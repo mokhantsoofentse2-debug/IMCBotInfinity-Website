@@ -34,16 +34,22 @@
         document.getElementById('botTitle').innerText = "Invalid Bot Selected";
     }
 
-    function verifyBot() {
-        const inputPass = document.getElementById('pass').value;
-        const area = document.getElementById('downloadArea');
-        const link = document.getElementById('botLink');
+// Replaced new
+function verifyBot() {
+    const accNum = document.getElementById('accNum').value;
+    const inputPass = document.getElementById('pass').value;
 
-        if (currentBot && inputPass === currentBot.pass) {
-            area.style.display = 'block';
-            link.href = currentBot.file;
-        } else {
-            alert("Incorrect password or unauthorized access attempt.");
-        }
+    if (currentBot && inputPass === currentBot.pass) {
+        // 1. Send signal to your database (Example using a fetch call)
+        fetch('https://your-api.com/register-bot', {
+            method: 'POST',
+            body: JSON.stringify({ account: accNum, bot: botType, status: 'active' })
+        });
+
+        // 2. Show the success UI
+        document.getElementById('verifyBtn').innerText = "System Synced!";
+        document.getElementById('downloadArea').style.display = 'block';
+        startSlideshow();
     }
+}
 </script>
