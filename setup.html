@@ -12,7 +12,6 @@
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
-            
             color: white; 
             font-family: 'Lexend Deca', sans-serif; 
             padding: 40px; 
@@ -32,12 +31,7 @@
             backdrop-filter: blur(5px);
         }
 
-        #botTitle {
-            text-transform: uppercase;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-        }
-
+        #botTitle { text-transform: uppercase; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
         .color-sa { color: #3FFF00; }
         .color-master { color: #00FFFF; }
         .color-king { color: #FF2400; }
@@ -54,72 +48,38 @@
         }
 
         input, select { 
-            width: 100%; 
-            padding: 12px; 
-            margin: 10px 0; 
-            border-radius: 8px; 
-            border: 1px solid #333; 
-            background: #222; 
-            color: white; 
-            box-sizing: border-box; 
+            width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; 
+            border: 1px solid #333; background: #222; color: white; box-sizing: border-box; 
         }
 
         button { 
-            background: #00FF00; 
-            color: black; 
-            border: none; 
-            padding: 15px 30px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            width: 100%; 
-            margin-top: 10px; 
-            transition: 0.3s; 
+            background: #00FF00; color: black; border: none; padding: 15px 30px; 
+            border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; 
+            margin-top: 10px; transition: 0.3s; 
         }
 
         button:hover { background: #00cc00; transform: scale(1.02); }
         
         #downloadArea { 
-            display: none; 
-            margin-top: 20px; 
-            padding: 20px; 
-            background: rgba(0,255,0,0.1); 
-            border-radius: 10px; 
-            border: 1px dashed #00FF00; 
+            display: none; margin-top: 20px; padding: 20px; 
+            background: rgba(0,255,0,0.1); border-radius: 10px; border: 1px dashed #00FF00; 
         }
 
-        .notice { font-size: 0.8em; color: #ccc; margin-bottom: 15px; }
-
-        /* --- NEW SLIDESHOW STYLES --- */
         #successView {
-            display: none; /* Hidden by default */
-            background: rgba(0, 0, 0, 0.8); 
-            padding: 30px; 
-            border-radius: 20px; 
-            border: 1px solid #00FF00; 
-            max-width: 400px; 
-            margin: 40px auto; 
-            backdrop-filter: blur(5px);
-            position: relative;
-            height: 300px;
-            overflow: hidden;
+            display: none; background: rgba(0, 0, 0, 0.8); padding: 30px; 
+            border-radius: 20px; border: 1px solid #00FF00; max-width: 400px; 
+            margin: 40px auto; backdrop-filter: blur(5px); position: relative;
+            height: 300px; overflow: hidden;
         }
 
         .slide-img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            height: auto;
-            border-radius: 10px;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out; /* Fading animation */
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; height: auto; border-radius: 10px; opacity: 0;
+            transition: opacity 1.5s ease-in-out;
         }
 
-        .slide-img.active {
-            opacity: 1;
-        }
+        .slide-img.active { opacity: 1; }
+        .notice { font-size: 0.8em; color: #ccc; margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -173,16 +133,16 @@
             </select>
 
             <input type="password" placeholder="Enter Bot License Password" id="pass">
-            <button id="verifyBtn" onclick="verifyBot()">Verify & Download</button>
+            <!-- CHANGED BUTTON TEXT BELOW -->
+            <button id="verifyBtn" onclick="verifyBot()">Verify & Trade</button>
 
             <div id="downloadArea">
-                <p style="color: #00FF00; font-weight: bold;">✓ Verification Successful!</p>
-                <a id="botLink" href="#" style="color: white; text-decoration: underline;" download>Click here to download your MT5 file</a>
+                <p style="color: #00FF00; font-weight: bold;">✓ Account Linked & Trading Active!</p>
+                <a id="botLink" href="#" style="color: white; text-decoration: underline;" download>Final Step: Click here to sync MT5 file</a>
             </div>
         </div>
     </div>
 
-    <!-- NEW SUCCESS VIEW CONTAINER -->
     <div id="successView">
         <img src="images/saver1.jpg" class="slide-img active" id="saver1">
         <img src="images/saver2.jpg" class="slide-img" id="saver2">
@@ -200,13 +160,9 @@
         };
 
         const currentBot = botDatabase[botType];
-        const titleElement = document.getElementById('botTitle');
-
         if (currentBot) {
-            titleElement.innerText = "IMCBOT " + currentBot.title;
-            titleElement.classList.add(currentBot.class);
-        } else {
-            titleElement.innerText = "Invalid Bot Selected";
+            document.getElementById('botTitle').innerText = "IMCBOT " + currentBot.title;
+            document.getElementById('botTitle').classList.add(currentBot.class);
         }
 
         function startSlideshow() {
@@ -214,17 +170,12 @@
             setInterval(() => {
                 const img1 = document.getElementById('saver1');
                 const img2 = document.getElementById('saver2');
-                
                 if (current === 1) {
-                    img1.classList.remove('active');
-                    img2.classList.add('active');
-                    current = 2;
+                    img1.classList.remove('active'); img2.classList.add('active'); current = 2;
                 } else {
-                    img2.classList.remove('active');
-                    img1.classList.add('active');
-                    current = 1;
+                    img2.classList.remove('active'); img1.classList.add('active'); current = 1;
                 }
-            }, 5000); // Change every 5 seconds
+            }, 5000);
         }
 
         function verifyBot() {
@@ -242,13 +193,11 @@
             }
 
             if (currentBot && inputPass === currentBot.pass) {
-                btn.innerText = "Verified!";
+                btn.innerText = "Trading Started!";
                 btn.style.background = "#444";
                 btn.disabled = true;
                 area.style.display = 'block';
                 link.href = currentBot.file;
-
-                // SHOW THE SLIDESHOW VIEW AFTER SUCCESS
                 document.getElementById('successView').style.display = 'block';
                 startSlideshow();
             } else {
