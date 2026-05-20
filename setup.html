@@ -6,202 +6,78 @@
     <title>Bot Configuration - IMCBOTS</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
     <style>
-        body { 
-            background-image: url('images/bg.png');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white; 
-            font-family: 'Lexend Deca', sans-serif; 
-            padding: 40px; 
-            text-align: center; 
-            min-height: 100vh;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .title-container {
-            background: rgba(0, 0, 0, 0.8); 
-            padding: 20px; 
-            border-radius: 20px; 
-            border: 1px solid #00FF00; 
-            max-width: 400px; 
-            margin: 0 auto 20px auto; 
-            backdrop-filter: blur(5px);
-        }
-
-        #botTitle { text-transform: uppercase; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
-        .color-sa { color: #3FFF00; }
-        .color-master { color: #00FFFF; }
-        .color-king { color: #FF2400; }
-        .color-asura { color: #FF00FF; }
-
-        .config-box { 
+        /* ... Keep your existing body, .title-container, .config-box, etc. styles ... */
+        
+        #successView {
+            display: none; 
             background: rgba(0, 0, 0, 0.8); 
             padding: 30px; 
             border-radius: 20px; 
             border: 1px solid #00FF00; 
             max-width: 400px; 
-            margin: auto; 
-            backdrop-filter: blur(5px);
-        }
-
-        input, select { 
-            width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; 
-            border: 1px solid #333; background: #222; color: white; box-sizing: border-box; 
-        }
-
-        button { 
-            background: #00FF00; color: black; border: none; padding: 15px 30px; 
-            border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; 
-            margin-top: 10px; transition: 0.3s; 
-        }
-
-        button:hover { background: #00cc00; transform: scale(1.02); }
-        
-        #downloadArea { 
-            display: none; margin-top: 20px; padding: 20px; 
-            background: rgba(0,255,0,0.1); border-radius: 10px; border: 1px dashed #00FF00; 
-        }
-
-        #successView {
-            display: none; background: rgba(0, 0, 0, 0.8); padding: 30px; 
-            border-radius: 20px; border: 1px solid #00FF00; max-width: 400px; 
-            margin: 40px auto; backdrop-filter: blur(5px); position: relative;
-            height: 300px; overflow: hidden;
+            margin: 40px auto; 
+            backdrop-filter: blur(5px); 
+            position: relative;
+            height: 300px; 
+            overflow: hidden;
         }
 
         .slide-img {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; height: auto; border-radius: 10px; opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 90%; 
+            height: auto; 
+            border-radius: 10px; 
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out; /* Smooth fade effect */
         }
 
         .slide-img.active { opacity: 1; }
-        .notice { font-size: 0.8em; color: #ccc; margin-bottom: 15px; }
+        
+        /* ... Keep your other existing styles ... */
     </style>
 </head>
 <body>
 
-    <div id="setupContent">
-        <div class="title-container">
-            <h2 id="botTitle">Configure Your Bot</h2>
-        </div>
-
-        <p class="notice">Note: These bots are compatible with <strong>MetaTrader 5 (MT5)</strong> only.</p>
-        
-        <div class="config-box">
-            <input type="text" placeholder="MT5 Account Number" id="accNum">
-            <input type="text" placeholder="Trading Server" id="server">
-            
-            <select id="market">
-                <option value="">Select Market</option>
-                <optgroup label="Forex Pairs">
-                    <option value="eurusd">EURUSD</option>
-                    <option value="usdjpy">USDJPY</option>
-                    <option value="usdcad">USDCAD</option>
-                    <option value="eurnzd">EURNZD</option>
-                    <option value="gbpjpy">GBPJPY</option>
-                    <option value="gbpaud">GBPAUD</option>
-                    <option value="nzdjpy">NZDJPY</option>
-                </optgroup>
-                <optgroup label="Indices">
-                    <option value="us30">US30 Index</option>
-                    <option value="nas100">NAS100 Index</option>
-                    <option value="ger40">GER40 Index</option>
-                    <option value="uk100">UK100 Index</option>
-                    <option value="cac40">CAC40 Index</option>
-                    <option value="sp500">SP500 Index</option>
-                </optgroup>
-                <optgroup label="Synthetic Indices">
-                    <option value="v75">Volatility 75 Index</option>
-                    <option value="v150">Volatility 150 Index</option>
-                    <option value="d25">Dynamic 25 Index</option>
-                </optgroup>
-                <optgroup label="Commodities">
-                    <option value="xauusd">Gold (XAUUSD)</option>
-                    <option value="xagusd">Silver (XAGUSD)</option>
-                    <option value="ukoil">UK Oil</option>
-                    <option value="usoil">US Oil</option>
-                </optgroup>
-                <optgroup label="Cryptocurrencies">
-                    <option value="btcusd">Bitcoin (BTCUSD)</option>
-                    <option value="ethusd">Ethereum (ETHUSD)</option>
-                    <option value="xmrusd">Monero (XMRUSD)</option>
-                </optgroup>
-            </select>
-
-            <input type="password" placeholder="Enter Bot License Password" id="pass">
-            <!-- CHANGED BUTTON TEXT BELOW -->
-            <button id="verifyBtn" onclick="verifyBot()">Verify & Trade</button>
-
-            <div id="downloadArea">
-                <p style="color: #00FF00; font-weight: bold;">✓ Account Linked & Trading Active!</p>
-                <a id="botLink" href="#" style="color: white; text-decoration: underline;" download>Final Step: Click here to sync MT5 file</a>
-            </div>
-        </div>
-    </div>
+    <!-- ... Keep your setupContent section as is ... -->
 
     <div id="successView">
-        <img src="images/saver1.jpg" class="slide-img active" id="saver1">
-        <img src="images/saver2.jpg" class="slide-img" id="saver2">
+        <img src="images/saver1.jpg" class="slide-img active" id="img1">
+        <img src="images/saver2.png" class="slide-img" id="img2">
+        <img src="images/saver3.jpg" class="slide-img" id="img3">
+        <img src="images/saver4.jpg" class="slide-img" id="img4">
     </div>
 
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const botType = params.get('bot');
-
-        const botDatabase = {
-            'sa': { title: "Small Account Setup", pass: "IMCBOTSA_9922", file: "files/IMCBOT_SA.mq5", class: "color-sa" },
-            'master': { title: "Master Bot Setup", pass: "IMCBOTMaster_101033", file: "files/IMCBOT_Master.mq5", class: "color-master" },
-            'king': { title: "King Bot Setup", pass: "IMCBOTKing_10111", file: "files/IMCBOT_KING.mq5", class: "color-king" },
-            'asura': { title: "Asura Bot Setup", pass: "IMCBOTAsura_10112", file: "files/IMCBOT_ASURA.mq5", class: "color-asura" }
-        };
-
-        const currentBot = botDatabase[botType];
-        if (currentBot) {
-            document.getElementById('botTitle').innerText = "IMCBOT " + currentBot.title;
-            document.getElementById('botTitle').classList.add(currentBot.class);
-        }
+        // ... Keep your existing botDatabase and initial logic ...
 
         function startSlideshow() {
             let current = 1;
+            const totalImages = 4;
+            
             setInterval(() => {
-                const img1 = document.getElementById('saver1');
-                const img2 = document.getElementById('saver2');
-                if (current === 1) {
-                    img1.classList.remove('active'); img2.classList.add('active'); current = 2;
-                } else {
-                    img2.classList.remove('active'); img1.classList.add('active'); current = 1;
-                }
-            }, 5000);
+                // Hide current
+                document.getElementById('img' + current).classList.remove('active');
+                
+                // Calculate next
+                current = (current % totalImages) + 1;
+                
+                // Show next
+                document.getElementById('img' + current).classList.add('active');
+            }, 12000); // 12 seconds
         }
 
         function verifyBot() {
-            const inputPass = document.getElementById('pass').value;
-            const accNum = document.getElementById('accNum').value;
-            const server = document.getElementById('server').value;
-            const market = document.getElementById('market').value;
-            const area = document.getElementById('downloadArea');
-            const link = document.getElementById('botLink');
-            const btn = document.getElementById('verifyBtn');
-
-            if (!accNum || !server || !market) {
-                alert("Please fill in all trading account details.");
-                return;
-            }
-
+            // ... Keep your existing validation logic ...
+            
             if (currentBot && inputPass === currentBot.pass) {
-                btn.innerText = "Trading Started!";
-                btn.style.background = "#444";
-                btn.disabled = true;
-                area.style.display = 'block';
-                link.href = currentBot.file;
+                // ... Keep your fetch/UI logic ...
                 document.getElementById('successView').style.display = 'block';
                 startSlideshow();
             } else {
-                alert("Incorrect password or unauthorized access attempt.");
+                alert("Incorrect password.");
             }
         }
     </script>
