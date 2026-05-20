@@ -36,20 +36,18 @@
 
 // Replaced new
 function verifyBot() {
-    const accNum = document.getElementById('accNum').value;
-    const inputPass = document.getElementById('pass').value;
-
-    if (currentBot && inputPass === currentBot.pass) {
-        // 1. Send signal to your database (Example using a fetch call)
-        fetch('https://your-api.com/register-bot', {
-            method: 'POST',
-            body: JSON.stringify({ account: accNum, bot: botType, status: 'active' })
-        });
-
-        // 2. Show the success UI
-        document.getElementById('verifyBtn').innerText = "System Synced!";
-        document.getElementById('downloadArea').style.display = 'block';
-        startSlideshow();
-    }
+    const market = document.getElementById('market').value;
+    
+    // Example: Sending a signal to a free Firebase Realtime Database
+    fetch('https://your-project-id.firebaseio.com/commands.json', {
+        method: 'PUT',
+        body: JSON.stringify({ 
+            action: 'buy', 
+            symbol: market, 
+            timestamp: Date.now() 
+        })
+    }).then(() => {
+        document.getElementById('verifyBtn').innerText = "Signal Sent to Cloud!";
+    });
 }
 </script>
