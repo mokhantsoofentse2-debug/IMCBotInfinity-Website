@@ -7,13 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
     <style>
         body { 
-            /* Responsive Background Logic */
             background-image: url('images/bg.png');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
-            
             color: white; 
             font-family: 'Lexend Deca', sans-serif; 
             padding: 40px; 
@@ -23,7 +21,6 @@
             box-sizing: border-box;
         }
 
-        /* Container for the Heading to match config-box style */
         .title-container {
             background: rgba(0, 0, 0, 0.8); 
             padding: 20px; 
@@ -34,20 +31,15 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Base Heading Style */
-        #botTitle {
-            text-transform: uppercase;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-        }
+        #botTitle { text-transform: uppercase; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
 
-        /* Color Classes for the Heading */
-        .color-sa { color: #3FFF00; }      /* Harlequin Green */
-        .color-master { color: #00FFFF; }  /* Cyan Blue */
-        .color-king { color: #FF2400; }    /* Scarlet Red */
-        .color-asura { color: #FF00FF; }   /* Magenta Purple */
+        .color-sa { color: #3FFF00; }      
+        .color-master { color: #00FFFF; }  
+        .color-king { color: #FF2400; }    
+        .color-asura { color: #FF00FF; }   
 
-        .config-box { 
+        /* Shared Container Style */
+        .config-box, .success-container { 
             background: rgba(0, 0, 0, 0.8); 
             padding: 30px; 
             border-radius: 20px; 
@@ -57,39 +49,54 @@
             backdrop-filter: blur(5px);
         }
 
+        .success-container { display: none; }
+
         input, select { 
-            width: 100%; 
-            padding: 12px; 
-            margin: 10px 0; 
-            border-radius: 8px; 
-            border: 1px solid #333; 
-            background: #222; 
-            color: white; 
-            box-sizing: border-box; 
+            width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; 
+            border: 1px solid #333; background: #222; color: white; box-sizing: border-box; 
         }
 
         button { 
-            background: #00FF00; 
-            color: black; 
-            border: none; 
-            padding: 15px 30px; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            width: 100%; 
-            margin-top: 10px; 
-            transition: 0.3s; 
+            background: #00FF00; color: black; border: none; padding: 15px 30px; 
+            border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; 
+            margin-top: 10px; transition: 0.3s; 
         }
 
         button:hover { background: #00cc00; transform: scale(1.02); }
-        
-        #downloadArea { 
-            display: none; 
-            margin-top: 20px; 
-            padding: 20px; 
-            background: rgba(0,255,0,0.1); 
-            border-radius: 10px; 
-            border: 1px dashed #00FF00; 
+
+        /* Slideshow Animation Logic */
+        .slideshow-wrapper {
+            position: relative;
+            width: 100%;
+            height: 250px; /* Adjust based on your image aspect ratio */
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slideshow-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 1.5s ease-in-out; /* The "slowly fading away" effect */
+        }
+
+        .img-hidden { opacity: 0; }
+        .img-visible { opacity: 1; }
+
+        .download-btn-final {
+            display: inline-block;
+            background: #00FF00;
+            color: black;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .notice { font-size: 0.8em; color: #ccc; margin-bottom: 15px; }
@@ -101,56 +108,36 @@
         <h2 id="botTitle">Configure Your Bot</h2>
     </div>
 
-    <p class="notice">Note: These bots are compatible with <strong>MetaTrader 5 (MT5)</strong> only.</p>
-    
-    <div class="config-box">
-        <input type="text" placeholder="MT5 Account Number" id="accNum">
-        <input type="text" placeholder="Trading Server" id="server">
-        
-        <select id="market">
-            <option value="">Select Market</option>
-            <optgroup label="Forex Pairs">
-                <option value="eurusd">EURUSD</option>
-                <option value="usdjpy">USDJPY</option>
-                <option value="usdcad">USDCAD</option>
-                <option value="eurnzd">EURNZD</option>
-                <option value="gbpjpy">GBPJPY</option>
-                <option value="gbpaud">GBPAUD</option>
-                <option value="nzdjpy">NZDJPY</option>
-            </optgroup>
-            <optgroup label="Indices">
-                <option value="us30">US30 Index</option>
-                <option value="nas100">NAS100 Index</option>
-                <option value="ger40">GER40 Index</option>
-                <option value="uk100">UK100 Index</option>
-                <option value="cac40">CAC40 Index</option>
-                <option value="sp500">SP500 Index</option>
-            </optgroup>
-            <optgroup label="Synthetic Indices">
-                <option value="v75">Volatility 75 Index</option>
-                <option value="v150">Volatility 150 Index</option>
-                <option value="d25">Dynamic 25 Index</option>
-            </optgroup>
-            <optgroup label="Commodities">
-                <option value="xauusd">Gold (XAUUSD)</option>
-                <option value="xagusd">Silver (XAGUSD)</option>
-                <option value="ukoil">UK Oil</option>
-                <option value="usoil">US Oil</option>
-            </optgroup>
-            <optgroup label="Cryptocurrencies">
-                <option value="btcusd">Bitcoin (BTCUSD)</option>
-                <option value="ethusd">Ethereum (ETHUSD)</option>
-                <option value="xmrusd">Monero (XMRUSD)</option>
-            </optgroup>
-        </select>
+    <!-- FORM SECTION -->
+    <div id="setupForm">
+        <p class="notice">Note: These bots are compatible with <strong>MetaTrader 5 (MT5)</strong> only.</p>
+        <div class="config-box">
+            <input type="text" placeholder="MT5 Account Number" id="accNum">
+            <input type="text" placeholder="Trading Server" id="server">
+            
+            <select id="market">
+                <option value="">Select Market</option>
+                <optgroup label="Forex Pairs"><option value="eurusd">EURUSD</option><option value="usdjpy">USDJPY</option></optgroup>
+                <optgroup label="Indices"><option value="us30">US30 Index</option><option value="nas100">NAS100 Index</option></optgroup>
+                <optgroup label="Synthetic Indices"><option value="v75">Volatility 75 Index</option></optgroup>
+            </select>
 
-        <input type="password" placeholder="Enter Bot License Password" id="pass">
-        <button id="verifyBtn" onclick="verifyBot()">Verify & Download</button>
-
-        <div id="downloadArea">
-            <p style="color: #00FF00; font-weight: bold;">✓ Verification Successful!</p>
-            <a id="botLink" href="#" style="color: white; text-decoration: underline;" download>Click here to download your MT5 file</a>
+            <input type="password" placeholder="Enter Bot License Password" id="pass">
+            <button id="verifyBtn" onclick="verifyBot()">Verify & Download</button>
         </div>
+    </div>
+
+    <!-- SUCCESS SECTION (Hidden by default) -->
+    <div id="successDisplay" class="success-container">
+        <h2 style="color: #00FF00;">Verification Successful!</h2>
+        
+        <div class="slideshow-wrapper">
+            <img src="images/saver1.jpg" id="slide1" class="img-visible" alt="Saver 1">
+            <img src="images/saver2.jpg" id="slide2" class="img-hidden" alt="Saver 2">
+        </div>
+
+        <p>Your configuration is ready.</p>
+        <a id="botLink" href="#" class="download-btn-final" download>Download MT5 File</a>
     </div>
 
     <script>
@@ -158,30 +145,10 @@
         const botType = params.get('bot');
 
         const botDatabase = {
-            'sa': { 
-                title: "Small Account Setup", 
-                pass: "IMCBOTSA_9922", 
-                file: "files/IMCBOT_SA.mq5",
-                class: "color-sa" 
-            },
-            'master': { 
-                title: "Master Bot Setup", 
-                pass: "IMCBOTMaster_101033", 
-                file: "files/IMCBOT_Master.mq5",
-                class: "color-master" 
-            },
-            'king': { 
-                title: "King Bot Setup", 
-                pass: "IMCBOTKing_10111", 
-                file: "files/IMCBOT_KING.mq5",
-                class: "color-king" 
-            },
-            'asura': { 
-                title: "Asura Bot Setup", 
-                pass: "IMCBOTAsura_10112", 
-                file: "files/IMCBOT_ASURA.mq5",
-                class: "color-asura" 
-            }
+            'sa': { title: "Small Account Setup", pass: "IMCBOTSA_9922", file: "files/IMCBOT_SA.mq5", class: "color-sa" },
+            'master': { title: "Master Bot Setup", pass: "IMCBOTMaster_101033", file: "files/IMCBOT_Master.mq5", class: "color-master" },
+            'king': { title: "King Bot Setup", pass: "IMCBOTKing_10111", file: "files/IMCBOT_KING.mq5", class: "color-king" },
+            'asura': { title: "Asura Bot Setup", pass: "IMCBOTAsura_10112", file: "files/IMCBOT_ASURA.mq5", class: "color-asura" }
         };
 
         const currentBot = botDatabase[botType];
@@ -189,10 +156,7 @@
 
         if (currentBot) {
             titleElement.innerText = "IMCBOT " + currentBot.title;
-            // Apply the specific color class
             titleElement.classList.add(currentBot.class);
-        } else {
-            titleElement.innerText = "Invalid Bot Selected";
         }
 
         function verifyBot() {
@@ -200,9 +164,6 @@
             const accNum = document.getElementById('accNum').value;
             const server = document.getElementById('server').value;
             const market = document.getElementById('market').value;
-            const area = document.getElementById('downloadArea');
-            const link = document.getElementById('botLink');
-            const btn = document.getElementById('verifyBtn');
 
             if (!accNum || !server || !market) {
                 alert("Please fill in all trading account details.");
@@ -210,14 +171,33 @@
             }
 
             if (currentBot && inputPass === currentBot.pass) {
-                btn.innerText = "Verified!";
-                btn.style.background = "#444";
-                btn.disabled = true;
-                area.style.display = 'block';
-                link.href = currentBot.file;
+                // Hide Form, Show Success Container
+                document.getElementById('setupForm').style.display = 'none';
+                document.getElementById('successDisplay').style.display = 'block';
+                document.getElementById('botLink').href = currentBot.file;
+                
+                // Start the Slideshow logic
+                startSlideshow();
             } else {
                 alert("Incorrect password or unauthorized access attempt.");
             }
+        }
+
+        function startSlideshow() {
+            const s1 = document.getElementById('slide1');
+            const s2 = document.getElementById('slide2');
+            let showingFirst = true;
+
+            setInterval(() => {
+                if (showingFirst) {
+                    s1.classList.replace('img-visible', 'img-hidden');
+                    s2.classList.replace('img-hidden', 'img-visible');
+                } else {
+                    s2.classList.replace('img-visible', 'img-hidden');
+                    s1.classList.replace('img-hidden', 'img-visible');
+                }
+                showingFirst = !showingFirst;
+            }, 5000); // 5 Seconds
         }
     </script>
 </body>
