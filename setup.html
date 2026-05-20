@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMCBOTS Showcase</title>
     <style>
-        body { background: #000; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+        body { background: #000; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; font-family: sans-serif; }
         #galleryContainer { background: #111; padding: 20px; border-radius: 20px; border: 1px solid #00FF00; width: 90%; max-width: 500px; height: 400px; position: relative; overflow: hidden; }
         .media-item { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1s ease-in-out; }
         .media-item.active { opacity: 1; }
@@ -17,13 +17,14 @@
     <div id="galleryContainer"></div>
 
     <script>
-        // Define your media assets
+        // Common images to be added to all bots
+        const commonImages = ['images/saver1.jpg', 'images/saver3.jpg', 'images/saver4.jpg', 'images/icon.jpg'];
+
         const botData = {
-            'sa': ['trades/sa1.png'],
-            'master': ['trades/master1.PNG', 'trades/master2.png', 'trades/master3.mp4'],
-            'king': ['trades/king1.mp4', 'trades/king2.mp4'],
-            'asura': ['trades/asura1.PNG', 'trades/asura4.png', 'trades/asura5.png'] 
-            // Note: Asura2/3 were not in your list, so I added the ones you have.
+            'sa': ['trades/sa1.png', ...commonImages],
+            'master': ['trades/master1.PNG', 'trades/master2.png', 'trades/master3.mp4', ...commonImages],
+            'king': ['trades/king1.mp4', 'trades/king2.mp4', ...commonImages],
+            'asura': ['trades/asura1.PNG', 'trades/asura4.png', 'trades/asura5.png', ...commonImages]
         };
 
         const params = new URLSearchParams(window.location.search);
@@ -34,15 +35,15 @@
         if (bot && botData[bot]) {
             title.innerText = bot.toUpperCase() + " Showcase";
             
-            // Generate elements
             botData[bot].forEach((src, index) => {
                 let element;
-                if (src.endsWith('.mp4')) {
+                if (src.toLowerCase().endsWith('.mp4')) {
                     element = document.createElement('video');
                     element.src = src;
                     element.autoplay = true;
                     element.muted = true;
                     element.loop = true;
+                    element.playsInline = true; // Required for mobile browsers
                 } else {
                     element = document.createElement('img');
                     element.src = src;
@@ -54,11 +55,20 @@
             // Cycling Logic
             let current = 0;
             const items = document.querySelectorAll('.media-item');
+            
+            // Auto-play videos when they become active
             setInterval(() => {
                 items[current].classList.remove('active');
+                
+                // If the outgoing item is a video, pause it
+                if(items[current].tagName === 'VIDEO') items[current].pause();
+
                 current = (current + 1) % items.length;
                 items[current].classList.add('active');
-            }, 5000); // Changed to 5 seconds for better flow
+
+                // If the incoming item is a video, play it
+                if(items[current].tagName === 'VIDEO') items[current].play();
+            }, 5000); 
         } else {
             title.innerText = "Bot not found";
         }
