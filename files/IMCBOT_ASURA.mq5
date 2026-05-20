@@ -21,6 +21,23 @@ double Last_Entry_SL = 0;
 string IconName = "IMCBOT_V10_ICON";
 string TextName = "IMCBOT_V10_TEXT";
 
+// cloud
+void CheckWebsiteCommands() {
+   string cookie=NULL, headers;
+   char post[], result[];
+   string url = "https://your-website.com/api/trade-status.json"; // Your command file
+   
+   // Reset headers for a clean GET request
+   int res = WebRequest("GET", url, cookie, NULL, 500, post, 0, result, headers);
+
+   if(res == 200) {
+      string response = CharArrayToString(result);
+      if(StringFind(response, "\"action\":\"buy\"") >= 0) {
+         // Logic to execute BUY trade here
+         Print("Command Received: Opening Buy Order");
+      }
+   }
+}
 //--- Helper Functions
 double GetATR(string symbol, ENUM_TIMEFRAMES timeframe, int period, int shift) {
    double res[1];
