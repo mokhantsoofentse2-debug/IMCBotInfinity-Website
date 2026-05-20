@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMCBOTS-Infinity</title>
-    <!-- Importing a clean, modular font similar to HK Modular -->
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
     
     <style>
         body {
-            /* Background adjustments */
             background-image: url('images/bg.png');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
-            font-family: 'Lexend Deca', sans-serif; /* Modular font style */
+            font-family: 'Lexend Deca', sans-serif;
             color: white;
             margin: 0;
-            padding: 40px;
+            padding: 20px; /* Reduced for mobile comfort */
             line-height: 1.6;
         }
 
@@ -38,7 +37,7 @@
         }
 
         li {
-            background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent box */
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 15px;
             border: 1px solid #00FF00;
@@ -48,7 +47,7 @@
         }
 
         li:hover {
-            transform: translateY(-10px); /* Subtle lift effect */
+            transform: translateY(-10px);
         }
 
         li b {
@@ -74,55 +73,33 @@
             margin-right: auto;
         }
 
-        footer h2 {
-            color: #00FF00;
-        }
+        footer h2 { color: #00FF00; }
+        footer a { color: #ffffff; text-decoration: none; }
+        footer a:hover { color: #00FF00; }
 
-        footer a {
-            color: #ffffff;
-            text-decoration: none;
-        }
+        .contact-item { margin: 10px 0; font-size: 1.1rem; }
 
-        footer a:hover {
-            color: #00FF00;
-        }
+        /* Hover colors */
+        li:hover .sa { color: #39FF14; }
+        li:hover .master { color: #00FFFF; }
+        li:hover .king { color: #FF2400; }
+        li:hover .asura { color: #C71585; }
 
-        .contact-item {
-            margin: 10px 0;
-            font-size: 1.1rem;
-        }
+        .sa, .master, .king, .asura { transition: color 0.3s ease; }
 
-        li:hover .sa {
-            color: #39FF14;
+        /* --- NEW LOGIC FOR PORTRAIT PHONES --- */
+        @media (max-width: 768px) and (orientation: portrait) {
+            ol {
+                flex-direction: column;
+                align-items: center;
+            }
+            li {
+                width: 85%;
+                max-width: 280px;
+            }
         }
-        li:hover .master {
-            color: #00FFFF;
-        }
-        li:hover .king {
-            color: #FF2400;
-        }
-        li:hover .asura {
-            color: #C71585;
-        }
-
-        /* Added transition to the text for smoothness */
-        .sa, .master, .king, .asura {
-            transition: color 0.3s ease;
-        }
-@media (max-width: 768px) and (orientation: portrait) {
-    ol {
-        flex-direction: column; /* Stacks items vertically */
-        align-items: center;    /* Centers the cards */
-    }
-
-    li {
-        width: 90%;             
-        max-width: 300px;       
-    }
-}
     </style>
 </head>
-
 <body>
 
     <h1>Indice Mo Cash Infinity Bots</h1>
@@ -133,11 +110,11 @@
             <img src="images/SA.jpg" width="150" height="200" alt="SA Bot">
         </li>
         <li>
-            <div class='master'><b>Master</b><div>
+            <div class='master'><b>Master</b></div>
             <img src="images/Master.jpg" width="150" height="200" alt="Master Bot">
         </li>
         <li>
-            <div class='king'><b>King</b><div>
+            <div class='king'><b>King</b></div>
             <img src="images/king.jpg" width="150" height="200" alt="King Bot">
         </li>
         <li>
