@@ -16,6 +16,58 @@ input long MagicNumber = 123456;
 string IconName = "IMCBOT_SA_ICON";
 string TextName = "IMCBOT_SA_TEXT";
 
+//+------------------------------------------------------------------+
+//| Cloud Command Logic                                              |
+//+------------------------------------------------------------------+
+void CheckWebsiteCommands() {
+   string cookie=NULL, headers;
+   char post[], result[];
+   
+   // Replace YOUR_ORACLE_IP with your actual VPS IP address
+   string url = "http://YOUR_ORACLE_IP:5000/get-command?bot=small_account"; 
+   
+   int res = WebRequest("GET", url, cookie, NULL, 1000, post, 0, result, headers);
+
+   if(res == 200) {
+      string response = CharArrayToString(result);
+      
+      if(StringFind(response, "\"status\":\"new\"") < 0) return;
+
+      double m15H = iHigh(_Symbol, PERIOD_M15, iHighest(_Symbol, PERIOD_M15, MODE_HIGH, Lookback, 1));
+      double m15L = iLow(_Symbol, PERIOD_M15, iLowest(_Symbol, PERIOD_M15, MODE_LOW, Lookback, 1));
+
+      // --- CLOUD BUY ---
+      if(StringFind(response, "\"action\":\"buy\"") >= 0 && !IsBotTradeOpen()) {
+          double lot = CalculateLotSize();
+          double sl = m15L;
+          if(trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, m15H, "(IMCBOT_SA)Cloud_Buy")) {
+             NotifySABrokerExecuted("buy");
+             Print("SA BOT: Cloud Buy Executed");
+          }
+      }
+      
+      // --- CLOUD SELL ---
+      if(StringFind(response, "\"action\":\"sell\"") >= 0 && !IsBotTradeOpen()) {
+          double lot = CalculateLotSize();
+          double sl = m15H;
+          if(trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, m15L, "(IMCBOT_SA)Cloud_Sell")) {
+             NotifySABrokerExecuted("sell");
+             Print("SA BOT: Cloud Sell Executed");
+          }
+      }
+   }
+}
+
+void NotifySABrokerExecuted(string action) {
+   string cookie=NULL, headers;
+   char post[], result[];
+   string url = "http://YOUR_ORACLE_IP:5000/clear-command?bot=small_account&action=" + action;
+   WebRequest("POST", url, cookie, NULL, 500, post, 0, result, headers);
+}
+
+//+------------------------------------------------------------------+
+//| Existing Logic                                                   |
+//+------------------------------------------------------------------+
 double CalculateLotSize() {
    double minLot = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
    return (minLot <= 0) ? 0.01 : minLot;
@@ -149,6 +201,10 @@ void OnTick() {
    if(Period() != PERIOD_M5) { UpdateStatus("SWITCH TO M5", true); return; }
    
    trade.SetExpertMagicNumber(MagicNumber);
+   
+   // --- Cloud Listener ---
+   CheckWebsiteCommands();
+   
    TrailByCompletedSwings(); 
    
    if(IsBotTradeOpen()) { 
@@ -186,7 +242,7 @@ void OnTick() {
          }
 
          if(trade.Buy(lot, _Symbol, entryPrice, sl, m15H, tradeComment)) {
-            trade.Buy(lot, _Symbol, entryPrice, sl, m15H, tradeComment);
+            // Already handled by if check
          }
       } else UpdateStatus("SCANNING BUY");
    } 
@@ -203,7 +259,7 @@ void OnTick() {
          }
 
          if(trade.Sell(lot, _Symbol, entryPrice, sl, m15L, tradeComment)) {
-            trade.Sell(lot, _Symbol, entryPrice, sl, m15L, tradeComment);
+            // Already handled by if check
          }
       } else UpdateStatus("SCANNING SELL");
    }
