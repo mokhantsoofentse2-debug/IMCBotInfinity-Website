@@ -3,82 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMCBOTS Gallery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <title>IMCBOTS Showcase</title>
     <style>
-        body { 
-            background-image: url('images/bg.png');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            color: white; 
-            font-family: 'Lexend Deca', sans-serif; 
-            text-align: center; 
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        h1 { color: #228B22; text-transform: uppercase; }
-
-        #galleryContainer { 
-            background: rgba(0, 0, 0, 0.8); 
-            padding: 30px; 
-            border-radius: 20px; 
-            border: 1px solid #00FF00; 
-            width: 90%;
-            max-width: 400px; 
-            height: 400px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .slide-img {
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%);
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; /* Keeps the image proportions intact */
-            border-radius: 10px; 
-            opacity: 0; 
-            transition: opacity 1.5s ease-in-out;
-            z-index: 1;
-        }
-
-        .slide-img.active { 
-            opacity: 1; 
-            z-index: 2; 
-        }
+        body { background: #000; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+        #galleryContainer { background: #111; padding: 20px; border-radius: 20px; border: 1px solid #00FF00; width: 90%; max-width: 500px; height: 400px; position: relative; overflow: hidden; }
+        .media-item { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1s ease-in-out; }
+        .media-item.active { opacity: 1; }
     </style>
 </head>
 <body>
 
-    <h1>Bot Showcase</h1>
-
-    <div id="galleryContainer">
-        <img src="images/saver1.jpg" class="slide-img active" id="img1" alt="Bot 1">
-        <img src="images/icon.jpg" class="slide-img" id="img2" alt="Bot 2">
-        <img src="images/saver3.jpg" class="slide-img" id="img3" alt="Bot 3">
-        <img src="images/saver4.jpg" class="slide-img" id="img4" alt="Bot 4">
-    </div>
+    <h1 id="botTitle">Loading...</h1>
+    <div id="galleryContainer"></div>
 
     <script>
-        let current = 1;
-        const totalImages = 4; 
+        // Define your media assets
+        const botData = {
+            'sa': ['trades/sa1.png'],
+            'master': ['trades/master1.PNG', 'trades/master2.png', 'trades/master3.mp4'],
+            'king': ['trades/king1.mp4', 'trades/king2.mp4'],
+            'asura': ['trades/asura1.PNG', 'trades/asura4.png', 'trades/asura5.png'] 
+            // Note: Asura2/3 were not in your list, so I added the ones you have.
+        };
 
-        setInterval(() => {
-            document.getElementById('img' + current).classList.remove('active');
+        const params = new URLSearchParams(window.location.search);
+        const bot = params.get('bot');
+        const container = document.getElementById('galleryContainer');
+        const title = document.getElementById('botTitle');
+
+        if (bot && botData[bot]) {
+            title.innerText = bot.toUpperCase() + " Showcase";
             
-            current++;
-            if (current > totalImages) current = 1;
-            
-            document.getElementById('img' + current).classList.add('active');
-        }, 12000); 
+            // Generate elements
+            botData[bot].forEach((src, index) => {
+                let element;
+                if (src.endsWith('.mp4')) {
+                    element = document.createElement('video');
+                    element.src = src;
+                    element.autoplay = true;
+                    element.muted = true;
+                    element.loop = true;
+                } else {
+                    element = document.createElement('img');
+                    element.src = src;
+                }
+                element.className = 'media-item' + (index === 0 ? ' active' : '');
+                container.appendChild(element);
+            });
+
+            // Cycling Logic
+            let current = 0;
+            const items = document.querySelectorAll('.media-item');
+            setInterval(() => {
+                items[current].classList.remove('active');
+                current = (current + 1) % items.length;
+                items[current].classList.add('active');
+            }, 5000); // Changed to 5 seconds for better flow
+        } else {
+            title.innerText = "Bot not found";
+        }
     </script>
 </body>
 </html>
