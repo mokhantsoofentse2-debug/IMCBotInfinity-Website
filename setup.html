@@ -72,5 +72,21 @@
             document.getElementById('img' + current).classList.add('active');
         }, 12000); // 12 seconds
     </script>
+    <script>
+    let current = 1;
+    const totalImages = 3; // Change this to 4 if you add your 4th image (saver4.jpg)
+
+    setInterval(() => {
+        // Remove 'active' class from current image
+        document.getElementById('img' + current).classList.remove('active');
+        
+        // Move to the next image
+        current++;
+        if (current > totalImages) current = 1;
+        
+        // Add 'active' class to the new image
+        document.getElementById('img' + current).classList.add('active');
+    }, 12000); // 12,000 milliseconds = 12 seconds
+</script>
 </body>
 </html>
