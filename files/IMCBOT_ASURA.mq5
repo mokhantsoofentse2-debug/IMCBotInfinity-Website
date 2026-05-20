@@ -7,11 +7,11 @@ CTrade trade;
 
 // --- User & Security Inputs ---
 input string BotPassword = "";
-input double RiskPercent = 8.0;    
-input int Lookback = 60;              
-input int MaxPositions = 5; 
-input double MaxLotLimit = 0.50;   
-input long MagicNumber = 888111;   
+input double RiskPercent = 8.0;     
+input int Lookback = 60;               
+input int MaxPositions = 5;  
+input double MaxLotLimit = 0.50;    
+input long MagicNumber = 888111;    
 
 //--- Global Variables
 double H1_Trap_High = 0, H1_Trap_Low = 0;
@@ -21,23 +21,40 @@ double Last_Entry_SL = 0;
 string IconName = "IMCBOT_V10_ICON";
 string TextName = "IMCBOT_V10_TEXT";
 
-// cloud
+// --- CLOUD COMMAND CENTER ---
 void CheckWebsiteCommands() {
    string cookie=NULL, headers;
    char post[], result[];
-   string url = "https://your-website.com/api/trade-status.json"; // Your command file
+   // Ensure this URL is correct and the domain is added to MT5 -> Tools -> Options -> Expert Advisors -> Allow WebRequest
+   string url = "https://your-website.com/api/trade-status.json"; 
    
-   // Reset headers for a clean GET request
    int res = WebRequest("GET", url, cookie, NULL, 500, post, 0, result, headers);
 
    if(res == 200) {
       string response = CharArrayToString(result);
-      if(StringFind(response, "\"action\":\"buy\"") >= 0) {
-         // Logic to execute BUY trade here
-         Print("Command Received: Opening Buy Order");
+      
+      // Parse for BUY command
+      if(StringFind(response, "\"action\":\"buy\"") >= 0 && !IsBotTradeOpen()) {
+         double sl = iLow(_Symbol, PERIOD_M5, iLowest(_Symbol, PERIOD_M5, MODE_LOW, 15, 1));
+         double lot = CalculateLotSize(sl);
+         if(lot > 0) {
+            trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, 0, "(IMCBOT_ASURA)Cloud_Buy");
+            Print("Cloud Command Executed: Buy Order Opened");
+         }
+      }
+      
+      // Parse for SELL command
+      if(StringFind(response, "\"action\":\"sell\"") >= 0 && !IsBotTradeOpen()) {
+         double sl = iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 1));
+         double lot = CalculateLotSize(sl);
+         if(lot > 0) {
+            trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, 0, "(IMCBOT_ASURA)Cloud_Sell");
+            Print("Cloud Command Executed: Sell Order Opened");
+         }
       }
    }
 }
+
 //--- Helper Functions
 double GetATR(string symbol, ENUM_TIMEFRAMES timeframe, int period, int shift) {
    double res[1];
@@ -56,7 +73,7 @@ bool IsBotTradeOpen() {
    return false;
 }
 
-//--- UPDATED: TRAILING LOGIC (Break-even at 5%, Switch to Candle-Trail at 80%)
+//--- TRAILING LOGIC (Preserved Exactly)
 void ManageTrailingAndHolding() {
    double currentBid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
    double currentAsk = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
@@ -75,7 +92,6 @@ void ManageTrailingAndHolding() {
             double totalDistance = MathAbs(swingTarget - entry);
             double currentProgress = (type == POSITION_TYPE_BUY) ? (currentBid - entry) : (entry - currentAsk);
 
-            // UPDATED: Break even into 2% profits once 5% of the way to target
             if(currentProgress >= (totalDistance * 0.05) && currentProgress < (totalDistance * 0.80)) {
                double profitLockPrice = 0;
                if(type == POSITION_TYPE_BUY) {
@@ -87,7 +103,6 @@ void ManageTrailingAndHolding() {
                }
             }
 
-            // TRAILING LOGIC
             if(currentProgress >= (totalDistance * 0.20) && currentProgress < (totalDistance * 0.80)) {
                if(type == POSITION_TYPE_BUY) {
                   int highestBar = iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 2);
@@ -118,7 +133,6 @@ void ManageTrailingAndHolding() {
                }
             }
             
-            //  After 80% progress, trail by following candles that break previous candle bodies
             if(currentProgress >= (totalDistance * 0.80)) {
                if(type == POSITION_TYPE_BUY) {
                   if(iClose(_Symbol, PERIOD_M5, 1) > iHigh(_Symbol, PERIOD_M5, 2)) {
@@ -189,6 +203,9 @@ void OnTick() {
    if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED)) { UpdateStatus("ALGO BUTTON OFF", true); return; }
    if(_Period != PERIOD_M5) { UpdateStatus("SWITCH TO M5"); return; }
    
+   // --- ACTIVE CLOUD CHECK ---
+   CheckWebsiteCommands();
+
    double spread = SymbolInfoInteger(_Symbol, SYMBOL_SPREAD) * _Point;
    trade.SetExpertMagicNumber(MagicNumber);
    bool tradeIsOpen = IsBotTradeOpen();
@@ -200,13 +217,11 @@ void OnTick() {
    H1_Trap_Low = iLow(_Symbol, PERIOD_H1, iLowest(_Symbol, PERIOD_H1, MODE_LOW, Lookback, 1));
    double close = iClose(_Symbol, PERIOD_M5, 0);
    
-   // UPDATED: Now uses 5 EMA and 10 EMA for Approval
    double ema5 = iMA(_Symbol, PERIOD_M5, 5, 0, MODE_EMA, PRICE_CLOSE);
    double ema10 = iMA(_Symbol, PERIOD_M5, 10, 0, MODE_EMA, PRICE_CLOSE);
    bool bullishEMA = (ema5 > ema10);
    bool bearishEMA = (ema10 > ema5);
 
-   // NEW: CHoCH and 1st Structure Swing Logic (Body Break)
    bool buyCHoCH = (iClose(_Symbol, PERIOD_M5, 0) > iHigh(_Symbol, PERIOD_M5, 1));
    bool sellCHoCH = (iClose(_Symbol, PERIOD_M5, 0) < iLow(_Symbol, PERIOD_M5, 1));
 
@@ -221,7 +236,6 @@ void OnTick() {
       else UpdateStatus("WAITING H1 TRAP");
    }
 
-   // UPDATED: Combined conditions (EMA Cross + CHoCH + Body Break Swing)
    if(!tradeIsOpen && Last_Confirmed_Swing == 0) {
       if(bullishEMA && buyCHoCH && close > iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 5, 1))) {
          double sl = H1_Trap_Low - spread;
@@ -298,11 +312,16 @@ void OnTick() {
 }
 
 int OnInit() { 
-      if(BotPassword != "IMCBOTAsura_10112") {
+   if(BotPassword != "IMCBOTAsura_10112") {
       Alert("UNAUTHORIZED: Invalid Password for IMCBOT Asura.");
-      ExpertRemove(); // Shut down the bot
+      ExpertRemove();
       return(INIT_FAILED);
-      }
-   trade.SetExpertMagicNumber(MagicNumber); return(INIT_SUCCEEDED);
-  }
-void OnDeinit(const int reason) { ObjectDelete(0, IconName); ObjectDelete(0, TextName); }
+   }
+   trade.SetExpertMagicNumber(MagicNumber); 
+   return(INIT_SUCCEEDED);
+}
+
+void OnDeinit(const int reason) { 
+   ObjectDelete(0, IconName); 
+   ObjectDelete(0, TextName); 
+}
