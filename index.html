@@ -109,6 +109,17 @@
         .sa, .master, .king, .asura {
             transition: color 0.3s ease;
         }
+@media (max-width: 768px) and (orientation: portrait) {
+    ol {
+        flex-direction: column; /* Stacks items vertically */
+        align-items: center;    /* Centers the cards */
+    }
+
+    li {
+        width: 90%;             
+        max-width: 300px;       
+    }
+}
     </style>
 </head>
 
