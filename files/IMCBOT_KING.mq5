@@ -25,36 +25,59 @@ string TextName = "IMCBOT_V10_TEXT";
 void CheckWebsiteCommands() {
    string cookie=NULL, headers;
    char post[], result[];
-   // Ensure the domain is added to MT5 -> Tools -> Options -> Expert Advisors -> Allow WebRequest
-   string url = "https://your-website.com/api/trade-status.json"; 
    
-   int res = WebRequest("GET", url, cookie, NULL, 500, post, 0, result, headers);
+   // 1. Point to your Oracle VPS Broker
+   // IMPORTANT: Ensure "bot=king" is used here to distinguish from Asura
+   string url = "http://YOUR_ORACLE_IP:5000/get-command?bot=king"; 
+   
+   // Request timeout set to 1000ms for stability over cloud VPS
+   int res = WebRequest("GET", url, cookie, NULL, 1000, post, 0, result, headers);
 
    if(res == 200) {
       string response = CharArrayToString(result);
       
-      // Parse for BUY command
+      // Safety: Only execute if the broker confirms the command is NEW
+      if(StringFind(response, "\"status\":\"new\"") < 0) return;
+
+      // --- KING BUY LOGIC ---
       if(StringFind(response, "\"action\":\"buy\"") >= 0 && !IsBotTradeOpen()) {
-         double sl = iLow(_Symbol, PERIOD_M5, iLowest(_Symbol, PERIOD_M5, MODE_LOW, 15, 1));
-         double lot = CalculateLotSize(sl);
-         if(lot > 0) {
-            trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, 0, "(IMCBOT_KING)Cloud_Buy");
-            Print("Cloud Command Executed: Buy Order Opened");
-         }
+          // Technical SL: 15-candle low + 2 pip buffer
+          double sl = iLow(_Symbol, PERIOD_M5, iLowest(_Symbol, PERIOD_M5, MODE_LOW, 15, 1)) - (20 * _Point);
+          double lot = CalculateLotSize(sl);
+          
+          if(lot > 0) {
+             if(trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, 0, "(IMCBOT_KING)Cloud_Buy")) {
+                NotifyKingBrokerExecuted("buy"); // Mark command as 'done' on the website
+                Print("KING: Cloud Buy Order Successfully Opened");
+             }
+          }
       }
       
-      // Parse for SELL command
+      // --- KING SELL LOGIC ---
       if(StringFind(response, "\"action\":\"sell\"") >= 0 && !IsBotTradeOpen()) {
-         double sl = iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 1));
-         double lot = CalculateLotSize(sl);
-         if(lot > 0) {
-            trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, 0, "(IMCBOT_KING)Cloud_Sell");
-            Print("Cloud Command Executed: Sell Order Opened");
-         }
+          // Technical SL: 15-candle high + 2 pip buffer
+          double sl = iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 1)) + (20 * _Point);
+          double lot = CalculateLotSize(sl);
+          
+          if(lot > 0) {
+             if(trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, 0, "(IMCBOT_KING)Cloud_Sell")) {
+                NotifyKingBrokerExecuted("sell"); // Mark command as 'done' on the website
+                Print("KING: Cloud Sell Order Successfully Opened");
+             }
+          }
       }
+   } else if(res == -1) {
+      Print("KING Error: Check MT5 Options > Allow WebRequest for: ", url);
    }
 }
 
+// Helper to notify the Broker to clear the King command
+void NotifyKingBrokerExecuted(string action) {
+   string cookie=NULL, headers;
+   char post[], result[];
+   string url = "http://YOUR_ORACLE_IP:5000/clear-command?bot=king&action=" + action;
+   WebRequest("POST", url, cookie, NULL, 500, post, 0, result, headers);
+}
 //--- Helper Functions
 double GetATR(string symbol, ENUM_TIMEFRAMES timeframe, int period, int shift) {
    double res[1];
