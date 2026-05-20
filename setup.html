@@ -3,22 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Configuration - IMCBOTS</title>
+    <title>IMCBOTS Gallery</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
     <style>
-        /* ... Keep your existing body, .title-container, .config-box, etc. styles ... */
-        
-        #successView {
-            display: none; 
+        body { 
+            background-image: url('images/bg.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: white; 
+            font-family: 'Lexend Deca', sans-serif; 
+            text-align: center; 
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #galleryContainer { 
             background: rgba(0, 0, 0, 0.8); 
             padding: 30px; 
             border-radius: 20px; 
             border: 1px solid #00FF00; 
+            width: 90%;
             max-width: 400px; 
-            margin: 40px auto; 
-            backdrop-filter: blur(5px); 
+            height: 400px;
             position: relative;
-            height: 300px; 
             overflow: hidden;
         }
 
@@ -31,55 +43,34 @@
             height: auto; 
             border-radius: 10px; 
             opacity: 0;
-            transition: opacity 1.5s ease-in-out; /* Smooth fade effect */
+            transition: opacity 1.5s ease-in-out;
         }
 
         .slide-img.active { opacity: 1; }
-        
-        /* ... Keep your other existing styles ... */
     </style>
 </head>
 <body>
 
-    <!-- ... Keep your setupContent section as is ... -->
+    <h1>Bot Showcase</h1>
 
-    <div id="successView">
+    <div id="galleryContainer">
         <img src="images/saver1.jpg" class="slide-img active" id="img1">
         <img src="images/saver2.png" class="slide-img" id="img2">
         <img src="images/saver3.jpg" class="slide-img" id="img3">
-        <img src="images/saver4.jpg" class="slide-img" id="img4">
-    </div>
+        </div>
 
     <script>
-        // ... Keep your existing botDatabase and initial logic ...
-
-        function startSlideshow() {
-            let current = 1;
-            const totalImages = 4;
+        let current = 1;
+        const totalImages = 3; // Update to 4 if you add a 4th image
+        
+        setInterval(() => {
+            document.getElementById('img' + current).classList.remove('active');
             
-            setInterval(() => {
-                // Hide current
-                document.getElementById('img' + current).classList.remove('active');
-                
-                // Calculate next
-                current = (current % totalImages) + 1;
-                
-                // Show next
-                document.getElementById('img' + current).classList.add('active');
-            }, 12000); // 12 seconds
-        }
-
-        function verifyBot() {
-            // ... Keep your existing validation logic ...
+            current++;
+            if (current > totalImages) current = 1;
             
-            if (currentBot && inputPass === currentBot.pass) {
-                // ... Keep your fetch/UI logic ...
-                document.getElementById('successView').style.display = 'block';
-                startSlideshow();
-            } else {
-                alert("Incorrect password.");
-            }
-        }
+            document.getElementById('img' + current).classList.add('active');
+        }, 12000); // 12 seconds
     </script>
 </body>
 </html>
