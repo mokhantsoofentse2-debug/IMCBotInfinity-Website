@@ -1,13 +1,14 @@
 //+------------------------------------------------------------------+
-//|                                IMCBOT SMALL ACCOUNT - V9.2       |
+//|                                  IMCBOT SMALL ACCOUNT - V9.2     |
 //+------------------------------------------------------------------+
 #property strict
+#property tester_everytick_calculate
 #include <Trade/Trade.mqh>
 CTrade trade;
 
 // --- User & Security Inputs ---
 input string BotPassword = "";
-input int Lookback = 60;           
+input int Lookback = 60;            
 input int StructureLookback = 15;  
 input long MagicNumber = 123456;   
 
