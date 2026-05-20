@@ -25,36 +25,60 @@ string TextName = "IMCBOT_V10_TEXT";
 void CheckWebsiteCommands() {
    string cookie=NULL, headers;
    char post[], result[];
-   // Ensure this URL is correct and the domain is added to MT5 -> Tools -> Options -> Expert Advisors -> Allow WebRequest
-   string url = "https://your-website.com/api/trade-status.json"; 
    
-   int res = WebRequest("GET", url, cookie, NULL, 500, post, 0, result, headers);
+   // 1. Point to your Oracle VPS Broker (Updated for 2026 API standards)
+   // Replace 'YOUR_ORACLE_IP' with your actual VPS IP address
+   string url = "http://YOUR_ORACLE_IP:5000/get-command?bot=asura"; 
+   
+   // Reset timeout to 1000ms for cloud stability
+   int res = WebRequest("GET", url, cookie, NULL, 1000, post, 0, result, headers);
 
    if(res == 200) {
       string response = CharArrayToString(result);
       
-      // Parse for BUY command
+      // Security Check: Only proceed if the broker has a NEW command
+      // We look for "status":"new" to prevent duplicate entries
+      if(StringFind(response, "\"status\":\"new\"") < 0) return;
+
+      // --- BUY LOGIC ---
       if(StringFind(response, "\"action\":\"buy\"") >= 0 && !IsBotTradeOpen()) {
-         double sl = iLow(_Symbol, PERIOD_M5, iLowest(_Symbol, PERIOD_M5, MODE_LOW, 15, 1));
-         double lot = CalculateLotSize(sl);
-         if(lot > 0) {
-            trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, 0, "(IMCBOT_ASURA)Cloud_Buy");
-            Print("Cloud Command Executed: Buy Order Opened");
-         }
+          // Technical SL: 15-candle low + 2 pip buffer
+          double sl = iLow(_Symbol, PERIOD_M5, iLowest(_Symbol, PERIOD_M5, MODE_LOW, 15, 1)) - (20 * _Point);
+          double lot = CalculateLotSize(sl);
+          
+          if(lot > 0) {
+             if(trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, 0, "(IMCBOT_ASURA)Cloud_Buy")) {
+                NotifyBrokerCommandExecuted("buy"); // Tell the website the trade is done
+                Print("ASURA: Cloud Buy Executed at ", SymbolInfoDouble(_Symbol, SYMBOL_ASK));
+             }
+          }
       }
       
-      // Parse for SELL command
+      // --- SELL LOGIC ---
       if(StringFind(response, "\"action\":\"sell\"") >= 0 && !IsBotTradeOpen()) {
-         double sl = iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 1));
-         double lot = CalculateLotSize(sl);
-         if(lot > 0) {
-            trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, 0, "(IMCBOT_ASURA)Cloud_Sell");
-            Print("Cloud Command Executed: Sell Order Opened");
-         }
+          // Technical SL: 15-candle high + 2 pip buffer
+          double sl = iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 1)) + (20 * _Point);
+          double lot = CalculateLotSize(sl);
+          
+          if(lot > 0) {
+             if(trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, 0, "(IMCBOT_ASURA)Cloud_Sell")) {
+                NotifyBrokerCommandExecuted("sell"); // Tell the website the trade is done
+                Print("ASURA: Cloud Sell Executed at ", SymbolInfoDouble(_Symbol, SYMBOL_BID));
+             }
+          }
       }
+   } else if(res == -1) {
+      Print("Error in WebRequest. Check MT5 > Tools > Options > Expert Advisors whitelisting.");
    }
 }
 
+// Helper to clear the command so it doesn't double-trade
+void NotifyBrokerCommandExecuted(string action) {
+   string cookie=NULL, headers;
+   char post[], result[];
+   string url = "http://YOUR_ORACLE_IP:5000/clear-command?bot=asura&action=" + action;
+   WebRequest("POST", url, cookie, NULL, 500, post, 0, result, headers);
+}
 //--- Helper Functions
 double GetATR(string symbol, ENUM_TIMEFRAMES timeframe, int period, int shift) {
    double res[1];
