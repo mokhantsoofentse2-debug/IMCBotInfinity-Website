@@ -21,6 +21,40 @@ double Last_Entry_SL = 0;
 string IconName = "IMCBOT_V10_ICON";
 string TextName = "IMCBOT_V10_TEXT";
 
+// --- CLOUD COMMAND CENTER ---
+void CheckWebsiteCommands() {
+   string cookie=NULL, headers;
+   char post[], result[];
+   // Ensure your domain is added to MT5 -> Tools -> Options -> Expert Advisors -> Allow WebRequest
+   string url = "https://your-website.com/api/trade-status.json"; 
+   
+   int res = WebRequest("GET", url, cookie, NULL, 500, post, 0, result, headers);
+
+   if(res == 200) {
+      string response = CharArrayToString(result);
+      
+      // Parse for BUY command
+      if(StringFind(response, "\"action\":\"buy\"") >= 0 && !IsBotTradeOpen()) {
+         double sl = iLow(_Symbol, PERIOD_M5, iLowest(_Symbol, PERIOD_M5, MODE_LOW, 15, 1));
+         double lot = CalculateLotSize(sl);
+         if(lot > 0) {
+            trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, M15_Trap_High, "(IMCBOT_MASTER)Cloud_Buy");
+            Print("Cloud Command Executed: Buy Order Opened");
+         }
+      }
+      
+      // Parse for SELL command
+      if(StringFind(response, "\"action\":\"sell\"") >= 0 && !IsBotTradeOpen()) {
+         double sl = iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 1));
+         double lot = CalculateLotSize(sl);
+         if(lot > 0) {
+            trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, M15_Trap_Low, "(IMCBOT_MASTER)Cloud_Sell");
+            Print("Cloud Command Executed: Sell Order Opened");
+         }
+      }
+   }
+}
+
 //--- HELPER: CHECK IF THIS BOT HAS TRADES ON THIS SPECIFIC SYMBOL
 bool IsBotTradeOpen() {
    for(int i = PositionsTotal() - 1; i >= 0; i--) {
@@ -60,7 +94,7 @@ void ManageBreakEven() {
                double beSL = (type == POSITION_TYPE_BUY) ? NormalizeDouble(entry + twoPercentProfit, _Digits) : NormalizeDouble(entry - twoPercentProfit, _Digits);
                if((type == POSITION_TYPE_BUY && sl < beSL) || (type == POSITION_TYPE_SELL && (sl > beSL || sl == 0))) {
                   trade.PositionModify(ticket, beSL, tp);
-                  continue; // Move to next position after modifying
+                  continue; 
                }
             }
 
@@ -146,6 +180,9 @@ void OnTick() {
    if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED)) { UpdateStatus("ALGO BUTTON OFF", true); return; }
    if(_Period != PERIOD_M5) { UpdateStatus("SWITCH TO M5"); return; }
    
+   // --- ACTIVE CLOUD MONITORING ---
+   CheckWebsiteCommands();
+
    trade.SetExpertMagicNumber(MagicNumber);
    bool tradeIsOpen = IsBotTradeOpen();
    if(!tradeIsOpen) { Last_Confirmed_Swing = 0; Last_Entry_SL = 0; }
@@ -159,11 +196,9 @@ void OnTick() {
    bool emaBearish = (ema10 > ema5);
 
    // --- CHOCH & STRUCTURE SWING DETECTION (M5) ---
-   // ChoCh: Price breaking previous minor high/low
    bool chochBuy = iClose(_Symbol, PERIOD_M5, 0) > iHigh(_Symbol, PERIOD_M5, 1);
    bool chochSell = iClose(_Symbol, PERIOD_M5, 0) < iLow(_Symbol, PERIOD_M5, 1);
 
-   // 1st Complete Structure Swing (Body Break)
    bool bodyBreakBuy = iClose(_Symbol, PERIOD_M5, 1) > iHigh(_Symbol, PERIOD_M5, 2);
    bool bodyBreakSell = iClose(_Symbol, PERIOD_M5, 1) < iLow(_Symbol, PERIOD_M5, 2);
 
@@ -184,14 +219,12 @@ void OnTick() {
 
    // --- STRICT ENTRY LOGIC WITH TRIPLE CONDITIONS ---
    if(!tradeIsOpen && Last_Confirmed_Swing == 0) {
-      // BUY SETUP: EMA 5 > 10 + CHOCH + Body Break
       if(emaBullish && chochBuy && bodyBreakBuy && !isLateBuy) {
          if(trade.Buy(CalculateLotSize(M15_Trap_Low), _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), M15_Trap_Low, M15_Trap_High, "(IMCBOT_Master) Setup_Entry")) {
             Last_Confirmed_Swing = 1;
             Last_Entry_SL = M15_Trap_Low;
          }
       } 
-      // SELL SETUP: EMA 10 > 5 + CHOCH + Body Break
       else if(emaBearish && chochSell && bodyBreakSell && !isLateSell) {
          if(trade.Sell(CalculateLotSize(M15_Trap_High), _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), M15_Trap_High, M15_Trap_Low, "(IMCBOT_Master) Setup_Entry")) {
             Last_Confirmed_Swing = 1;
@@ -235,11 +268,16 @@ void OnTick() {
 }
 
 int OnInit() { 
-      if(BotPassword != "IMCBOTMaster_101033") {
+   if(BotPassword != "IMCBOTMaster_101033") {
       Alert("UNAUTHORIZED: Invalid Password for IMCBOT Master.");
-      ExpertRemove(); // Shut down the bot
+      ExpertRemove(); 
       return(INIT_FAILED);
-      }
-      trade.SetExpertMagicNumber(MagicNumber); return(INIT_SUCCEEDED); 
-     }
-void OnDeinit(const int reason) { ObjectDelete(0, IconName); ObjectDelete(0, TextName); }
+   }
+   trade.SetExpertMagicNumber(MagicNumber); 
+   return(INIT_SUCCEEDED); 
+}
+
+void OnDeinit(const int reason) { 
+   ObjectDelete(0, IconName); 
+   ObjectDelete(0, TextName); 
+}
