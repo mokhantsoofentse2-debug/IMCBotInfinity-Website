@@ -24,8 +24,7 @@
         <select id="market">
             <option value="">Select Market</option>
             <option value="v75">Volatility 75 Index</option>
-            <option value="v100">Volatility 100 Index</option>
-            <option value="crash">Crash / Boom</option>
+            <option value="v100">Volatility 150 Index</option>
         </select>
 
         <input type="password" placeholder="Enter Bot License Password" id="pass">
@@ -33,7 +32,7 @@
 
         <div id="downloadArea">
             <p style="color: #00FF00;">Verification Successful!</p>
-            <a id="botLink" href="#" style="color: white; text-decoration: underline;">Click here to download your .mq5 file</a>
+            <a id="botLink" href="#" style="color: white; text-decoration: underline;" download>Click here to download your file</a>
         </div>
     </div>
 
@@ -42,19 +41,48 @@
         const params = new URLSearchParams(window.location.search);
         const botType = params.get('bot');
 
-        if(botType === 'sa') document.getElementById('botTitle').innerText = "IMCBOT Small Account Setup";
+        // Central Database for your bots
+        const botDatabase = {
+            'sa': {
+                title: "Small Account Setup",
+                pass: "IMCBOTSA_9922",
+                file: "files/IMCBOT_SA.mq5" // Ensure file is inside the 'files' folder!
+            },
+            'master': {
+                title: "Master Bot Setup",
+                pass: "IMCBOTMaster_101033", 
+                file: "files/IMCBOT_Master.mq5"
+            },
+            'king': {
+                title: "King Bot Setup",
+                pass: "IMCBOTKing_10111",
+                file: "files/IMCBOT_KING.mq5"
+            },
+            'asura': {
+                title: "Asura Bot Setup",
+                pass: "IMCBOTAsura_10112",
+                file: "files/IMCBOT_ASURA.mq5"
+            }
+        };
+
+        // Initialize Page
+        const currentBot = botDatabase[botType];
+        if (currentBot) {
+            document.getElementById('botTitle').innerText = "IMCBOT " + currentBot.title;
+        } else {
+            document.getElementById('botTitle').innerText = "Invalid Bot Selected";
+        }
 
         function verifyBot() {
-            const pass = document.getElementById('pass').value;
+            const inputPass = document.getElementById('pass').value;
             const area = document.getElementById('downloadArea');
             const link = document.getElementById('botLink');
 
-            // Verification Logic
-            if(botType === 'sa' && pass === 'IMCBOTSA_9922') {
+            if (currentBot && inputPass === currentBot.pass) {
                 area.style.display = 'block';
-                link.href = "files/IMCBOT_SA.mq5"; // Path to your file on GitHub
+                link.href = currentBot.file;
             } else {
-                alert("Incorrect password for this specific bot.");
+                alert("Incorrect password or unauthorized access attempt.");
             }
         }
     </script>
