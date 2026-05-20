@@ -7,21 +7,21 @@
         'sa': {
             title: "Small Account Setup",
             pass: "IMCBOTSA_9922",
-            file: "files/IMCBOT_SA_V9.mq5"
+            file: "files/IMCBOT_SA.mq5"
         },
         'master': {
             title: "Master Bot Setup",
-            pass: "MASTER_INFINITY_88", // Example password
-            file: "files/IMCBOT_MASTER.mq5"
+            pass: "IMCBOTMaster_101033", 
+            file: "files/IMCBOT_Master.mq5"
         },
         'king': {
             title: "King Bot Setup",
-            pass: "KING_RULE_77",
+            pass: "IMCBOTKing_10111",
             file: "files/IMCBOT_KING.mq5"
         },
         'asura': {
             title: "Asura Bot Setup",
-            pass: "ASURA_DEMON_66",
+            pass: "IMCBOTAsura_10112",
             file: "files/IMCBOT_ASURA.mq5"
         }
     };
