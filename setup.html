@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Configuration - IMCBOTS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <style>
+        body { background: #0a0a0a; color: white; font-family: 'Lexend Deca', sans-serif; padding: 40px; text-align: center; }
+        .config-box { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; border: 1px solid #00FF00; max-width: 400px; margin: auto; }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #222; color: white; box-sizing: border-box; }
+        button { background: #00FF00; color: black; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
+        #downloadArea { display: none; margin-top: 20px; padding: 20px; background: rgba(0,255,0,0.1); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <h2 id="botTitle">Configure Your Bot</h2>
+    
+    <div class="config-box">
+        <input type="text" placeholder="MT5 Account Number" id="accNum">
+        <input type="text" placeholder="Trading Server (e.g. Deriv-Server)" id="server">
+        
+        <select id="market">
+            <option value="">Select Market</option>
+            <option value="v75">Volatility 75 Index</option>
+            <option value="v100">Volatility 100 Index</option>
+            <option value="crash">Crash / Boom</option>
+        </select>
+
+        <input type="password" placeholder="Enter Bot License Password" id="pass">
+        <button onclick="verifyBot()">Verify & Download</button>
+
+        <div id="downloadArea">
+            <p style="color: #00FF00;">Verification Successful!</p>
+            <a id="botLink" href="#" style="color: white; text-decoration: underline;">Click here to download your .mq5 file</a>
+        </div>
+    </div>
+
+    <script>
+        // Get the bot type from the URL (?bot=sa)
+        const params = new URLSearchParams(window.location.search);
+        const botType = params.get('bot');
+
+        if(botType === 'sa') document.getElementById('botTitle').innerText = "IMCBOT Small Account Setup";
+
+        function verifyBot() {
+            const pass = document.getElementById('pass').value;
+            const area = document.getElementById('downloadArea');
+            const link = document.getElementById('botLink');
+
+            // Verification Logic
+            if(botType === 'sa' && pass === 'IMCBOTSA_9922') {
+                area.style.display = 'block';
+                link.href = "files/IMCBOT_SA.mq5"; // Path to your file on GitHub
+            } else {
+                alert("Incorrect password for this specific bot.");
+            }
+        }
+    </script>
+</body>
+</html>
