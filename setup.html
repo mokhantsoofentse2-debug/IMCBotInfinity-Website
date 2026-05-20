@@ -6,13 +6,82 @@
     <title>Bot Configuration - IMCBOTS</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
     <style>
-        body { background: #0a0a0a; color: white; font-family: 'Lexend Deca', sans-serif; padding: 40px; text-align: center; }
-        .config-box { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; border: 1px solid #00FF00; max-width: 400px; margin: auto; }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #222; color: white; box-sizing: border-box; }
-        button { background: #00FF00; color: black; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; transition: 0.3s; }
+        body { 
+            /* Responsive Background Logic */
+            background-image: url('images/bg.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            color: white; 
+            font-family: 'Lexend Deca', sans-serif; 
+            padding: 40px; 
+            text-align: center; 
+            min-height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Heading Style */
+        #botTitle {
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        /* Color Classes for the Heading */
+        .color-sa { color: #009E60; }      /* Shamrock Green */
+        .color-master { color: #00FFFF; }  /* Cyan Blue */
+        .color-king { color: #FF2400; }    /* Scarlet Red */
+        .color-asura { color: #FF00FF; }   /* Magenta Purple */
+
+        .config-box { 
+            background: rgba(0, 0, 0, 0.8); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 1px solid #00FF00; 
+            max-width: 400px; 
+            margin: auto; 
+            backdrop-filter: blur(5px);
+        }
+
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border-radius: 8px; 
+            border: 1px solid #333; 
+            background: #222; 
+            color: white; 
+            box-sizing: border-box; 
+        }
+
+        button { 
+            background: #00FF00; 
+            color: black; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            width: 100%; 
+            margin-top: 10px; 
+            transition: 0.3s; 
+        }
+
         button:hover { background: #00cc00; transform: scale(1.02); }
-        #downloadArea { display: none; margin-top: 20px; padding: 20px; background: rgba(0,255,0,0.1); border-radius: 10px; border: 1px dashed #00FF00; }
-        .notice { font-size: 0.8em; color: #888; margin-bottom: 15px; }
+        
+        #downloadArea { 
+            display: none; 
+            margin-top: 20px; 
+            padding: 20px; 
+            background: rgba(0,255,0,0.1); 
+            border-radius: 10px; 
+            border: 1px dashed #00FF00; 
+        }
+
+        .notice { font-size: 0.8em; color: #ccc; margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -22,35 +91,20 @@
     
     <div class="config-box">
         <input type="text" placeholder="MT5 Account Number" id="accNum">
-        <input type="text" placeholder="Trading Server (e.g., Deriv-Server or IC-Markets-MT5)" id="server">
+        <input type="text" placeholder="Trading Server" id="server">
         
         <select id="market">
             <option value="">Select Market</option>
             <optgroup label="Forex Pairs">
                 <option value="eurusd">EURUSD</option>
                 <option value="usdjpy">USDJPY</option>
-                <option value="gbpjpy">GBPJPY</option>
-                <option value="eurnzd">EURNZD</option>
-                <option value="usdcad">USDCAD</option>
-            </optgroup>
-            <optgroup label="Metals">
-                <option value="xauusd">XAUUSD (Gold)</option>
-                <option value="xagusd">XAGUSD (Silver)</option>
             </optgroup>
             <optgroup label="Indices">
-                <option value="ger40">GER40 Index</option>
                 <option value="us30">US30 Index</option>
-                <option value="uk100">UK100 Index</option>
-                <option value="sp500">SP500 Index</option>
                 <option value="nas100">NAS100 Index</option>
-                <option value="jpn225">JPN225 Index</option>
-                <option value="cac40">CAC40 Index</option>
-                <option value="aus200">AUS200 Index</option>
             </optgroup>
             <optgroup label="Synthetic Indices">
                 <option value="v75">Volatility 75 Index</option>
-                <option value="v150">Volatility 150 Index</option>
-                <option value="dyn25">Dynamic 25 Synthetic</option>
             </optgroup>
         </select>
 
@@ -68,17 +122,41 @@
         const botType = params.get('bot');
 
         const botDatabase = {
-            'sa': { title: "Small Account Setup", pass: "IMCBOTSA_9922", file: "files/IMCBOT_SA.mq5" },
-            'master': { title: "Master Bot Setup", pass: "IMCBOTMaster_101033", file: "files/IMCBOT_Master.mq5" },
-            'king': { title: "King Bot Setup", pass: "IMCBOTKing_10111", file: "files/IMCBOT_KING.mq5" },
-            'asura': { title: "Asura Bot Setup", pass: "IMCBOTAsura_10112", file: "files/IMCBOT_ASURA.mq5" }
+            'sa': { 
+                title: "Small Account Setup", 
+                pass: "IMCBOTSA_9922", 
+                file: "files/IMCBOT_SA.mq5",
+                class: "color-sa" 
+            },
+            'master': { 
+                title: "Master Bot Setup", 
+                pass: "IMCBOTMaster_101033", 
+                file: "files/IMCBOT_Master.mq5",
+                class: "color-master" 
+            },
+            'king': { 
+                title: "King Bot Setup", 
+                pass: "IMCBOTKing_10111", 
+                file: "files/IMCBOT_KING.mq5",
+                class: "color-king" 
+            },
+            'asura': { 
+                title: "Asura Bot Setup", 
+                pass: "IMCBOTAsura_10112", 
+                file: "files/IMCBOT_ASURA.mq5",
+                class: "color-asura" 
+            }
         };
 
         const currentBot = botDatabase[botType];
+        const titleElement = document.getElementById('botTitle');
+
         if (currentBot) {
-            document.getElementById('botTitle').innerText = "IMCBOT " + currentBot.title;
+            titleElement.innerText = "IMCBOT " + currentBot.title;
+            // Apply the specific color class
+            titleElement.classList.add(currentBot.class);
         } else {
-            document.getElementById('botTitle').innerText = "Invalid Bot Selected";
+            titleElement.innerText = "Invalid Bot Selected";
         }
 
         function verifyBot() {
