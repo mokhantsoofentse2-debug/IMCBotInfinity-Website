@@ -41,17 +41,18 @@
             top: 50%; 
             left: 50%; 
             transform: translate(-50%, -50%);
-            width: 90%; 
-            height: auto; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* Keeps the image proportions intact */
             border-radius: 10px; 
-            opacity: 0; /* Hidden by default */
+            opacity: 0; 
             transition: opacity 1.5s ease-in-out;
             z-index: 1;
         }
 
         .slide-img.active { 
-            opacity: 1; /* Visible when active */
-            z-index: 2; /* Bring to front */
+            opacity: 1; 
+            z-index: 2; 
         }
     </style>
 </head>
@@ -60,10 +61,10 @@
     <h1>Bot Showcase</h1>
 
     <div id="galleryContainer">
-        <img src="images/saver1.jpg" class="slide-img active" id="img1">
-        <img src="images/icon.jpg" class="slide-img" id="img2">
-        <img src="images/saver3.jpg" class="slide-img" id="img3">
-        <img src="images/saver4.jpg" class="slide-img" id="img4">
+        <img src="images/saver1.jpg" class="slide-img active" id="img1" alt="Bot 1">
+        <img src="images/icon.jpg" class="slide-img" id="img2" alt="Bot 2">
+        <img src="images/saver3.jpg" class="slide-img" id="img3" alt="Bot 3">
+        <img src="images/saver4.jpg" class="slide-img" id="img4" alt="Bot 4">
     </div>
 
     <script>
@@ -71,14 +72,11 @@
         const totalImages = 4; 
 
         setInterval(() => {
-            // Remove 'active' class from current
             document.getElementById('img' + current).classList.remove('active');
             
-            // Increment
             current++;
             if (current > totalImages) current = 1;
             
-            // Add 'active' class to new
             document.getElementById('img' + current).classList.add('active');
         }, 12000); 
     </script>
