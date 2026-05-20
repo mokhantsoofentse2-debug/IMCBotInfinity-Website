@@ -7,11 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
     <style>
         body { 
+            /* Responsive Background Logic */
             background-image: url('images/bg.png');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
+            
             color: white; 
             font-family: 'Lexend Deca', sans-serif; 
             padding: 40px; 
@@ -21,25 +23,26 @@
             box-sizing: border-box;
         }
 
-        /* Container for the Heading */
+        /* Container for the Heading to match config-box style */
         .title-container {
-            background: rgba(0, 0, 0, 0.6); /* Transparent background */
-            padding: 15px 25px;
-            border-radius: 15px;
-            display: inline-block; /* Fits the width of the text */
-            margin-bottom: 25px;
-            backdrop-filter: blur(8px); /* Blurs the background like the config box */
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.8); 
+            padding: 20px; 
+            border-radius: 20px; 
+            border: 1px solid #00FF00; 
+            max-width: 400px; 
+            margin: 0 auto 20px auto; 
+            backdrop-filter: blur(5px);
         }
 
+        /* Base Heading Style */
         #botTitle {
             text-transform: uppercase;
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
 
-        /* Color Classes - Updated SA to Harlequin */
-        .color-sa { color: #3FFF00; }      /* Harlequin Green (Brighter) */
+        /* Color Classes for the Heading */
+        .color-sa { color: #3FFF00; }      /* Harlequin Green */
         .color-master { color: #00FFFF; }  /* Cyan Blue */
         .color-king { color: #FF2400; }    /* Scarlet Red */
         .color-asura { color: #FF00FF; }   /* Magenta Purple */
@@ -94,7 +97,6 @@
 </head>
 <body>
 
-    <!-- Wrapped the Heading in a transparent container -->
     <div class="title-container">
         <h2 id="botTitle">Configure Your Bot</h2>
     </div>
@@ -165,6 +167,7 @@
 
         if (currentBot) {
             titleElement.innerText = "IMCBOT " + currentBot.title;
+            // Apply the specific color class
             titleElement.classList.add(currentBot.class);
         } else {
             titleElement.innerText = "Invalid Bot Selected";
