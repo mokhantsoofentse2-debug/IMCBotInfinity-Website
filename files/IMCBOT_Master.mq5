@@ -23,36 +23,62 @@ string TextName = "IMCBOT_V10_TEXT";
 
 // --- CLOUD COMMAND CENTER ---
 void CheckWebsiteCommands() {
+void CheckWebsiteCommands() {
    string cookie=NULL, headers;
    char post[], result[];
-   // Ensure your domain is added to MT5 -> Tools -> Options -> Expert Advisors -> Allow WebRequest
-   string url = "https://your-website.com/api/trade-status.json"; 
    
-   int res = WebRequest("GET", url, cookie, NULL, 500, post, 0, result, headers);
+   // 1. Point to your Oracle VPS Broker
+   // MASTER bot uses a dedicated stream to handle its unique Trap targets
+   string url = "http://YOUR_ORACLE_IP:5000/get-command?bot=master"; 
+   
+   int res = WebRequest("GET", url, cookie, NULL, 1000, post, 0, result, headers);
 
    if(res == 200) {
       string response = CharArrayToString(result);
       
-      // Parse for BUY command
+      // Safety: Ignore if command isn't flagged as 'new'
+      if(StringFind(response, "\"status\":\"new\"") < 0) return;
+
+      // --- MASTER BUY LOGIC ---
       if(StringFind(response, "\"action\":\"buy\"") >= 0 && !IsBotTradeOpen()) {
-         double sl = iLow(_Symbol, PERIOD_M5, iLowest(_Symbol, PERIOD_M5, MODE_LOW, 15, 1));
-         double lot = CalculateLotSize(sl);
-         if(lot > 0) {
-            trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, M15_Trap_High, "(IMCBOT_MASTER)Cloud_Buy");
-            Print("Cloud Command Executed: Buy Order Opened");
-         }
+          // Technical SL: 15-candle low
+          double sl = iLow(_Symbol, PERIOD_M5, iLowest(_Symbol, PERIOD_M5, MODE_LOW, 15, 1));
+          double lot = CalculateLotSize(sl);
+          
+          if(lot > 0) {
+             // MASTER Bot utilizes the M15 Trap levels for Take Profit
+             if(trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, M15_Trap_High, "(IMCBOT_MASTER)Cloud_Buy")) {
+                NotifyMasterBrokerExecuted("buy");
+                Print("MASTER: Cloud Trap-Buy Executed targeting: ", M15_Trap_High);
+             }
+          }
       }
       
-      // Parse for SELL command
+      // --- MASTER SELL LOGIC ---
       if(StringFind(response, "\"action\":\"sell\"") >= 0 && !IsBotTradeOpen()) {
-         double sl = iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 1));
-         double lot = CalculateLotSize(sl);
-         if(lot > 0) {
-            trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, M15_Trap_Low, "(IMCBOT_MASTER)Cloud_Sell");
-            Print("Cloud Command Executed: Sell Order Opened");
-         }
+          // Technical SL: 15-candle high
+          double sl = iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 1));
+          double lot = CalculateLotSize(sl);
+          
+          if(lot > 0) {
+             // MASTER Bot utilizes the M15 Trap levels for Take Profit
+             if(trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, M15_Trap_Low, "(IMCBOT_MASTER)Cloud_Sell")) {
+                NotifyMasterBrokerExecuted("sell");
+                Print("MASTER: Cloud Trap-Sell Executed targeting: ", M15_Trap_Low);
+             }
+          }
       }
+   } else if(res == -1) {
+      Print("MASTER Error: Connection failed. Check VPS IP and MT5 WebRequest Whitelist.");
    }
+}
+
+// Helper to notify the Broker to clear the Master command
+void NotifyMasterBrokerExecuted(string action) {
+   string cookie=NULL, headers;
+   char post[], result[];
+   string url = "http://YOUR_ORACLE_IP:5000/clear-command?bot=master&action=" + action;
+   WebRequest("POST", url, cookie, NULL, 500, post, 0, result, headers);
 }
 
 //--- HELPER: CHECK IF THIS BOT HAS TRADES ON THIS SPECIFIC SYMBOL
