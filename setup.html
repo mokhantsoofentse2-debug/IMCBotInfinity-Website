@@ -11,20 +11,49 @@
         input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #222; color: white; box-sizing: border-box; }
         button { background: #00FF00; color: black; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
         #downloadArea { display: none; margin-top: 20px; padding: 20px; background: rgba(0,255,0,0.1); border-radius: 10px; }
+        .notice { font-size: 0.8em; color: #888; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
     <h2 id="botTitle">Configure Your Bot</h2>
+    <p class="notice">Note: These bots are compatible with <strong>MetaTrader 5 (MT5)</strong> only.</p>
     
     <div class="config-box">
         <input type="text" placeholder="MT5 Account Number" id="accNum">
-        <input type="text" placeholder="Trading Server (e.g. Deriv-Server)" id="server">
+        <input type="text" placeholder="Trading Server (e.g., Deriv-Server or IC-Markets-MT5)" id="server">
         
         <select id="market">
             <option value="">Select Market</option>
-            <option value="v75">Volatility 75 Index</option>
-            <option value="v100">Volatility 150 Index</option>
+            <!-- Forex -->
+            <optgroup label="Forex Pairs">
+                <option value="eurusd">EURUSD</option>
+                <option value="usdjpy">USDJPY</option>
+                <option value="gbpjpy">GBPJPY</option>
+                <option value="eurnzd">EURNZD</option>
+                <option value="usdcad">USDCAD</option>
+            </optgroup>
+            <!-- Metals -->
+            <optgroup label="Metals">
+                <option value="xauusd">XAUUSD (Gold)</option>
+            </optgroup>
+            <!-- Indices -->
+            <optgroup label="Indices">
+                <option value="ger40">GER40 Index</option>
+                <option value="us30">US30 Index</option>
+                <option value="uk100">UK100 Index</option>
+                <option value="sp500">SP500 Index</option>
+                <option value="nas100">NAS100 Index</option>
+                <option value="jpn225">JPN225 Index</option>
+                <option value="cac40">CAC40 Index</option>
+                <option value="aus200">AUS200 Index</option>
+            </optgroup>
+            <!-- Synthetics -->
+            <optgroup label="Synthetic Indices">
+                <option value="v75">Volatility 75 Index</option>
+                <option value="v150">Volatility 150 Index</option>
+                <option value="dyn25">Dynamic 25 Synthetic</option>
+            </optgroup>
         </select>
 
         <input type="password" placeholder="Enter Bot License Password" id="pass">
@@ -32,21 +61,19 @@
 
         <div id="downloadArea">
             <p style="color: #00FF00;">Verification Successful!</p>
-            <a id="botLink" href="#" style="color: white; text-decoration: underline;" download>Click here to download your file</a>
+            <a id="botLink" href="#" style="color: white; text-decoration: underline;" download>Click here to download your MT5 file</a>
         </div>
     </div>
 
     <script>
-        // Get the bot type from the URL (?bot=sa)
         const params = new URLSearchParams(window.location.search);
         const botType = params.get('bot');
 
-        // Central Database for your bots
         const botDatabase = {
             'sa': {
                 title: "Small Account Setup",
                 pass: "IMCBOTSA_9922",
-                file: "files/IMCBOT_SA.mq5" // Ensure file is inside the 'files' folder!
+                file: "files/IMCBOT_SA.mq5"
             },
             'master': {
                 title: "Master Bot Setup",
@@ -65,7 +92,6 @@
             }
         };
 
-        // Initialize Page
         const currentBot = botDatabase[botType];
         if (currentBot) {
             document.getElementById('botTitle').innerText = "IMCBOT " + currentBot.title;
@@ -75,8 +101,16 @@
 
         function verifyBot() {
             const inputPass = document.getElementById('pass').value;
+            const accNum = document.getElementById('accNum').value;
+            const server = document.getElementById('server').value;
+            const market = document.getElementById('market').value;
             const area = document.getElementById('downloadArea');
             const link = document.getElementById('botLink');
+
+            if (!accNum || !server || !market) {
+                alert("Please fill in all trading account details.");
+                return;
+            }
 
             if (currentBot && inputPass === currentBot.pass) {
                 area.style.display = 'block';
