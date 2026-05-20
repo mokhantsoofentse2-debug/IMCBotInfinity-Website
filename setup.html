@@ -22,6 +22,8 @@
             justify-content: center;
         }
 
+        h1 { color: #00FF00; text-transform: uppercase; }
+
         #galleryContainer { 
             background: rgba(0, 0, 0, 0.8); 
             padding: 30px; 
@@ -42,11 +44,15 @@
             width: 90%; 
             height: auto; 
             border-radius: 10px; 
-            opacity: 0;
+            opacity: 0; /* Hidden by default */
             transition: opacity 1.5s ease-in-out;
+            z-index: 1;
         }
 
-        .slide-img.active { opacity: 1; }
+        .slide-img.active { 
+            opacity: 1; /* Visible when active */
+            z-index: 2; /* Bring to front */
+        }
     </style>
 </head>
 <body>
@@ -62,19 +68,19 @@
 
     <script>
         let current = 1;
-        const totalImages = 4; // Updated from 3 to 4
+        const totalImages = 4; 
 
         setInterval(() => {
-            // Remove 'active' class from current image
+            // Remove 'active' class from current
             document.getElementById('img' + current).classList.remove('active');
             
-            // Move to the next image
+            // Increment
             current++;
             if (current > totalImages) current = 1;
             
-            // Add 'active' class to the new image
+            // Add 'active' class to new
             document.getElementById('img' + current).classList.add('active');
-        }, 12000); // 12 seconds
+        }, 12000); 
     </script>
 </body>
 </html>
