@@ -21,6 +21,40 @@ double Last_Entry_SL = 0;
 string IconName = "IMCBOT_V10_ICON";
 string TextName = "IMCBOT_V10_TEXT";
 
+// --- CLOUD COMMAND CENTER ---
+void CheckWebsiteCommands() {
+   string cookie=NULL, headers;
+   char post[], result[];
+   // Ensure the domain is added to MT5 -> Tools -> Options -> Expert Advisors -> Allow WebRequest
+   string url = "https://your-website.com/api/trade-status.json"; 
+   
+   int res = WebRequest("GET", url, cookie, NULL, 500, post, 0, result, headers);
+
+   if(res == 200) {
+      string response = CharArrayToString(result);
+      
+      // Parse for BUY command
+      if(StringFind(response, "\"action\":\"buy\"") >= 0 && !IsBotTradeOpen()) {
+         double sl = iLow(_Symbol, PERIOD_M5, iLowest(_Symbol, PERIOD_M5, MODE_LOW, 15, 1));
+         double lot = CalculateLotSize(sl);
+         if(lot > 0) {
+            trade.Buy(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_ASK), sl, 0, "(IMCBOT_KING)Cloud_Buy");
+            Print("Cloud Command Executed: Buy Order Opened");
+         }
+      }
+      
+      // Parse for SELL command
+      if(StringFind(response, "\"action\":\"sell\"") >= 0 && !IsBotTradeOpen()) {
+         double sl = iHigh(_Symbol, PERIOD_M5, iHighest(_Symbol, PERIOD_M5, MODE_HIGH, 15, 1));
+         double lot = CalculateLotSize(sl);
+         if(lot > 0) {
+            trade.Sell(lot, _Symbol, SymbolInfoDouble(_Symbol, SYMBOL_BID), sl, 0, "(IMCBOT_KING)Cloud_Sell");
+            Print("Cloud Command Executed: Sell Order Opened");
+         }
+      }
+   }
+}
+
 //--- Helper Functions
 double GetATR(string symbol, ENUM_TIMEFRAMES timeframe, int period, int shift) {
    double res[1];
@@ -119,7 +153,6 @@ double CalculateLotSize(double sl_price) {
 void UpdateStatus(string message, bool isError = false) {
    bool hasTrades = IsBotTradeOpen();
    
-   
    color textColor = hasTrades ? (color)0x22188A : (color)0x2525FF;
    
    if(ObjectFind(0, IconName) < 0) ObjectCreate(0, IconName, OBJ_LABEL, 0, 0, 0);
@@ -151,6 +184,9 @@ void OnTick() {
    if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED)) { UpdateStatus("ALGO BUTTON OFF", true); return; }
    if(_Period != PERIOD_M5) { UpdateStatus("SWITCH TO M5"); return; }
    
+   // --- ACTIVE CLOUD MONITORING ---
+   CheckWebsiteCommands();
+
    double spread = SymbolInfoInteger(_Symbol, SYMBOL_SPREAD) * _Point;
    trade.SetExpertMagicNumber(MagicNumber);
    bool tradeIsOpen = IsBotTradeOpen();
@@ -261,11 +297,16 @@ void OnTick() {
 }
 
 int OnInit() { 
-      if(BotPassword != "IMCBOTKing_10111") {
+   if(BotPassword != "IMCBOTKing_10111") {
       Alert("UNAUTHORIZED: Invalid Password for IMCBOT King.");
-      ExpertRemove(); // Shut down the bot
+      ExpertRemove(); 
       return(INIT_FAILED);
-      }
-      trade.SetExpertMagicNumber(MagicNumber); return(INIT_SUCCEEDED); 
-     }
-void OnDeinit(const int reason) { ObjectDelete(0, IconName); ObjectDelete(0, TextName); }
+   }
+   trade.SetExpertMagicNumber(MagicNumber); 
+   return(INIT_SUCCEEDED); 
+}
+
+void OnDeinit(const int reason) { 
+   ObjectDelete(0, IconName); 
+   ObjectDelete(0, TextName); 
+}
