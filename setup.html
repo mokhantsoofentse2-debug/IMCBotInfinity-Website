@@ -9,8 +9,9 @@
         body { background: #0a0a0a; color: white; font-family: 'Lexend Deca', sans-serif; padding: 40px; text-align: center; }
         .config-box { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; border: 1px solid #00FF00; max-width: 400px; margin: auto; }
         input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: #222; color: white; box-sizing: border-box; }
-        button { background: #00FF00; color: black; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
-        #downloadArea { display: none; margin-top: 20px; padding: 20px; background: rgba(0,255,0,0.1); border-radius: 10px; }
+        button { background: #00FF00; color: black; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; transition: 0.3s; }
+        button:hover { background: #00cc00; transform: scale(1.02); }
+        #downloadArea { display: none; margin-top: 20px; padding: 20px; background: rgba(0,255,0,0.1); border-radius: 10px; border: 1px dashed #00FF00; }
         .notice { font-size: 0.8em; color: #888; margin-bottom: 15px; }
     </style>
 </head>
@@ -25,7 +26,6 @@
         
         <select id="market">
             <option value="">Select Market</option>
-            <!-- Forex -->
             <optgroup label="Forex Pairs">
                 <option value="eurusd">EURUSD</option>
                 <option value="usdjpy">USDJPY</option>
@@ -33,11 +33,10 @@
                 <option value="eurnzd">EURNZD</option>
                 <option value="usdcad">USDCAD</option>
             </optgroup>
-            <!-- Metals -->
             <optgroup label="Metals">
                 <option value="xauusd">XAUUSD (Gold)</option>
+                <option value="xagusd">XAGUSD (Silver)</option>
             </optgroup>
-            <!-- Indices -->
             <optgroup label="Indices">
                 <option value="ger40">GER40 Index</option>
                 <option value="us30">US30 Index</option>
@@ -48,7 +47,6 @@
                 <option value="cac40">CAC40 Index</option>
                 <option value="aus200">AUS200 Index</option>
             </optgroup>
-            <!-- Synthetics -->
             <optgroup label="Synthetic Indices">
                 <option value="v75">Volatility 75 Index</option>
                 <option value="v150">Volatility 150 Index</option>
@@ -57,10 +55,10 @@
         </select>
 
         <input type="password" placeholder="Enter Bot License Password" id="pass">
-        <button onclick="verifyBot()">Verify & Download</button>
+        <button id="verifyBtn" onclick="verifyBot()">Verify & Download</button>
 
         <div id="downloadArea">
-            <p style="color: #00FF00;">Verification Successful!</p>
+            <p style="color: #00FF00; font-weight: bold;">✓ Verification Successful!</p>
             <a id="botLink" href="#" style="color: white; text-decoration: underline;" download>Click here to download your MT5 file</a>
         </div>
     </div>
@@ -70,26 +68,10 @@
         const botType = params.get('bot');
 
         const botDatabase = {
-            'sa': {
-                title: "Small Account Setup",
-                pass: "IMCBOTSA_9922",
-                file: "files/IMCBOT_SA.mq5"
-            },
-            'master': {
-                title: "Master Bot Setup",
-                pass: "IMCBOTMaster_101033", 
-                file: "files/IMCBOT_Master.mq5"
-            },
-            'king': {
-                title: "King Bot Setup",
-                pass: "IMCBOTKing_10111",
-                file: "files/IMCBOT_KING.mq5"
-            },
-            'asura': {
-                title: "Asura Bot Setup",
-                pass: "IMCBOTAsura_10112",
-                file: "files/IMCBOT_ASURA.mq5"
-            }
+            'sa': { title: "Small Account Setup", pass: "IMCBOTSA_9922", file: "files/IMCBOT_SA.mq5" },
+            'master': { title: "Master Bot Setup", pass: "IMCBOTMaster_101033", file: "files/IMCBOT_Master.mq5" },
+            'king': { title: "King Bot Setup", pass: "IMCBOTKing_10111", file: "files/IMCBOT_KING.mq5" },
+            'asura': { title: "Asura Bot Setup", pass: "IMCBOTAsura_10112", file: "files/IMCBOT_ASURA.mq5" }
         };
 
         const currentBot = botDatabase[botType];
@@ -106,6 +88,7 @@
             const market = document.getElementById('market').value;
             const area = document.getElementById('downloadArea');
             const link = document.getElementById('botLink');
+            const btn = document.getElementById('verifyBtn');
 
             if (!accNum || !server || !market) {
                 alert("Please fill in all trading account details.");
@@ -113,6 +96,9 @@
             }
 
             if (currentBot && inputPass === currentBot.pass) {
+                btn.innerText = "Verified!";
+                btn.style.background = "#444";
+                btn.disabled = true;
                 area.style.display = 'block';
                 link.href = currentBot.file;
             } else {
