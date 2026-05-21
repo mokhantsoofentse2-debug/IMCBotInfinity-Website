@@ -63,6 +63,27 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
 
+        /* Payment Button Styles */
+        .payment-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .bank-btn {
+            background-color: #228B22;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+        }
+        .bank-btn:hover, .bank-btn:active {
+            background-color: #7FFF00;
+            color: black;
+        }
+
         footer {
             margin-top: 50px;
             background: rgba(0, 0, 0, 0.8);
@@ -130,6 +151,10 @@
             </a>
         </li>
     </ol>
+
+    <div class="payment-container">
+        <a href="setup.html?bot=bank" class="bank-btn">Account Payment Details</a>
+    </div>
 
     <footer>
         <h2>Contact Details</h2>
