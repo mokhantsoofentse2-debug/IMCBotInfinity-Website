@@ -13,6 +13,7 @@
         
         /* Bank Details Styling */
         .bank-details { color: white; font-size: 1.2rem; line-height: 2.5; }
+        .bnk { text-decoration: underline; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -43,9 +44,9 @@
             container.innerHTML = `
                 <div class="bank-details">
                     <ul style="list-style: none; padding: 0;">
-                        <li><b><u>Bank:</u></b> Capitec</li>
-                        <li><b><u>Acc. no:</u></b> 1195468286</li>
-                        <li><b><u>Acc. type:</u></b> Savings</li>
+                        <li><b><div class='bnk'>Bank:</div> Capitec</li>
+                        <li><b><div class='bnk'>Acc. no:</div> 1195468286</li>
+                        <li><b><div class='bnk'>Acc. type:</div> Savings</li>
                     </ul>
                 </div>`;
         } else if (botKey && botData[botKey]) {
