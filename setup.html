@@ -19,13 +19,13 @@
 
     <script>
         // Define media lists (Images only)
-        const commonImages = ['images/saver1.jpg', 'images/saver3.jpg', 'images/saver4.jpg', 'images/icon.jpg'];
+        const commonImages = ['images/saver1.jpg', 'images/saver3.jpg', 'images/cmn.jpg', 'images/saver4.jpg', 'images/icon.jpg'];
         
         const botData = {
             'sa': { images: ['trades/sa1.png', ...commonImages], color: '#39FF14' }, // Shamrock Green
             'master': { images: ['trades/master1.PNG', 'trades/master2.png', 'trades/master4.jpg', 'trades/master5.jpg', 'trades/master6.jpg', ...commonImages], color: '#00FFFF' }, // Cyan Blue
-            'king': { images: [...commonImages], color: '#FF2400' }, // Scarlet Red
-            'asura': { images: ['trades/asura1.PNG', 'trades/asura4.png', 'trades/asura5.png', ...commonImages], color: '#C71585' } // Magenta Purple
+            'king': { images: ['trades/king4.jpg',...commonImages], color: '#FF2400' }, // Scarlet Red
+            'asura': { images: ['trades/asura1.PNG','trades/asura6.jpg', 'trades/asura4.png', 'trades/asura5.png', ...commonImages], color: '#C71585' } // Magenta Purple
         };
 
         const params = new URLSearchParams(window.location.search);
