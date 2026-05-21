@@ -6,6 +6,7 @@
     <title>IMCBOTS Showcase</title>
     <style>
         body { background: #000; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; font-family: sans-serif; }
+        #botTitle { text-transform: uppercase; }
         #galleryContainer { background: #111; padding: 20px; border-radius: 20px; border: 1px solid #00FF00; width: 90%; max-width: 500px; height: 400px; position: relative; overflow: hidden; }
         .media-item { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1s ease-in-out; }
         .media-item.active { opacity: 1; }
@@ -17,57 +18,42 @@
     <div id="galleryContainer"></div>
 
     <script>
-        // Common images to be added to all bots
+        // Define media lists (Images only)
         const commonImages = ['images/saver1.jpg', 'images/saver3.jpg', 'images/saver4.jpg', 'images/icon.jpg'];
-
+        
         const botData = {
-            'sa': ['trades/sa1.png', ...commonImages],
-            'master': ['trades/master1.PNG', 'trades/master2.png', 'trades/master3.mp4', ...commonImages],
-            'king': ['trades/king1.mp4', 'trades/king2.mp4', ...commonImages],
-            'asura': ['trades/asura1.PNG', 'trades/asura4.png', 'trades/asura5.png', ...commonImages]
+            'sa': { images: ['trades/sa1.png', ...commonImages], color: '#39FF14' }, // Shamrock Green
+            'master': { images: ['trades/master1.PNG', 'trades/master2.png', ...commonImages], color: '#00FFFF' }, // Cyan Blue
+            'king': { images: [...commonImages], color: '#FF2400' }, // Scarlet Red
+            'asura': { images: ['trades/asura1.PNG', 'trades/asura4.png', 'trades/asura5.png', ...commonImages], color: '#C71585' } // Magenta Purple
         };
 
         const params = new URLSearchParams(window.location.search);
-        const bot = params.get('bot');
+        const botKey = params.get('bot');
         const container = document.getElementById('galleryContainer');
         const title = document.getElementById('botTitle');
 
-        if (bot && botData[bot]) {
-            title.innerText = bot.toUpperCase() + " Showcase";
+        if (botKey && botData[botKey]) {
+            const data = botData[botKey];
+            title.innerText = botKey + " Showcase";
+            title.style.color = data.color;
+            container.style.borderColor = data.color;
             
-            botData[bot].forEach((src, index) => {
-                let element;
-                if (src.toLowerCase().endsWith('.mp4')) {
-                    element = document.createElement('video');
-                    element.src = src;
-                    element.autoplay = true;
-                    element.muted = true;
-                    element.loop = true;
-                    element.playsInline = true; // Required for mobile browsers
-                } else {
-                    element = document.createElement('img');
-                    element.src = src;
-                }
-                element.className = 'media-item' + (index === 0 ? ' active' : '');
-                container.appendChild(element);
+            // Generate Image elements
+            data.images.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'media-item' + (index === 0 ? ' active' : '');
+                container.appendChild(img);
             });
 
             // Cycling Logic
             let current = 0;
             const items = document.querySelectorAll('.media-item');
-            
-            // Auto-play videos when they become active
             setInterval(() => {
                 items[current].classList.remove('active');
-                
-                // If the outgoing item is a video, pause it
-                if(items[current].tagName === 'VIDEO') items[current].pause();
-
                 current = (current + 1) % items.length;
                 items[current].classList.add('active');
-
-                // If the incoming item is a video, play it
-                if(items[current].tagName === 'VIDEO') items[current].play();
             }, 5000); 
         } else {
             title.innerText = "Bot not found";
