@@ -195,11 +195,18 @@
         <div class="contact-item"><b>Instagram:</b> <a href="https://www.instagram.com/indice_m.o_cash/?hl=en">@indice_m.o_cash</a></div>
     </footer>
 
-    <script>
-        function toggleBio() {
-            const content = document.getElementById('bioContent');
-            content.style.display = (content.style.display === 'block') ? 'none' : 'block';
-        }
-    </script>
+<script>
+    function toggleBio() {
+        const content = document.getElementById('bioContent');
+        const header = document.querySelector('.bio-header');
+        
+        // Toggle the display
+        const isHidden = content.style.display !== 'block';
+        content.style.display = isHidden ? 'block' : 'none';
+        
+        // Update the arrow (▾ is 25BE, ▴ is 25B4)
+        header.innerHTML = isHidden ? 'Bots Biography ▴' : 'Bots Biography ▾';
+    }
+</script>
 </body>
 </html>
