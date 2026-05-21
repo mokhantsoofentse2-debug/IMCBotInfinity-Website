@@ -1,167 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMCBOTS-Infinity</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
-    
+    <!-- ... (Keep your existing meta tags and fonts) ... -->
     <style>
-        body {
-            background-image: url('images/bg.png');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            font-family: 'Lexend Deca', sans-serif;
-            color: white;
-            margin: 0;
-            padding: 20px; /* Reduced for mobile comfort */
-            line-height: 1.6;
-        }
+        /* ... (Keep all your existing styles) ... */
 
-        h1 {
-            color: green; 
-            text-transform: uppercase;
-            text-decoration: underline;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        ol {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
+        /* NEW BIOGRAPHY STYLES */
+        .bio-container {
             background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
+            border: 1px solid #228B22;
             border-radius: 15px;
-            border: 1px solid #00FF00;
-            text-align: center;
-            width: 200px;
-            transition: transform 0.3s ease;
-        }
-
-        li:hover {
-            transform: translateY(-10px);
-        }
-
-        li b {
-            display: block;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            text-decoration: underline;
-        }
-
-        img {
-            border-radius: 8px;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
-
-        /* Payment Button Styles */
-        .payment-container {
-            text-align: center;
-            margin: 40px 0;
-        }
-        .bank-btn {
-            background-color: #228B22;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: background-color 0.3s, color 0.3s;
-            display: inline-block;
-        }
-        .bank-btn:hover, .bank-btn:active {
-            background-color: #7FFF00;
-            color: black;
-        }
-
-        footer {
-            margin-top: 50px;
-            background: rgba(0, 0, 0, 0.8);
             padding: 20px;
-            border-radius: 15px;
+            margin: 20px auto;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            color: #228B22;
+            font-weight: bold;
         }
 
-        footer h2 { color: #00FF00; }
-        footer a { color: #ffffff; text-decoration: none; }
-        footer a:hover { color: #00FF00; }
-
-        .contact-item { margin: 10px 0; font-size: 1.1rem; }
-
-        /* Hover colors */
-        li:hover .sa { color: #39FF14; }
-        li:hover .master { color: #00FFFF; }
-        li:hover .king { color: #FF2400; }
-        li:hover .asura { color: #C71585; }
-
-        .sa, .master, .king, .asura { transition: color 0.3s ease; }
-
-        /* --- NEW LOGIC FOR PORTRAIT PHONES --- */
-        @media (max-width: 768px) and (orientation: portrait) {
-            ol {
-                flex-direction: column;
-                align-items: center;
-            }
-            li {
-                width: 85%;
-                max-width: 280px;
-            }
+        .bio-content {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+            color: white;
+            padding-top: 15px;
+            border-top: 1px solid #228B22;
         }
+
+        .bio-content ul { display: block; text-align: left; }
+        .bio-content li { 
+            background: none; border: none; width: 100%; text-align: left; 
+            padding: 5px 0; margin-bottom: 10px; display: list-item;
+        }
+
+        .dropdown-icon { display: inline-block; transition: transform 0.3s; }
+        .open .dropdown-icon { transform: rotate(180deg); }
     </style>
 </head>
 <body>
 
     <h1>Indice Mo Cash Infinity Bots</h1>
 
-    <ol>
-        <li>
-            <div class='sa'><b>SA (Small Accounts)</b></div>
-            <a href="setup.html?bot=sa">
-            <img src="images/SA.jpg" width="150" height="200" alt="SA Bot">
-            </a>
-        </li>
-        <li>
-            <div class='master'><b>Master</b></div>
-            <a href="setup.html?bot=master">
-            <img src="images/Master.jpg" width="150" height="200" alt="Master Bot">
-            </a>
-        </li>
-        <li>
-            <div class='king'><b>King</b></div>
-            <a href="setup.html?bot=king">
-            <img src="images/king.jpg" width="150" height="200" alt="King Bot">
-            </a>
-        </li>
-        <li>
-            <div class='asura'><b>Asura</b></div>
-            <a href="setup.html?bot=asura">
-            <img src="images/asura.jpg" width="150" height="200" alt="Asura Bot">
-            </a>
-        </li>
-    </ol>
-
-    <div class="payment-container">
-        <a href="setup.html?bot=bank" class="bank-btn">Account Payment Details</a>
+    <!-- NEW BIOGRAPHY SECTION -->
+    <div class="bio-container" id="bioContainer" onclick="toggleBio()">
+        <div>Bots Biography <span class="dropdown-icon">▼</span></div>
+        <div class="bio-content" id="bioContent">
+            <ul>
+                <li>• IMCBOTS are built to risk based on your account size.</li>
+                <li>• IMCBOTS handle everything for you including, securing profits during a trades, and profits maximizing whenever possible.</li>
+                <li>• IMCBOTS do their best in avoiding major losses by minimizing or escaping losses.</li>
+                <li>• IMCBOTS analyze for you and depend on market structure for trades execution.</li>
+                <li>• IMCBOTS are simply plug and play.</li>
+            </ul>
+            <br>
+            <ul>
+                <li>• <b>IMCBOT SA (Small Accounts):</b> Is built to grow small account by nature and can grow any small amount of money, given that the market you use is low margin requirement.</li>
+                <li>• <b>IMCBOT Master:</b> Is built to profit maximize by following trend structure.</li>
+                <li>• <b>IMCBOT King:</b> Is built to secure profits as soon as possible when possible and also profit maximizes by following trend structure, and aims at growing your trading account.</li>
+                <li>• <b>IMCBOT Asura:</b> Is built to profit maximize by following trend structure and also highly avoid losses by profit locking, it respects your account size no matter the size, and also aims at growing your account.</li>
+            </ul>
+        </div>
     </div>
 
-    <footer>
-        <h2>Contact Details</h2>
-        <div class="contact-item"><b>Tel:</b> <a href="tel:+27671349698">+27 67 134 9698</a></div>
-        <div class="contact-item"><b>Email:</b> <a href="mailto:mokhantsoofentse2@gmail.com">mokhantsoofentse2@gmail.com</a></div>
-        <div class="contact-item"><b>Instagram:</b> <a href="https://www.instagram.com/indice_m.o_cash/?hl=en">@indice_m.o_cash</a></div>
-    </footer>
+    <ol>
+        <!-- ... (Keep your existing bot list items) ... -->
+    </ol>
 
+    <!-- ... (Keep your payment and footer sections) ... -->
+
+    <script>
+        function toggleBio() {
+            const container = document.getElementById('bioContainer');
+            const content = document.getElementById('bioContent');
+            const isOpen = content.style.display === 'block';
+
+            content.style.display = isOpen ? 'none' : 'block';
+            container.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
