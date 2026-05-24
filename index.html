@@ -254,7 +254,8 @@
                 <img src="imc/imc24.png" class="owner-media">
                 <img src="imc/imc46.png" class="owner-media">
                 <img src="imc/imc51.png" class="owner-media">
-                <video class="owner-media" muted loop playsinline> 
+                <!-- Removed "loop" attribute so the script detects when it ends -->
+                <video class="owner-media" muted playsinline> 
                     <source src="accflip.mp4" type="video/mp4"> 
                 </video>
             </div>
@@ -296,34 +297,50 @@
         header.innerHTML = isHidden ? 'About The Owner ▴' : 'About The Owner ▾';
     }
 
-    // Owner Slideshow Logic (Handles Images & Video)
+    // Owner Slideshow Logic (Dynamic Timing handles Images & Video)
     let currentIndex = 0;
     const mediaElements = document.querySelectorAll('.owner-media');
-    
+    let slideTimeout;
+
+    function nextSlide() {
+        // Hide current element
+        const currentElement = mediaElements[currentIndex];
+        currentElement.classList.remove('active');
+        
+        // If current was a video, pause it just in case
+        if(currentElement.tagName === 'VIDEO') {
+            currentElement.pause();
+        }
+
+        // Move to next element
+        currentIndex = (currentIndex + 1) % mediaElements.length;
+        const nextElement = mediaElements[currentIndex];
+        
+        // Show next element
+        nextElement.classList.add('active');
+
+        // Check if the next element is a video or an image
+        if(nextElement.tagName === 'VIDEO') {
+            nextElement.currentTime = 0;
+            nextElement.play();
+            // Wait for the video to end, then trigger nextSlide automatically
+            nextElement.onended = nextSlide;
+        } else {
+            // It's an image, stay on it for 5 seconds
+            slideTimeout = setTimeout(nextSlide, 5000);
+        }
+    }
+
+    // Initialize the slideshow
     if(mediaElements.length > 0) {
-        setInterval(() => {
-            // Hide current element
-            const currentElement = mediaElements[currentIndex];
-            currentElement.classList.remove('active');
-            
-            // If current was a video, pause it
-            if(currentElement.tagName === 'VIDEO') {
-                currentElement.pause();
-            }
-
-            // Move to next element
-            currentIndex = (currentIndex + 1) % mediaElements.length;
-            const nextElement = mediaElements[currentIndex];
-            
-            // Show next element
-            nextElement.classList.add('active');
-
-            // If next is a video, restart and play
-            if(nextElement.tagName === 'VIDEO') {
-                nextElement.currentTime = 0;
-                nextElement.play();
-            }
-        }, 5000); // Transitions every 5 seconds
+        const firstElement = mediaElements[0];
+        // Check if the first loaded element happens to be a video
+        if(firstElement.tagName === 'VIDEO') {
+            firstElement.play();
+            firstElement.onended = nextSlide;
+        } else {
+            slideTimeout = setTimeout(nextSlide, 5000);
+        }
     }
 </script>
 </body>
