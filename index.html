@@ -254,6 +254,9 @@
                 <img src="imc/imc24.png" class="owner-media">
                 <img src="imc/imc46.png" class="owner-media">
                 <img src="imc/imc51.png" class="owner-media">
+                <video class="owner-media" muted loop playsinline> 
+                    <source src="accflip.mp4" type="video/mp4"> 
+                </video>
             </div>
         </div>
     </div>
@@ -293,16 +296,34 @@
         header.innerHTML = isHidden ? 'About The Owner ▴' : 'About The Owner ▾';
     }
 
-    // Owner Slideshow Logic
-    let currentImg = 0;
-    const images = document.querySelectorAll('.owner-media');
+    // Owner Slideshow Logic (Handles Images & Video)
+    let currentIndex = 0;
+    const mediaElements = document.querySelectorAll('.owner-media');
     
-    if(images.length > 0) {
+    if(mediaElements.length > 0) {
         setInterval(() => {
-            images[currentImg].classList.remove('active');
-            currentImg = (currentImg + 1) % images.length;
-            images[currentImg].classList.add('active');
-        }, 5000);
+            // Hide current element
+            const currentElement = mediaElements[currentIndex];
+            currentElement.classList.remove('active');
+            
+            // If current was a video, pause it
+            if(currentElement.tagName === 'VIDEO') {
+                currentElement.pause();
+            }
+
+            // Move to next element
+            currentIndex = (currentIndex + 1) % mediaElements.length;
+            const nextElement = mediaElements[currentIndex];
+            
+            // Show next element
+            nextElement.classList.add('active');
+
+            // If next is a video, restart and play
+            if(nextElement.tagName === 'VIDEO') {
+                nextElement.currentTime = 0;
+                nextElement.play();
+            }
+        }, 5000); // Transitions every 5 seconds
     }
 </script>
 </body>
