@@ -27,14 +27,14 @@
             margin-bottom: 40px;
         }
 
-        /* --- NEW BIOGRAPHY CONTAINER --- */
+        /* --- BIOGRAPHY CONTAINERS --- */
         .bio-container {
             background: rgba(0, 0, 0, 0.7);
             border: 1px solid #228B22;
             border-radius: 15px;
             padding: 20px;
             max-width: 600px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto 30px auto;
             cursor: pointer;
             text-align: center;
             transition: all 0.3s ease;
@@ -45,6 +45,30 @@
         .bio-content li { text-align: left; width: auto; background: none; border: none; padding: 5px 0; }
         .bio-content li:hover { transform: none; }
 
+        /* --- OWNER SLIDESHOW BLOCK --- */
+        #ownerSlideshow {
+            background: #111;
+            margin-top: 20px;
+            border-radius: 15px;
+            border: 1px solid #228B22;
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        .owner-media {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .owner-media.active { opacity: 1; }
+
         ol {
             display: flex;
             flex-wrap: wrap;
@@ -52,6 +76,7 @@
             gap: 20px;
             list-style: none;
             padding: 0;
+            margin-bottom: 40px;
         }
 
         li {
@@ -64,9 +89,7 @@
             transition: transform 0.3s ease;
         }
 
-        li:hover {
-            transform: translateY(-10px);
-        }
+        li:hover { transform: translateY(-10px); }
 
         li b {
             display: block;
@@ -139,7 +162,7 @@
 
     <!-- Bio Container -->
     <div class="bio-container" onclick="toggleBio()">
-        <div class="bio-header">Bots Biography ▾</div>
+        <div class="bio-header" id="bioHeader">Bots Biography ▾</div>
         <div class="bio-content" id="bioContent">
             <ul>
                 <li>IMCBOTS are built to risk only based on your account size.</li>
@@ -152,15 +175,16 @@
             <br>
              <strong><u>Bots</u></strong>
             <ul>
-                <li><strong>IMCBOT SA(SmallAccounts)</strong> - Is built to grow small accounts by nature. It can grow any small amount of money, given that the market you use is low margin requirement. It is built to secure your profits as the trend moves and avoids losses by profit locking. (Cost - R18 000)</li>
-                <li><strong>IMCBOT Master</strong> - Is built to profit maximize by following trend structure. It profit locks and avoids losses as soon as possible, while heading for the profit goal. (Cost - R28 000)</li>
-                <li><strong>IMCBOT King</strong> - Is built to secure every profit a moving trend offers and follows trend structure while also profit maximizing, and overall aims at growing your trading account while avoiding losses. (Cost - R50 000)</li>
-                <li><strong>IMCBOT Asura</strong> - Is built to profit maximize by following trend structure. It secures an almost entire profit range and keeps you longer in profit maximizing, while ensuring the account balance grows as needed. (Cost - R60 000)</li>
-                <li><strong>IMCBOT Prgtry(Purgatory)</strong> - Is built to profit maximize by taking every possible entry a moving trend offers, after the main entry of a setup range. It is aimed at growing accounts as quick as possible, while also avoiding losses and it profit locks. (Cost - R40 000)</li>
+                <li><strong>IMCBOT SA(SmallAccounts)</strong> - (Cost - R18 000)</li>
+                <li><strong>IMCBOT Master</strong> - (Cost - R28 000)</li>
+                <li><strong>IMCBOT King</strong> - (Cost - R50 000)</li>
+                <li><strong>IMCBOT Asura</strong> - (Cost - R60 000)</li>
+                <li><strong>IMCBOT Prgtry(Purgatory)</strong> - (Cost - R40 000)</li>
             </ul>
         </div>
     </div>
 
+    <!-- Bot Icons -->
     <ol>
         <li>
             <div class='sa'><b>SA (Small Accounts)</b></div>
@@ -194,10 +218,37 @@
         </li>
     </ol>
 
+    <!-- About The Owner Container -->
+    <div class="bio-container" onclick="toggleOwner()">
+        <div class="bio-header" id="ownerHeader">About The Owner ▾</div>
+        <div class="bio-content" id="ownerContent">
+            <ul>
+                <li>My actual name is Ofentse Mokhantso, and it took me 6 years before i became successful in trading as a career.</li>
+                <li>So what inspired me to build the bots was all the past strategies that i have ever created before that i wasnt utilizing anymore.</li>
+                <li>Not only that, but what truly inspired the bots creation was the distractions that kept on occurring when i needed to trade, the bots idea was always bugging me.</li>
+                <li>For that fact i had to create my bots starting with the Master, followed by SA and the rest of the bots. Each bot represents a part of me.</li>
+                <li>Therefore my IMCBOTS represent different parts of me as a trader along my journey.</li>
+                <li>But whats most important of all is to understand that i had to be a successful trader in order to build these bots.</li>
+                <li>I have never build a bot before, but also thanks to my partial knowledge and understanding of Information Technology, i was able to handle building the bots, added with my done research on how to perfectly achieve my goal.</li>
+            </ul>
+
+            <!-- Slideshow Block -->
+            <div id="ownerSlideshow">
+                <img src="images/saver1.jpg" class="owner-media active">
+                <img src="images/tradesn.PNG" class="owner-media">
+                <img src="images/saver3.jpg" class="owner-media">
+                <img src="images/cmn.jpg" class="owner-media">
+                <img src="images/icon.jpg" class="owner-media">
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Container -->
     <div class="payment-container">
         <a href="setup.html?bot=bank" class="bank-btn">Account Payment Details</a>
     </div>
 
+    <!-- Footer -->
     <footer>
         <h2>Contact Details</h2>
         <div class="contact-item"><b>Tel:</b> <a href="tel:+27671349698">+27 67 134 9698</a></div>
@@ -209,16 +260,34 @@
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // Toggle Bots Bio
     function toggleBio() {
         const content = document.getElementById('bioContent');
-        const header = document.querySelector('.bio-header');
-        
-        // Toggle the display
+        const header = document.getElementById('bioHeader');
         const isHidden = content.style.display !== 'block';
         content.style.display = isHidden ? 'block' : 'none';
-        
-        // Update the arrow (▾ is 25BE, ▴ is 25B4)
         header.innerHTML = isHidden ? 'Bots Biography ▴' : 'Bots Biography ▾';
+    }
+
+    // Toggle Owner Bio
+    function toggleOwner() {
+        const content = document.getElementById('ownerContent');
+        const header = document.getElementById('ownerHeader');
+        const isHidden = content.style.display !== 'block';
+        content.style.display = isHidden ? 'block' : 'none';
+        header.innerHTML = isHidden ? 'About The Owner ▴' : 'About The Owner ▾';
+    }
+
+    // Owner Slideshow Logic
+    let currentImg = 0;
+    const images = document.querySelectorAll('.owner-media');
+    
+    if(images.length > 0) {
+        setInterval(() => {
+            images[currentImg].classList.remove('active');
+            currentImg = (currentImg + 1) % images.length;
+            images[currentImg].classList.add('active');
+        }, 5000);
     }
 </script>
 </body>
