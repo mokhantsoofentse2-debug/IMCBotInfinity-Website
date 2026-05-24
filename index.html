@@ -43,7 +43,6 @@
         .bio-content { display: none; text-align: left; margin-top: 15px; border-top: 1px solid #228B22; padding-top: 10px; }
         .bio-content ul { list-style: disc; padding-left: 20px; }
         .bio-content li { text-align: left; width: auto; background: none; border: none; padding: 5px 0; }
-        .bio-content li:hover { transform: none; }
 
         /* --- OWNER SLIDESHOW BLOCK --- */
         #ownerSlideshow {
@@ -90,24 +89,11 @@
         }
 
         li:hover { transform: translateY(-10px); }
+        li b { display: block; margin-bottom: 15px; font-size: 1.2rem; text-decoration: underline; }
 
-        li b {
-            display: block;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            text-decoration: underline;
-        }
+        img { border-radius: 8px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
 
-        img {
-            border-radius: 8px;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-        }
-
-        .payment-container {
-            text-align: center;
-            margin: 40px 0;
-        }
+        .payment-container { text-align: center; margin: 40px 0; }
         .bank-btn {
             background-color: #228B22;
             color: white;
@@ -119,10 +105,7 @@
             transition: background-color 0.3s, color 0.3s;
             display: inline-block;
         }
-        .bank-btn:hover, .bank-btn:active {
-            background-color: #7FFF00;
-            color: black;
-        }
+        .bank-btn:hover { background-color: #7FFF00; color: black; }
 
         footer {
             margin-top: 50px;
@@ -130,8 +113,7 @@
             padding: 20px;
             border-radius: 15px;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 50px auto 0 auto;
             text-align: center;
         }
 
@@ -142,6 +124,7 @@
         .contact-item { margin: 10px 0; font-size: 1.1rem; }
         .copyright { margin-top: 15px; font-size: 0.9rem; color: #888; }
 
+        /* Custom Colors for hover */
         li:hover .sa { color: #39FF14; }
         li:hover .master { color: #00FFFF; }
         li:hover .king { color: #FF2400; }
@@ -150,7 +133,7 @@
 
         .sa, .master, .king, .asura, .prgtry { transition: color 0.3s ease; }
 
-        @media (max-width: 768px) and (orientation: portrait) {
+        @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
             li { width: 85%; max-width: 280px; }
         }
@@ -165,22 +148,22 @@
         <div class="bio-header" id="bioHeader">Bots Biography ▾</div>
         <div class="bio-content" id="bioContent">
             <ul>
-                <li>Firstly, IMCBOTS are highly inspired by Roronoa Zoro, whom is a character from a well known & famous anime called One Piece.</li>
+                <li>Firstly, IMCBOTS are highly inspired by Roronoa Zoro, who is a character from a well-known anime called One Piece.</li>
                 <li>IMCBOTS are built to risk only based on your account size.</li>
-                <li>IMCBOTS handle everything for you including, securing profits during running trades, and profits maximizing whenever possible.</li>
-                <li>IMCBOTS do their best in avoiding major losses by maximizing profits or escaping losses.</li>
-                <li>IMCBOTS analyze for you and depend on market structure for trades executions.</li>
-                <li>IMCBOTS are simply a plugin and play scenario.</li>
-                <li>IMCBOTS are both Sell and Buy biased, but because of the way they are designed, they can stick to one direction for a while until market structure highly changes, so that a new direction can be focused on.</li>
+                <li>IMCBOTS handle everything for you including securing profits during running trades and profit maximizing whenever possible.</li>
+                <li>IMCBOTS do their best to avoid major losses by maximizing profits or escaping losses.</li>
+                <li>IMCBOTS analyze for you and depend on market structure for trade executions.</li>
+                <li>IMCBOTS are simply a "plug and play" scenario.</li>
+                <li>IMCBOTS are both Sell and Buy biased; however, they can stick to one direction until market structure significantly changes.</li>
             </ul>
             <br>
-             <font color='#72FF13'><strong><u>Bots</u></strong></font>
+             <strong style="color: #72FF13; text-decoration: underline;">Bots</strong>
             <ul>
-                <li><font color='#4CBB17'><strong>IMCBOT SA(SmallAccounts) - </strong></font>Is built to grow small accounts by nature. It can grow any small amount of money, given that the market you use is low margin requirement. It is built to secure your profits as the trend moves and avoids losses by profit locking. (Cost - R18 000)</li>
-                <li><font color='#00FFFF'><strong>IMCBOT Master - </strong></font>Is built to profit maximize by following trend structure. It profit locks and avoids losses as soon as possible, while heading for the profit goal. (Cost - R28 000)</li>
-                <li><font color='#FF0000'><strong>IMCBOT King - </strong></font>Is built to secure every profit a moving trend offers and follows trend structure while also profit maximizing, and overall aims at growing your trading account while avoiding losses. It has no limited profit target. (Cost - R50 000)</li>
-                <li><font color='#DF00FE'><strong>IMCBOT Asura - </strong></font>Is built to profit maximize by following trend structure. It secures an almost entire profit range and keeps you longer in profit maximizing, while ensuring the account balance grows as needed. It has no limited profit target. (Cost - R60 000)</li>
-                <li><font color='#BBC2CC'><strong>IMCBOT Prgtry(Purgatory) - </strong></font>Is built to profit maximize by taking every possible entry a moving trend offers, after the main entry of a setup range. It is aimed at growing any account size as quick as possible, while also avoiding losses, and it profit locks. (Cost - R40 000)</li>
+                <li><strong style="color:#4CBB17">IMCBOT SA (Small Accounts) - </strong>Is built to grow small accounts by nature. It can grow any small amount of money, provided the market used has low margin requirements. (Cost - R18,000)</li>
+                <li><strong style="color:#00FFFF">IMCBOT Master - </strong>Is built to maximize profit by following trend structure. It profit locks and avoids losses as soon as possible. (Cost - R28,000)</li>
+                <li><strong style="color:#FF0000">IMCBOT King - </strong>Is built to secure every profit a moving trend offers. It has no limited profit target. (Cost - R50,000)</li>
+                <li><strong style="color:#DF00FE">IMCBOT Asura - </strong>Is built for maximum profit range. It keeps you longer in profit maximizing trends. (Cost - R60,000)</li>
+                <li><strong style="color:#BBC2CC">IMCBOT Prgtry (Purgatory) - </strong>Takes every possible entry a moving trend offers to grow accounts as quickly as possible. (Cost - R40,000)</li>
             </ul>
         </div>
     </div>
@@ -190,31 +173,31 @@
         <li>
             <div class='sa'><b>SA (Small Accounts)</b></div>
             <a href="setup.html?bot=sa">
-            <img src="images/SA.jpg" width="150" height="200" alt="SA Bot">
+                <img src="images/SA.jpg" width="150" height="200" alt="SA Bot">
             </a>
         </li>
         <li>
             <div class='master'><b>Master</b></div>
             <a href="setup.html?bot=master">
-            <img src="images/Master.jpg" width="150" height="200" alt="Master Bot">
+                <img src="images/Master.jpg" width="150" height="200" alt="Master Bot">
             </a>
         </li>
         <li>
             <div class='king'><b>King</b></div>
             <a href="setup.html?bot=king">
-            <img src="images/king.jpg" width="150" height="200" alt="King Bot">
+                <img src="images/king.jpg" width="150" height="200" alt="King Bot">
             </a>
         </li>
         <li>
             <div class='asura'><b>Asura</b></div>
             <a href="setup.html?bot=asura">
-            <img src="images/asura.jpg" width="150" height="200" alt="Asura Bot">
+                <img src="images/asura.jpg" width="150" height="200" alt="Asura Bot">
             </a>
         </li>
         <li>
             <div class='prgtry'><b>Prgtry</b></div>
             <a href="setup.html?bot=prgtry">
-            <img src="images/purgatorycc.jpg" width="150" height="200" alt="Prgtry Bot">
+                <img src="images/purgatorycc.jpg" width="150" height="200" alt="Prgtry Bot">
             </a>
         </li>
     </ol>
@@ -224,21 +207,17 @@
         <div class="bio-header" id="ownerHeader">About The Owner ▾</div>
         <div class="bio-content" id="ownerContent">
             <ul>
-                <li>My actual name is Ofentse Mokhantso, and it took me 6 years before i became successful in trading as a career.</li>
-                <li>The name 'indice' originates from the fact that my successful trading form was born from an indice market (Ger40), that was the birth of my trading style, and it is where i expanded and grew from that point.</li>
-                <li>'m.o' represents my initials of my full names, and 'cash' is because i am money inspired.</li>
-                <li>Therefore hence 'I.M.C' exists.</li>
-                <li>So what inspired me to build the bots was all the past strategies that i have ever created before, and that i wasn't utilizing anymore.</li>
-                <li>Not only that, but what truly caused the bots creation was the distractions that kept on occurring when i needed to trade, so the bots idea kept on bugging me.</li>
-                <li>And for that fact i had to create my bots starting with the Master bot, followed by SA bot and the rest of the bots. Each bot represents a part of me.</li>
-                <li>Therefore my IMCBOTS represent different parts of me as a trader, referring to my trading journey.</li>
-                <li>All my IMCBOTS are perfectly built, tested on both huge and small trading accounts, and all perform efficiently and smoothly. I have built well trusted bots that are at their peak versions and are not capable of ever failing.</li>
-                <li>And as i am a huge fan of One Piece Anime, Roronoa Zoro was a perfectly fit character for my bots, as IMCBOTS' names take after Roronoa Zoro's battle forms (except for SA).</li>
-                <li>But what's most important of all is to understand that i had to be a successful trader in order to build successful bots (Knowing the market's movement language).</li>
-                <li>I have never built a bot before, but with also thanks to my partial knowledge and understanding of Information Technology, i was able to handle building the bots, added with my done research on how to perfectly achieve my goal.</li>
+                <li>My name is Ofentse Mokhantso. It took me 6 years before I became successful in trading as a career.</li>
+                <li>The name 'Indice' originates from the fact that my successful trading form was born from an indices market (Ger40).</li>
+                <li>'M.O' represents the initials of my full name, and 'Cash' is because I am money-inspired.</li>
+                <li>What inspired me to build these bots was the past strategies I created but was no longer utilizing manually.</li>
+                <li>I built the Master bot first, followed by the SA bot and the rest. Each bot represents a part of my trading journey.</li>
+                <li>All IMCBOTS are perfectly built, tested on various account sizes, and perform efficiently. They are at their peak versions, & can never fail.</li>
+                <li>As a fan of One Piece, the names take after Roronoa Zoro's battle forms (except for SA).</li>
+                <li>With my knowledge of Information Technology and extensive research, I was able to successfully automate my trading logic.</li>
             </ul>
             <br>
-            <font color='#72FF13'><strong><u>Below Is A Showcase Of My Successful Trading Before The Bots:</u></strong></font>
+            <strong style="color:#72FF13; text-decoration: underline;">Showcase of my successful trading before the bots:</strong>
 
             <!-- Slideshow Block -->
             <div id="ownerSlideshow">
@@ -260,7 +239,6 @@
                 <img src="imc/imc24.png" class="owner-media">
                 <img src="imc/imc46.png" class="owner-media">
                 <img src="imc/imc51.jpg" class="owner-media">
-                <!-- Removed "loop"  -->
                 <video class="owner-media" muted playsinline> 
                     <source src="accflip.mp4" type="video/mp4"> 
                 </video>
@@ -285,67 +263,50 @@
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Toggle Bots Bio
     function toggleBio() {
         const content = document.getElementById('bioContent');
         const header = document.getElementById('bioHeader');
-        const isHidden = content.style.display !== 'block';
+        const isHidden = window.getComputedStyle(content).display === 'none';
         content.style.display = isHidden ? 'block' : 'none';
         header.innerHTML = isHidden ? 'Bots Biography ▴' : 'Bots Biography ▾';
     }
 
-    // Toggle Owner Bio
     function toggleOwner() {
         const content = document.getElementById('ownerContent');
         const header = document.getElementById('ownerHeader');
-        const isHidden = content.style.display !== 'block';
+        const isHidden = window.getComputedStyle(content).display === 'none';
         content.style.display = isHidden ? 'block' : 'none';
         header.innerHTML = isHidden ? 'About The Owner ▴' : 'About The Owner ▾';
     }
 
-    // Owner Slideshow Logic (Dynamic Timing handles Images & Video)
     let currentIndex = 0;
     const mediaElements = document.querySelectorAll('.owner-media');
-    let slideTimeout;
 
     function nextSlide() {
-        // Hide current element
         const currentElement = mediaElements[currentIndex];
         currentElement.classList.remove('active');
-        
-        // If current was a video, pause it just in case
-        if(currentElement.tagName === 'VIDEO') {
-            currentElement.pause();
-        }
+        if(currentElement.tagName === 'VIDEO') currentElement.pause();
 
-        // Move to next element
         currentIndex = (currentIndex + 1) % mediaElements.length;
         const nextElement = mediaElements[currentIndex];
-        
-        // Show next element
         nextElement.classList.add('active');
 
-        // Check if the next element is a video or an image
         if(nextElement.tagName === 'VIDEO') {
             nextElement.currentTime = 0;
             nextElement.play();
-            // Wait for the video to end, then trigger nextSlide automatically
             nextElement.onended = nextSlide;
         } else {
-            // It's an image, stay on it for 5 seconds
-            slideTimeout = setTimeout(nextSlide, 5000);
+            setTimeout(nextSlide, 5000);
         }
     }
 
-    // Initialize the slideshow
     if(mediaElements.length > 0) {
-        const firstElement = mediaElements[0];
-        // Check if the first loaded element happens to be a video
-        if(firstElement.tagName === 'VIDEO') {
-            firstElement.play();
-            firstElement.onended = nextSlide;
+        const first = mediaElements[0];
+        if(first.tagName === 'VIDEO') {
+            first.play();
+            first.onended = nextSlide;
         } else {
-            slideTimeout = setTimeout(nextSlide, 5000);
+            setTimeout(nextSlide, 5000);
         }
     }
 </script>
