@@ -137,24 +137,28 @@
             ol { flex-direction: column; align-items: center; }
             li { width: 85%; max-width: 280px; }
         }
-        /* --- Modern Marquee Replacement --- */
+/* --- Modern Marquee Replacement --- */
         .scrolling-wrapper {
             overflow: hidden;
             white-space: nowrap;
             width: 100%;
             margin-top: 15px;
+            box-sizing: border-box; 
         }
 
         .copyright {
             display: inline-block;
             font-size: 0.9rem; 
             color: #888;
-            /* Adjust '10s' to make it scroll faster or slower */
-            animation: scrollText 10s linear infinite;
+            /* Pushes the text entirely to the right edge before it even moves */
+            padding-left: 100%; 
+            /* You may want to increase the time (e.g., 15s) since it travels further now */
+            animation: scrollText 15s linear infinite;
         }
 
         @keyframes scrollText {
-            0% { transform: translateX(100%); }
+            0% { transform: translateX(0); }
+            /* Travels the 100% padding distance + the text's own width */
             100% { transform: translateX(-100%); }
         }
     </style>
