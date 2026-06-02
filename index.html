@@ -125,13 +125,15 @@
         .copyright { margin-top: 15px; font-size: 0.9rem; color: #888; }
 
         /* Custom Colors for hover */
+        li:hover .db { color: #FFA800; }
         li:hover .sa { color: #39FF14; }
         li:hover .master { color: #00FFFF; }
         li:hover .king { color: #FF2400; }
         li:hover .asura { color: #C71585; }
         li:hover .prgtry { color: #BBC2CC; }
+        
 
-        .sa, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
+         .db, .sa, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
 
         @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
@@ -184,6 +186,7 @@
             <br>
              <strong style="color: #72FF13; text-decoration: underline;">Bots</strong>
             <ul>
+                <li><strong style="color:#FFA800">IMCBOT DB (Dragon Blaze) - </strong>Is built to execute trades according to strong resistance or support levels available in the market. It simply executes a single trade and rewards higher profit amounts. (Cost - R12,000)</li>
                 <li><strong style="color:#4CBB17">IMCBOT SA (Small Accounts) - </strong>Is built to grow small accounts by nature. It can grow any small amount of money, provided the market used has low margin requirements. (Cost - R18,000)</li>
                 <li><strong style="color:#00FFFF">IMCBOT Master - </strong>Is built to maximize profit by following trend structure. It profit locks and avoids losses as soon as possible. (Cost - R28,000)</li>
                 <li><strong style="color:#BBC2CC">IMCBOT Prgtry (Purgatory) - </strong>Takes every possible entry a moving trend offers to grow accounts as quickly as possible. Highly requires tight spreads for great success. (Cost - R40,000)</li>
@@ -196,6 +199,12 @@
 
     <!-- Bot Icons -->
     <ol>
+        <li>
+            <div class='db'><b>DB (Dragon Blaze)</b></div>
+            <a href="setup.html?bot=db">
+                <img src="db.png" width="150" height="200" alt="DB Bot">
+            </a>
+        </li>        
         <li>
             <div class='sa'><b>SA (Small Accounts)</b></div>
             <a href="setup.html?bot=sa">
