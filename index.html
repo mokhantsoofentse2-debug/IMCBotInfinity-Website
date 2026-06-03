@@ -111,6 +111,22 @@
             font-size: 1.1rem;
             margin-bottom: 40px;
         }
+        
+        /* Added rules to make header spans bounce on hover */
+        .risk-headers span {
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .risk-headers span:hover {
+            animation: bounceWord 0.4s infinite alternate ease-in-out;
+        }
+
+        @keyframes bounceWord {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
         .risk-headers .safest { color: #4CBB17; text-transform: uppercase; }
         .risk-headers .bots-middle { color: #ffffff; text-transform: uppercase; text-decoration: underline; }
         .risk-headers .riskiest { color: #FF0000; text-transform: uppercase; }
