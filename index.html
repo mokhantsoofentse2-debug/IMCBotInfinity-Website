@@ -99,7 +99,7 @@
             margin: 40px auto;
             padding: 20px 30px;
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid #228B22; /* Matches bio/owner container border color */
             border-radius: 15px;
             position: relative;
         }
@@ -141,6 +141,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            cursor: pointer;
         }
         .scale-label {
             font-weight: bold;
@@ -153,6 +154,12 @@
             height: 22px;
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(0,0,0,0.6);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.4); /* Creates the springy bounce effect */
+        }
+
+        /* Bounce scaling on node hover */
+        .scale-node:hover .scale-circle {
+            transform: scale(1.45);
         }
 
         /* Specific node colors */
