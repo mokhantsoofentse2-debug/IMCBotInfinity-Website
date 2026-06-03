@@ -93,6 +93,85 @@
 
         img { border-radius: 8px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
 
+        /* --- RISK SCALE CONTAINER --- */
+        .risk-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px 30px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            position: relative;
+        }
+        .risk-headers {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+        .risk-headers .safest { color: #39FF14; text-transform: uppercase; }
+        .risk-headers .riskiest { color: #FF0000; text-transform: uppercase; }
+        
+        .risk-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        /* Horizontal line connecting circles */
+        .risk-scale::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+        .scale-node {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .scale-label {
+            font-weight: bold;
+            font-size: 0.9rem;
+            position: absolute;
+            top: -28px; /* Places text right on top of the circle */
+        }
+        .scale-circle {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        }
+
+        /* Specific node colors */
+        .node-db .scale-label { color: #FFA800; }
+        .node-db .scale-circle { background-color: #FFA800; }
+        
+        .node-sa .scale-label { color: #39FF14; }
+        .node-sa .scale-circle { background-color: #39FF14; }
+        
+        .node-mstr .scale-label { color: #00FFFF; }
+        .node-mstr .scale-circle { background-color: #00FFFF; }
+        
+        .node-pgtry .scale-label { color: #C0C0C0; }
+        .node-pgtry .scale-circle { background-color: #C0C0C0; }
+        
+        .node-kng .scale-label { color: #FF0000; }
+        .node-kng .scale-circle { background-color: #FF0000; }
+        
+        .node-asr .scale-label { color: #FF00FF; }
+        .node-asr .scale-circle { background-color: #FF00FF; }
+
         .payment-container { text-align: center; margin: 40px 0; }
         .bank-btn {
             background-color: #228B22;
@@ -132,14 +211,17 @@
         li:hover .asura { color: #C71585; }
         li:hover .prgtry { color: #BBC2CC; }
         
-
-         .db, .sa, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
+        .db, .sa, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
 
         @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
             li { width: 85%; max-width: 280px; }
+            .risk-container { padding: 15px; }
+            .scale-label { font-size: 0.7rem; top: -22px; }
+            .scale-circle { width: 16px; height: 16px; }
         }
-/* --- Modern Marquee Replacement --- */
+
+        /* --- Modern Marquee Replacement --- */
         .scrolling-wrapper {
             overflow: hidden;
             white-space: nowrap;
@@ -152,15 +234,12 @@
             display: inline-block;
             font-size: 0.9rem; 
             color: #888;
-            /* Pushes the text entirely to the right edge before it even moves */
             padding-left: 100%; 
-            /* You may want to increase the time (e.g., 15s) since it travels further now */
             animation: scrollText 15s linear infinite;
         }
 
         @keyframes scrollText {
             0% { transform: translateX(0); }
-            /* Travels the 100% padding distance + the text's own width */
             100% { transform: translateX(-100%); }
         }
     </style>
@@ -169,7 +248,6 @@
 
     <h1>Indice Mo Cash Infinity Bots</h1>
 
-    <!-- Bio Container -->
     <div class="bio-container" onclick="toggleBio()">
         <div class="bio-header" id="bioHeader">Bots Biography ▾</div>
         <div class="bio-content" id="bioContent">
@@ -192,12 +270,10 @@
                 <li><strong style="color:#BBC2CC">IMCBOT Prgtry (Purgatory) - </strong>Takes every possible entry a moving trend offers to grow accounts as quickly as possible. Highly requires tight spreads for great success. (Cost - R40,000)</li>
                 <li><strong style="color:#FF0000">IMCBOT King - </strong>Is built to secure every profit a moving trend offers. It has no limited profit target. (Cost - R50,000)</li>
                 <li><strong style="color:#DF00FE">IMCBOT Asura - </strong>Is built for maximum profit range. It keeps you longer in profit maximizing trends. (Cost - R60,000)</li>
-                
             </ul>
         </div>
     </div>
 
-    <!-- Bot Icons -->
     <ol>
         <li>
             <div class='db'><b>DB (Dragon Blaze) - F.E</b></div>
@@ -237,7 +313,6 @@
         </li>
     </ol>
 
-    <!-- About The Owner Container -->
     <div class="bio-container" onclick="toggleOwner()">
         <div class="bio-header" id="ownerHeader">About The Owner ▾</div>
         <div class="bio-content" id="ownerContent">
@@ -254,7 +329,6 @@
             <br>
             <strong style="color:#72FF13; text-decoration: underline;">Showcase of my successful trading before the bots:</strong>
 
-            <!-- Slideshow Block -->
             <div id="ownerSlideshow">
                 <img src="imc/imc1.jpg" class="owner-media active">
                 <img src="imc/imc2.jpg" class="owner-media">
@@ -281,19 +355,49 @@
         </div>
     </div>
 
-    <!-- Payment Container -->
+    <div class="risk-container">
+        <div class="risk-headers">
+            <span class="safest">Safest</span>
+            <span class="riskiest">Riskiest</span>
+        </div>
+        <div class="risk-scale">
+            <div class="scale-node node-db">
+                <span class="scale-label">DB</span>
+                <div class="scale-circle"></div>
+            </div>
+            <div class="scale-node node-sa">
+                <span class="scale-label">SA</span>
+                <div class="scale-circle"></div>
+            </div>
+            <div class="scale-node node-mstr">
+                <span class="scale-label">Mstr</span>
+                <div class="scale-circle"></div>
+            </div>
+            <div class="scale-node node-pgtry">
+                <span class="scale-label">pgtry</span>
+                <div class="scale-circle"></div>
+            </div>
+            <div class="scale-node node-kng">
+                <span class="scale-label">kng</span>
+                <div class="scale-circle"></div>
+            </div>
+            <div class="scale-node node-asr">
+                <span class="scale-label">asr</span>
+                <div class="scale-circle"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="payment-container">
         <a href="setup.html?bot=bank" class="bank-btn">Account Payment Details</a>
     </div>
 
-    <!-- Footer -->
     <footer>
         <h2>Contact Details</h2>
         <div class="contact-item"><b>Tel:</b> <a href="tel:+27671349698">+27 67 134 9698</a></div>
         <div class="contact-item"><b>Email:</b> <a href="mailto:mokhantsoofentse2@gmail.com">mokhantsoofentse2@gmail.com</a></div>
         <div class="contact-item"><b>Instagram:</b> <a href="https://www.instagram.com/indice_m.o_cash/?hl=en">@indice_m.o_cash</a></div>
         
-        <!-- scrolling wrapper -->
         <div class="scrolling-wrapper">
             <div class="copyright">&copy; <span id="year"></span> IMCBOTS. All rights reserved.</div>
         </div>
