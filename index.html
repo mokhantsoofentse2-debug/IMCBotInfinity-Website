@@ -106,11 +106,13 @@
         .risk-headers {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-weight: bold;
             font-size: 1.1rem;
             margin-bottom: 40px;
         }
         .risk-headers .safest { color: #39FF14; text-transform: uppercase; }
+        .risk-headers .bots-middle { color: #ffffff; text-transform: uppercase; text-decoration: underline; }
         .risk-headers .riskiest { color: #FF0000; text-transform: uppercase; }
         
         .risk-scale {
@@ -358,6 +360,7 @@
     <div class="risk-container">
         <div class="risk-headers">
             <span class="safest">Safest</span>
+            <span class="bots-middle">BOTS</span>
             <span class="riskiest">Riskiest</span>
         </div>
         <div class="risk-scale">
