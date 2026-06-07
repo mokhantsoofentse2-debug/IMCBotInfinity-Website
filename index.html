@@ -99,7 +99,7 @@
             margin: 40px auto;
             padding: 20px 30px;
             background: transparent;
-            border: 1px solid #228B22; /* Matches bio/owner container border color */
+            border: 1px solid #228B22; 
             border-radius: 15px;
             position: relative;
         }
@@ -112,14 +112,9 @@
             margin-bottom: 40px;
         }
         
-        /* Added rules to make header spans bounce on hover */
         .risk-headers span {
             display: inline-block;
             cursor: pointer;
-        }
-        
-        .risk-headers span:hover {
-            animation: bounceWord 0.4s infinite alternate ease-in-out;
         }
 
         @keyframes bounceWord {
@@ -127,9 +122,22 @@
             100% { transform: translateY(-10px); }
         }
 
-        .risk-headers .safest { color: #4CBB17; text-transform: uppercase; }
-        .risk-headers .bots-middle { color: #ffffff; text-transform: uppercase; text-decoration: underline; }
-        .risk-headers .riskiest { color: #FF0000; text-transform: uppercase; }
+        /* Continuous bounce for safest and riskiest */
+        .risk-headers .safest { 
+            color: #4CBB17; 
+            text-transform: uppercase; 
+            animation: bounceWord 0.4s infinite alternate ease-in-out;
+        }
+        .risk-headers .bots-middle { 
+            color: #ffffff; 
+            text-transform: uppercase; 
+            text-decoration: underline; 
+        }
+        .risk-headers .riskiest { 
+            color: #FF0000; 
+            text-transform: uppercase; 
+            animation: bounceWord 0.4s infinite alternate ease-in-out;
+        }
         
         .risk-scale {
             display: flex;
@@ -163,14 +171,14 @@
             font-weight: bold;
             font-size: 0.9rem;
             position: absolute;
-            top: -28px; /* Places text right on top of the circle */
+            top: -28px; 
         }
         .scale-circle {
             width: 22px;
             height: 22px;
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(0,0,0,0.6);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.4); /* Creates the springy bounce effect */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.4); 
         }
 
         /* Bounce scaling on node hover */
@@ -179,7 +187,6 @@
         }
 
         /* Specific node colors */
-        
         .node-sa .scale-label { color: #39FF14; }
         .node-sa .scale-circle { background-color: #39FF14; }
 
@@ -201,7 +208,6 @@
         .node-pgtry .scale-label { color: #C0C0C0; }
         .node-pgtry .scale-circle { background-color: #C0C0C0; }
         
-
         .payment-container { text-align: center; margin: 40px 0; }
         .bank-btn {
             background-color: #228B22;
@@ -232,6 +238,18 @@
 
         .contact-item { margin: 10px 0; font-size: 1.1rem; }
         .yt { margin: 10px 0; font-size: 1.1rem; }
+        
+        /* Double-sided sword line */
+        .sword-line {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #00FF00, transparent);
+            box-shadow: 0 0 8px #00FF00;
+            margin: 25px auto 15px auto;
+            border-radius: 50%;
+            width: 90%;
+        }
+
         .copyright { margin-top: 15px; font-size: 0.9rem; color: #888; }
 
         /* Custom Colors for hover */
@@ -440,6 +458,8 @@
         <div class="contact-item"><b>Email:</b> <a href="mailto:mokhantsoofentse2@gmail.com">mokhantsoofentse2@gmail.com</a></div>
         <div class="contact-item"><b>Instagram:</b> <a href="https://www.instagram.com/indice_m.o_cash/?hl=en">@indice_m.o_cash</a></div>
         <div class="yt"><b>Youtube:</b> <a href="http://www.youtube.com/@indicemocashwealth">IndiceMoCash - Wealth</a></div>
+        
+        <hr class="sword-line">
         
         <div class="scrolling-wrapper">
             <div class="copyright">&copy; <span id="year"></span> IMCBOTS. All rights reserved.</div>
