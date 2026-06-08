@@ -190,40 +190,52 @@
             position: absolute;
             top: -28px; 
         }
+        
+        /* --- PULSE WAVE ANIMATION --- */
         .scale-circle {
             width: 22px;
             height: 22px;
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(0,0,0,0.6);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.4); 
+            animation: continuousPulseWave 2s infinite ease-in-out;
         }
 
-        /* Bounce scaling on node hover */
-        .scale-node:hover .scale-circle {
-            transform: scale(1.45);
+        @keyframes continuousPulseWave {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(0,0,0,0.6); }
+            50% { transform: scale(1.45); box-shadow: 0 0 15px currentColor; }
         }
+
+        /* Staggered Delay for left-to-right fluid motion */
+        .node-sa .scale-circle { animation-delay: 0.0s; }
+        .node-db .scale-circle { animation-delay: 0.25s; }
+        .node-dba .scale-circle { animation-delay: 0.5s; }
+        .node-asr .scale-circle { animation-delay: 0.75s; }
+        .node-mstr .scale-circle { animation-delay: 1.0s; }
+        .node-kng .scale-circle { animation-delay: 1.25s; }
+        .node-pgtry .scale-circle { animation-delay: 1.5s; }
 
         /* Specific node colors */
         .node-sa .scale-label { color: #39FF14; }
-        .node-sa .scale-circle { background-color: #39FF14; }
+        .node-sa .scale-circle { background-color: #39FF14; color: #39FF14; }
 
         .node-db .scale-label { color: #FFA800; }
-        .node-db .scale-circle { background-color: #FFA800; }  
+        .node-db .scale-circle { background-color: #FFA800; color: #FFA800; }  
 
         .node-dba .scale-label { color: #00d062; }
-        .node-dba .scale-circle { background-color: #00d062; }          
+        .node-dba .scale-circle { background-color: #00d062; color: #00d062; }          
 
         .node-asr .scale-label { color: #FF00FF; }
-        .node-asr .scale-circle { background-color: #FF00FF; }        
+        .node-asr .scale-circle { background-color: #FF00FF; color: #FF00FF; }        
         
         .node-mstr .scale-label { color: #00FFFF; }
-        .node-mstr .scale-circle { background-color: #00FFFF; }
+        .node-mstr .scale-circle { background-color: #00FFFF; color: #00FFFF; }
 
         .node-kng .scale-label { color: #FF0000; }
-        .node-kng .scale-circle { background-color: #FF0000; }        
+        .node-kng .scale-circle { background-color: #FF0000; color: #FF0000; }        
         
         .node-pgtry .scale-label { color: #C0C0C0; }
-        .node-pgtry .scale-circle { background-color: #C0C0C0; }
+        .node-pgtry .scale-circle { background-color: #C0C0C0; color: #C0C0C0; }
         
         .payment-container { text-align: center; margin: 40px 0; }
         .bank-btn {
@@ -308,6 +320,112 @@
         @keyframes scrollText {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
+        }
+
+        /* --- LIVING AI WIDGET INTERFACE --- */
+        #ai-widget-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            font-family: 'Lexend Deca', sans-serif;
+        }
+        .ai-core-orb {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #00FF00 0%, #003300 100%);
+            box-shadow: 0 0 20px #00FF00, inset 0 0 10px #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: coreFloat 3s infinite alternate ease-in-out;
+        }
+        .ai-core-orb:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 30px #7FFF00;
+        }
+        .ai-core-orb span {
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: black;
+            text-shadow: 0 0 5px white;
+            text-transform: uppercase;
+        }
+        @keyframes coreFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        .ai-chat-window {
+            display: none;
+            width: 320px;
+            background: rgba(5, 15, 5, 0.95);
+            border: 2px solid #00FF00;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+            overflow: hidden;
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        .ai-chat-header {
+            background: #002200;
+            padding: 12px;
+            border-bottom: 1px solid #00FF00;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #00FF00;
+        }
+        .ai-chat-header .close-btn {
+            cursor: pointer;
+            color: #ff3333;
+            font-size: 1.2rem;
+        }
+        .ai-chat-body {
+            padding: 15px;
+            max-height: 220px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+        .ai-chat-body::-webkit-scrollbar {
+            width: 5px;
+        }
+        .ai-chat-body::-webkit-scrollbar-thumb {
+            background: #228B22;
+            border-radius: 10px;
+        }
+        .ai-response-text {
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .ai-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .ai-btn {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00FF00;
+            color: white;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.85rem;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .ai-btn:hover {
+            background: #00FF00;
+            color: black;
+            font-weight: bold;
+            transform: translateX(5px);
         }
     </style>
 </head>
@@ -496,6 +614,22 @@
     </footer>
     <hr class="sword-line">
 
+    <div id="ai-widget-container">
+        <div class="ai-core-orb" onclick="toggleAIChat()">
+            <span>Core</span>
+        </div>
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="ai-chat-header">
+                <span>Enma AI Core v1.0</span>
+                <span class="close-btn" onclick="toggleAIChat()">&times;</span>
+            </div>
+            <div class="ai-chat-body">
+                <div class="ai-response-text" id="aiResponse">Initializing systemic matrix...</div>
+                <div class="ai-options" id="aiOptions"></div>
+            </div>
+        </div>
+    </div>
+
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -544,6 +678,88 @@
         } else {
             setTimeout(nextSlide, 5000);
         }
+    }
+
+    /* --- LIVING AI CORE LOGIC ENGINE --- */
+    const aiMessages = {
+        start: {
+            text: "Greetings, human trader. I am the integrated intelligence of IMCBOTS. Like Enma, I cut cleanly through complex market structure. What strategy profile are we mapping today?",
+            options: [
+                { text: "Which bot is perfect for small accounts?", next: "small_acc" },
+                { text: "I want maximum returns, zero limits.", next: "high_risk" },
+                { text: "Show me the bank/payment details.", next: "bank_info" }
+            ]
+        },
+        small_acc: {
+            text: "Analyzing resources... For small margins, your best match is IMCBOT SA (Small Accounts). It is carefully balanced to scale minimal capitals without blowing parameters. Shall we view its performance setup?",
+            options: [
+                { text: "Launch SA Setup Page ➔", link: "setup.html?bot=sa" },
+                { text: "Go back to main options", next: "start" }
+            ]
+        },
+        high_risk: {
+            text: "Detecting ambition. The extreme tiers await: IMCBOT King & IMCBOT Asura run with no profit ceiling. Or choose Prgtry for blistering trend growth. Note: High speed requires calculated risk thresholds.",
+            options: [
+                { text: "Launch Asura Setup ➔", link: "setup.html?bot=asura" },
+                { text: "Launch King Setup ➔", link: "setup.html?bot=king" },
+                { text: "Go back", next: "start" }
+            ]
+        },
+        bank_info: {
+            text: "Payment secure routing prepared. Secure your plug-and-play architecture seamlessly via our registered corporate Capitec Savings gateway.",
+            options: [
+                { text: "Open Banking Protocol Details ➔", link: "setup.html?bot=bank" },
+                { text: "Go back", next: "start" }
+            ]
+        }
+    };
+
+    let chatInitialized = false;
+
+    function toggleAIChat() {
+        const win = document.getElementById('aiChatWindow');
+        if (win.style.display === 'flex') {
+            win.style.display = 'none';
+        } else {
+            win.style.display = 'flex';
+            if (!chatInitialized) {
+                loadAINode("start");
+                chatInitialized = true;
+            }
+        }
+    }
+
+    function loadAINode(nodeKey) {
+        const node = aiMessages[nodeKey];
+        const textContainer = document.getElementById('aiResponse');
+        const optionsContainer = document.getElementById('aiOptions');
+        
+        textContainer.innerHTML = "";
+        optionsContainer.innerHTML = "";
+        
+        // Typing text simulator
+        let i = 0;
+        function typeWriter() {
+            if (i < node.text.length) {
+                textContainer.innerHTML += node.text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 15);
+            } else {
+                // Show choice options instantly once typing finished
+                node.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'ai-btn';
+                    btn.innerText = opt.text;
+                    if(opt.link) {
+                        btn.onclick = () => { window.location.href = opt.link; };
+                    } else {
+                        btn.onclick = () => { loadAINode(opt.next); };
+                    }
+                    optionsContainer.appendChild(btn);
+                });
+            }
+        }
+        typeWriter();
     }
 </script>
 </body>
