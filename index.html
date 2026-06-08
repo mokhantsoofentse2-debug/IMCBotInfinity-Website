@@ -139,7 +139,6 @@
             100% { transform: translateY(-10px); }
         }
 
-        /* Continuous bounce for safest and riskiest */
         .risk-headers .safest { 
             color: #4CBB17; 
             text-transform: uppercase; 
@@ -164,7 +163,6 @@
             margin-top: 20px;
             margin-bottom: 10px;
         }
-        /* Horizontal line connecting circles */
         .risk-scale::before {
             content: '';
             position: absolute;
@@ -215,25 +213,18 @@
         .node-kng .scale-circle { animation-delay: 1.25s; }
         .node-pgtry .scale-circle { animation-delay: 1.5s; }
 
-        /* Specific node colors */
         .node-sa .scale-label { color: #39FF14; }
         .node-sa .scale-circle { background-color: #39FF14; color: #39FF14; }
-
         .node-db .scale-label { color: #FFA800; }
         .node-db .scale-circle { background-color: #FFA800; color: #FFA800; }  
-
         .node-dba .scale-label { color: #00d062; }
         .node-dba .scale-circle { background-color: #00d062; color: #00d062; }          
-
         .node-asr .scale-label { color: #FF00FF; }
         .node-asr .scale-circle { background-color: #FF00FF; color: #FF00FF; }        
-        
         .node-mstr .scale-label { color: #00FFFF; }
         .node-mstr .scale-circle { background-color: #00FFFF; color: #00FFFF; }
-
         .node-kng .scale-label { color: #FF0000; }
         .node-kng .scale-circle { background-color: #FF0000; color: #FF0000; }        
-        
         .node-pgtry .scale-label { color: #C0C0C0; }
         .node-pgtry .scale-circle { background-color: #C0C0C0; color: #C0C0C0; }
         
@@ -268,7 +259,6 @@
         .contact-item { margin: 10px 0; font-size: 1.1rem; }
         .yt { margin: 10px 0; font-size: 1.1rem; }
         
-        /* Double-sided sword line */
         .sword-line {
             border: none;
             height: 3px;
@@ -281,7 +271,6 @@
 
         .copyright { margin-top: 15px; font-size: 0.9rem; color: #888; }
 
-        /* Custom Colors for hover */
         li:hover .db { color: #FFA800; }
         li:hover .sa { color: #39FF14; }
         li:hover .dba { color: #00d062; }
@@ -300,7 +289,6 @@
             .scale-circle { width: 16px; height: 16px; }
         }
 
-        /* --- Modern Marquee Replacement --- */
         .scrolling-wrapper {
             overflow: hidden;
             white-space: nowrap;
@@ -322,37 +310,47 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* --- LIVING AI WIDGET INTERFACE --- */
+        /* --- LIVING AI WIDGET INTERFACE (PIRATE ZORO EDITION) --- */
         #ai-widget-container {
             position: fixed;
-            bottom: 25px;
+            bottom: 35px;
             right: 25px;
             z-index: 1000;
             font-family: 'Lexend Deca', sans-serif;
         }
         .ai-core-orb {
-            width: 60px;
-            height: 60px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
-            background: radial-gradient(circle, #00FF00 0%, #003300 100%);
-            box-shadow: 0 0 20px #00FF00, inset 0 0 10px #ffffff;
+            background: #050f05;
+            border: 2px solid #00FF00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.6), inset 0 0 15px rgba(0, 50, 0, 0.8);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             animation: coreFloat 3s infinite alternate ease-in-out;
         }
         .ai-core-orb:hover {
-            transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 0 30px #7FFF00;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px #7FFF00, inset 0 0 20px #004d00;
         }
-        .ai-core-orb span {
+        .ai-core-orb svg {
+            width: 80%;
+            height: 80%;
+            z-index: 2;
+        }
+        .ai-core-orb .enma-text {
+            position: absolute;
+            bottom: -22px;
             font-weight: bold;
-            font-size: 0.75rem;
-            color: black;
-            text-shadow: 0 0 5px white;
+            font-size: 0.9rem;
+            color: #00FF00;
+            text-shadow: 0 0 8px #00FF00;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
         @keyframes coreFloat {
             0% { transform: translateY(0); }
@@ -367,7 +365,7 @@
             box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
             overflow: hidden;
             position: absolute;
-            bottom: 75px;
+            bottom: 90px;
             right: 0;
             flex-direction: column;
             transition: all 0.3s ease;
@@ -614,10 +612,56 @@
     </footer>
     <hr class="sword-line">
 
+    <!-- AI ENMA WIDGET -->
     <div id="ai-widget-container">
         <div class="ai-core-orb" onclick="toggleAIChat()">
-            <span>Core</span>
+            <!-- SVG Pirate Skull - Zoro Edition -->
+            <svg viewBox="0 0 100 100">
+                <defs>
+                    <filter id="greenGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="2.5" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- Cross Swords Behind -->
+                <line x1="18" y1="18" x2="82" y2="82" stroke="#888" stroke-width="5" stroke-linecap="round"/>
+                <line x1="82" y1="18" x2="18" y2="82" stroke="#888" stroke-width="5" stroke-linecap="round"/>
+
+                <!-- Skull Base -->
+                <path d="M30,50 C30,22 70,22 70,50 C70,62 64,66 64,72 L36,72 C36,66 30,62 30,50 Z" fill="#e0e0e0"/>
+                
+                <!-- Teeth/Jaw -->
+                <rect x="41" y="72" width="18" height="8" fill="#e0e0e0" rx="2"/>
+                <line x1="45" y1="72" x2="45" y2="80" stroke="#111" stroke-width="1.5"/>
+                <line x1="50" y1="72" x2="50" y2="80" stroke="#111" stroke-width="1.5"/>
+                <line x1="55" y1="72" x2="55" y2="80" stroke="#111" stroke-width="1.5"/>
+
+                <!-- Zoro Bandana -->
+                <path d="M28,45 C30,20 70,20 72,45 Q50,52 28,45 Z" fill="#004d00"/>
+                
+                <!-- Bandana Knot/Tail (Left side) -->
+                <path d="M28,40 Q15,30 8,48 Q18,46 26,45 Z" fill="#004d00"/>
+
+                <!-- Left Eye Socket -->
+                <circle cx="41" cy="54" r="5.5" fill="#111"/>
+                <!-- Horizontal Scratch (Scar) -->
+                <line x1="31" y1="54" x2="51" y2="54" stroke="#ff3333" stroke-width="2.5" stroke-linecap="round"/>
+
+                <!-- Right Eye Socket -->
+                <circle cx="59" cy="54" r="5.5" fill="#111"/>
+                <!-- Glowing Electric Green Eye -->
+                <circle cx="59" cy="54" r="3.5" fill="#00FF00" filter="url(#greenGlow)"/>
+                
+                <!-- Nose -->
+                <path d="M48,63 L52,63 L50,58 Z" fill="#111"/>
+            </svg>
+            <span class="enma-text">Enma</span>
         </div>
+        
         <div class="ai-chat-window" id="aiChatWindow">
             <div class="ai-chat-header">
                 <span>Enma AI Core v1.0</span>
@@ -763,7 +807,6 @@
                 i++;
                 setTimeout(typeWriter, 15);
             } else {
-                // Show choice options instantly once typing finished
                 node.options.forEach(opt => {
                     const btn = document.createElement('button');
                     btn.className = 'ai-btn';
