@@ -319,8 +319,8 @@
             font-family: 'Lexend Deca', sans-serif;
         }
         .ai-core-orb {
-            width: 75px;
-            height: 75px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: #050f05;
             border: 2px solid #00FF00;
@@ -338,8 +338,8 @@
             box-shadow: 0 0 25px #7FFF00, inset 0 0 20px #004d00;
         }
         .ai-core-orb svg {
-            width: 80%;
-            height: 80%;
+            width: 90%;
+            height: 90%;
             z-index: 2;
         }
         .ai-core-orb .enma-text {
@@ -627,11 +627,31 @@
                     </filter>
                 </defs>
                 
-                <!-- Cross Swords Behind -->
-                <line x1="18" y1="18" x2="82" y2="82" stroke="#888" stroke-width="5" stroke-linecap="round"/>
-                <line x1="82" y1="18" x2="18" y2="82" stroke="#888" stroke-width="5" stroke-linecap="round"/>
+                <!-- Appealing Cross Katana 1 (Bottom Left to Top Right) -->
+                <g>
+                    <!-- Handle/Tsuka -->
+                    <path d="M15,85 L30,70" stroke="#700000" stroke-width="4.5" stroke-linecap="round"/>
+                    <path d="M15,85 L30,70" stroke="#111" stroke-width="4.5" stroke-dasharray="2,3" stroke-linecap="round"/>
+                    <!-- Guard/Tsuba -->
+                    <ellipse cx="30" cy="70" rx="6" ry="3" transform="rotate(-45 30 70)" fill="#d4af37" stroke="#9a7b1c" stroke-width="1"/>
+                    <!-- Steel Blade -->
+                    <path d="M30,70 L83,17 L86,19 L32,72 Z" fill="#e6e6e6" stroke="#999" stroke-width="0.5"/>
+                    <path d="M31,71 L84,18" stroke="#ffffff" stroke-width="1"/> <!-- Blade Edge Highlight -->
+                </g>
 
-                <!-- Skull Base -->
+                <!-- Appealing Cross Katana 2 (Bottom Right to Top Left) -->
+                <g>
+                    <!-- Handle/Tsuka -->
+                    <path d="M85,85 L70,70" stroke="#1d3557" stroke-width="4.5" stroke-linecap="round"/>
+                    <path d="M85,85 L70,70" stroke="#111" stroke-width="4.5" stroke-dasharray="2,3" stroke-linecap="round"/>
+                    <!-- Guard/Tsuba -->
+                    <ellipse cx="70" cy="70" rx="6" ry="3" transform="rotate(45 70 70)" fill="#d4af37" stroke="#9a7b1c" stroke-width="1"/>
+                    <!-- Steel Blade -->
+                    <path d="M70,70 L17,17 L14,19 L68,72 Z" fill="#e6e6e6" stroke="#999" stroke-width="0.5"/>
+                    <path d="M69,71 L16,18" stroke="#ffffff" stroke-width="1"/> <!-- Blade Edge Highlight -->
+                </g>
+
+                <!-- Skull Base Base -->
                 <path d="M30,50 C30,22 70,22 70,50 C70,62 64,66 64,72 L36,72 C36,66 30,62 30,50 Z" fill="#e0e0e0"/>
                 
                 <!-- Teeth/Jaw -->
@@ -643,18 +663,19 @@
                 <!-- Zoro Bandana -->
                 <path d="M28,45 C30,20 70,20 72,45 Q50,52 28,45 Z" fill="#004d00"/>
                 
-                <!-- Bandana Knot/Tail (Left side) -->
+                <!-- Bandana Knot Tail (Left side) -->
                 <path d="M28,40 Q15,30 8,48 Q18,46 26,45 Z" fill="#004d00"/>
 
-                <!-- Left Eye Socket -->
+                <!-- Skull's Right Eye (Viewer's Left) - Glowing Electric Green, No Scar -->
                 <circle cx="41" cy="54" r="5.5" fill="#111"/>
-                <!-- Horizontal Scratch (Scar) -->
-                <line x1="31" y1="54" x2="51" y2="54" stroke="#ff3333" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="41" cy="54" r="3.5" fill="#00FF00" filter="url(#greenGlow)"/>
 
-                <!-- Right Eye Socket -->
+                <!-- Skull's Left Eye (Viewer's Right) - Closed Socket with Vertical Scar -->
                 <circle cx="59" cy="54" r="5.5" fill="#111"/>
-                <!-- Glowing Electric Green Eye -->
-                <circle cx="59" cy="54" r="3.5" fill="#00FF00" filter="url(#greenGlow)"/>
+                <!-- Eye closed line slot inside socket -->
+                <line x1="55" y1="54" x2="63" y2="54" stroke="#222" stroke-width="1.5"/>
+                <!-- Vertical Scratch Scar -->
+                <line x1="59" y1="42" x2="59" y2="66" stroke="#ff3333" stroke-width="2.5" stroke-linecap="round"/>
                 
                 <!-- Nose -->
                 <path d="M48,63 L52,63 L50,58 Z" fill="#111"/>
@@ -799,7 +820,6 @@
         textContainer.innerHTML = "";
         optionsContainer.innerHTML = "";
         
-        // Typing text simulator
         let i = 0;
         function typeWriter() {
             if (i < node.text.length) {
