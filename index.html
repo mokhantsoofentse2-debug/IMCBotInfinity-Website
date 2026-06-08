@@ -471,7 +471,7 @@
             <a href="setup.html?bot=db - fe">
                 <img src="db0.png" width="150" height="200" alt="DB Bot">
             </a>
-        </li>        
+        </div>        
         <li>
             <div class='sa'><b>SA (Small Accounts)</b></div>
             <a href="setup.html?bot=sa">
@@ -685,31 +685,49 @@
         start: {
             text: "Greetings, human trader. I am the integrated intelligence of IMCBOTS. Like Enma, I cut cleanly through complex market structure. What strategy profile are we mapping today?",
             options: [
-                { text: "Which bot is perfect for small accounts?", next: "small_acc" },
-                { text: "I want maximum returns, zero limits.", next: "high_risk" },
-                { text: "Show me the bank/payment details.", next: "bank_info" }
+                { text: "Scale Small Capital (Safest Node)", next: "small_acc" },
+                { text: "Support & Resistance Frameworks (DB / DBA)", next: "sr_frameworks" },
+                { text: "Trend Exploitation & Maximizers", next: "trend_maximizers" },
+                { text: "Aggressive Hyper-Growth Systems", next: "aggressive_growth" },
+                { text: "View Banking & Payment Protocols", next: "bank_info" }
             ]
         },
         small_acc: {
-            text: "Analyzing resources... For small margins, your best match is IMCBOT SA (Small Accounts). It is carefully balanced to scale minimal capitals without blowing parameters. Shall we view its performance setup?",
+            text: "Analyzing allocation parameters... For minimal capital margins, your best architectural match is IMCBOT SA (Small Accounts). It is carefully bounded to scale low funds without overleveraging indices. Initialize its framework?",
             options: [
                 { text: "Launch SA Setup Page ➔", link: "setup.html?bot=sa" },
-                { text: "Go back to main options", next: "start" }
+                { text: "Return to Core Matrix", next: "start" }
             ]
         },
-        high_risk: {
-            text: "Detecting ambition. The extreme tiers await: IMCBOT King & IMCBOT Asura run with no profit ceiling. Or choose Prgtry for blistering trend growth. Note: High speed requires calculated risk thresholds.",
+        sr_frameworks: {
+            text: "Accessing Key Level structures. Choose between DB F.E (Fan Edition: targets major support/resistance zones with a single high-impact win parameter) or DBA Apex (multi-entry trailing to secure profits comfortably).",
             options: [
-                { text: "Launch Asura Setup ➔", link: "setup.html?bot=asura" },
+                { text: "Launch DB F.E Setup ➔", link: "setup.html?bot=db - fe" },
+                { text: "Launch DBA Apex Setup ➔", link: "setup.html?bot=dba" },
+                { text: "Return to Core Matrix", next: "start" }
+            ]
+        },
+        trend_maximizers: {
+            text: "Loading architectural trend hunters. IMCBOT Master trails and locks structural targets early. King completely removes profit ceilings. Asura relies on ultra-low risk percentages to optimize long running operations.",
+            options: [
+                { text: "Launch Master Setup ➔", link: "setup.html?bot=master" },
                 { text: "Launch King Setup ➔", link: "setup.html?bot=king" },
-                { text: "Go back", next: "start" }
+                { text: "Launch Asura Setup ➔", link: "setup.html?bot=asura" },
+                { text: "Return to Core Matrix", next: "start" }
+            ]
+        },
+        aggressive_growth: {
+            text: "Warning: High asset volatility signature detected. IMCBOT Purgatory (Pgtry) extracts values aggressively by firing at every trend inflection option. Demands razor-sharp execution spreads.",
+            options: [
+                { text: "Launch Purgatory Setup ➔", link: "setup.html?bot=prgtry" },
+                { text: "Return to Core Matrix", next: "start" }
             ]
         },
         bank_info: {
-            text: "Payment secure routing prepared. Secure your plug-and-play architecture seamlessly via our registered corporate Capitec Savings gateway.",
+            text: "Payment routing prepared. Secure your plug-and-play automated trading logic securely via our direct registered Capitec Savings gateway.",
             options: [
-                { text: "Open Banking Protocol Details ➔", link: "setup.html?bot=bank" },
-                { text: "Go back", next: "start" }
+                { text: "Open Banking Details ➔", link: "setup.html?bot=bank" },
+                { text: "Return to Core Matrix", next: "start" }
             ]
         }
     };
