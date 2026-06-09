@@ -8,6 +8,8 @@
     
     <style>
         body {
+            /* Implemented Dark Emerald Green theme base color */
+            background-color: #011a0d; 
             background-image: url('images/bg8.png');
             background-size: cover;
             background-attachment: fixed;
@@ -46,7 +48,7 @@
 
         /* --- BIOGRAPHY CONTAINERS --- */
         .bio-container {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 20, 10, 0.75); /* Dark emerald tint */
             border: 1px solid #058743;
             border-radius: 15px;
             padding: 20px;
@@ -63,7 +65,7 @@
 
         /* --- OWNER SLIDESHOW BLOCK --- */
         #ownerSlideshow {
-            background: #111;
+            background: #011508;
             margin-top: 20px;
             border-radius: 15px;
             border: 1px solid #058743;
@@ -96,7 +98,7 @@
         }
 
         li {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 20, 10, 0.75);
             padding: 20px;
             border-radius: 15px;
             border: 1px solid #058743;
@@ -105,7 +107,7 @@
             transition: transform 0.3s ease;
         }
 
-        li:hover { transform: translateY(-10px); }
+        li:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(5, 135, 67, 0.3); }
         li b { display: block; margin-bottom: 15px; font-size: 1.2rem; text-decoration: underline; }
 
         img { border-radius: 8px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
@@ -213,6 +215,7 @@
         .node-kng .scale-circle { animation-delay: 1.25s; }
         .node-pgtry .scale-circle { animation-delay: 1.5s; }
 
+        /* Maintained Unique Bot Colors */
         .node-sa .scale-label { color: #39FF14; }
         .node-sa .scale-circle { background-color: #39FF14; color: #39FF14; }
         .node-db .scale-label { color: #FFA800; }
@@ -244,7 +247,7 @@
 
         footer {
             margin-top: 50px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 20, 10, 0.85); /* Emerald tint footer */
             padding: 20px;
             border-radius: 15px;
             max-width: 600px;
@@ -322,7 +325,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: #050f05;
+            background: #011508; /* Deep emerald inner core */
             border: 2px solid #058743;
             box-shadow: 0 0 15px rgba(0, 255, 0, 0.6), inset 0 0 15px rgba(0, 50, 0, 0.8);
             cursor: pointer;
@@ -338,8 +341,8 @@
             box-shadow: 0 0 25px #7FFF00, inset 0 0 20px #004d00;
         }
         .ai-core-orb svg {
-            width: 90%;
-            height: 90%;
+            width: 85%;
+            height: 85%;
             z-index: 2;
         }
         .ai-core-orb .blade-text {
@@ -359,10 +362,10 @@
         .ai-chat-window {
             display: none;
             width: 320px;
-            background: rgba(5, 15, 5, 0.95);
+            background: rgba(1, 21, 8, 0.95); /* Dark emerald chat window */
             border: 2px solid #058743;
             border-radius: 15px;
-            box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+            box-shadow: 0 0 25px rgba(5, 135, 67, 0.4);
             overflow: hidden;
             position: absolute;
             bottom: 90px;
@@ -371,14 +374,14 @@
             transition: all 0.3s ease;
         }
         .ai-chat-header {
-            background: #002200;
+            background: #022b13;
             padding: 12px;
             border-bottom: 1px solid #058743;
             font-weight: bold;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #058743;
+            color: #39FF14;
         }
         .ai-chat-header .close-btn {
             cursor: pointer;
@@ -396,7 +399,7 @@
             width: 5px;
         }
         .ai-chat-body::-webkit-scrollbar-thumb {
-            background: #228B22;
+            background: #058743;
             border-radius: 10px;
         }
         .ai-response-text {
@@ -409,7 +412,7 @@
             gap: 8px;
         }
         .ai-btn {
-            background: rgba(0, 255, 0, 0.1);
+            background: rgba(5, 135, 67, 0.15);
             border: 1px solid #058743;
             color: white;
             padding: 8px;
@@ -468,7 +471,7 @@
             <a href="setup.html?bot=db - fe">
                 <img src="dbfepp.png" width="150" height="200" alt="DB Bot">
             </a>
-        </div>        
+        </li>        
         <li>
             <div class='sa'><b>SA (Small Accounts)</b></div>
             <a href="setup.html?bot=sa">
@@ -610,74 +613,38 @@
     </footer>
     <hr class="sword-line">
 
-    <!-- AI BLADE WIDGET -->
     <div id="ai-widget-container">
         <div class="ai-core-orb" onclick="toggleAIChat()">
-            <!-- SVG Pirate Skull Anime Edition -->
+            
             <svg viewBox="0 0 100 100">
                 <defs>
-                    <filter id="greenGlow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="2.5" result="blur" />
+                    <filter id="emeraldGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="2" result="blur" />
                         <feMerge>
                             <feMergeNode in="blur"/>
                             <feMergeNode in="SourceGraphic"/>
                         </feMerge>
                     </filter>
                 </defs>
+
+                <path d="M 60 50 L 70 80 L 40 80 L 45 50 Z" fill="#011508" stroke="#058743" stroke-width="1.5"/>
+                <path d="M 35 80 C 35 60 75 60 75 80 Z" fill="#0F5132" stroke="#058743" stroke-width="2"/>
+
+                <path d="M 55 35 L 55 60 L 35 55 L 30 45 L 45 35 Z" fill="#0a0a0a" stroke="#058743" stroke-width="1.5"/>
+
+                <circle cx="40" cy="45" r="2.5" fill="#39FF14" filter="url(#emeraldGlow)"/>
                 
-                <!-- Appealing Cross Katana 1 (Bottom Left to Top Right) -->
-                <g>
-                    <!-- Handle/Tsuka -->
-                    <path d="M15,85 L30,70" stroke="#700000" stroke-width="4.5" stroke-linecap="round"/>
-                    <path d="M15,85 L30,70" stroke="#111" stroke-width="4.5" stroke-dasharray="2,3" stroke-linecap="round"/>
-                    <!-- Guard/Tsuba -->
-                    <ellipse cx="30" cy="70" rx="6" ry="3" transform="rotate(-45 30 70)" fill="#d4af37" stroke="#9a7b1c" stroke-width="1"/>
-                    <!-- Steel Blade -->
-                    <path d="M30,70 L83,17 L86,19 L32,72 Z" fill="#e6e6e6" stroke="#999" stroke-width="0.5"/>
-                    <path d="M31,71 L84,18" stroke="#ffffff" stroke-width="1"/> <!-- Blade Edge Highlight -->
-                </g>
+                <path d="M 35 42 L 45 44" stroke="#058743" stroke-width="1.5" stroke-linecap="round"/>
 
-                <!-- Appealing Cross Katana 2 (Bottom Right to Top Left) -->
-                <g>
-                    <!-- Handle/Tsuka -->
-                    <path d="M85,85 L70,70" stroke="#1d3557" stroke-width="4.5" stroke-linecap="round"/>
-                    <path d="M85,85 L70,70" stroke="#111" stroke-width="4.5" stroke-dasharray="2,3" stroke-linecap="round"/>
-                    <!-- Guard/Tsuba -->
-                    <ellipse cx="70" cy="70" rx="6" ry="3" transform="rotate(45 70 70)" fill="#d4af37" stroke="#9a7b1c" stroke-width="1"/>
-                    <!-- Steel Blade -->
-                    <path d="M70,70 L17,17 L14,19 L68,72 Z" fill="#e6e6e6" stroke="#999" stroke-width="0.5"/>
-                    <path d="M69,71 L16,18" stroke="#ffffff" stroke-width="1"/> <!-- Blade Edge Highlight -->
-                </g>
+                <path d="M 32 52 L 40 54" stroke="#058743" stroke-width="1" stroke-linecap="round"/>
 
-                <!-- Skull Base Base -->
-                <path d="M30,50 C30,22 70,22 70,50 C70,62 64,66 64,72 L36,72 C36,66 30,62 30,50 Z" fill="#e0e0e0"/>
+                <path d="M 5 45 Q 45 30 85 45 L 55 10 Z" fill="#022411" stroke="#058743" stroke-width="2" stroke-linejoin="round"/>
                 
-                <!-- Teeth/Jaw -->
-                <rect x="41" y="72" width="18" height="8" fill="#e0e0e0" rx="2"/>
-                <line x1="45" y1="72" x2="45" y2="80" stroke="#111" stroke-width="1.5"/>
-                <line x1="50" y1="72" x2="50" y2="80" stroke="#111" stroke-width="1.5"/>
-                <line x1="55" y1="72" x2="55" y2="80" stroke="#111" stroke-width="1.5"/>
-
-                <!-- head Bandana -->
-                <path d="M28,45 C30,20 70,20 72,45 Q50,52 28,45 Z" fill="#004d00"/>
-                
-                <!-- Bandana Knot Tail (Left side) -->
-                <path d="M28,40 Q15,30 8,48 Q18,46 26,45 Z" fill="#004d00"/>
-
-                <!-- Skull's Right Eye (Viewer's Left) - Glowing Electric Green, No Scar -->
-                <circle cx="41" cy="54" r="5.5" fill="#111"/>
-                <circle cx="41" cy="54" r="3.5" fill="#00FF00" filter="url(#greenGlow)"/>
-
-                <!-- Skull's Left Eye (Viewer's Right) - Closed Socket with Vertical Scar -->
-                <circle cx="59" cy="54" r="5.5" fill="#111"/>
-                <!-- Eye closed line slot inside socket -->
-                <line x1="55" y1="54" x2="63" y2="54" stroke="#222" stroke-width="1.5"/>
-                <!-- Vertical Scratch Scar -->
-                <line x1="59" y1="42" x2="59" y2="66" stroke="#ff3333" stroke-width="2.5" stroke-linecap="round"/>
-                
-                <!-- Nose -->
-                <path d="M48,63 L52,63 L50,58 Z" fill="#111"/>
+                <line x1="55" y1="10" x2="25" y2="40" stroke="#058743" stroke-width="1"/>
+                <line x1="55" y1="10" x2="45" y2="35" stroke="#058743" stroke-width="1"/>
+                <line x1="55" y1="10" x2="70" y2="40" stroke="#058743" stroke-width="1"/>
             </svg>
+            
             <span class="blade-text">Blade</span>
         </div>
         
