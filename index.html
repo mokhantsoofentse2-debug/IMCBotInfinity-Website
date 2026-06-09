@@ -136,26 +136,36 @@
             cursor: pointer;
         }
 
-        @keyframes bounceWord {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
 
-        .risk-headers .safest { 
-            color: #4CBB17; 
-            text-transform: uppercase; 
-            animation: bounceWord 0.4s infinite alternate ease-in-out;
-        }
-        .risk-headers .bots-middle { 
-            color: #ffffff; 
-            text-transform: uppercase; 
-            text-decoration: underline; 
-        }
-        .risk-headers .riskiest { 
-            color: #FF0000; 
-            text-transform: uppercase; 
-            animation: bounceWord 0.4s infinite alternate ease-in-out;
-        }
+@keyframes bounceSafest {
+    0% { transform: translateY(0); }
+    6.25% { transform: translateY(-10px); } 
+    12.5%, 100% { transform: translateY(0); } 
+}
+
+@keyframes bounceRiskiest {
+    0%, 12.5% { transform: translateY(0); } 
+    18.75% { transform: translateY(-10px); } 
+    25%, 100% { transform: translateY(0); } 
+}
+
+.risk-headers .safest { 
+    color: #4CBB17; 
+    text-transform: uppercase; 
+    animation: bounceSafest 4s infinite ease-in-out;
+}
+
+.risk-headers .bots-middle { 
+    color: #ffffff; 
+    text-transform: uppercase; 
+    text-decoration: underline; 
+}
+
+.risk-headers .riskiest { 
+    color: #FF0000; 
+    text-transform: uppercase; 
+    animation: bounceRiskiest 4s infinite ease-in-out;
+}
         
         .risk-scale {
             display: flex;
