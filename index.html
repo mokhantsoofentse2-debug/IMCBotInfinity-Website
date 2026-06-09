@@ -730,7 +730,8 @@
                 { text: "Trend Exploitation & Maximizers", next: "trend_maximizers" },
                 { text: "Aggressive Hyper-Growth Systems", next: "aggressive_growth" },
                 { text: "View Banking & Payment Protocols", next: "bank_info" },
-                { text: "About The IMCBOTS Creator", next: "IndiceMoCash" }
+                { text: "About The IMCBOTS Creator", next: "IndiceMoCash" },
+                { text: "IMCBOTS Prices", next: "Prices" }
             ]
         },
         small_acc: {
@@ -782,6 +783,26 @@ IndiceMoCash: {
                         const header = document.getElementById('ownerHeader');
                         content.style.display = 'block';
                         header.innerHTML = 'About The Owner ▴';
+                        
+                        // Smoothly scroll the page to the biography container
+                        header.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                },
+                { text: "Return to Core Matrix", next: "start" }
+            ]
+        },
+
+Prices: {
+            text: "Here's more details about how much each bot costs in ZAR currency.",
+            options: [
+                { 
+                    text: "Open Bots Bio ➔", 
+                    action: () => {
+                        // Force the bio open (avoids accidentally closing it if already open)
+                        const content = document.getElementById('bioContent');
+                        const header = document.getElementById('bioHeader');
+                        content.style.display = 'block';
+                        header.innerHTML = 'Bots Biography ▴';
                         
                         // Smoothly scroll the page to the biography container
                         header.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
