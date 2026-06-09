@@ -5,9 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMCBOTS Showcase</title>
 <style>
-        body { background: #000; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; font-family: sans-serif; }
+        
+        body { 
+            background: #011c12; 
+            color: white; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            font-family: sans-serif; 
+        }
+        
         #botTitle { text-transform: uppercase; }
-        #galleryContainer { background: #111; padding: 20px; border-radius: 20px; border: 1px solid #058743; width: 90%; max-width: 500px; height: 400px; position: relative; overflow: hidden; }
+        
+        
+        #galleryContainer { 
+            background: #022b1b; 
+            padding: 20px; 
+            border-radius: 20px; 
+            border: 1px solid #058743; /* acts as a fallback before JS kicks in */
+            width: 90%; 
+            max-width: 500px; 
+            height: 400px; 
+            position: relative; 
+            overflow: hidden; 
+        }
         
         .media-item { 
             position: absolute; 
@@ -74,6 +98,8 @@
         } else if (botKey && botData[botKey]) {
             const data = botData[botKey];
             title.innerHTML = `<u>${botKey} Showcase</u><br><span style="display: block; text-align: center; font-size: 60%;">(watch)</span>`;
+            
+            
             title.style.color = data.color;
             container.style.borderColor = data.color;
             
