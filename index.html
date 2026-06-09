@@ -218,12 +218,12 @@
 
         /* Staggered Delay for left-to-right fluid motion */
         .node-sa .scale-circle { animation-delay: 0.0s; }
-        .node-db .scale-circle { animation-delay: 0.25s; }
-        .node-dba .scale-circle { animation-delay: 0.5s; }
-        .node-asr .scale-circle { animation-delay: 0.75s; }
-        .node-mstr .scale-circle { animation-delay: 1.0s; }
-        .node-kng .scale-circle { animation-delay: 1.25s; }
-        .node-pgtry .scale-circle { animation-delay: 1.5s; }
+        .node-db .scale-circle { animation-delay: 0.3s; }
+        .node-dba .scale-circle { animation-delay: 0.6s; }
+        .node-asr .scale-circle { animation-delay: 0.9s; }
+        .node-mstr .scale-circle { animation-delay: 1.2s; }
+        .node-kng .scale-circle { animation-delay: 1.5s; }
+        .node-pgtry .scale-circle { animation-delay: 1.8s; }
 
         /* Unique Bot Colors */
         .node-sa .scale-label { color: #39FF14; }
@@ -723,13 +723,14 @@
     /* --- LIVING AI CORE LOGIC ENGINE --- */
     const aiMessages = {
         start: {
-            text: "Greetings, human trader. I am the integrated intelligence of IMCBOTS. Like a blade, I cut cleanly through complex market structure. What strategy profile are we mapping today?",
+            text: "Greetings, human trader. I am the integrated intelligence of IMCBOTS. My name is Blade(The man in the background/dojo) & welcome to the IMCBOT dojo. Like a blade, I cut cleanly through complex market structure. What strategy profile are we mapping today?",
             options: [
                 { text: "Scale Small Capital (Safest Node)", next: "small_acc" },
                 { text: "Support & Resistance Frameworks (DB / DBA)", next: "sr_frameworks" },
                 { text: "Trend Exploitation & Maximizers", next: "trend_maximizers" },
                 { text: "Aggressive Hyper-Growth Systems", next: "aggressive_growth" },
-                { text: "View Banking & Payment Protocols", next: "bank_info" }
+                { text: "View Banking & Payment Protocols", next: "bank_info" },
+                { text: "About The IMCBOTS Creator", next: "IndiceMoCash" }
             ]
         },
         small_acc: {
@@ -769,6 +770,25 @@
                 { text: "Open Banking Details ➔", link: "setup.html?bot=bank" },
                 { text: "Return to Core Matrix", next: "start" }
             ]
+        },
+IndiceMoCash: {
+            text: "Here's more information about how IMCBOTS came to be, and how the IndiceMoCash succeeded.",
+            options: [
+                { 
+                    text: "Open Owner Bio ➔", 
+                    action: () => {
+                        // Force the bio open (avoids accidentally closing it if already open)
+                        const content = document.getElementById('ownerContent');
+                        const header = document.getElementById('ownerHeader');
+                        content.style.display = 'block';
+                        header.innerHTML = 'About The Owner ▴';
+                        
+                        // Smoothly scroll the page to the biography container
+                        header.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                },
+                { text: "Return to Core Matrix", next: "start" }
+            ]
         }
     };
 
@@ -806,11 +826,16 @@
                     const btn = document.createElement('button');
                     btn.className = 'ai-btn';
                     btn.innerText = opt.text;
-                    if(opt.link) {
-                        btn.onclick = () => { window.location.href = opt.link; };
+                    
+                    // Button Logic Router
+                    if (opt.link) {
+                        btn.onclick = () => { window.location.href = opt.link; }; 
+                    } else if (opt.action) {
+                        btn.onclick = opt.action; 
                     } else {
-                        btn.onclick = () => { loadAINode(opt.next); };
+                        btn.onclick = () => { loadAINode(opt.next); }; 
                     }
+                    
                     optionsContainer.appendChild(btn);
                 });
             }
