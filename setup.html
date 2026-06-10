@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMCBOTS Showcase</title>
     <style>
+
         body { 
             background: #011c12; 
             color: white; 
@@ -16,9 +17,7 @@
             margin: 0; 
             font-family: sans-serif; 
         }
-        
         #botTitle { text-transform: uppercase; }
-        
         #galleryContainer { 
             background: #022b1b; 
             padding: 20px; 
@@ -30,7 +29,6 @@
             position: relative; 
             overflow: hidden; 
         }
-        
         .media-item { 
             position: absolute; 
             top: 50%; 
@@ -42,12 +40,10 @@
             opacity: 0; 
             transition: opacity 1s ease-in-out, transform 6s linear; 
         }
-        
         .media-item.active { 
             opacity: 1; 
             transform: translate(-50%, -50%) scale(1.15); 
         }
-        
         .bank-details { color: white; font-size: 1.2rem; line-height: 2.5; }
         .bnk { text-decoration: underline; font-weight: bold; }
     </style>
@@ -58,38 +54,19 @@
     <div id="galleryContainer"></div>
 
     <script>
-        const commonImages = [ 'images/btspstr.png', 'images/btscrtr.png', 'btscl.jpg', 'imcbots1.mp4' ];
-        
-const botData = {
-    'db - fe': { 
-        media: ['dbv.mp4', 'images/db3.PNG', 'trades/db4.PNG', 'trades/db5.PNG', 'trades/db6.png', 'trades/db7.png', 'dbcl.jpg', 'imcbotscvr.mp4', ...commonImages], 
-        color: '#FFA800' 
-    }, 
-    'dba': { 
-        media: ['dbav.mp4', 'trades/dba1.PNG', 'trades/dba3.PNG', 'trades/dba4.png', 'trades/dba5.PNG', 'trades/dba6.PNG', 'trades/dba7.png', 'trades/dba8.PNG', 'trades/dba9.jpg', 'trades/dba10.PNG', 'trades/dba11.jpg', 'trades/dba12.png', 'dbacl.jpg', 'imcbotscvr.mp4', ...commonImages], 
-        color: '#00d062' 
-    }, 
-    'sa': { 
-        media: ['sav.mp4', 'trades/sa4.PNG', 'trades/sa5.PNG', 'trades/sa7.png', 'trades/sa2.PNG', 'saccl.jpg', 'imcbotscvr.mp4', ...commonImages], 
-        color: '#39FF14' 
-    }, 
-    'master': { 
-        media: ['mstrv.mp4', 'trades/master1.PNG', 'trades/master5.PNG', 'trades/master8.png', 'trades/master9.png', 'trades/master10.png', 'trades/master2.png', 'trades/master4.jpg', 'trades/master5.jpg', 'trades/master6.jpg', 'trades/master15.png', 'mastercl.jpg', 'imcbotscvr.mp4', ...commonImages], 
-        color: '#00FFFF' 
-    }, 
-    'prgtry': { 
-        media: ['pgtryv.mp4', 'trades/prgtry2.PNG', 'trades/prgtry3.PNG', 'trades/prgtry4.PNG', 'trades/prgtry5.PNG', 'trades/prgtry6.png', 'trades/prgtry7.png', 'trades/prgtry8.png', 'trades/prgtry9.png', 'trades/prgtry10.png', 'pgtryccll.jpg', 'imcbotscvr.mp4', ...commonImages], 
-        color: '#BBC2CC' 
-    }, 
-    'king': { 
-        media: ['kngv.mp4', 'trades/king2.PNG', 'trades/king8.PNG', 'trades/king9.png', 'trades/king4.jpg', 'trades/king5.PNG', 'kngcl.jpg', 'imcbotscvr.mp4', ...commonImages], 
-        color: '#FF2400' 
-    }, 
-    'asura': { 
-        media: ['asrv.mp4', 'trades/asura1.PNG', 'trades/asura6.jpg', 'trades/asura4.png', 'trades/asura5.png', 'asuracll.jpg', 'imcbotscvr.mp4', ...commonImages], 
-        color: '#800080' 
-    } 
-};
+
+        const commonImages = [ 'images/btspstr.png', 'images/btscrtr.png', 'btscl.jpg', 'imcbots1.mp4', 'imcbotscvr.mp4' ];
+
+        const botData = {
+            'db - fe': { video:['dbv.mp4' ], images: ['images/db3.PNG', 'trades/db4.PNG', 'trades/db5.PNG', 'trades/db6.png', 'trades/db7.png', 'dbcl.jpg', ...commonImages], color: '#FFA800' }, 
+            'dba': { video:[ 'dbav.mp4'], images: ['trades/dba1.PNG', 'trades/dba3.PNG', 'trades/dba4.png', 'trades/dba5.PNG', 'trades/dba6.PNG', 'trades/dba7.png', 'trades/dba8.PNG', 'trades/dba9.jpg', 'trades/dba10.PNG', 'trades/dba11.jpg', 'trades/dba12.png', 'dbacl.jpg', ...commonImages], color: '#00d062' }, 
+            'sa': { video:['sav.mp4' ], images: ['trades/sa4.PNG', 'trades/sa5.PNG', 'trades/sa7.png', 'trades/sa2.PNG', 'saccl.jpg', ...commonImages],  color: '#39FF14' }, 
+            'master': { video:['mstrv.mp4' ], images: ['trades/master1.PNG', 'trades/master5.PNG', 'trades/master8.png', 'trades/master9.png', 'trades/master10.png', 'trades/master2.png', 'trades/master4.jpg', 'trades/master5.jpg', 'trades/master6.jpg', 'trades/master15.png', 'mastercl.jpg', ...commonImages], color: '#00FFFF' }, 
+            'prgtry': { video:['pgtryv.mp4' ], images: ['trades/prgtry2.PNG', 'trades/prgtry3.PNG', 'trades/prgtry4.PNG', 'trades/prgtry5.PNG', 'trades/prgtry6.png', 'trades/prgtry7.png', 'trades/prgtry8.png', 'trades/prgtry9.png', 'trades/prgtry10.png', 'pgtryccll.jpg',  ...commonImages],  color: '#BBC2CC' }, 
+            'king': { video:['kngv.mp4' ], images: ['trades/king2.PNG', 'trades/king8.PNG', 'trades/king9.png', 'trades/king4.jpg', 'trades/king5.PNG', 'kngcl.jpg', ...commonImages],  color: '#FF2400' }, 
+            'asura': { video:['asrv.mp4' ], images: ['trades/asura1.PNG', 'trades/asura6.jpg', 'trades/asura4.png', 'trades/asura5.png', 'asuracll.jpg', ...commonImages], color: '#800080' } 
+        };
+
         const params = new URLSearchParams(window.location.search);
         const botKey = params.get('bot');
         const container = document.getElementById('galleryContainer');
@@ -107,38 +84,35 @@ const botData = {
                         <li><div class='bnk'>Acc. type:</div> Savings</li>
                     </ul>
                 </div>`;
+
         } else if (botKey && botData[botKey]) {
             const data = botData[botKey];
             title.innerHTML = `<u>${botKey} Showcase</u><br><span style="display: block; text-align: center; font-size: 60%;">(watch)</span>`;
-            
             title.style.color = data.color;
             container.style.borderColor = data.color;
-            
             const allMedia = [...(data.video || []), ...data.images];
-            
             allMedia.forEach((src) => {
                 let mediaElement;
-                
                 if (src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm')) {
                     mediaElement = document.createElement('video');
                     mediaElement.src = src;
                     mediaElement.muted = true;
                     mediaElement.playsInline = true;
-                    
+
                 } else {
                     mediaElement = document.createElement('img');
                     mediaElement.src = src;
+
                 }
-                
                 mediaElement.className = 'media-item'; 
                 container.appendChild(mediaElement);
+
             });
 
             // NEW SMART CYCLING LOGIC
             let current = 0;
             const items = document.querySelectorAll('.media-item');
             let slideTimeout;
-
             function startSlide() {
                 const currentItem = items[current];
                 currentItem.classList.add('active');
@@ -146,38 +120,35 @@ const botData = {
                 if (currentItem.tagName === 'VIDEO') {
                     currentItem.currentTime = 0; // Rewind to start
                     currentItem.play().catch(e => console.log("Playback interrupted:", e));
-                    
+
                     // Wait until the video completely finishes playing
                     currentItem.addEventListener('ended', changeSlide, { once: true });
+
                 } else {
                     // It's an image, stay on it for 5 seconds
                     slideTimeout = setTimeout(changeSlide, 5000);
                 }
             }
-
             function changeSlide() {
                 const currentItem = items[current];
                 currentItem.classList.remove('active');
-                
+
                 if (currentItem.tagName === 'VIDEO') {
                     currentItem.pause(); // Stop it safely
                 }
-
                 // Move to next item index
                 current = (current + 1) % items.length;
-                
                 // Fire up the next asset
                 startSlide();
             }
-
             // Start the very first slide execution
             if (items.length > 0) {
                 startSlide();
             }
-            
+
         } else {
             title.innerText = "Bot not found";
         }
     </script>
 </body>
-</html>
+</html> 
