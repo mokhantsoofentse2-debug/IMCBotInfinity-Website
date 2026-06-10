@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMCBOTS Showcase</title>
-<style>
-        
+    <style>
         body { 
             background: #011c12; 
             color: white; 
@@ -20,12 +19,11 @@
         
         #botTitle { text-transform: uppercase; }
         
-        
         #galleryContainer { 
             background: #022b1b; 
             padding: 20px; 
             border-radius: 20px; 
-            border: 1px solid #058743; /* acts as a fallback before JS kicks in */
+            border: 1px solid #058743; 
             width: 90%; 
             max-width: 500px; 
             height: 400px; 
@@ -37,23 +35,19 @@
             position: absolute; 
             top: 50%; 
             left: 50%; 
-            /* Start at normal scale */
             transform: translate(-50%, -50%) scale(1); 
             width: 100%; 
             height: 100%; 
             object-fit: contain; 
             opacity: 0; 
-            /* Fade over 1s, zoom smoothly over 6s to cover the interval + fade out */
             transition: opacity 1s ease-in-out, transform 6s linear; 
         }
         
         .media-item.active { 
             opacity: 1; 
-            /* Zoom in by 15% when active */
             transform: translate(-50%, -50%) scale(1.15); 
         }
         
-        /* Bank Details Styling */
         .bank-details { color: white; font-size: 1.2rem; line-height: 2.5; }
         .bnk { text-decoration: underline; font-weight: bold; }
     </style>
@@ -63,19 +57,17 @@
     <h1 id="botTitle">Loading...</h1>
     <div id="galleryContainer"></div>
 
-<script>
-        // Define media lists. We just use the file path string for the video now.
+    <script>
         const commonImages = [ 'images/btspstr.png', 'images/btscrtr.png', 'Imcbotscover.png', 'btscl.jpg', 'imcbots1.mp4' ];
         
         const botData = {
-            'db - fe': { images: ['dbfec.jpg', 'images/db3.PNG', 'trades/db4.PNG', 'trades/db5.PNG', 'trades/db6.png', 'trades/db7.png', 'dbcl.jpg',   ...commonImages], color: '#FFA800' }, // Tangerine Orange
-            'dba': { images: ['dbaccc.jpg', 'trades/dba1.PNG', 'trades/dba3.PNG', 'trades/dba4.png', 'trades/dba5.PNG', 'trades/dba6.PNG', 'trades/dba7.png', 'trades/dba8.PNG', 'trades/dba9.jpg', 'trades/dba10.PNG', 'trades/dba11.jpg', 'trades/dba12.png', 'dbacl.jpg', ...commonImages], color: '#00d062' }, // Lime green
-            'sa': { images: ['sacc.jpg', 'trades/sa4.PNG', 'trades/sa5.PNG', 'trades/sa7.png', 'trades/sa2.PNG', 'saccl.jpg',  ...commonImages], color: '#39FF14' }, // Shamrock Green
-            'master': { images: ['mastercc.jpg', 'trades/master1.PNG', 'trades/master5.PNG', 'trades/master8.png', 'trades/master9.png', 'trades/master10.png', 'trades/master2.png', 'trades/master4.jpg', 'trades/master5.jpg', 'trades/master6.jpg', 'trades/master15.png', 'mastercl.jpg', ...commonImages], color: '#00FFFF' }, // Cyan Blue
-            'prgtry': { images: ['pgtrycc.jpg', 'trades/prgtry2.PNG', 'trades/prgtry3.PNG', 'trades/prgtry4.PNG', 'trades/prgtry5.PNG', 'trades/prgtry6.png', 'trades/prgtry7.png', 'trades/prgtry8.png', 'trades/prgtry9.png', 'trades/prgtry10.png', 'pgtryccll.jpg', ...commonImages], color: '#BBC2CC' }, // Metalic Silver
-            'king': { images: ['kngcc.jpg', 'trades/king2.PNG', 'trades/king8.PNG', 'trades/king9.png', 'trades/king4.jpg', 'trades/king5.PNG', 'kngcl.jpg', ...commonImages], color: '#FF2400' }, // Scarlet Red
-            'asura': { images: ['asuracc.jpg', 'trades/asura1.PNG', 'trades/asura6.jpg', 'trades/asura4.png', 'trades/asura5.png', 'asuracll.jpg', ...commonImages], color: '#800080' } // Purple
-            
+            'db - fe': { video:['dbv.mp4' ], images: ['images/db3.PNG', 'trades/db4.PNG', 'trades/db5.PNG', 'trades/db6.png', 'trades/db7.png', 'dbcl.jpg', ...commonImages], color: '#FFA800' }, 
+            'dba': { video:[ 'dbav.mp4'], images: ['trades/dba1.PNG', 'trades/dba3.PNG', 'trades/dba4.png', 'trades/dba5.PNG', 'trades/dba6.PNG', 'trades/dba7.png', 'trades/dba8.PNG', 'trades/dba9.jpg', 'trades/dba10.PNG', 'trades/dba11.jpg', 'trades/dba12.png', 'dbacl.jpg', ...commonImages], color: '#00d062' }, 
+            'sa': { video:['sav.mp4' ], images: ['trades/sa4.PNG', 'trades/sa5.PNG', 'trades/sa7.png', 'trades/sa2.PNG', 'saccl.jpg', ...commonImages], color: '#39FF14' }, 
+            'master': { video:['mstrv.mp4' ], images: ['trades/master1.PNG', 'trades/master5.PNG', 'trades/master8.png', 'trades/master9.png', 'trades/master10.png', 'trades/master2.png', 'trades/master4.jpg', 'trades/master5.jpg', 'trades/master6.jpg', 'trades/master15.png', 'mastercl.jpg', ...commonImages], color: '#00FFFF' }, 
+            'prgtry': { video:['pgtryv.mp4' ], images: ['trades/prgtry2.PNG', 'trades/prgtry3.PNG', 'trades/prgtry4.PNG', 'trades/prgtry5.PNG', 'trades/prgtry6.png', 'trades/prgtry7.png', 'trades/prgtry8.png', 'trades/prgtry9.png', 'trades/prgtry10.png', 'pgtryccll.jpg', ...commonImages], color: '#BBC2CC' }, 
+            'king': { video:['kngv.mp4' ], images: ['trades/king2.PNG', 'trades/king8.PNG', 'trades/king9.png', 'trades/king4.jpg', 'trades/king5.PNG', 'kngcl.jpg', ...commonImages], color: '#FF2400' }, 
+            'asura': { video:['asrv.mp4' ], images: ['trades/asura1.PNG', 'trades/asura6.jpg', 'trades/asura4.png', 'trades/asura5.png', 'asuracll.jpg', ...commonImages], color: '#800080' } 
         };
 
         const params = new URLSearchParams(window.location.search);
@@ -102,20 +94,21 @@
             title.style.color = data.color;
             container.style.borderColor = data.color;
             
-            // Generate Media elements dynamically
-            data.images.forEach((src, index) => {
+            // FIX: Combine videos and images arrays so everything gets processed!
+            const allMedia = [...(data.video || []), ...data.images];
+            
+            // Loop through the combined array instead of just data.images
+            allMedia.forEach((src, index) => {
                 let mediaElement;
                 
-                // Check if the file is a video based on its extension
                 if (src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm')) {
                     mediaElement = document.createElement('video');
                     mediaElement.src = src;
                     mediaElement.muted = true;
                     mediaElement.playsInline = true;
-                    mediaElement.autoplay = true; // Plays automatically like a GIF
-                    mediaElement.loop = true;     // Loops continuously
+                    mediaElement.autoplay = true; 
+                    mediaElement.loop = true;     
                 } else {
-                    // It's an image
                     mediaElement = document.createElement('img');
                     mediaElement.src = src;
                 }
