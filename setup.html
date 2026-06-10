@@ -94,11 +94,9 @@
             title.style.color = data.color;
             container.style.borderColor = data.color;
             
-            // FIX: Combine videos and images arrays so everything gets processed!
             const allMedia = [...(data.video || []), ...data.images];
             
-            // Loop through the combined array instead of just data.images
-            allMedia.forEach((src, index) => {
+            allMedia.forEach((src) => {
                 let mediaElement;
                 
                 if (src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm')) {
@@ -106,25 +104,57 @@
                     mediaElement.src = src;
                     mediaElement.muted = true;
                     mediaElement.playsInline = true;
-                    mediaElement.autoplay = true; 
-                    mediaElement.loop = true;     
+                    // FIX: Removed mediaElement.loop = true so the video can actually finish playing!
                 } else {
                     mediaElement = document.createElement('img');
                     mediaElement.src = src;
                 }
                 
-                mediaElement.className = 'media-item' + (index === 0 ? ' active' : '');
+                mediaElement.className = 'media-item'; // Class handled dynamically now
                 container.appendChild(mediaElement);
             });
 
-            // Cycling Logic
+            // NEW SMART CYCLING LOGIC
             let current = 0;
             const items = document.querySelectorAll('.media-item');
-            setInterval(() => {
-                items[current].classList.remove('active');
+            let slideTimeout;
+
+            function startSlide() {
+                const currentItem = items[current];
+                currentItem.classList.add('active');
+
+                if (currentItem.tagName === 'VIDEO') {
+                    currentItem.currentTime = 0; // Rewind to start
+                    currentItem.play().catch(e => console.log("Playback interrupted:", e));
+                    
+                    // Wait until the video completely finishes playing
+                    currentItem.addEventListener('ended', changeSlide, { once: true });
+                } else {
+                    // It's an image, stay on it for 5 seconds
+                    slideTimeout = setTimeout(changeSlide, 5000);
+                }
+            }
+
+            function changeSlide() {
+                const currentItem = items[current];
+                currentItem.classList.remove('active');
+                
+                if (currentItem.tagName === 'VIDEO') {
+                    currentItem.pause(); // Stop it safely
+                }
+
+                // Move to next item index
                 current = (current + 1) % items.length;
-                items[current].classList.add('active');
-            }, 5000); 
+                
+                // Fire up the next asset
+                startSlide();
+            }
+
+            // Start the very first slide execution
+            if (items.length > 0) {
+                startSlide();
+            }
+            
         } else {
             title.innerText = "Bot not found";
         }
