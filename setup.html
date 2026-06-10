@@ -104,13 +104,13 @@
                     mediaElement.src = src;
                     mediaElement.muted = true;
                     mediaElement.playsInline = true;
-                    // FIX: Removed mediaElement.loop = true so the video can actually finish playing!
+                    
                 } else {
                     mediaElement = document.createElement('img');
                     mediaElement.src = src;
                 }
                 
-                mediaElement.className = 'media-item'; // Class handled dynamically now
+                mediaElement.className = 'media-item'; 
                 container.appendChild(mediaElement);
             });
 
