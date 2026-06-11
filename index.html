@@ -82,33 +82,28 @@
             height: 100%;
             object-fit: contain;
         }
-       /* ---- BOTS' BATTLE ------*/
-        #battle {
-            background: #011508;
-            margin-top: 20px;
-            border-radius: 15px;
-            border: 1px solid #058743;
-            width: 100%;
-            height: 300px;
-            display: flex;             
-            justify-content: center;   
-            align-items: center;
-            gap: 10px;                 
-            padding: 10px;
-            box-sizing: border-box;
-            overflow: hidden;
-        } 
-        
-        .btle {
-            width: 48%;            
-            height: 100%;
-            object-fit: cover;         
-            border-radius: 10px;  
-            box-shadow: 0 0 8px rgba(5, 135, 67, 0.5); 
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .btle.active { opacity: 1; }
+       
+/* --- BOTS' BATTLE CENTERING --- */
+#battle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #011508;
+    margin: 20px auto; 
+    border-radius: 15px;
+    border: 1px solid #058743;
+    width: 100%;
+    max-width: 600px; 
+    height: 300px;
+    overflow: hidden;
+} 
+
+.btle {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    opacity: 1;
+}
 
         /* --- OWNER SLIDESHOW BLOCK --- */
         #ownerSlideshow {
@@ -539,11 +534,11 @@
                 <strong style="color: #058743; text-decoration: underline;">BOTS' BATTLE:</strong>
             </div>            
             <div id="battle">
-                <video class="btle active" autoplay loop muted playsinline> 
+                <video class="btle" autoplay loop muted playsinline> 
                     <source src="botswr.mp4" type="video/mp4"> 
                 </video>
                 <video class="btle" autoplay loop muted playsinline> 
-                    <source src="kngm(1).mp4" type="video/mp4"> 
+                    <source src="kngm.mp4" type="video/mp4"> 
                 </video>
             </div>            
             <hr class="sword-line">
