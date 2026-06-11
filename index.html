@@ -81,7 +81,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-                        
         }
 
         /* --- OWNER SLIDESHOW BLOCK --- */
@@ -156,7 +155,6 @@
             display: inline-block;
             cursor: pointer;
         }
-
 
         @keyframes bounceSafest {
             0% { transform: translateY(0); }
@@ -505,7 +503,7 @@
             <br>
              <div style="text-align: center;">
                  <strong style="color: #058743; text-decoration: underline;">USAGE CRITERIA:</strong>
-             </div>           
+             </div>            
             <div id="criteria">
                 <img src = "images/btscrtr.png" class= "crtr">
             </div>
@@ -671,7 +669,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                 <circle cx="12" cy="12" r="3"></circle>
-            </svg>: Total Website Views/Visits - <span id="viewCount" class="live-counter-num">0</span>
+            </svg>: Total Website Views/Visits - <span id="viewCount" class="live-counter-num">...</span>
         </div>
 
         <div class="scrolling-wrapper">
@@ -730,25 +728,19 @@
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    /* --- CONTINUOUS WEB VIEW ENGINE --- */
+    /* --- REAL GLOBAL WEB VIEW COUNTER --- */
     (function initializeCounter() {
-        // Generates a base setup count for your enterprise presence if not built yet
-        let totalViews = parseInt(localStorage.getItem('imc_total_views')) || 184390;
-        
-        // Increase views by 1 on fresh reload/entry point
-        totalViews += 1;
-        localStorage.setItem('imc_total_views', totalViews);
-        
         const counterElement = document.getElementById('viewCount');
-        counterElement.textContent = totalViews.toLocaleString();
 
-        // Background interval updates live traffic views every 2 to 5 seconds
-        setInterval(() => {
-            const extraVisits = Math.floor(Math.random() * 3) + 1; // simulation updates views
-            totalViews += extraVisits;
-            localStorage.setItem('imc_total_views', totalViews);
-            counterElement.textContent = totalViews.toLocaleString();
-        }, Math.floor(Math.random() * 3000) + 2000);
+        fetch('https://api.counterapi.dev/v1/indicemocashbots/visits/up')
+            .then(response => response.json())
+            .then(data => {
+                counterElement.textContent = data.count.toLocaleString();
+            })
+            .catch(error => {
+                console.error("Counter API unavailable:", error);
+                counterElement.textContent = "Offline";
+            });
     })();
 
     function toggleBio() {
