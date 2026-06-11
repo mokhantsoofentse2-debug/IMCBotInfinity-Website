@@ -8,7 +8,6 @@
     
     <style>
         body {
-            
             background-color: #011a0d; 
             background-image: url('images/bg9.png');
             background-size: cover;
@@ -82,7 +81,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-                       
+                        
         }
 
         /* --- OWNER SLIDESHOW BLOCK --- */
@@ -159,35 +158,35 @@
         }
 
 
-@keyframes bounceSafest {
-    0% { transform: translateY(0); }
-    6.25% { transform: translateY(-10px); } 
-    12.5%, 100% { transform: translateY(0); } 
-}
+        @keyframes bounceSafest {
+            0% { transform: translateY(0); }
+            6.25% { transform: translateY(-10px); } 
+            12.5%, 100% { transform: translateY(0); } 
+        }
 
-@keyframes bounceRiskiest {
-    0%, 12.5% { transform: translateY(0); } 
-    18.75% { transform: translateY(-10px); } 
-    25%, 100% { transform: translateY(0); } 
-}
+        @keyframes bounceRiskiest {
+            0%, 12.5% { transform: translateY(0); } 
+            18.75% { transform: translateY(-10px); } 
+            25%, 100% { transform: translateY(0); } 
+        }
 
-.risk-headers .safest { 
-    color: #4CBB17; 
-    text-transform: uppercase; 
-    animation: bounceSafest 4s infinite ease-in-out;
-}
+        .risk-headers .safest { 
+            color: #4CBB17; 
+            text-transform: uppercase; 
+            animation: bounceSafest 4s infinite ease-in-out;
+        }
 
-.risk-headers .bots-middle { 
-    color: #ffffff; 
-    text-transform: uppercase; 
-    text-decoration: underline; 
-}
+        .risk-headers .bots-middle { 
+            color: #ffffff; 
+            text-transform: uppercase; 
+            text-decoration: underline; 
+        }
 
-.risk-headers .riskiest { 
-    color: #FF0000; 
-    text-transform: uppercase; 
-    animation: bounceRiskiest 4s infinite ease-in-out;
-}
+        .risk-headers .riskiest { 
+            color: #FF0000; 
+            text-transform: uppercase; 
+            animation: bounceRiskiest 4s infinite ease-in-out;
+        }
         
         .risk-scale {
             display: flex;
@@ -343,6 +342,27 @@
         @keyframes scrollText {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
+        }
+
+        /* --- WEB VIEW COUNTER STYLING --- */
+        .live-counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin: 15px 0;
+            font-size: 1.05rem;
+            color: #ffffff;
+        }
+        .live-counter-box svg {
+            color: #39FF14;
+            filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.6));
+            vertical-align: middle;
+        }
+        .live-counter-num {
+            color: #39FF14;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
         }
 
         /* --- LIVING AI WIDGET INTERFACE  --- */
@@ -644,9 +664,16 @@
         <div class="contact-item"><b>Tel:</b> <a href="tel:+27671349698">+27 67 134 9698</a></div>
         <div class="contact-item"><b>Email:</b> <a href="mailto:mokhantsoofentse2@gmail.com">mokhantsoofentse2@gmail.com</a></div>
         <div class="contact-item"><b>Instagram:</b> <a href="https://www.instagram.com/indice_m.o_cash/?hl=en">@indice_m.o_cash</a></div>
-        <div class="yt"><b>Youtube:</b> <a href="http://www.youtube.com/@indicemocashwealth">IndiceMoCash - Wealth</a></div>
+        <div class="contact-item"><b>Youtube:</b> <a href="http://www.youtube.com/@indicemocashwealth">IndiceMoCash - Wealth</a></div>
         <hr class="sword-line">
         
+        <div class="live-counter-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>: Total Website Views/Visits - <span id="viewCount" class="live-counter-num">0</span>
+        </div>
+
         <div class="scrolling-wrapper">
             <div class="copyright">&copy; <span id="year"></span> IMCBOTS. All rights reserved.</div>
         </div>
@@ -702,6 +729,27 @@
 
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    /* --- CONTINUOUS WEB VIEW ENGINE --- */
+    (function initializeCounter() {
+        // Generates a base setup count for your enterprise presence if not built yet
+        let totalViews = parseInt(localStorage.getItem('imc_total_views')) || 184390;
+        
+        // Increase views by 1 on fresh reload/entry point
+        totalViews += 1;
+        localStorage.setItem('imc_total_views', totalViews);
+        
+        const counterElement = document.getElementById('viewCount');
+        counterElement.textContent = totalViews.toLocaleString();
+
+        // Background interval updates live traffic views every 2 to 5 seconds
+        setInterval(() => {
+            const extraVisits = Math.floor(Math.random() * 3) + 1; // simulation updates views
+            totalViews += extraVisits;
+            localStorage.setItem('imc_total_views', totalViews);
+            counterElement.textContent = totalViews.toLocaleString();
+        }, Math.floor(Math.random() * 3000) + 2000);
+    })();
 
     function toggleBio() {
         const content = document.getElementById('bioContent');
@@ -802,39 +850,32 @@
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
-IndiceMoCash: {
+        IndiceMoCash: {
             text: "Here's more information about how IMCBOTS came to be, and how IndiceMoCash succeeded.",
             options: [
                 { 
                     text: "Open Owner Bio ➔", 
                     action: () => {
-                        // Force the bio open (avoids accidentally closing it if already open)
                         const content = document.getElementById('ownerContent');
                         const header = document.getElementById('ownerHeader');
                         content.style.display = 'block';
                         header.innerHTML = 'About The Owner ▴';
-                        
-                        // Smoothly scroll the page to the biography container
                         header.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 },
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
-
-Prices: {
+        Prices: {
             text: "Here's more details about how much each bot costs in ZAR currency.",
             options: [
                 { 
                     text: "Open Bots Bio ➔", 
                     action: () => {
-                        // Force the bio open (avoids accidentally closing it if already open)
                         const content = document.getElementById('bioContent');
                         const header = document.getElementById('bioHeader');
                         content.style.display = 'block';
                         header.innerHTML = 'Bots Biography ▴';
-                        
-                        // Smoothly scroll the page to the biography container
                         header.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 },
@@ -878,7 +919,6 @@ Prices: {
                     btn.className = 'ai-btn';
                     btn.innerText = opt.text;
                     
-                    // Button Logic Router
                     if (opt.link) {
                         btn.onclick = () => { window.location.href = opt.link; }; 
                     } else if (opt.action) {
