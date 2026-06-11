@@ -105,7 +105,10 @@
             object-fit: cover;         
             border-radius: 10px;  
             box-shadow: 0 0 8px rgba(5, 135, 67, 0.5); 
-        }    
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .btle.active { opacity: 1; }
 
         /* --- OWNER SLIDESHOW BLOCK --- */
         #ownerSlideshow {
@@ -536,11 +539,11 @@
                 <strong style="color: #058743; text-decoration: underline;">BOTS' BATTLE:</strong>
             </div>            
             <div id="battle">
-                <video class="btle" autoplay loop muted playsinline> 
+                <video class="btle active" autoplay loop muted playsinline> 
                     <source src="botswr.mp4" type="video/mp4"> 
                 </video>
                 <video class="btle" autoplay loop muted playsinline> 
-                    <source src="kngm (1).mp4" type="video/mp4"> 
+                    <source src="kngm(1).mp4" type="video/mp4"> 
                 </video>
             </div>            
             <hr class="sword-line">
