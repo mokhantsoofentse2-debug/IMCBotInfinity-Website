@@ -82,28 +82,34 @@
             height: 100%;
             object-fit: contain;
         }
-       
-/* --- BOTS' BATTLE --- */
-#battle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #011508;
-    margin: 20px auto; 
-    border-radius: 15px;
-    border: 1px solid #058743;
-    width: 100%;
-    max-width: 600px; 
-    height: 300px;
-    overflow: hidden;
-} 
+        
+        /* --- BOTS' BATTLE --- */
+        #battle {
+            position: relative; 
+            background: #011508;
+            margin: 20px auto; 
+            border-radius: 15px;
+            border: 1px solid #058743;
+            width: 100%;
+            max-width: 600px; 
+            height: 300px;
+            overflow: hidden;
+        } 
 
-.btle {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; 
-}
-.btle.active{ opacity: 1;}
+        .btle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .btle.active { 
+            opacity: 1; 
+            z-index: 1;
+        }
         
         /* --- OWNER SLIDESHOW BLOCK --- */
         #ownerSlideshow {
@@ -364,25 +370,30 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* --- WEB VIEW COUNTER STYLING --- */
+        /* --- WEB VIEW COUNTER STYLING UPDATED --- */
         .live-counter-box {
             display: flex;
+            flex-wrap: wrap; /* Allows wrap if number gets too big */
             align-items: center;
             justify-content: center;
             gap: 6px;
-            margin: 15px 0;
+            margin: 15px auto;
+            padding: 0 10px;
             font-size: 1.05rem;
             color: #ffffff;
+            text-align: center;
         }
         .live-counter-box svg {
             color: #39FF14;
             filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.6));
             vertical-align: middle;
+            flex-shrink: 0; /* Prevents eye from squishing on small screens */
         }
         .live-counter-num {
             color: #39FF14;
             font-weight: bold;
             text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+            word-break: break-all; /* Keeps huge numbers contained */
         }
 
         /* --- LIVING AI WIDGET INTERFACE  --- */
@@ -527,20 +538,20 @@
                  <strong style="color: #058743; text-decoration: underline;">USAGE CRITERIA:</strong>
              </div>            
             <div id="criteria">
-                <img src = "images/btscrtr.png" class= "crtr">
+                <img src="images/btscrtr.png" class="crtr">
             </div>
             <hr class="sword-line">
             <div style="text-align: center;">
                 <strong style="color: #058743; text-decoration: underline;">BOTS' BATTLE:</strong>
             </div>            
             <div id="battle">
-                <video class="btle active" autoplay loop muted playsinline> 
+                <video class="btle active" autoplay muted playsinline> 
                     <source src="botswr.mp4" type="video/mp4"> 
                 </video>
-                <video class="btle" autoplay loop muted playsinline>
+                <video class="btle" muted playsinline>
                     <source src="kngms.mp4" type="video/mp4">
                 </video>
-            </div>            
+            </div>
             <hr class="sword-line">
             <br>
              <strong style="color: #058743; text-decoration: underline;">BOTS:</strong>
@@ -703,7 +714,9 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                 <circle cx="12" cy="12" r="3"></circle>
-            </svg>: Total Website Views/Visits - <span id="viewCount" class="live-counter-num">...</span>
+            </svg>
+            <span>: Total Website's Views/Visits - </span>
+            <span id="viewCount" class="live-counter-num">...</span>
         </div>
         <hr class="sword-line">
         <div class="scrolling-wrapper">
@@ -793,6 +806,7 @@
         header.innerHTML = isHidden ? 'About The Owner ▴' : 'About The Owner ▾';
     }
 
+    /* --- OWNER SLIDESHOW LOGIC --- */
     let currentIndex = 0;
     const mediaElements = document.querySelectorAll('.owner-media');
 
@@ -822,6 +836,36 @@
         } else {
             setTimeout(nextSlide, 5000);
         }
+    }
+
+    /* --- BOTS BATTLE VIDEO LOGIC --- */
+    const battleVideos = document.querySelectorAll('#battle .btle');
+    let currentBattleIdx = 0;
+
+    function playNextBattleVideo() {
+        if (battleVideos.length === 0) return;
+
+        // Hide and pause current video
+        battleVideos[currentBattleIdx].classList.remove('active');
+        battleVideos[currentBattleIdx].pause();
+
+        // Increment to next video index
+        currentBattleIdx = (currentBattleIdx + 1) % battleVideos.length;
+
+        // Show and play next video
+        battleVideos[currentBattleIdx].classList.add('active');
+        battleVideos[currentBattleIdx].currentTime = 0;
+        battleVideos[currentBattleIdx].play().catch(e => console.log("Play interrupted", e));
+    }
+
+    if (battleVideos.length > 0) {
+        // Set up event listeners for when each battle video finishes
+        battleVideos.forEach(vid => {
+            vid.addEventListener('ended', playNextBattleVideo);
+        });
+        
+        // Start the first one automatically
+        battleVideos[0].play().catch(e => console.log("Autoplay blocked", e));
     }
 
     /* --- LIVING AI CORE LOGIC ENGINE --- */
