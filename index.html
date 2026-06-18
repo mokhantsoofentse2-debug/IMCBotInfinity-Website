@@ -291,8 +291,8 @@
         .node-pgtry .scale-label { color: #C0C0C0; }
         .node-pgtry .scale-circle { background-color: #C0C0C0; color: #C0C0C0; }
         
-        .payment-container { text-align: center; margin: 40px 0; }
-        .bank-btn {
+        .final-container .payment-container { text-align: center; margin: 40px 0; }
+        .final-btn .bank-btn {
             background-color: #0F5132;
             color: white;
             padding: 15px 30px;
@@ -303,7 +303,7 @@
             transition: background-color 0.3s, color 0.3s;
             display: inline-block;
         }
-        .bank-btn:hover { background-color: #058743; color: black; }
+        .final-btn .bank-btn:hover { background-color: #058743; color: black; }
 
         footer {
             margin-top: 50px;
@@ -603,13 +603,7 @@
             <a href="setup.html?bot=master">
                 <img src="Masterpp.png" width="150" height="200" alt="Master Bot">
             </a>
-        </li>
-        <li>
-            <div class='flow'><b>Flow</b></div>
-            <a href="setup.html?bot=flow">
-                <img src="flp.png" width="150" height="200" alt="Master Bot">
-            </a>
-        </li>        
+        </li>      
         <li>
             <div class='prgtry'><b>Prgtry (Purgatory)</b></div>
             <a href="setup.html?bot=prgtry">
@@ -715,6 +709,10 @@
             </div>
         </div>
     </div>
+    <hr class="sword-line">
+    <div class="final-container">
+        <a href="final.html" class="final-btn">Final IMCBOT</a>
+    </div>    
     <hr class="sword-line">
 
     <div class="payment-container">
