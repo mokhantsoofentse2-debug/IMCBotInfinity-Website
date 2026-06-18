@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final IMCBOT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #011a0d; 
+            background-image: url('images/bg9.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: 'Lexend Deca', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            /* Reflective Metallic Gradient Effect */
+            background: linear-gradient(
+                135deg, 
+                #0F5132 0%, 
+                #058743 25%, 
+                #ffffff 50%, 
+                #058743 75%, 
+                #0F5132 100%
+            );
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            
+            /* Underline tracking color */
+            text-decoration: underline;
+            text-decoration-color: #058743; 
+            
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+		li {
+            background: rgba(0, 20, 10, 0.75);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid #058743;
+            text-align: center;
+            width: 200px;
+            transition: transform 0.3s ease;
+        }
+	    li:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(5, 135, 67, 0.3); }
+        li b { display: block; margin-bottom: 15px; font-size: 1.2rem; text-decoration: underline; }
+
+        img { border-radius: 8px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+		.back-btn {
+            background-color: #0F5132;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+        }
+        .back-btn:hover { background-color: #058743; color: black; }
+		li:hover .flow { color: #088F8F; }
+		.flw { transition: color 0.3s ease; }
+		.sword-line {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, transparent,#058743, transparent);
+            box-shadow: 0 0 8px #058743;
+            margin: 25px auto 15px auto;
+            border-radius: 50%;
+            width: 90%;
+        }
+		ol {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+		.back-container { text-align: center; margin: 40px 0; }
+
+    </style>
+	</head>
+<body>
+    <hr class="sword-line">
+    <h1>Final IMCBOT</h1>
+    <hr class="sword-line">
+	<ol>
+	    <li>
+            <div class='flow'><b>Flow</b></div>
+            <a href="setup.html?bot=flow">
+                <img src="flp.png" width="150" height="200" alt="Master Bot">
+            </a>
+        </li> 
+	</ol>
+	<hr class="sword-line">
+	<div class="back-container">
+        <a href="index.html" class="back-btn">Back</a>
+    </div>
+    <hr class="sword-line">
+</body>
+</html>
