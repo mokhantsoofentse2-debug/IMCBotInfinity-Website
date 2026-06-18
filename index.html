@@ -265,6 +265,7 @@
 
         /* Staggered Delay for left-to-right fluid motion */
         .node-sa .scale-circle { animation-delay: 0.0s; }
+        .node-flw .scale-circle { animation-delay: 0.0s; }
         .node-db .scale-circle { animation-delay: 0.5s; }
         .node-dba .scale-circle { animation-delay: 1.0s; }
         .node-asr .scale-circle { animation-delay: 1.5s; }
@@ -275,6 +276,8 @@
         /* Unique Bot Colors */
         .node-sa .scale-label { color: #39FF14; }
         .node-sa .scale-circle { background-color: #39FF14; color: #39FF14; }
+        .node-flw .scale-label { color: #088F8F; }
+        .node-flw .scale-circle { background-color: #088F8F; color: #088F8F; }         
         .node-db .scale-label { color: #FFA800; }
         .node-db .scale-circle { background-color: #FFA800; color: #FFA800; }  
         .node-dba .scale-label { color: #00d062; }
@@ -284,7 +287,7 @@
         .node-mstr .scale-label { color: #00FFFF; }
         .node-mstr .scale-circle { background-color: #00FFFF; color: #00FFFF; }
         .node-kng .scale-label { color: #FF0000; }
-        .node-kng .scale-circle { background-color: #FF0000; color: #FF0000; }        
+        .node-kng .scale-circle { background-color: #FF0000; color: #FF0000; }       
         .node-pgtry .scale-label { color: #C0C0C0; }
         .node-pgtry .scale-circle { background-color: #C0C0C0; color: #C0C0C0; }
         
@@ -338,8 +341,9 @@
         li:hover .king { color: #FF2400; }
         li:hover .asura { color: #800080; }
         li:hover .prgtry { color: #BBC2CC; }
+        li:hover .flow { color: #088F8F; }
         
-        .db, .sa, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
+        .db, .sa, .dba, .master, .flw, .prgtry, .king, .asura { transition: color 0.3s ease; }
 
         @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
@@ -566,6 +570,7 @@
                 <li><strong style="color:#4CBB17">IMCBOT SA (Small Accounts) - </strong>Is built to grow small accounts by nature. It can grow any small amount of money, provided the market used has low margin requirements. (Cost - R18,000)</li>
                 <li><strong style="color:#00d062">IMCBOT DBA (Dragon Blaze Apex) - </strong>Is built to execute trades according to strong resistance or support levels available in the market, while taking more possible entries a moving trend offers to profit maximize. This bot maximizes while using a comfortable risk on an account balance. (Cost - R22,000)</li>
                 <li><strong style="color:#00FFFF">IMCBOT Master - </strong>Is built to maximize profits by following trend structure. It profit locks and avoids losses as soon as possible, while heading for your profits target. (Cost - R28,000)</li>
+                <li><strong style="color:#088F8F">IMCBOT Flow - </strong>Allows follows break of structure to execute its entries, while avoiding losses, profit maximizing, and using a low risk percent on any account size. (Cost - R35,000)</li>
                 <li><strong style="color:#BBC2CC">IMCBOT Prgtry (Purgatory) - </strong>Takes every possible entry a moving trend offers to grow accounts as quickly as possible. It highly requires tight spreads for great success, which makes it a risky IMCBOT, but also a great profits provider. (Cost - R40,000)</li>
                 <li><strong style="color:#FF0000">IMCBOT King - </strong>Is built to secure profits provided by a moving trend & at the correct price action. It has no limited profits target. (Cost - R50,000)</li>
                 <li><strong style="color:#800080">IMCBOT Asura - </strong>Is built for maximum profit range while profit-locking. It keeps you longer in profit maximizing trends, while also having no limited profits target. It's the only Elite IMCBOT that uses the lowest trade-risk-percent, this assists the bot to be any account size flexible. (Cost - R60,000)</li>
@@ -599,6 +604,12 @@
                 <img src="Masterpp.png" width="150" height="200" alt="Master Bot">
             </a>
         </li>
+        <li>
+            <div class='flow'><b>Flow</b></div>
+            <a href="setup.html?bot=flow">
+                <img src="flp.png" width="150" height="200" alt="Master Bot">
+            </a>
+        </li>        
         <li>
             <div class='prgtry'><b>Prgtry (Purgatory)</b></div>
             <a href="setup.html?bot=prgtry">
@@ -674,6 +685,10 @@
                 <span class="scale-label">SA</span>
                 <div class="scale-circle"></div>
             </div>
+            <div class="scale-node node-flw">
+                <span class="scale-label">Flw</span>
+                <div class="scale-circle"></div>
+            </div>           
             <div class="scale-node node-db">
                 <span class="scale-label">DB</span>
                 <div class="scale-circle"></div>
@@ -904,11 +919,12 @@
             ]
         },
         trend_maximizers: {
-            text: "Loading architectural trend hunters. IMCBOT Master trails and locks structural targets early. King completely removes profit ceilings. Asura relies on ultra-low risk percentages to optimize long running operations.",
+            text: "Loading architectural trend hunters. IMCBOT Master trails and locks structural targets early. King completely removes profit ceilings. Asura relies on ultra-low risk percentages to optimize long running operations. And Flow highly prioritizes structure breaks to execute its entries along a trend.",
             options: [
                 { text: "Launch Master Setup ➔", link: "setup.html?bot=master" },
                 { text: "Launch King Setup ➔", link: "setup.html?bot=king" },
                 { text: "Launch Asura Setup ➔", link: "setup.html?bot=asura" },
+                { text: "Launch Flow Setup ➔", link: "setup.html?bot=flow" },
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
