@@ -1082,7 +1082,7 @@
                 { text: "View Banking & Payment Protocols", next: "bank_info" },
                 { text: "About The IMCBOTS Creator", next: "IndiceMoCash" },
                 { text: "IMCBOTS Prices", next: "Prices" },
-                { text: "⚔️ Tick-Tac-Toe: Market Combat", action: () => launchTicTacToe() }
+                { text: "⚔️ Tick-Tac-Toe: Market Direction Combat", action: () => launchTicTacToe() }
             ]
         },
         small_acc: {
@@ -1215,8 +1215,10 @@
     let computerIcon = '';  // '🐻' or '🐂'
     let tttBoard = ['', '', '', '', '', '', '', '', ''];
     let isGameRunning = false;
+    let currentRound = 1;
 
     function launchTicTacToe() {
+        currentRound = 1;
         const chatBody = document.querySelector('.ai-chat-body');
         const aiOptions = document.getElementById('aiOptions');
         const aiResponse = document.getElementById('aiResponse');
@@ -1262,18 +1264,24 @@
         tttBoard = ['', '', '', '', '', '', '', '', ''];
         isGameRunning = true;
         renderTTTGrid();
+    }
 
-        if (userSide === 'Bears') {
-            setTimeout(executeComputerMove, 450);
-        }
+    function reEngageCombat() {
+        currentRound++;
+        const overlays = document.querySelectorAll('.ttt-announcement-overlay');
+        overlays.forEach(el => el.remove());
+        tttBoard = ['', '', '', '', '', '', '', '', ''];
+        isGameRunning = true;
+        renderTTTGrid();
     }
 
     function renderTTTGrid() {
         const interactiveArea = document.getElementById('tttInteractiveArea');
         interactiveArea.innerHTML = `
             <div class="ttt-grid-wrapper">
-                <div style="font-size:0.8rem; color:#888; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">
-                    Your Node: <span style="color:${userSide==='Bulls'?'#39FF14':'#ff3333'}">${userIcon} ${userSide}</span>
+                <div style="font-size:0.8rem; color:#888; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px; display:flex; justify-content:space-between; width:100%;">
+                    <span>Round: <span style="color:#ffffff;">${currentRound}</span></span>
+                    <span>Your Node: <span style="color:${userSide==='Bulls'?'#39FF14':'#ff3333'}">${userIcon} ${userSide}</span></span>
                 </div>
                 <div class="ttt-grid">
                     ${tttBoard.map((cell, idx) => {
@@ -1311,32 +1319,36 @@
 
         let selectedMove = -1;
 
-        // 1. Can AI execute a tactical alignment win right now?
-        for(let i=0; i<9; i++) {
-            if(tttBoard[i] === '') {
-                tttBoard[i] = computerIcon;
-                if(checkWinStatus(computerIcon)) { selectedMove = i; }
-                tttBoard[i] = '';
-            }
-        }
+        if (currentRound % 2 === 0) {
+            // EVEN ROUND: Computer plays SMART to win
 
-        // 2. Clear block optimization logic parameter check
-        if(selectedMove === -1) {
+            // 1. Can AI execute a tactical alignment win right now?
             for(let i=0; i<9; i++) {
                 if(tttBoard[i] === '') {
-                    tttBoard[i] = userIcon;
-                    if(checkWinStatus(userIcon)) { selectedMove = i; }
+                    tttBoard[i] = computerIcon;
+                    if(checkWinStatus(computerIcon)) { selectedMove = i; }
                     tttBoard[i] = '';
                 }
             }
+
+            // 2. Clear block optimization logic parameter check
+            if(selectedMove === -1) {
+                for(let i=0; i<9; i++) {
+                    if(tttBoard[i] === '') {
+                        tttBoard[i] = userIcon;
+                        if(checkWinStatus(userIcon)) { selectedMove = i; }
+                        tttBoard[i] = '';
+                    }
+                }
+            }
+
+            // 3. Center grid take priority 
+            if(selectedMove === -1 && tttBoard[4] === '') {
+                selectedMove = 4;
+            }
         }
 
-        // 3. Center grid take priority 
-        if(selectedMove === -1 && tttBoard[4] === '') {
-            selectedMove = 4;
-        }
-
-        // 4. Secure basic random array allocation map
+        // ODD ROUND (or fallback for even round): Computer plays DUMB (Random execution)
         if(selectedMove === -1) {
             let availableIndexes = [];
             tttBoard.forEach((cell, idx) => { if(cell === '') availableIndexes.push(idx); });
@@ -1378,21 +1390,21 @@
             overlayHTML = `
                 <div class="ttt-announcement-overlay">
                     <div class="announcement-msg msg-bulls">Bulls are in control</div>
-                    <button class="ttt-restart-btn" onclick="startTTTMatch('${userSide}')">Re-engage Combat</button>
+                    <button class="ttt-restart-btn" onclick="reEngageCombat()">Re-engage Combat</button>
                 </div>
             `;
         } else if(winner === 'Bears') {
             overlayHTML = `
                 <div class="ttt-announcement-overlay">
                     <div class="announcement-msg msg-bears">Bears are in control</div>
-                    <button class="ttt-restart-btn" onclick="startTTTMatch('${userSide}')">Re-engage Combat</button>
+                    <button class="ttt-restart-btn" onclick="reEngageCombat()">Re-engage Combat</button>
                 </div>
             `;
         } else {
             overlayHTML = `
                 <div class="ttt-announcement-overlay">
                     <div class="announcement-msg msg-draw">Market Consolidation<br>(Draw)</div>
-                    <button class="ttt-restart-btn" onclick="startTTTMatch('${userSide}')">Re-engage Combat</button>
+                    <button class="ttt-restart-btn" onclick="reEngageCombat()">Re-engage Combat</button>
                 </div>
             `;
         }
