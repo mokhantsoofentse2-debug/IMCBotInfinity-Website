@@ -281,7 +281,7 @@
         .node-db .scale-label { color: #FFA800; }
         .node-db .scale-circle { background-color: #FFA800; color: #FFA800; }  
         .node-dba .scale-label { color: #00d062; }
-        .node-dba .scale-circle { background-color: #00d062; color: #00d062; }          
+        .node-dba .scale-circle { background-color: #00d062; color: #00d062; }           
         .node-asr .scale-label { color: #800080; }
         .node-asr .scale-circle { background-color: #800080; color: #800080; }        
         .node-mstr .scale-label { color: #00FFFF; }
@@ -389,7 +389,7 @@
         /* --- WEB VIEW COUNTER STYLING UPDATED --- */
         .live-counter-box {
             display: flex;
-            flex-wrap: wrap; /* Allows wrap if number gets too big */
+            flex-wrap: wrap; 
             align-items: center;
             justify-content: center;
             gap: 6px;
@@ -403,13 +403,13 @@
             color: #39FF14;
             filter: drop-shadow(0 0 5px rgba(57, 255, 20, 0.6));
             vertical-align: middle;
-            flex-shrink: 0; /* Prevents eye from squishing on small screens */
+            flex-shrink: 0; 
         }
         .live-counter-num {
             color: #39FF14;
             font-weight: bold;
             text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
-            word-break: break-all; /* Keeps huge numbers contained */
+            word-break: break-all; 
         }
 
         /* --- LIVING AI WIDGET INTERFACE  --- */
@@ -493,6 +493,7 @@
             overflow-y: auto;
             font-size: 0.9rem;
             color: #e0e0e0;
+            transition: max-height 0.4s ease;
         }
         .ai-chat-body::-webkit-scrollbar {
             width: 5px;
@@ -526,6 +527,171 @@
             color: black;
             font-weight: bold;
             transform: translateX(5px);
+        }
+
+        /* --- INTENSE TICK-TAC-TOE MATRIX STYLES --- */
+        .ttt-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            margin-top: 10px;
+        }
+        .ttt-return-btn {
+            position: absolute;
+            top: -12px;
+            left: 0;
+            background: rgba(255, 51, 51, 0.1);
+            border: 1px solid #ff3333;
+            color: #ff3333;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: bold;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+        .ttt-return-btn:hover {
+            background: #ff3333;
+            color: black;
+            box-shadow: 0 0 8px #ff3333;
+        }
+        .ttt-choice-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            width: 100%;
+            text-align: center;
+        }
+        .ttt-choice-btns {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+        }
+        .ttt-choice-btn {
+            background: #011508;
+            border: 2px solid;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            font-family: 'Lexend Deca', sans-serif;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-bull { border-color: #39FF14; color: #39FF14; box-shadow: 0 0 10px rgba(57,255,20,0.3); }
+        .btn-bear { border-color: #ff3333; color: #ff3333; box-shadow: 0 0 10px rgba(255,51,51,0.3); }
+        .btn-bull:hover { transform: scale(1.05); box-shadow: 0 0 20px #39FF14; }
+        .btn-bear:hover { transform: scale(1.05); box-shadow: 0 0 20px #ff3333; }
+        
+        .ttt-grid-wrapper {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .ttt-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        .ttt-cell {
+            background: rgba(0, 20, 10, 0.85);
+            border: 2px solid #058743;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: inset 0 0 8px rgba(5,135,67,0.4);
+        }
+        .ttt-cell:hover {
+            background: rgba(5, 135, 67, 0.25);
+            border-color: #39FF14;
+            box-shadow: 0 0 12px rgba(57, 255, 20, 0.5);
+        }
+        .cell-bull { animation: neonGlowGreen 0.5s ease-out forwards; }
+        .cell-bear { animation: neonGlowRed 0.5s ease-out forwards; }
+
+        @keyframes neonGlowGreen {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 6px #39FF14); }
+        }
+        @keyframes neonGlowRed {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 6px #ff3333); }
+        }
+
+        /* Full Window Screen Dynamic Announcements */
+        .ttt-announcement-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 10, 4, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            text-align: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .announcement-msg {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+        .msg-bulls {
+            color: #39FF14 !important;
+            text-shadow: 0 0 15px #39FF14, 0 0 30px #058743;
+            animation: blastText 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .msg-bears {
+            color: #ff3333 !important;
+            text-shadow: 0 0 15px #ff3333, 0 0 30px #ff0000;
+            animation: blastText 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .msg-draw {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        @keyframes blastText {
+            0% { transform: scale(0.4); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .ttt-restart-btn {
+            background: transparent;
+            border: 1px solid #058743;
+            color: #39FF14;
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Lexend Deca', sans-serif;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .ttt-restart-btn:hover {
+            background: #058743;
+            color: black;
+            box-shadow: 0 0 10px #39FF14;
         }
     </style>
 </head>
@@ -915,7 +1081,8 @@
                 { text: "Aggressive Hyper-Growth Systems", next: "aggressive_growth" },
                 { text: "View Banking & Payment Protocols", next: "bank_info" },
                 { text: "About The IMCBOTS Creator", next: "IndiceMoCash" },
-                { text: "IMCBOTS Prices", next: "Prices" }
+                { text: "IMCBOTS Prices", next: "Prices" },
+                { text: "⚔️ Tick-Tac-Toe: Market Combat", action: () => launchTicTacToe() }
             ]
         },
         small_acc: {
@@ -1039,6 +1206,197 @@
             }
         }
         typeWriter();
+    }
+
+    /* --- INTENSE COMBAT TICK-TAC-TOE ENGINE --- */
+    let userSide = '';      // 'Bulls' or 'Bears'
+    let computerSide = '';  // 'Bears' or 'Bulls'
+    let userIcon = '';      // '🐂' or '🐻'
+    let computerIcon = '';  // '🐻' or '🐂'
+    let tttBoard = ['', '', '', '', '', '', '', '', ''];
+    let isGameRunning = false;
+
+    function launchTicTacToe() {
+        const chatBody = document.querySelector('.ai-chat-body');
+        const aiOptions = document.getElementById('aiOptions');
+        const aiResponse = document.getElementById('aiResponse');
+        
+        chatBody.style.maxHeight = '380px'; 
+        aiOptions.innerHTML = '';
+        
+        aiResponse.innerHTML = `
+            <div class="ttt-container">
+                <button class="ttt-return-btn" onclick="exitTicTacToe()">✕ Quit</button>
+                <div id="tttInteractiveArea" style="width:100%;">
+                    <div class="ttt-choice-screen">
+                        <div style="font-weight:700; color:#39FF14; text-shadow:0 0 8px rgba(57,255,20,0.4); text-transform:uppercase;">Which direction do you favor?</div>
+                        <div class="ttt-choice-btns">
+                            <button class="ttt-choice-btn btn-bull" onclick="startTTTMatch('Bulls')">BULLS 🐂</button>
+                            <button class="ttt-choice-btn btn-bear" onclick="startTTTMatch('Bears')">BEARS 🐻</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function exitTicTacToe() {
+        const chatBody = document.querySelector('.ai-chat-body');
+        chatBody.style.maxHeight = '220px';
+        isGameRunning = false;
+        loadAINode("start");
+    }
+
+    function startTTTMatch(chosenFaction) {
+        userSide = chosenFaction;
+        if(userSide === 'Bulls') {
+            computerSide = 'Bears';
+            userIcon = '🐂';
+            computerIcon = '🐻';
+        } else {
+            computerSide = 'Bulls';
+            userIcon = '🐻';
+            computerIcon = '🐂';
+        }
+        
+        tttBoard = ['', '', '', '', '', '', '', '', ''];
+        isGameRunning = true;
+        renderTTTGrid();
+
+        if (userSide === 'Bears') {
+            setTimeout(executeComputerMove, 450);
+        }
+    }
+
+    function renderTTTGrid() {
+        const interactiveArea = document.getElementById('tttInteractiveArea');
+        interactiveArea.innerHTML = `
+            <div class="ttt-grid-wrapper">
+                <div style="font-size:0.8rem; color:#888; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">
+                    Your Node: <span style="color:${userSide==='Bulls'?'#39FF14':'#ff3333'}">${userIcon} ${userSide}</span>
+                </div>
+                <div class="ttt-grid">
+                    ${tttBoard.map((cell, idx) => {
+                        let cellClass = '';
+                        if(cell === '🐂') cellClass = 'cell-bull';
+                        if(cell === '🐻') cellClass = 'cell-bear';
+                        return `<div class="ttt-cell ${cellClass}" onclick="handleCellClick(${idx})">${cell}</div>`;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    function handleCellClick(index) {
+        if(!isGameRunning || tttBoard[index] !== '') return;
+
+        tttBoard[index] = userIcon;
+        renderTTTGrid();
+
+        if(checkWinStatus(userIcon)) {
+            triggerTerminalOverlay(userSide);
+            return;
+        }
+        if(tttBoard.every(cell => cell !== '')) {
+            triggerTerminalOverlay('Draw');
+            return;
+        }
+
+        isGameRunning = false; 
+        setTimeout(executeComputerMove, 400);
+    }
+
+    function executeComputerMove() {
+        if(tttBoard.every(cell => cell !== '')) return;
+
+        let selectedMove = -1;
+
+        // 1. Can AI execute a tactical alignment win right now?
+        for(let i=0; i<9; i++) {
+            if(tttBoard[i] === '') {
+                tttBoard[i] = computerIcon;
+                if(checkWinStatus(computerIcon)) { selectedMove = i; }
+                tttBoard[i] = '';
+            }
+        }
+
+        // 2. Clear block optimization logic parameter check
+        if(selectedMove === -1) {
+            for(let i=0; i<9; i++) {
+                if(tttBoard[i] === '') {
+                    tttBoard[i] = userIcon;
+                    if(checkWinStatus(userIcon)) { selectedMove = i; }
+                    tttBoard[i] = '';
+                }
+            }
+        }
+
+        // 3. Center grid take priority 
+        if(selectedMove === -1 && tttBoard[4] === '') {
+            selectedMove = 4;
+        }
+
+        // 4. Secure basic random array allocation map
+        if(selectedMove === -1) {
+            let availableIndexes = [];
+            tttBoard.forEach((cell, idx) => { if(cell === '') availableIndexes.push(idx); });
+            selectedMove = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+        }
+
+        tttBoard[selectedMove] = computerIcon;
+        renderTTTGrid();
+
+        if(checkWinStatus(computerIcon)) {
+            triggerTerminalOverlay(computerSide);
+            return;
+        }
+        if(tttBoard.every(cell => cell !== '')) {
+            triggerTerminalOverlay('Draw');
+            return;
+        }
+
+        isGameRunning = true;
+    }
+
+    function checkWinStatus(icon) {
+        const winningLines = [
+            [0,1,2], [3,4,5], [6,7,8],
+            [0,3,6], [1,4,7], [2,5,8],
+            [0,4,8], [2,4,6]
+        ];
+        return winningLines.some(combination => {
+            return combination.every(idx => tttBoard[idx] === icon);
+        });
+    }
+
+    function triggerTerminalOverlay(winner) {
+        isGameRunning = false;
+        const container = document.querySelector('.ttt-container');
+        
+        let overlayHTML = '';
+        if(winner === 'Bulls') {
+            overlayHTML = `
+                <div class="ttt-announcement-overlay">
+                    <div class="announcement-msg msg-bulls">Bulls are in control</div>
+                    <button class="ttt-restart-btn" onclick="startTTTMatch('${userSide}')">Re-engage Combat</button>
+                </div>
+            `;
+        } else if(winner === 'Bears') {
+            overlayHTML = `
+                <div class="ttt-announcement-overlay">
+                    <div class="announcement-msg msg-bears">Bears are in control</div>
+                    <button class="ttt-restart-btn" onclick="startTTTMatch('${userSide}')">Re-engage Combat</button>
+                </div>
+            `;
+        } else {
+            overlayHTML = `
+                <div class="ttt-announcement-overlay">
+                    <div class="announcement-msg msg-draw">Market Consolidation<br>(Draw)</div>
+                    <button class="ttt-restart-btn" onclick="startTTTMatch('${userSide}')">Re-engage Combat</button>
+                </div>
+            `;
+        }
+        container.insertAdjacentHTML('beforeend', overlayHTML);
     }
 </script>
 </body>
