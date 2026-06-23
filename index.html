@@ -693,6 +693,12 @@
             color: black;
             box-shadow: 0 0 10px #39FF14;
         }
+        @keyframes bladeStrike {
+        to { stroke-dashoffset: 0; }
+        }
+        .strike-line {
+         animation: bladeStrike 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+         }
     </style>
 </head>
 <body>
@@ -1275,7 +1281,7 @@
         renderTTTGrid();
     }
 
-    function renderTTTGrid() {
+function renderTTTGrid() {
         const interactiveArea = document.getElementById('tttInteractiveArea');
         interactiveArea.innerHTML = `
             <div class="ttt-grid-wrapper">
@@ -1283,7 +1289,7 @@
                     <span>Round: <span style="color:#ffffff;">${currentRound}</span></span>
                     <span>Your Node: <span style="color:${userSide==='Bulls'?'#39FF14':'#ff3333'}">${userIcon} ${userSide}</span></span>
                 </div>
-                <div class="ttt-grid">
+                <div class="ttt-grid" id="tttGridMaster" style="position: relative;">
                     ${tttBoard.map((cell, idx) => {
                         let cellClass = '';
                         if(cell === '🐂') cellClass = 'cell-bull';
@@ -1295,14 +1301,53 @@
         `;
     }
 
+    
+    function drawWinningLine(combo, winner) {
+        const grid = document.getElementById('tttGridMaster');
+        if (!grid) return;
+
+        // Determine colors based on the winner
+        const lineColor = winner === 'Bulls' ? '#39FF14' : '#FF0000';
+        const glow = winner === 'Bulls' ? 'drop-shadow(0 0 10px #39FF14)' : 'drop-shadow(0 0 10px #FF0000)';
+
+        // Calculate grid coordinates for the line start and end
+        const startIdx = combo[0];
+        const endIdx = combo[2];
+
+        const startCol = startIdx % 3;
+        const startRow = Math.floor(startIdx / 3);
+        const endCol = endIdx % 3;
+        const endRow = Math.floor(endIdx / 3);
+
+        const startX = (startCol * 33.33) + 16.66;
+        const startY = (startRow * 33.33) + 16.66;
+        const endX = (endCol * 33.33) + 16.66;
+        const endY = (endRow * 33.33) + 16.66;
+
+        // Generate the SVG overlay
+        const svgHTML = `
+            <svg width="100%" height="100%" style="position:absolute; top:0; left:0; pointer-events:none; z-index:20; filter: ${glow};">
+                <line x1="${startX}%" y1="${startY}%" x2="${endX}%" y2="${endY}%"
+                      stroke="${lineColor}" stroke-width="8" stroke-linecap="round"
+                      pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"
+                      class="strike-line" />
+            </svg>
+        `;
+        grid.insertAdjacentHTML('beforeend', svgHTML);
+    }
+
     function handleCellClick(index) {
         if(!isGameRunning || tttBoard[index] !== '') return;
 
         tttBoard[index] = userIcon;
         renderTTTGrid();
 
-        if(checkWinStatus(userIcon)) {
-            triggerTerminalOverlay(userSide);
+        const userWinLine = checkWinStatus(userIcon);
+        if(userWinLine) {
+            isGameRunning = false; // Stop further clicks
+            drawWinningLine(userWinLine, userSide);
+            // Delay the terminal overlay so the user sees the strike
+            setTimeout(() => triggerTerminalOverlay(userSide), 1000);
             return;
         }
         if(tttBoard.every(cell => cell !== '')) {
@@ -1320,9 +1365,6 @@
         let selectedMove = -1;
 
         if (currentRound % 2 === 0) {
-            // EVEN ROUND: Computer plays SMART to win
-
-            // 1. Can AI execute a tactical alignment win right now?
             for(let i=0; i<9; i++) {
                 if(tttBoard[i] === '') {
                     tttBoard[i] = computerIcon;
@@ -1330,8 +1372,6 @@
                     tttBoard[i] = '';
                 }
             }
-
-            // 2. Clear block optimization logic parameter check
             if(selectedMove === -1) {
                 for(let i=0; i<9; i++) {
                     if(tttBoard[i] === '') {
@@ -1341,14 +1381,11 @@
                     }
                 }
             }
-
-            // 3. Center grid take priority 
             if(selectedMove === -1 && tttBoard[4] === '') {
                 selectedMove = 4;
             }
         }
 
-        // ODD ROUND (or fallback for even round): Computer plays DUMB (Random execution)
         if(selectedMove === -1) {
             let availableIndexes = [];
             tttBoard.forEach((cell, idx) => { if(cell === '') availableIndexes.push(idx); });
@@ -1358,8 +1395,11 @@
         tttBoard[selectedMove] = computerIcon;
         renderTTTGrid();
 
-        if(checkWinStatus(computerIcon)) {
-            triggerTerminalOverlay(computerSide);
+        const compWinLine = checkWinStatus(computerIcon);
+        if(compWinLine) {
+            isGameRunning = false;
+            drawWinningLine(compWinLine, computerSide);
+            setTimeout(() => triggerTerminalOverlay(computerSide), 1000);
             return;
         }
         if(tttBoard.every(cell => cell !== '')) {
@@ -1370,15 +1410,21 @@
         isGameRunning = true;
     }
 
+    
     function checkWinStatus(icon) {
         const winningLines = [
             [0,1,2], [3,4,5], [6,7,8],
             [0,3,6], [1,4,7], [2,5,8],
             [0,4,8], [2,4,6]
         ];
-        return winningLines.some(combination => {
-            return combination.every(idx => tttBoard[idx] === icon);
-        });
+        
+        for (let i = 0; i < winningLines.length; i++) {
+            const [a, b, c] = winningLines[i];
+            if (tttBoard[a] === icon && tttBoard[b] === icon && tttBoard[c] === icon) {
+                return winningLines[i]; // Return the exact line that won
+            }
+        }
+        return null; // Return null if no win
     }
 
     function triggerTerminalOverlay(winner) {
