@@ -76,6 +76,16 @@
         }        
         .botuse-header { color:#058743; font-weight: bold; font-size: 1.2rem; }
         .botuse-content { display: none; text-align: left; margin-top: 15px; border-top: 1px solid #228B22; padding-top: 10px; }
+        #usermanual {
+            background: #011508;
+            margin-top: 20px;
+            border-radius: 15px;
+            border: 1px solid #058743;
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }        
 
         /* ---- BOTS CRITERIA ------*/
         #criteria {
@@ -786,7 +796,7 @@
         </div>
     </div>
     <hr class="sword-line">
-    <div class="botuse-container" onclick="toggleBio()">
+    <div class="botuse-container" onclick="toggleBotuse()">
         <div class="botuse-header" id="botuseHeader">Bots' Success Usage ▾</div>
         <div class="botuse-content" id="botuseContent">
             <div id="usermanual">
@@ -1052,7 +1062,14 @@
         content.style.display = isHidden ? 'block' : 'none';
         header.innerHTML = isHidden ? 'About The Owner ▴' : 'About The Owner ▾';
     }
-
+    function toggleBotuse() {
+        const content = document.getElementById('botuseContent');
+        const header = document.getElementById('botuseHeader');
+        const isHidden = window.getComputedStyle(content).display === 'none';
+        
+        content.style.display = isHidden ? 'block' : 'none';
+        header.innerHTML = isHidden ? "Bots' Success Usage ▴" : "Bots' Success Usage ▾";
+    }
     /* --- OWNER SLIDESHOW LOGIC --- */
     let currentIndex = 0;
     const mediaElements = document.querySelectorAll('.owner-media');
