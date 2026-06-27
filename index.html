@@ -1287,7 +1287,7 @@
         typeWriter();
     }
 
-    /* --- INTENSE COMBAT TICK-TAC-TOE ENGINE --- */
+/* --- INTENSE COMBAT TICK-TAC-TOE ENGINE --- */
     let userSide = '';      // 'Bulls' or 'Bears'
     let computerSide = '';  // 'Bears' or 'Bulls'
     let userIcon = '';      // '🐂' or '🐻'
@@ -1295,9 +1295,13 @@
     let tttBoard = ['', '', '', '', '', '', '', '', ''];
     let isGameRunning = false;
     let currentRound = 1;
+    let userWins = 0;       // Tracks user victories
+    let userLosses = 0;     // Tracks user defeats
 
     function launchTicTacToe() {
         currentRound = 1;
+        userWins = 0;       // Reset score on new launch
+        userLosses = 0;
         const chatBody = document.querySelector('.ai-chat-body');
         const aiOptions = document.getElementById('aiOptions');
         const aiResponse = document.getElementById('aiResponse');
@@ -1354,12 +1358,14 @@
         renderTTTGrid();
     }
 
-function renderTTTGrid() {
+    function renderTTTGrid() {
         const interactiveArea = document.getElementById('tttInteractiveArea');
         interactiveArea.innerHTML = `
             <div class="ttt-grid-wrapper">
-                <div style="font-size:0.8rem; color:#888; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px; display:flex; justify-content:space-between; width:100%;">
+                <div style="font-size:0.75rem; color:#888; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px; display:flex; justify-content:space-between; width:100%; align-items: center;">
                     <span>Round: <span style="color:#ffffff;">${currentRound}</span></span>
+                    <span>Ws: <span style="color:#39FF14;">${userWins}</span></span>
+                    <span>Ls: <span style="color:#FF0000;">${userLosses}</span></span>
                     <span>Your Node: <span style="color:${userSide==='Bulls'?'#39FF14':'#ff3333'}">${userIcon} ${userSide}</span></span>
                 </div>
                 <div class="ttt-grid" id="tttGridMaster" style="position: relative;">
@@ -1418,6 +1424,7 @@ function renderTTTGrid() {
         const userWinLine = checkWinStatus(userIcon);
         if(userWinLine) {
             isGameRunning = false; // Stop further clicks
+            userWins++;            // Increment user victories
             drawWinningLine(userWinLine, userSide);
             // Delay the terminal overlay so the user sees the strike
             setTimeout(() => triggerTerminalOverlay(userSide), 1000);
@@ -1471,6 +1478,7 @@ function renderTTTGrid() {
         const compWinLine = checkWinStatus(computerIcon);
         if(compWinLine) {
             isGameRunning = false;
+            userLosses++;         // Increment user defeats
             drawWinningLine(compWinLine, computerSide);
             setTimeout(() => triggerTerminalOverlay(computerSide), 1000);
             return;
