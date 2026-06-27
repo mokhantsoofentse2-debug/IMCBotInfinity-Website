@@ -61,6 +61,21 @@
         .bio-content { display: none; text-align: left; margin-top: 15px; border-top: 1px solid #228B22; padding-top: 10px; }
         .bio-content ul { list-style: disc; padding-left: 20px; }
         .bio-content li { text-align: left; width: auto; background: none; border: none; padding: 5px 0; }
+        
+        /* ------UserManual-----*/
+        .botuse-container {
+            background: rgba(0, 20, 10, 0.75); 
+            border: 1px solid #058743;
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }        
+        .botuse-header { color:#058743; font-weight: bold; font-size: 1.2rem; }
+        .botuse-content { display: none; text-align: left; margin-top: 15px; border-top: 1px solid #228B22; padding-top: 10px; }
 
         /* ---- BOTS CRITERIA ------*/
         #criteria {
@@ -771,6 +786,15 @@
         </div>
     </div>
     <hr class="sword-line">
+    <div class="botuse-container" onclick="toggleBio()">
+        <div class="botuse-header" id="botuseHeader">Bots' Success Usage ▾</div>
+        <div class="botuse-content" id="botuseContent">
+            <div id="usermanual">
+                <img src="images/btscrtr.png" class="crtr">
+            </div>
+        </div>
+    </div>
+     <hr class="sword-line">
     <ol>
         <li>
             <div class='db'><b>DB (Dragon Blaze) - F.E</b></div>
