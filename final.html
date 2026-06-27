@@ -18,7 +18,7 @@
             margin: 0;
             padding: 20px;
             line-height: 1.6;
-            overflow-x: hidden; /* Keeps the floating embers from creating scrollbars */
+            overflow-x: hidden; 
         }
 
         h1 {
@@ -62,7 +62,7 @@
         li:hover { 
             transform: translateY(-15px) scale(1.05); 
             box-shadow: 0 0 30px rgba(57, 255, 20, 0.6), inset 0 0 15px rgba(5, 135, 67, 0.5); 
-            border-color: #39FF14;
+            border-color: #058743;
         }
         li b { display: block; margin-bottom: 15px; font-size: 1.2rem; text-decoration: underline; }
 
@@ -73,7 +73,7 @@
             transition: filter 0.4s ease;
         }
         
-        /* Make the bot image glow on hover */
+        /* bot image glow on hover */
         li:hover img {
             filter: drop-shadow(0 0 12px rgba(57,255,20,0.8));
         }
@@ -97,7 +97,7 @@
             box-shadow: 0 0 20px #39FF14; 
             transform: scale(1.05);
         }
-        li:hover .flow { color: #39FF14; text-shadow: 0 0 10px #39FF14; }
+        li:hover .flow { color: #058743; text-shadow: 0 0 10px #058743; }
         .flow { transition: all 0.3s ease; }
         
         .sword-line {
@@ -126,10 +126,10 @@
         .ember {
             position: fixed;
             bottom: -10px;
-            background: #39FF14;
+            background: #058743;
             border-radius: 50%;
             pointer-events: none;
-            box-shadow: 0 0 8px #39FF14, 0 0 15px #058743;
+            box-shadow: 0 0 8px #058743, 0 0 15px #058743;
             animation: rise linear forwards;
             z-index: 0;
         }
