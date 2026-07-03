@@ -290,6 +290,7 @@
 
         /* Staggered Delay for left-to-right fluid motion */
         .node-sa .scale-circle { animation-delay: 0.0s; }
+        .node-rng .scale-circle { animation-delay: 0.0s; }
         .node-flw .scale-circle { animation-delay: 0.0s; }
         .node-twstr .scale-circle { animation-delay: 0.0s; }
         .node-db .scale-circle { animation-delay: 0.5s; }
@@ -302,6 +303,8 @@
         /* Unique Bot Colors */
         .node-sa .scale-label { color: #39FF14; }
         .node-sa .scale-circle { background-color: #39FF14; color: #39FF14; }
+        .node-rng .scale-label { color: #6E260E; }
+        .node-rng .scale-circle { background-color: #6E260E; color: #6E260E; }        
         .node-flw .scale-label { color: #088F8F; }
         .node-flw .scale-circle { background-color: #088F8F; color: #088F8F; } 
         .node-twstr .scale-label { color: #B2BEB5; }
@@ -376,6 +379,7 @@
         .copyright { margin-top: 15px; font-size: 0.9rem; color: #888; }
 
         li:hover .db { color: #FFA800; }
+        li:hover .rng { color: #6E260E; }
         li:hover .sa { color: #39FF14; }
         li:hover .twstr { color: #B2BEB5; }
         li:hover .dba { color: #00d062; }
@@ -384,7 +388,7 @@
         li:hover .asura { color: #800080; }
         li:hover .prgtry { color: #BBC2CC; }
         
-        .db, .sa, .twstr, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
+        .rng, .db, .sa, .twstr, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
 
         @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
@@ -792,6 +796,7 @@
             <hr class="sword-line">
             <ul>
                 <li><strong style="color:#FFA800">IMCBOT DB (Dragon Blaze) F.E - </strong>Is built to execute trades according to strong resistance or support levels available in the market. It simply executes a single trade & safely rewards higher profit amounts. As the "Fan Edition," it is of low-cost while remaining uniquely efficient among all IMCBOTS. It's the only IMCBOT that uses the highest trade-risk-percent to return good great profits from a win. (Cost - R12,000)</li>
+                 <li><strong style="color:#6E260E">IMCBOT Rang - </strong>Is built to execute trades by following rejection levels of pullback swings. It makes profits while avoiding losses . (Cost - R15,000)</li>
                 <li><strong style="color:#4CBB17">IMCBOT SA (Small Accounts) - </strong>Is built to grow small accounts by nature. It can grow any small amount of money, provided the market used has low margin requirements. (Cost - R18,000)</li>
                 <li><strong style="color:#B2BEB5">IMCBOT Twister - </strong>Is built to capitalize profits by capturing pullback swings at their turning points, & escapes major losses. (Cost - R20,000)</li>
                 <li><strong style="color:#00d062">IMCBOT DBA (Dragon Blaze Apex) - </strong>Is built to execute trades according to strong resistance or support levels available in the market, while taking more possible entries a moving trend offers to profit maximize. This bot maximizes while using a comfortable risk on an account balance. (Cost - R22,000)</li>
@@ -822,7 +827,13 @@
             <a href="setup.html?bot=db - fe">
                 <img src="dbfepp.png" width="150" height="200" alt="DB Bot">
             </a>
-        </li>        
+        </li>
+        <li>
+            <div class='rng'><b>RANG</b></div>
+            <a href="setup.html?bot=rang">
+                <img src="" width="150" height="200" alt="Rang Bot">
+            </a>
+        </li>                
         <li>
             <div class='sa'><b>SA (Small Accounts)</b></div>
             <a href="setup.html?bot=sa">
@@ -931,7 +942,11 @@
             <div class="scale-node node-twstr">
                 <span class="scale-label">Twstr</span>
                 <div class="scale-circle"></div>
-            </div>                  
+            </div>  
+            <div class="scale-node node-rng">
+                <span class="scale-label">Rng</span>
+                <div class="scale-circle"></div>
+            </div>                           
             <div class="scale-node node-db">
                 <span class="scale-label">DB</span>
                 <div class="scale-circle"></div>
@@ -1154,7 +1169,7 @@
             text: "Greetings, human trader. I am the integrated intelligence of IMCBOTS. My name is Blade, the man in the background & welcome to the IMCBOT dojo. Like a blade, I cut cleanly through complex market structure. What strategy profile are we mapping today?",
             options: [
                 { text: "Scale Small Capital (Safest Node)", next: "small_acc" },
-                { text: "Support & Resistance Frameworks (DB / DBA)", next: "sr_frameworks" },
+                { text: "Support & Resistance Frameworks (DB / DBA / Rang)", next: "sr_frameworks" },
                 { text: "Trend Exploitation & Maximizers", next: "trend_maximizers" },
                 { text: "Aggressive Hyper-Growth Systems", next: "aggressive_growth" },
                 { text: "View Banking & Payment Protocols", next: "bank_info" },
@@ -1171,10 +1186,11 @@
             ]
         },
         sr_frameworks: {
-            text: "Accessing Key Level structures. Choose between DB F.E (Fan Edition: targets major support/resistance zones with a single high-impact win parameter) or DBA Apex (multi-entry trailing to secure profits comfortably).",
+            text: "Accessing Key Level structures. Choose between DB F.E (Fan Edition: targets major support/resistance zones with a single high-impact win parameter) & DBA Apex (multi-entry trailing to secure profits comfortably). Or use Rang that executes double entries and prioritizes market rejection levels",
             options: [
                 { text: "Launch DB F.E Setup ➔", link: "setup.html?bot=db - fe" },
                 { text: "Launch DBA Apex Setup ➔", link: "setup.html?bot=dba" },
+                { text: "Launch Rang Setup ➔", link: "setup.html?bot=rang" },
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
