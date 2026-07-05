@@ -772,24 +772,8 @@
             </div>
             <hr class="sword-line">
             <div id="battle">
-                <video class="btle active" autoplay muted playsinline> 
-                    <source src="botswar.mp4" type="video/mp4"> 
+                <video id="battlePlayer" class="btle active" autoplay muted playsinline src="botswar.mp4" type="video/mp4">
                 </video>
-                <video class="btle" muted playsinline>
-                    <source src="kngms.mp4" type="video/mp4">
-                </video>
-                <video class="btle" muted playsinline>
-                    <source src="btl0.mp4" type="video/mp4">
-                </video>   
-                <video class="btle" muted playsinline>
-                    <source src="btl3.mp4" type="video/mp4">
-                </video>       
-                <video class="btle" muted playsinline>
-                    <source src="botsfwr.mp4" type="video/mp4">
-                </video> 
-                <video class="btle" muted playsinline>
-                    <source src="rfwr.mp4" type="video/mp4">
-                </video>                        
             </div>
             <hr class="sword-line">
             <br>
@@ -1136,35 +1120,37 @@
         }
     }
 
-    /* --- BOTS BATTLE VIDEO LOGIC --- */
-    const battleVideos = document.querySelectorAll('#battle .btle');
-    let currentBattleIdx = 0;
+/* --- BOTS BATTLE VIDEO LOGIC (OPTIMIZED SINGLE PLAYER) --- */
+const battlePlaylist = [
+    "botswar.mp4",
+    "kngms.mp4",
+    "btl0.mp4",
+    "btl3.mp4",
+    "botsfwr.mp4",
+    "rfwr.mp4"
+];
+let currentBattleIdx = 0;
+const battlePlayer = document.getElementById('battlePlayer');
 
-    function playNextBattleVideo() {
-        if (battleVideos.length === 0) return;
+function playNextBattleVideo() {
+    if (!battlePlayer || battlePlaylist.length === 0) return;
 
-        // Hide and pause current video
-        battleVideos[currentBattleIdx].classList.remove('active');
-        battleVideos[currentBattleIdx].pause();
+    // Smoothly cycle to the next video source index
+    currentBattleIdx = (currentBattleIdx + 1) % battlePlaylist.length;
 
-        // Increment to next video index
-        currentBattleIdx = (currentBattleIdx + 1) % battleVideos.length;
+    // Update source, force reload matrix, and engage playback
+    battlePlayer.src = battlePlaylist[currentBattleIdx];
+    battlePlayer.load();
+    battlePlayer.play().catch(e => console.log("Playback transition interrupted:", e));
+}
 
-        // Show and play next video
-        battleVideos[currentBattleIdx].classList.add('active');
-        battleVideos[currentBattleIdx].currentTime = 0;
-        battleVideos[currentBattleIdx].play().catch(e => console.log("Play interrupted", e));
-    }
-
-    if (battleVideos.length > 0) {
-        // Set up event listeners for when each battle video finishes
-        battleVideos.forEach(vid => {
-            vid.addEventListener('ended', playNextBattleVideo);
-        });
-        
-        // Start the first one automatically
-        battleVideos[0].play().catch(e => console.log("Autoplay blocked", e));
-    }
+if (battlePlayer) {
+    // Fire next track as soon as the current asset finishes its cycle
+    battlePlayer.addEventListener('ended', playNextBattleVideo);
+    
+    // Safely kick off initial autoplay framework
+    battlePlayer.play().catch(e => console.log("Initial autoplay blocked by system:", e));
+}
 
     /* --- LIVING AI CORE LOGIC ENGINE --- */
     const aiMessages = {
