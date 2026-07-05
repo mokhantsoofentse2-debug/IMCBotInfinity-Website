@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMCBOTS Showcase</title>
     <style>
-
         body { 
             background: #011c12; 
             color: white; 
@@ -39,10 +38,12 @@
             object-fit: contain; 
             opacity: 0; 
             transition: opacity 1s ease-in-out, transform 6s linear; 
+            z-index: 1; 
         }
         .media-item.active { 
             opacity: 1; 
             transform: translate(-50%, -50%) scale(1.15); 
+            z-index: 2; 
         }
         .bank-details { color: white; font-size: 1.2rem; line-height: 2.5; }
         .bnk { text-decoration: underline; font-weight: bold; }
@@ -101,37 +102,51 @@
                     mediaElement.src = src;
                     mediaElement.muted = true;
                     mediaElement.playsInline = true;
-
+                    
+                
+                    mediaElement.setAttribute('muted', 'true');
+                    mediaElement.setAttribute('playsinline', 'true');
+                    mediaElement.setAttribute('preload', 'auto');
                 } else {
                     mediaElement = document.createElement('img');
                     mediaElement.src = src;
-
                 }
                 mediaElement.className = 'media-item'; 
                 container.appendChild(mediaElement);
-
             });
 
-            // NEW SMART CYCLING LOGIC
+            // SMART CYCLING LOGIC
             let current = 0;
             const items = document.querySelectorAll('.media-item');
             let slideTimeout;
+            
             function startSlide() {
                 const currentItem = items[current];
                 currentItem.classList.add('active');
 
                 if (currentItem.tagName === 'VIDEO') {
-                    currentItem.currentTime = 0; // Rewind to start
-                    currentItem.play().catch(e => console.log("Playback interrupted:", e));
-
-                    // Wait until the video completely finishes playing
-                    currentItem.addEventListener('ended', changeSlide, { once: true });
+                    
+                    try { currentItem.currentTime = 0; } catch (e) {}
+                    
+                    
+                    let playPromise = currentItem.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            currentItem.addEventListener('ended', changeSlide, { once: true });
+                        }).catch(e => {
+                            console.log("Playback interrupted:", e);
+                            slideTimeout = setTimeout(changeSlide, 4000); // Fail gracefully, move to next slide
+                        });
+                    } else {
+                        currentItem.addEventListener('ended', changeSlide, { once: true });
+                    }
 
                 } else {
                     // It's an image, stay on it for 5 seconds
                     slideTimeout = setTimeout(changeSlide, 5000);
                 }
             }
+            
             function changeSlide() {
                 const currentItem = items[current];
                 currentItem.classList.remove('active');
@@ -144,6 +159,7 @@
                 // Fire up the next asset
                 startSlide();
             }
+            
             // Start the very first slide execution
             if (items.length > 0) {
                 startSlide();
@@ -154,4 +170,4 @@
         }
     </script>
 </body>
-</html> 
+</html>
