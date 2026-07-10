@@ -9,7 +9,7 @@
     <style>
         body {
             background-color: #011a0d; 
-            background-image: url('bg21.png');
+            background-image: url('bg22.png');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
@@ -291,6 +291,7 @@
         /* Staggered Delay for left-to-right fluid motion */
         .node-sa .scale-circle { animation-delay: 0.0s; }
         .node-rng .scale-circle { animation-delay: 0.0s; }
+        .node-shdw .scale-circle { animation-delay: 0.0s; }
         .node-flw .scale-circle { animation-delay: 0.0s; }
         .node-twstr .scale-circle { animation-delay: 0.0s; }
         .node-db .scale-circle { animation-delay: 0.5s; }
@@ -304,7 +305,9 @@
         .node-sa .scale-label { color: #39FF14; }
         .node-sa .scale-circle { background-color: #39FF14; color: #39FF14; }
         .node-rng .scale-label { color: #6E260E; }
-        .node-rng .scale-circle { background-color: #6E260E; color: #6E260E; }        
+        .node-rng .scale-circle { background-color: #6E260E; color: #6E260E; }
+        .node-shdw .scale-label { color: #FFAE42; }
+        .node-shdw .scale-circle { background-color: #FFAE42; color: #FFAE42; }        
         .node-flw .scale-label { color: #088F8F; }
         .node-flw .scale-circle { background-color: #088F8F; color: #088F8F; } 
         .node-twstr .scale-label { color: #B2BEB5; }
@@ -382,13 +385,14 @@
         li:hover .rng { color: #6E260E; }
         li:hover .sa { color: #39FF14; }
         li:hover .twstr { color: #B2BEB5; }
+        li:hover .shdw { color: #FFAE42; }
         li:hover .dba { color: #00d062; }
         li:hover .master { color: #00FFFF; }
         li:hover .king { color: #FF2400; }
         li:hover .asura { color: #800080; }
         li:hover .prgtry { color: #BBC2CC; }
         
-        .rng, .db, .sa, .twstr, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
+        .rng, .db, .sa, .twstr, .shdw, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
 
         @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
@@ -756,7 +760,7 @@
                 <li>IMCBOTS analyze for you and depend on market structure for trade executions.</li>
                 <li>IMCBOTS are simply a "plug and play" scenario.</li>
                 <li>IMCBOTS are capable of executing both Buy and Sell setups.</li>
-                <li>IMCBOTS: Twister, Rang, Fan Edition, Apex, Flow, Master, King, Purgatory all require a minimum funding of R300, Except for SA(for small account trading) & Asura(any account size flexible) - which can trade any account size.</li>
+                <li>IMCBOTS: Twister, Rang, Shadow, Fan Edition, Apex, Flow, Master, King, Purgatory all require a minimum funding of R300, Except for SA(for small account trading) & Asura(any account size flexible) - which can trade any account size.</li>
             </ul>
             <hr class="sword-line">
             <br>
@@ -784,8 +788,9 @@
             <hr class="sword-line">
             <ul>
                 <li><strong style="color:#FFA800">IMCBOT DB (Dragon Blaze) F.E - </strong>Is built to execute trades according to strong resistance or support levels available in the market. It simply executes a single trade & safely rewards higher profit amounts. As the "Fan Edition," it is of low-cost while remaining uniquely efficient among all IMCBOTS. It's the only IMCBOT that uses the highest trade-risk-percent to return good great profits from a win. (Cost - R12,000)</li>
-                 <li><strong style="color:#6E260E">IMCBOT Rang - </strong>Is built to execute trades by following rejection levels of pullback swings. It makes profits while avoiding losses . (Cost - R15,000)</li>
+                <li><strong style="color:#6E260E">IMCBOT Rang - </strong>Is built to execute trades by following rejection levels of pullback swings. It makes profits while avoiding losses . (Cost - R15,000)</li>
                 <li><strong style="color:#4CBB17">IMCBOT SA (Small Accounts) - </strong>Is built to grow small accounts by nature. It can grow any small amount of money, provided the market used has low margin requirements. (Cost - R18,000)</li>
+                <li><strong style="color:#FFAE42">IMCBOT Shadow - </strong>Is built to rely on previous support/resistance to be flipped into a resistance/support for a new trend direction. It minimizes losses and maximizes wins. (Cost - R21,000)</li>
                 <li><strong style="color:#B2BEB5">IMCBOT Twister - </strong>Is built to capitalize profits by capturing pullback swings at their turning points, & escapes major losses. (Cost - R20,000)</li>
                 <li><strong style="color:#00d062">IMCBOT DBA (Dragon Blaze Apex) - </strong>Is built to execute trades according to strong resistance or support levels available in the market, while taking more possible entries a moving trend offers to profit maximize. This bot maximizes while using a comfortable risk on an account balance. (Cost - R22,000)</li>
                 <li><strong style="color:#00FFFF">IMCBOT Master - </strong>Is built to maximize profits by following trend structure. It profit locks and avoids losses as soon as possible, while heading for your profits target. (Cost - R28,000)</li>
@@ -828,6 +833,12 @@
                 <img src="sapp.png" width="150" height="200" alt="SA Bot">
             </a>
         </li>
+        <li>
+            <div class='shdw'><b>Shadow</b></div>
+            <a href="setup.html?bot=shadow">
+                <img src="shdwpst.png" width="150" height="200" alt="Shadow Bot">
+            </a>
+        </li>        
         <li>
             <div class='twstr'><b>Twister</b></div>
             <a href="setup.html?bot=twister">
@@ -935,6 +946,10 @@
                 <span class="scale-label">Rng</span>
                 <div class="scale-circle"></div>
             </div>
+            <div class="scale-node node-shdw">
+                <span class="scale-label">Shdw</span>
+                <div class="scale-circle"></div>
+            </div>         
             <div class="scale-node node-twstr">
                 <span class="scale-label">Twstr</span>
                 <div class="scale-circle"></div>
@@ -1159,7 +1174,7 @@ if (battlePlayer) {
             text: "Greetings, human trader. I am the integrated intelligence of IMCBOTS. My name is Blade, the man in the background & welcome to the IMCBOT dojo. Like a blade, I cut cleanly through complex market structure. What strategy profile are we mapping today?",
             options: [
                 { text: "Scale Small Capital (Safest Node)", next: "small_acc" },
-                { text: "Support & Resistance Frameworks (DB / DBA / Rang)", next: "sr_frameworks" },
+                { text: "Support & Resistance Frameworks (DB / DBA / Rang / Shadow)", next: "sr_frameworks" },
                 { text: "Trend Exploitation & Maximizers", next: "trend_maximizers" },
                 { text: "Aggressive Hyper-Growth Systems", next: "aggressive_growth" },
                 { text: "View Banking & Payment Protocols", next: "bank_info" },
@@ -1169,18 +1184,19 @@ if (battlePlayer) {
             ]
         },
         small_acc: {
-            text: "Analyzing allocation parameters... For minimal capital margins, your best architectural match is IMCBOT SA (Small Accounts). It is carefully bounded to scale low funds without overleveraging indices. Initialize its framework?",
+            text: "Analyzing allocation parameters... For low capital margins, your best architectural match is IMCBOT SA (Small Accounts). It is carefully bounded to scale low funds without overleveraging. Initialize its framework?",
             options: [
                 { text: "Launch SA Setup Page ➔", link: "setup.html?bot=sa" },
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
         sr_frameworks: {
-            text: "Accessing Key Level structures. Choose between DB F.E (Fan Edition: targets major support/resistance zones with a single high-impact win parameter) & DBA Apex (multi-entry trailing to secure profits comfortably). Or use Rang that executes double entries and prioritizes market rejection levels",
+            text: "Accessing Key Level structures. Choose between DB F.E (Fan Edition: targets major support/resistance zones with a single high-impact win parameter) & DBA Apex (multi-entry trailing to secure profits comfortably), And while Rang executes double entries and prioritizes market rejection levels for both entries & targets, Shadow relies on a single structure level to act as its support and resistance.",
             options: [
                 { text: "Launch DB F.E Setup ➔", link: "setup.html?bot=db - fe" },
                 { text: "Launch DBA Apex Setup ➔", link: "setup.html?bot=dba" },
                 { text: "Launch Rang Setup ➔", link: "setup.html?bot=rang" },
+                { text: "Launch Shadow Setup ➔", link: "setup.html?bot=shadow" },
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
