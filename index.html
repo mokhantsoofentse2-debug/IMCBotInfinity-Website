@@ -292,6 +292,7 @@
         .node-sa .scale-circle { animation-delay: 0.0s; }
         .node-rng .scale-circle { animation-delay: 0.0s; }
         .node-shdw .scale-circle { animation-delay: 0.0s; }
+        .node-slt .scale-circle { animation-delay: 0.0s; }
         .node-flw .scale-circle { animation-delay: 0.0s; }
         .node-twstr .scale-circle { animation-delay: 0.0s; }
         .node-db .scale-circle { animation-delay: 0.5s; }
@@ -307,7 +308,9 @@
         .node-rng .scale-label { color: #6E260E; }
         .node-rng .scale-circle { background-color: #6E260E; color: #6E260E; }
         .node-shdw .scale-label { color: #FFAE42; }
-        .node-shdw .scale-circle { background-color: #FFAE42; color: #FFAE42; }        
+        .node-shdw .scale-circle { background-color: #FFAE42; color: #FFAE42; } 
+        .node-slt .scale-label { color: #FFFFF0; }
+        .node-slt .scale-circle { background-color: #FFFFF0; color: #FFFFF0; }         
         .node-flw .scale-label { color: #088F8F; }
         .node-flw .scale-circle { background-color: #088F8F; color: #088F8F; } 
         .node-twstr .scale-label { color: #B2BEB5; }
@@ -386,13 +389,14 @@
         li:hover .sa { color: #39FF14; }
         li:hover .twstr { color: #B2BEB5; }
         li:hover .shdw { color: #FFAE42; }
+        li:hover .slt { color: #FFFFF0; }
         li:hover .dba { color: #00d062; }
         li:hover .master { color: #00FFFF; }
         li:hover .king { color: #FF2400; }
         li:hover .asura { color: #800080; }
         li:hover .prgtry { color: #BBC2CC; }
         
-        .rng, .db, .sa, .twstr, .shdw, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
+        .rng, .db, .sa, .twstr, .shdw, .slt, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
 
         @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
@@ -761,7 +765,7 @@
                 <li>IMCBOTS analyze for you and depend on market structure for trade executions.</li>
                 <li>IMCBOTS are simply a "plug and play" scenario.</li>
                 <li>IMCBOTS are capable of executing both Buy and Sell setups.</li>
-                <li>IMCBOTS: Twister, Rang, Shadow, Fan Edition, Apex, Flow, Master, King, Purgatory all require a minimum funding of R250, While SA(for small account trading) & Asura(any account size flexible) require a minimum funding of R100.</li>
+                <li>IMCBOTS: Twister, Rang, Shadow, ShadowLight, Fan Edition, Apex, Flow, Master, King, Purgatory all require a minimum funding of R250, While SA(for small account trading) & Asura(any account size flexible) require a minimum funding of R100.</li>
             </ul>
             <hr class="sword-line">
             <br>
@@ -795,6 +799,7 @@
                 <li><strong style="color:#FFAE42">IMCBOT Shadow - </strong>Is built to rely on previous support/resistance to be flipped into a resistance/support for a new trend direction. It minimizes losses and maximizes wins. (Cost - R21,000)</li>
                 <li><strong style="color:#00d062">IMCBOT DBA (Dragon Blaze Apex) - </strong>Is built to execute trades according to strong resistance or support levels available in the market, while taking more possible entries a moving trend offers to profit maximize. This bot maximizes while using a comfortable risk on an account balance. (Cost - R22,000)</li>
                 <li><strong style="color:#00FFFF">IMCBOT Master - </strong>Is built to maximize profits by following trend structure. It profit locks and avoids losses as soon as possible, while heading for your profits target. (Cost - R28,000)</li>
+                <li><strong style="color:#FFFFF0">IMCBOT SHDW Light - </strong>Is built to rely on previous support/resistance to be flipped into a resistance/support for a new trend direction, while it profit maximizes using trend continuation. It minimizes losses and maximizes wins. (Cost - R30,000)</li>
                 <li><strong style="color:#088F8F">IMCBOT Flow - </strong>Is built to always follow a break of structure in order to execute its entries, while avoiding losses, profit maximizing, and using a low risk percent on any account size. It highly requires a market with very tight spreads - As it's the only IMCBOT that trades on a very low timeframe. (Cost - R35,000)</li>
                 <li><strong style="color:#BBC2CC">IMCBOT Prgtry (Purgatory) - </strong>Takes every possible entry a moving trend offers to grow accounts as quickly as possible. It highly requires tight spreads for great success, which makes it a risky IMCBOT, but also a great profits provider. (Cost - R40,000)</li>
                 <li><strong style="color:#FF0000">IMCBOT King - </strong>Is built to secure profits provided by a moving trend & at the correct price action. It has no limited profits target. (Cost - R50,000)</li>
@@ -857,7 +862,13 @@
             <a href="setup.html?bot=master">
                 <img src="Masterpp.png" width="150" height="200" alt="Master Bot">
             </a>
-        </li>      
+        </li> 
+        <li>
+            <div class='slt'><b>SHDW Light</b></div>
+            <a href="setup.html?bot=slight">
+                <img src="Sltpst.png" width="150" height="200" alt="Slight Bot">
+            </a>
+        </li>              
         <li>
             <div class='prgtry'><b>Prgtry (Purgatory)</b></div>
             <a href="setup.html?bot=prgtry">
@@ -963,6 +974,10 @@
                 <span class="scale-label">DBA</span>
                 <div class="scale-circle"></div>
             </div>
+            <div class="scale-node node-slt">
+                <span class="scale-label">SLght</span>
+                <div class="scale-circle"></div>
+            </div>            
             <div class="scale-node node-flw">
                 <span class="scale-label">Flw</span>
                 <div class="scale-circle"></div>
@@ -1202,13 +1217,14 @@ if (battlePlayer) {
             ]
         },
         trend_maximizers: {
-            text: "Loading architectural trend hunters. IMCBOT Master trails and locks structural targets early. King completely removes profit ceilings. Asura relies on ultra-low risk percentages to optimize long running operations. Flow highly prioritizes structure breaks to execute its entries along a trend. Twister relies on & captures the turning points of pullback swings, while profit maximizing.",
+            text: "Loading architectural trend hunters. IMCBOT Master trails and locks structural targets early. King completely removes profit ceilings. Asura relies on ultra-low risk percentages to optimize long running operations. Flow highly prioritizes structure breaks to execute its entries along a trend. Twister relies on & captures the turning points of pullback swings, while profit maximizing. And lastly, ShadowLight uses a single structure level for both support & resistance to profit maximize on a trend towards its target.",
             options: [
                 { text: "Launch Master Setup ➔", link: "setup.html?bot=master" },
                 { text: "Launch King Setup ➔", link: "setup.html?bot=king" },
                 { text: "Launch Asura Setup ➔", link: "setup.html?bot=asura" },
                 { text: "Launch Flow Setup ➔", link: "setup.html?bot=flow" },
                 { text: "Launch Twister Setup ➔", link: "setup.html?bot=twister" },
+                { text: "Launch ShadowLight Setup ➔", link: "setup.html?bot=slight" },
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
