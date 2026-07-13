@@ -9,7 +9,7 @@
     <style>
         body {
             background-color: #011a0d; 
-            background-image: url('bg23.png');
+            background-image: url('bg24.png');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
@@ -293,6 +293,7 @@
         .node-rng .scale-circle { animation-delay: 0.0s; }
         .node-shdw .scale-circle { animation-delay: 0.0s; }
         .node-slt .scale-circle { animation-delay: 0.0s; }
+        .node-slssnc .scale-circle { animation-delay: 0.0s; }
         .node-flw .scale-circle { animation-delay: 0.0s; }
         .node-twstr .scale-circle { animation-delay: 0.0s; }
         .node-db .scale-circle { animation-delay: 0.5s; }
@@ -310,7 +311,9 @@
         .node-shdw .scale-label { color: #FFAE42; }
         .node-shdw .scale-circle { background-color: #FFAE42; color: #FFAE42; } 
         .node-slt .scale-label { color: #FFFFF0; }
-        .node-slt .scale-circle { background-color: #FFFFF0; color: #FFFFF0; }         
+        .node-slt .scale-circle { background-color: #FFFFF0; color: #FFFFF0; }  
+        .node-slssnc .scale-label { color: #FFFFF0; }
+        .node-slssnc .scale-circle { background-color: #FFFFF0; color: #FFFFF0; }         
         .node-flw .scale-label { color: #088F8F; }
         .node-flw .scale-circle { background-color: #088F8F; color: #088F8F; } 
         .node-twstr .scale-label { color: #B2BEB5; }
@@ -390,13 +393,14 @@
         li:hover .twstr { color: #B2BEB5; }
         li:hover .shdw { color: #FFAE42; }
         li:hover .slt { color: #FFFFF0; }
+        li:hover .slssnc { color: #FFFFF0; }
         li:hover .dba { color: #00d062; }
         li:hover .master { color: #00FFFF; }
         li:hover .king { color: #FF2400; }
         li:hover .asura { color: #800080; }
         li:hover .prgtry { color: #BBC2CC; }
         
-        .rng, .db, .sa, .twstr, .shdw, .slt, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
+        .rng, .db, .sa, .twstr, .shdw, .slt, .slssnc, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
 
         @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
@@ -765,7 +769,7 @@
                 <li>IMCBOTS analyze for you and depend on market structure for trade executions.</li>
                 <li>IMCBOTS are simply a "plug and play" scenario.</li>
                 <li>IMCBOTS are capable of executing both Buy and Sell setups.</li>
-                <li>IMCBOTS: Twister, Rang, Shadow, ShadowLight, Fan Edition, Apex, Flow, Master, King, Purgatory all require a minimum funding of R250, While SA(for small account trading) & Asura(any account size flexible) require a minimum funding of R100.</li>
+                <li>IMCBOTS: Twister, Rang, Shadow, Light, SuperSonic, Fan Edition, Apex, Flow, Master, King, Purgatory all require a minimum funding of R250, While SA(for small account trading) & Asura(any account size flexible) require a minimum funding of R100.</li>
             </ul>
             <hr class="sword-line">
             <br>
@@ -802,6 +806,7 @@
                 <li><strong style="color:#FFFFF0">IMCBOT SHDW Light - </strong>Is built to rely on previous support/resistance to be flipped into a resistance/support for a new trend direction, while it profit maximizes using trend continuation. It minimizes losses and maximizes wins. (Cost - R30,000)</li>
                 <li><strong style="color:#088F8F">IMCBOT Flow - </strong>Is built to always follow a break of structure in order to execute its entries, while avoiding losses, profit maximizing, and using a low risk percent on any account size. It highly requires a market with very tight spreads - As it's the only IMCBOT that trades on a very low timeframe. (Cost - R35,000)</li>
                 <li><strong style="color:#BBC2CC">IMCBOT Prgtry (Purgatory) - </strong>Takes every possible entry a moving trend offers to grow accounts as quickly as possible. It highly requires tight spreads for great success, which makes it a risky IMCBOT, but also a great profits provider. (Cost - R40,000)</li>
+                <li><strong style="color:#FFFFF0">IMCBOT ShdwLight - SuperSonic - </strong>Is built to rely on previous support/resistance to be flipped into a resistance/support for a new trend direction, while it profit maximizes using trend continuation. While it minimizes losses and maximizes wins, it uses a very low timeframe for quick opportunities, while also using an additional trading technique to profit more off trend continuation unlike the ShadowLight Bot. (Cost - R46,000)</li>
                 <li><strong style="color:#FF0000">IMCBOT King - </strong>Is built to secure profits provided by a moving trend & at the correct price action. It has no limited profits target. (Cost - R50,000)</li>
                 <li><strong style="color:#800080">IMCBOT Asura - </strong>Is built for maximum profit range while profit-locking. It keeps you longer in profit maximizing trends, while also having no limited profits target. It's the only Elite IMCBOT that uses the lowest trade-risk-percent, this assists the bot to be any account size flexible. (Cost - R60,000)</li>
             </ul>
@@ -865,8 +870,8 @@
         </li> 
         <li>
             <div class='slt'><b>SHDW Light</b></div>
-            <a href="setup.html?bot=slight">
-                <img src="Sltpst.png" width="150" height="200" alt="Slight Bot">
+            <a href="setup.html?bot=shdwlight">
+                <img src="Sltpst.png" width="150" height="200" alt="ShdwLight Bot">
             </a>
         </li>              
         <li>
@@ -875,6 +880,12 @@
                 <img src="Pgrtypp.png" width="150" height="200" alt="Prgtry Bot">
             </a>
         </li>
+        <li>
+            <div class='slssnc'><b>ShdwLight - SuperSonic</b></div>
+            <a href="setup.html?bot=supersonic">
+                <img src="slssonicpst.png" width="150" height="200" alt="SuperSonic Bot">
+            </a>
+        </li>             
         <li>
             <div class='king'><b>King</b></div>
             <a href="setup.html?bot=king">
@@ -906,7 +917,7 @@
                 <li>I built the design of my website to be like an anime of my own universe, thanks to being an anime fan - which is what lead to my anime-like design for my IMCBOTS project.</li>
                 <li>What inspired me to build these bots was the past strategies I created but was no longer utilizing manually.</li>
                 <li>I built the Master bot first, followed by the SA bot and the rest. Each bot represents a part of my trading journey.</li>
-                <li>A friend of mine called kamohetsoe Ntoi became my team mate in the journey of my IMCBOTS - by inspiring & motivating me to not to give up on my IMCBOTS idea. He became my team mate by using my bots and having hope in their success, which lead to me making each IMCBOT a perfect masterpiece. Kamohetsoe Ntoi was the one who also influenced me to build one more last powerful & unique IMCBOT - which is the IMCBOT Flow, He is a true blessing of a friend from God to me - a brother from another mother, And that is how the IMCBOTS entirely came to be without doubt in their creation, all 12 Bots created, with passion & dedication. </li>
+                <li>A friend of mine called kamohetsoe Ntoi became my team mate in the journey of my IMCBOTS - by inspiring & motivating me to not to give up on my IMCBOTS idea. He became my team mate by using my bots and having hope in their success, which lead to me making each IMCBOT a perfect masterpiece. Kamohetsoe Ntoi was the one who also influenced me to build one more last powerful & unique IMCBOT - which is the IMCBOT Flow, He is a true blessing of a friend from God to me - a brother from another mother, And that is how the IMCBOTS entirely came to be without doubt in their creation, all 13 Bots crafted with passion & dedication. </li>
                 <li>All IMCBOTS are perfectly built, tested on various account sizes, and perform efficiently. They are at their peak versions, & can never fail.</li>
                 <li>With my knowledge of Information Technology, knowing the markets, and extensive research - I was able to successfully automate my trading logic.</li>
             </ul>
@@ -975,7 +986,7 @@
                 <div class="scale-circle"></div>
             </div>
             <div class="scale-node node-slt">
-                <span class="scale-label">SLght</span>
+                <span class="scale-label">Slt</span>
                 <div class="scale-circle"></div>
             </div>            
             <div class="scale-node node-flw">
@@ -989,7 +1000,11 @@
             <div class="scale-node node-kng">
                 <span class="scale-label">Kng</span>
                 <div class="scale-circle"></div>
-            </div>            
+            </div>    
+            <div class="scale-node node-slssnc">
+                <span class="scale-label">SS</span>
+                <div class="scale-circle"></div>
+            </div>                  
             <div class="scale-node node-pgtry">
                 <span class="scale-label">Pgtry</span>
                 <div class="scale-circle"></div>
@@ -1217,14 +1232,15 @@ if (battlePlayer) {
             ]
         },
         trend_maximizers: {
-            text: "Loading architectural trend hunters. IMCBOT Master trails and locks structural targets early. King completely removes profit ceilings. Asura relies on ultra-low risk percentages to optimize long running operations. Flow highly prioritizes structure breaks to execute its entries along a trend. Twister relies on & captures the turning points of pullback swings, while profit maximizing. And lastly, ShadowLight uses a single structure level for both support & resistance to profit maximize on a trend towards its target.",
+            text: "Loading architectural trend hunters. IMCBOT Master trails and locks structural targets early. King completely removes profit ceilings. Asura relies on ultra-low risk percentages to optimize long running operations. Flow highly prioritizes structure breaks to execute its entries along a trend. Twister relies on & captures the turning points of pullback swings, while profit maximizing. ShadowLight uses a single structure level for both support & resistance to profit maximize on a trend towards its target, while ShadowLight SuperSonic utilizes a very low timframe for quicker executions and is more advanced in trend maximization unlike ShadowLight.",
             options: [
                 { text: "Launch Master Setup ➔", link: "setup.html?bot=master" },
                 { text: "Launch King Setup ➔", link: "setup.html?bot=king" },
                 { text: "Launch Asura Setup ➔", link: "setup.html?bot=asura" },
                 { text: "Launch Flow Setup ➔", link: "setup.html?bot=flow" },
                 { text: "Launch Twister Setup ➔", link: "setup.html?bot=twister" },
-                { text: "Launch ShadowLight Setup ➔", link: "setup.html?bot=slight" },
+                { text: "Launch ShadowLight Setup ➔", link: "setup.html?bot=shdwlight" },
+                { text: "Launch ShdwLight-SuperSonic Setup ➔", link: "setup.html?bot=supersonic" },
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
