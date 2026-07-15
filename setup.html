@@ -93,14 +93,192 @@
                         <li><div class='bnk'>Acc. type:</div> Savings</li>
                     </ul>
                 </div>`;
+                
         } else if (botKey === 'comic') { 
             title.innerText = "IMC-COMICS";
             title.style.color = "#7393B3";
             container.style.borderColor = "#7393B3";
+            container.style.padding = "0"; // Maximize viewing area
+            
+            // Inject styling for comic controls
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .sword-arrow {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: rgba(1, 28, 18, 0.85);
+                    border: 1px solid #7393B3;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    z-index: 10;
+                    padding: 8px 12px;
+                    box-shadow: 0 0 8px rgba(115, 147, 179, 0.4);
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    outline: none;
+                }
+                .sword-arrow:hover {
+                    box-shadow: 0 0 15px rgba(115, 147, 179, 0.9);
+                    background: rgba(115, 147, 179, 0.15);
+                    transform: translateY(-50%) scale(1.1);
+                }
+                .arrow-right:hover {
+                    /* Preserve the flip for the right arrow on hover */
+                    transform: translateY(-50%) scaleX(-1) scale(1.1);
+                }
+                .arrow-left { left: 10px; }
+                .arrow-right { right: 10px; transform: translateY(-50%) scaleX(-1); }
+                
+                .zoom-panel {
+                    position: absolute;
+                    bottom: 15px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(1, 28, 18, 0.9);
+                    border: 1px solid #7393B3;
+                    border-radius: 20px;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    padding: 5px 20px;
+                    z-index: 10;
+                    box-shadow: 0 0 8px rgba(115, 147, 179, 0.4);
+                }
+                .zoom-btn {
+                    background: none;
+                    border: none;
+                    color: #7393B3;
+                    font-size: 24px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    transition: color 0.2s;
+                    padding: 0 5px;
+                }
+                .zoom-btn:hover { color: #fff; }
+                #zoomLevelText { color: #7393B3; font-weight: bold; min-width: 45px; text-align: center; font-size: 14px;}
+                
+                #comicWrapper {
+                    width: 100%;
+                    height: 100%;
+                    overflow: auto;
+                    position: relative;
+                    display: flex;
+                    align-items: center; 
+                    justify-content: center;
+                    border-radius: 18px;
+                }
+                
+                /* Custom Scrollbars for smooth aesthetics */
+                #comicWrapper::-webkit-scrollbar { width: 8px; height: 8px; }
+                #comicWrapper::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 10px; }
+                #comicWrapper::-webkit-scrollbar-thumb { background: #7393B3; border-radius: 10px; }
+                
+                #comicImg {
+                    transition: width 0.3s ease;
+                    object-fit: contain;
+                    display: block;
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Stylish SVG sword
+            const swordSvg = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30" width="40" height="16">
+                    <!-- Pommel -->
+                    <circle cx="92" cy="15" r="5" fill="#ffd700"/>
+                    <!-- Grip -->
+                    <rect x="72" y="12" width="20" height="6" fill="#555"/>
+                    <!-- Crossguard -->
+                    <rect x="67" y="2" width="5" height="26" rx="2" fill="#ffd700"/>
+                    <!-- Blade -->
+                    <path d="M67 12 L0 15 L67 18 Z" fill="#e0e0e0"/>
+                    <line x1="15" y1="15" x2="67" y2="15" stroke="#999" stroke-width="1"/>
+                </svg>
+            `;
+
             container.innerHTML = `
-                <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
-                  <img src='imccomics.png' alt='IMC Comics' style='max-width: 100%; max-height: 100%; object-fit: contain;'>
-                </div>`;            
+                <div id="comicWrapper">
+                    <img id="comicImg" src="imccomics.png" alt="IMC Comics">
+                </div>
+                
+                <button id="btnPrev" class="sword-arrow arrow-left" title="Previous Image">
+                    ${swordSvg}
+                </button>
+                <button id="btnNext" class="sword-arrow arrow-right" title="Next Image">
+                    ${swordSvg}
+                </button>
+
+                <div class="zoom-panel">
+                    <button class="zoom-btn" id="btnZoomOut">-</button>
+                    <span id="zoomLevelText">100%</span>
+                    <button class="zoom-btn" id="btnZoomIn">+</button>
+                </div>
+            `;
+
+            // Setup state logic
+            const images = ['imccomics.png', 'imcbotsuniverse.png'];
+            let currentIndex = 0;
+            let currentZoom = 100;
+
+            const imgEl = document.getElementById('comicImg');
+            const wrapper = document.getElementById('comicWrapper');
+            const txtZoom = document.getElementById('zoomLevelText');
+
+            function updateImage() {
+                imgEl.src = images[currentIndex];
+                currentZoom = 100;
+                applyZoom();
+            }
+
+            function applyZoom() {
+                imgEl.style.width = currentZoom + '%';
+                txtZoom.innerText = currentZoom + '%';
+                
+                if (currentZoom > 100) {
+                    
+                    wrapper.style.alignItems = 'flex-start';
+                    wrapper.style.justifyContent = 'flex-start';
+                    imgEl.style.maxHeight = 'none';
+                    imgEl.style.maxWidth = 'none';
+                } else {
+                    // Standard centered view
+                    wrapper.style.alignItems = 'center';
+                    wrapper.style.justifyContent = 'center';
+                    imgEl.style.maxHeight = '100%';
+                    imgEl.style.maxWidth = '100%';
+                }
+            }
+
+            // Bind Navigation Handlers
+            document.getElementById('btnPrev').addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateImage();
+            });
+
+            document.getElementById('btnNext').addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % images.length;
+                updateImage();
+            });
+
+            // Bind Zoom Handlers
+            document.getElementById('btnZoomIn').addEventListener('click', () => {
+                if (currentZoom < 400) { // Max 400% zoom limit
+                    currentZoom += 50;
+                    applyZoom();
+                }
+            });
+
+            document.getElementById('btnZoomOut').addEventListener('click', () => {
+                if (currentZoom > 100) { // Minimum 100% boundary
+                    currentZoom -= 50;
+                    applyZoom();
+                }
+            });
 
         } else if (botKey && botData[botKey]) {
             const data = botData[botKey];
@@ -148,7 +326,7 @@
                             currentItem.addEventListener('ended', changeSlide, { once: true });
                         }).catch(e => {
                             console.log("Playback interrupted:", e);
-                            slideTimeout = setTimeout(changeSlide, 4000); // Fail gracefully, move to next slide
+                            slideTimeout = setTimeout(changeSlide, 4000); 
                         });
                     } else {
                         currentItem.addEventListener('ended', changeSlide, { once: true });
