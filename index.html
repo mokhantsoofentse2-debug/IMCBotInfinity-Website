@@ -302,6 +302,7 @@
         .node-dba .scale-circle { animation-delay: 1.0s; }
         .node-asr .scale-circle { animation-delay: 1.5s; }
         .node-mstr .scale-circle { animation-delay: 2.0s; }
+        .node-pls .scale-circle { animation-delay: 2.0s; }
         .node-kng .scale-circle { animation-delay: 2.5s; }
         .node-pgtry .scale-circle { animation-delay: 3.0s; }
 
@@ -332,6 +333,8 @@
         .node-asr .scale-circle { background-color: #800080; color: #800080; }        
         .node-mstr .scale-label { color: #00FFFF; }
         .node-mstr .scale-circle { background-color: #00FFFF; color: #00FFFF; }
+        .node-pls .scale-label { color: #8a6665; }
+        .node-pls .scale-circle { background-color: #8a6665; color: #8a6665; }        
         .node-kng .scale-label { color: #FF0000; }
         .node-kng .scale-circle { background-color: #FF0000; color: #FF0000; }       
         .node-pgtry .scale-label { color: #C0C0C0; }
@@ -415,11 +418,12 @@
         li:hover .slssnc { color: #FFFFF0; }
         li:hover .dba { color: #00d062; }
         li:hover .master { color: #00FFFF; }
+        li:hover .pls { color: #8a6665; }
         li:hover .king { color: #FF2400; }
         li:hover .asura { color: #800080; }
         li:hover .prgtry { color: #BBC2CC; }
         
-        .rng, .db, .sa, .twstr, .shdw, .slt, .slssnc, .dba, .master, .prgtry, .king, .asura { transition: color 0.3s ease; }
+        .rng, .db, .sa, .twstr, .shdw, .slt, .slssnc, .dba, .master, .pls, .prgtry, .king, .asura { transition: color 0.3s ease; }
 
         @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
@@ -788,7 +792,7 @@
                 <li>IMCBOTS analyze for you and depend on market structure for trade executions.</li>
                 <li>IMCBOTS are simply a "plug and play" scenario.</li>
                 <li>IMCBOTS are capable of executing both Buy and Sell setups.</li>
-                <li>IMCBOTS: Twister, Rang, Shadow, Light, SuperSonic, Fan Edition, Apex, Flow, Deep, Frost, Master, King, Purgatory all require a minimum funding of R250, While SA(for small account trading) & Asura(any account size flexible) require a minimum funding of R100.</li>
+                <li>IMCBOTS: Twister, Rang, Shadow, Light, SuperSonic, Fan Edition, Apex, Flow, Deep, Frost, Master, Plasma, King, Purgatory all require a minimum funding of R250, While SA(for small account trading) & Asura(any account size flexible) require a minimum funding of R100.</li>
             </ul>
             <hr class="sword-line">
             <br>
@@ -823,6 +827,7 @@
                 <li><strong style="color:#00d062">IMCBOT DBA (Dragon Blaze Apex) - </strong>Is built to execute trades according to strong resistance or support levels available in the market, while taking more possible entries a moving trend offers to profit maximize. This bot maximizes while using a comfortable risk on an account balance. (Cost - R22,000)</li>
                 <li><strong style="color:#00FFFF">IMCBOT Master - </strong>Is built to maximize profits by following trend structure. It profit locks and avoids losses as soon as possible, while heading for your profits target. (Cost - R28,000)</li>
                 <li><strong style="color:#FFFFF0">IMCBOT SHDW Light - </strong>Is built to rely on previous support/resistance to be flipped into a resistance/support for a new trend direction, while it profit maximizes using trend continuation. It minimizes losses and maximizes wins. (Cost - R30,000)</li>
+                <li><strong style="color:#8a6665">IMCBOT Master - BluePlasma - </strong>Is built to maximize profits by following trend structure. Unlike master or amy other IMCBOT, it prioritizes using a high risk percent of a trading account size, & doesn't have target limits. (Cost - R34,000)</li>
                 <li><strong style="color:#088F8F">IMCBOT Flow - </strong>Is built to always follow a break of structure in order to execute its entries, while avoiding losses, profit maximizing, and using a low risk percent on any account size. It highly requires a market with very tight spreads - As it executes on a very low timeframe. (Cost - R35,000)</li>
                 <li><strong style="color:#a2d2df">IMCBOT FlowFrost - </strong>Is built to always follow a break of structure in order to execute its entries, while avoiding losses, profit maximizing, and using a low risk percent. It uses patterns to gain more profits during trend continuation. (Cost - R39,000)</li>
                 <li><strong style="color:#BBC2CC">IMCBOT Prgtry (Purgatory) - </strong>Takes every possible entry a moving trend offers to grow accounts as quickly as possible. It highly requires tight spreads for great success, which makes it a risky IMCBOT, but also a great profits provider. (Cost - R40,000)</li>
@@ -894,7 +899,13 @@
             <a href="setup.html?bot=light">
                 <img src="Sltpst.png" width="150" height="200" alt="Light Bot">
             </a>
-        </li>              
+        </li> 
+        <li>
+            <div class='master'><b>Master - BluePlasma</b></div>
+            <a href="setup.html?bot=plasma">
+                <img src="bpst.png" width="150" height="200" alt="Plasma Bot">
+            </a>
+        </li>         
         <li>
             <div class='prgtry'><b>Prgtry (Purgatory)</b></div>
             <a href="setup.html?bot=prgtry">
@@ -938,7 +949,7 @@
                 <li>I built the design of my website to be like an anime of my own universe, thanks to being an anime fan - which is what lead to my anime-like design for my IMCBOTS project.</li>
                 <li>What inspired me to build these bots was the past strategies I created but was no longer utilizing manually.</li>
                 <li>I built the Master bot first, followed by the SA bot and the rest. Each bot represents a part of my trading journey.</li>
-                <li>A friend of mine called kamohetsoe Ntoi became my team mate in the journey of my IMCBOTS - by inspiring & motivating me to not to give up on my IMCBOTS idea. He became my team mate by using my bots and having hope in their success, which lead to me making each IMCBOT a perfect masterpiece. Kamohetsoe Ntoi was the one who also influenced me to build one more last powerful & unique IMCBOT - which is the IMCBOT Flow, He is a true blessing of a friend from God to me - a brother from another mother, And that is how the IMCBOTS entirely came to be without doubt in their creation, all 15 Bots crafted with passion & dedication. </li>
+                <li>A friend of mine called kamohetsoe Ntoi became my team mate in the journey of my IMCBOTS - by inspiring & motivating me to not to give up on my IMCBOTS idea. He became my team mate by using my bots and having hope in their success, which lead to me making each IMCBOT a perfect masterpiece. Kamohetsoe Ntoi was the one who also influenced me to build one more last powerful & unique IMCBOT - which is the IMCBOT Flow, He is a true blessing of a friend from God to me - a brother from another mother, And that is how the IMCBOTS entirely came to be without doubt in their creation, all 16 Bots crafted with passion & dedication. </li>
                 <li>All IMCBOTS are perfectly built, tested on various account sizes, and perform efficiently. They are at their peak versions, & can never fail.</li>
                 <li>With my knowledge of Information Technology, knowing the markets, and extensive research - I was able to successfully automate my trading logic.</li>
             </ul>
@@ -1033,7 +1044,11 @@
             <div class="scale-node node-slssnc">
                 <span class="scale-label">SS</span>
                 <div class="scale-circle"></div>
-            </div>                  
+            </div>
+            <div class="scale-node node-pls">
+                <span class="scale-label">Pls</span>
+                <div class="scale-circle"></div>
+            </div>            
             <div class="scale-node node-pgtry">
                 <span class="scale-label">Pgt</span>
                 <div class="scale-circle"></div>
@@ -1281,9 +1296,10 @@ if (battlePlayer) {
             ]
         },
         aggressive_growth: {
-            text: "Warning: High asset volatility signature detected. IMCBOT Purgatory (Pgtry) extracts values aggressively by firing at every trend inflection option. Demands razor-sharp execution spreads.",
+            text: "Warning: High asset volatility signature detected. IMCBOT Purgatory (Pgtry) extracts values aggressively by firing at every trend inflection option (It demands razor-sharp execution spreads). The IMCBOT BluePlasma is the most aggressive risk percent user, the bot aims at using half of your account size, hoping for quick big profit returns.",
             options: [
                 { text: "Launch Purgatory Setup ➔", link: "setup.html?bot=prgtry" },
+                { text: "Launch BluePlasma Setup ➔", link: "setup.html?bot=plasma" },
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
