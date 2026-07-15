@@ -47,6 +47,7 @@
         }
         .bank-details { color: white; font-size: 1.2rem; line-height: 2.5; }
         .bnk { text-decoration: underline; font-weight: bold; }
+        
     </style>
 </head>
 <body>
@@ -95,7 +96,7 @@
                 </div>`;
                 
         } else if (botKey === 'comic') { 
-            title.innerText = "IMC-COMICS";
+            title.innerHTML = "<u>IMC-COMICS</u>";
             title.style.color = "#7393B3";
             container.style.borderColor = "#7393B3";
             container.style.padding = "0"; // Maximize viewing area
