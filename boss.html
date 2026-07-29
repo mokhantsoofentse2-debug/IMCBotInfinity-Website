@@ -20,13 +20,62 @@
             padding: 20px;
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ensure main content sits above the floating asteroids */
+        hr, h1, p, ol, .back-container {
+            position: relative;
+            z-index: 2;
         }
 
         /* --- Animations --- */
-        @keyframes pulseGlow {
-            0% { text-shadow: 0 0 5px #7a00cc; }
-            50% { text-shadow: 0 0 20px #9d00ff, 0 0 35px #b300ff; }
-            100% { text-shadow: 0 0 5px #7a00cc; }
+        @keyframes sparkleGlitter {
+            0%, 100% {
+                text-shadow: 0 0 5px #e6ccff, 0 0 10px #9d00ff, 0 0 15px #4b0082;
+                filter: brightness(1);
+            }
+            25% {
+                text-shadow: 0 0 15px #ffffff, 0 0 25px #e6ccff, 0 0 35px #9d00ff;
+                filter: brightness(1.25);
+            }
+            50% {
+                text-shadow: 0 0 8px #9d00ff, 0 0 20px #ffffff, 0 0 30px #e6ccff;
+                filter: brightness(1.1);
+            }
+            75% {
+                text-shadow: 0 0 20px #ffffff, 0 0 30px #9d00ff, 0 0 40px #7a00cc;
+                filter: brightness(1.35);
+            }
+        }
+
+        /* --- Floating Asteroids --- */
+        .asteroid {
+            position: fixed;
+            bottom: -60px;
+            background: radial-gradient(circle at 35% 35%, #5a5a6b, #1a1a24);
+            border-radius: 40% 60% 50% 40% / 50% 40% 60% 50%;
+            box-shadow: inset -4px -4px 10px rgba(0,0,0,0.9), 0 0 8px rgba(157, 0, 255, 0.4);
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.85;
+            }
+            85% {
+                opacity: 0.85;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg) scale(1.1);
+                opacity: 0;
+            }
         }
 
         /* --- Typography & Headings --- */
@@ -40,7 +89,7 @@
             margin-bottom: 10px;
             font-size: 2.8rem;
             letter-spacing: 4px;
-            animation: pulseGlow 3s infinite;
+            animation: sparkleGlitter 2s infinite ease-in-out;
         }
 
         .lore-text {
@@ -128,19 +177,22 @@
             text-shadow: 0 0 15px #9d00ff;
         }
 
+        /* --- Enhanced Image Poster Hover Animation --- */
         img {
             border-radius: 8px;
             object-fit: cover;
             box-shadow: 0 6px 15px rgba(0,0,0,0.9);
             position: relative;
             z-index: 2;
-            transition: transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(157, 0, 255, 0.2);
         }
         
         li:hover img {
-            transform: scale(1.03);
-            border-color: rgba(157, 0, 255, 0.8);
+            transform: scale(1.08) translateY(-6px) rotate(1.5deg);
+            box-shadow: 0 0 25px rgba(157, 0, 255, 0.9), inset 0 0 12px rgba(230, 204, 255, 0.6);
+            border-color: #ffffff;
+            filter: brightness(1.15) contrast(1.05);
         }
 
         /* --- Buttons & Dividers --- */
@@ -206,6 +258,32 @@
     <div class="back-container">
         <a href="index.html" class="back-btn">Return</a>
     </div>
+
+    <!-- Script to dynamically generate flowing cosmic asteroids -->
+    <script>
+        function spawnAsteroids() {
+            const count = 14; // Number of asteroids floating simultaneously
+            for (let i = 0; i < count; i++) {
+                let asteroid = document.createElement('div');
+                asteroid.className = 'asteroid';
+                
+                // Randomize size, position, and speed
+                let size = Math.random() * 35 + 15; // 15px to 50px
+                asteroid.style.width = size + 'px';
+                asteroid.style.height = size + 'px';
+                asteroid.style.left = Math.random() * 100 + 'vw';
+                
+                let duration = Math.random() * 7 + 7; // 7s to 14s travel time
+                let delay = Math.random() * 12; // Staggered start times
+                
+                asteroid.style.animationDuration = duration + 's';
+                asteroid.style.animationDelay = delay + 's';
+                
+                document.body.appendChild(asteroid);
+            }
+        }
+        window.addEventListener('DOMContentLoaded', spawnAsteroids);
+    </script>
 
 </body>
 </html>
