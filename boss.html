@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate King - Cosmic Overlord</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            /* Deep, dark space void background */
+            background-color: #05000a; 
+            background-image: url('bg99.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: 'Lexend Deca', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Animations --- */
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 5px #7a00cc; }
+            50% { text-shadow: 0 0 20px #9d00ff, 0 0 35px #b300ff; }
+            100% { text-shadow: 0 0 5px #7a00cc; }
+        }
+
+        /* --- Typography & Headings --- */
+        h1 {
+            background: linear-gradient(135deg, #4b0082 0%, #9d00ff 50%, #e6ccff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.8rem;
+            letter-spacing: 4px;
+            animation: pulseGlow 3s infinite;
+        }
+
+        .lore-text {
+            text-align: center;
+            font-style: italic;
+            color: #cda4e0;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            letter-spacing: 1.5px;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.9);
+        }
+
+        /* --- Layout & Containers --- */
+        ol {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        /* --- The Boss Card --- */
+        li {
+            background: rgba(10, 0, 20, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            /* Corrupted Purple Border */
+            border: 2px solid #7a00cc;
+            text-align: center;
+            width: 220px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(122, 0, 204, 0.3);
+        }
+
+        /* Energy Slash Hover Effect */
+        li::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(
+                to right, 
+                rgba(255,255,255,0) 0%, 
+                rgba(157, 0, 255, 0.6) 50%, 
+                rgba(255,255,255,0) 100%
+            );
+            transform: rotate(45deg) translateY(-100%);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        li:hover::before {
+            transform: rotate(45deg) translateY(100%);
+        }
+
+        li:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(157, 0, 255, 0.8);
+            border-color: #e6ccff;
+        }
+
+        li b {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #9d00ff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+
+        li:hover b {
+            color: #ffffff;
+            text-shadow: 0 0 15px #9d00ff;
+        }
+
+        img {
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.9);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(157, 0, 255, 0.2);
+        }
+        
+        li:hover img {
+            transform: scale(1.03);
+            border-color: rgba(157, 0, 255, 0.8);
+        }
+
+        /* --- Buttons & Dividers --- */
+        .sword-line {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #9d00ff, transparent);
+            box-shadow: 0 0 15px #9d00ff;
+            margin: 25px auto 25px auto;
+            border-radius: 50%;
+            width: 80%;
+        }
+
+        .back-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .back-btn {
+            background-color: rgba(10, 0, 20, 0.8);
+            color: #9d00ff;
+            padding: 12px 35px;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 2px solid #9d00ff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        }
+
+        .back-btn:hover {
+            background-color: #9d00ff;
+            color: #05000a;
+            box-shadow: 0 0 25px rgba(157, 0, 255, 0.8);
+        }
+
+    </style>
+</head>
+<body>
+
+    <hr class="sword-line">
+    
+    <h1>The Ultimate King</h1>
+    <p class="lore-text">"Bow before the abyss. Harness the dark matter of the cosmos and subjugate the universe!"</p>
+
+    <hr class="sword-line">
+    
+    <ol>
+        <li>
+            <b>Magnifier</b>
+            <a href="setup.html?bot=magnifier">
+                <img src="mgpst.png" width="150" height="200" alt="Magnifier Bot">
+            </a>
+        </li>        
+    </ol>
+
+    <hr class="sword-line">
+    
+    <div class="back-container">
+        <a href="index.html" class="back-btn">Return</a>
+    </div>
+
+</body>
+</html>
