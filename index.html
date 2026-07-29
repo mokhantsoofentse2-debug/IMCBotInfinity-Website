@@ -305,6 +305,7 @@
         .node-pls .scale-circle { animation-delay: 2.0s; }
         .node-kng .scale-circle { animation-delay: 2.5s; }
         .node-pgtry .scale-circle { animation-delay: 3.0s; }
+        .node-mg .scale-circle { animation-delay: 3.0s; }
 
         /* Unique Bot Colors */
         .node-sa .scale-label { color: #39FF14; }
@@ -339,8 +340,11 @@
         .node-kng .scale-circle { background-color: #FF0000; color: #FF0000; }       
         .node-pgtry .scale-label { color: #C0C0C0; }
         .node-pgtry .scale-circle { background-color: #C0C0C0; color: #C0C0C0; }
+        .node-mg .scale-label { color: #9F2B68; }
+        .node-mg .scale-circle { background-color: #9F2B68; color: #9F2B68; }        
         
         .final-container { text-align: center; margin: 40px 0; }
+        .IMC-Nemisis-container { text-align: center; margin: 40px 0; }
         .comics-container { text-align: center; margin: 40px 0; }
         .payment-container { text-align: center; margin: 40px 0; }
         .final-btn {
@@ -354,6 +358,17 @@
             transition: background-color 0.3s, color 0.3s;
             display: inline-block;
         }
+        .nemisis-btn {
+            background-color: #0F5132;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+        }        
         .comics-btn {
             background-color: #0F5132;
             color: white;
@@ -379,6 +394,7 @@
         .final-btn:hover { background-color: #088F8F; color: white; } 
         .bank-btn:hover { background-color: #058743; color: black; }
         .comics-btn:hover { background-color: #7393B3; color: white; }
+        .nemisis-btn:hover { background-color: #9F2B68; color: white; }
 
         footer {
             margin-top: 50px;
@@ -792,7 +808,7 @@
                 <li>IMCBOTS analyze for you and depend on market structure for trade executions.</li>
                 <li>IMCBOTS are simply a "plug and play" scenario.</li>
                 <li>IMCBOTS are capable of executing both Buy and Sell setups.</li>
-                <li>IMCBOTS: Twister, Rang, Shadow, Light, SuperSonic, Fan Edition, Apex, Flow, Deep, Frost, Master, Plasma, King, Purgatory all require a minimum funding of R250, While SA(for small account trading) & Asura(any account size flexible) require a minimum funding of R100.</li>
+                <li>IMCBOTS: Twister, Rang, Shadow, Light, SuperSonic, Fan Edition, Apex, Flow, Deep, Frost, Master, Plasma, King, Purgatory, Magnifier all require a minimum funding of R250, While SA(for small account trading) & Asura(any account size flexible) require a minimum funding of R100.</li>
             </ul>
             <hr class="sword-line">
             <br>
@@ -819,7 +835,7 @@
             </div>
             <hr class="sword-line">
             <ul>
-                <li><strong style="color:#FFA800">IMCBOT DB (Dragon Blaze) F.E - </strong>Is built to execute trades according to strong resistance or support levels available in the market. It simply executes a single trade & safely rewards higher profit amounts. As the "Fan Edition," it is of low-cost while remaining uniquely efficient among all IMCBOTS. It's the only IMCBOT that uses the highest trade-risk-percent to return good great profits from a win. (Cost - R12,000)</li>
+                <li><strong style="color:#FFA800">IMCBOT DB (Dragon Blaze) F.E - </strong>Is built to execute trades according to strong resistance or support levels available in the market. It simply executes a single trade & safely rewards higher profit amounts. As the "Fan Edition," it is of low-cost while remaining uniquely efficient among all IMCBOTS. (Cost - R12,000)</li>
                 <li><strong style="color:#6E260E">IMCBOT Rang - </strong>Is built to execute trades by following rejection levels of pullback swings. It makes profits while avoiding losses . (Cost - R15,000)</li>
                 <li><strong style="color:#4CBB17">IMCBOT SA (Small Accounts) - </strong>Is built to grow small accounts by nature. It can grow any small amount of money, provided the market used has low margin requirements. (Cost - R18,000)</li>
                 <li><strong style="color:#B2BEB5">IMCBOT Twister - </strong>Is built to capitalize profits by capturing pullback swings at their turning points, & escapes major losses. (Cost - R20,000)</li>
@@ -834,7 +850,8 @@
                 <li><strong style="color:#FFFFF0">IMCBOT ShdwLight - SuperSonic - </strong>Is built to rely on previous support/resistance to be flipped into a resistance/support for a new trend direction, while it profit maximizes using trend continuation. While it minimizes losses and maximizes wins, it also uses an additional trading technique to profit more off trend continuation unlike the ShadowLight Bot. (Cost - R46,000)</li>
                 <li><strong style="color:#FF0000">IMCBOT King - </strong>Is built to secure profits provided by a moving trend & at the correct price action. It has no limited profits target. (Cost - R50,000)</li>
                 <li><strong style="color:#004080">IMCBOT FlowDeep - </strong>Is built to utilize a very wide profit ranges in order to maximize capital. Unlike the flow bot, it doesn't stop profit maximizing. (Cost - R52,000)</li>
-                <li><strong style="color:#800080">IMCBOT Asura - </strong>Is built for maximum profit range while profit-locking. It keeps you longer in profit maximizing trends, while also having no limited profits target. It's the only Elite IMCBOT that uses the lowest trade-risk-percent, this assists the bot to be any account size flexible. (Cost - R60,000)</li>
+                <li><strong style="color:#800080">IMCBOT Asura - </strong>Is built for maximum profit range while profit-locking. It keeps you longer in profit maximizing trends, while also having no limited profits target. It's any account size flexible when lot size risking. (Cost - R60,000)</li>
+                <li><strong style="color:#9F2B68">IMCBOT Magnifier - </strong>Is built intelligently to risk without harming the account, while profit maximizing through trend continuation and focusing on strong market rejection zones for entries. (Cost - R80,000)</li>
             </ul>
             <hr class="sword-line">
         </div>
@@ -1031,6 +1048,10 @@
             </div>
             <div class="scale-node node-dp">
                 <span class="scale-label">Dp</span>
+                <div class="scale-circle"></div>
+            </div>
+            <div class="scale-node node-mg">
+                <span class="scale-label">MG</span>
                 <div class="scale-circle"></div>
             </div>              
             <div class="scale-node node-mstr">
@@ -1283,7 +1304,7 @@ if (battlePlayer) {
             ]
         },
         trend_maximizers: {
-            text: "Loading architectural trend hunters. IMCBOT Master trails and locks structural targets early. King completely removes profit ceilings. Asura relies on ultra-low risk percentages to optimize long running operations. Flow highly prioritizes structure breaks to execute its entries along a trend. Deep profit maximizes by utilizing trend continuation and a very high timeframe. Frost utilizes patterns during trend continuation in order to gain more profits. Twister relies on & captures the turning points of pullback swings, while profit maximizing. ShadowLight uses a single structure level for both support & resistance to profit maximize on a trend towards its target. ShadowLight SuperSonic utilizes a very low timframe for quicker executions and is more advanced in trend maximization unlike ShadowLight.",
+            text: "Loading architectural trend hunters. IMCBOT Master trails and locks structural targets early. King completely removes profit ceilings. Asura relies on ultra-low risk percentages to optimize long running operations. Flow highly prioritizes structure breaks to execute its entries along a trend. Deep profit maximizes by utilizing trend continuation and a very high timeframe. Frost utilizes patterns during trend continuation in order to gain more profits. Twister relies on & captures the turning points of pullback swings, while profit maximizing. ShadowLight uses a single structure level for both support & resistance to profit maximize on a trend towards its target. ShadowLight SuperSonic utilizes a very low timframe for quicker executions and is more advanced in trend maximization unlike ShadowLight. And Magnfier uses high market retest zones for high influence winning executions.",
             options: [
                 { text: "Launch Master Setup ➔", link: "setup.html?bot=master" },
                 { text: "Launch King Setup ➔", link: "setup.html?bot=king" },
@@ -1291,6 +1312,7 @@ if (battlePlayer) {
                 { text: "Launch Flow Setup ➔", link: "setup.html?bot=flow" },
                 { text: "Launch FlowFrost Setup ➔", link: "setup.html?bot=frost" },
                 { text: "Launch FlowDeep Setup ➔", link: "setup.html?bot=deep" },
+                { text: "Launch Magnifier Setup ➔", link: "setup.html?bot=magnifier" },
                 { text: "Launch Twister Setup ➔", link: "setup.html?bot=twister" },
                 { text: "Launch ShadowLight Setup ➔", link: "setup.html?bot=light" },
                 { text: "Launch ShdwLight-SuperSonic Setup ➔", link: "setup.html?bot=sprsonic" },
