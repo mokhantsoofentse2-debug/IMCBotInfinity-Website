@@ -16,7 +16,9 @@
             margin: 0; 
             font-family: sans-serif; 
         }
-        #botTitle { text-transform: uppercase; }
+        #botTitle { 
+            text-transform: uppercase; 
+        }
         #galleryContainer { 
             background: #022b1b; 
             padding: 20px; 
@@ -45,9 +47,15 @@
             transform: translate(-50%, -50%) scale(1.15); 
             z-index: 2; 
         }
-        .bank-details { color: white; font-size: 1.2rem; line-height: 2.5; }
-        .bnk { text-decoration: underline; font-weight: bold; }
-        
+        .bank-details { 
+            color: white; 
+            font-size: 1.2rem; 
+            line-height: 2.5; 
+        }
+        .bnk { 
+            text-decoration: underline; 
+            font-weight: bold; 
+        }
     </style>
 </head>
 <body>
@@ -56,8 +64,12 @@
     <div id="galleryContainer"></div>
 
     <script>
-
-        const commonImages = [ 'images/btspstr.png', 'bprz.png', 'rangprz.png', 'shdwprz.png', 'Sltprzz.png', 'slssonicprz.png', 'twistrprz.png', 'flr.png', 'froprz.png', 'fdprz.png', 'mgprz.png', 'images/btscrtr.png', 'btscl.jpg', 'imcbots1.mp4', 'imcbotscvr.mp4' ];
+        const commonImages = [ 
+            'images/btspstr.png', 'bprz.png', 'rangprz.png', 'shdwprz.png', 
+            'Sltprzz.png', 'slssonicprz.png', 'twistrprz.png', 'flr.png', 
+            'froprz.png', 'fdprz.png', 'mgprz.png', 'images/btscrtr.png', 
+            'btscl.jpg', 'imcbots1.mp4', 'imcbotscvr.mp4' 
+        ];
 
         const botData = {
             'db - fe': { video:['dbv.mp4' ], images: ['images/db3.PNG', 'trades/db4.PNG', 'trades/db5.PNG', 'trades/db6.png', 'trades/db7.png', 'dbcl.jpg', ...commonImages], color: '#FFA800' },
@@ -68,15 +80,15 @@
             'prgtry': { video:['pgtryv.mp4' ], images: ['trades/prgtry2.PNG', 'trades/prgtry3.PNG', 'trades/prgtry4.PNG', 'trades/prgtry5.PNG', 'trades/prgtry6.png', 'trades/prgtry7.png', 'trades/prgtry8.png', 'trades/prgtry9.png', 'trades/prgtry10.png', 'pgtryccll.jpg',  ...commonImages],  color: '#BBC2CC' }, 
             'king': { video:['kngv.mp4' ], images: ['trades/king2.PNG', 'trades/king8.PNG', 'trades/king9.png', 'trades/king4.jpg', 'trades/king5.PNG', 'kngcl.jpg', ...commonImages],  color: '#FF2400' }, 
             'asura': { video:['asrv.mp4' ], images: ['trades/asura1.PNG', 'trades/asura6.jpg', 'trades/asura4.png', 'trades/asura5.png', 'asuracll.jpg', ...commonImages], color: '#800080' },
-            'twister': { video:['twstcvr.mp4' ], images: ['twstr1.PNG', 'twstr3.PNG', 'twstr4.png', 'twstr5.PNG', 'twstr6.PNG', 'twstr7.png', 'twstcl.jpg',...commonImages], color: '#B2BEB5' },
-            'rang': { video:['rangcvr.mp4' ], images: ['rng1.PNG', 'rng2.PNG', 'rng4.png', 'rngcl.png',...commonImages], color: '#6E260E' },
-            'shadow': { video:['shadow.mp4' ], images: ['shdw2.PNG', 'shdwcl.jpg',...commonImages], color: '#FFAE42' },
-            'light': { video:['sltcvr.mp4' ], images: [ 'sltcl.jpg',...commonImages], color: '#FFFFF0' },
-            'sprsonic': { video:['slsscvr.mp4' ], images: [ 'ss2.PNG', 'ss3.PNG', 'sspcl.jpg',...commonImages], color: '#FFFFF0' },
-            'deep': { video:['dpcvr.mp4' ], images: [ 'dp1.PNG', 'dp2.PNG', 'dp3.png', 'dpcl.jpg',...commonImages], color: '#04003f' },
-            'frost': { video:['frocvr.mp4' ], images: [ 'fr1.PNG', 'frocl.jpg',...commonImages], color: '#a2d2df' },
-            'plasma': { video:['plcvr.mp4' ], images: [ 'bp1.PNG', 'bp2.PNG', 'bp4.png', 'plcl.jpg',...commonImages], color: '#8a6665' },
-            'magnifier': { images: [ 'mgcv.png', 'mg1.PNG', 'mgcl.png',...commonImages], color: '#9F2B68' }
+            'twister': { video:['twstcvr.mp4' ], images: ['twstr1.PNG', 'twstr3.PNG', 'twstr4.png', 'twstr5.PNG', 'twstr6.PNG', 'twstr7.png', 'twstcl.jpg', ...commonImages], color: '#B2BEB5' },
+            'rang': { video:['rangcvr.mp4' ], images: ['rng1.PNG', 'rng2.PNG', 'rng4.png', 'rngcl.png', ...commonImages], color: '#6E260E' },
+            'shadow': { video:['shadow.mp4' ], images: ['shdw2.PNG', 'shdwcl.jpg', ...commonImages], color: '#FFAE42' },
+            'light': { video:['sltcvr.mp4' ], images: [ 'sltcl.jpg', ...commonImages], color: '#FFFFF0' },
+            'sprsonic': { video:['slsscvr.mp4' ], images: [ 'ss2.PNG', 'ss3.PNG', 'sspcl.jpg', ...commonImages], color: '#FFFFF0' },
+            'deep': { video:['dpcvr.mp4' ], images: [ 'dp1.PNG', 'dp2.PNG', 'dp3.png', 'dpcl.jpg', ...commonImages], color: '#04003f' },
+            'frost': { video:['frocvr.mp4' ], images: [ 'fr1.PNG', 'frocl.jpg', ...commonImages], color: '#a2d2df' },
+            'plasma': { video:['plcvr.mp4' ], images: [ 'bp1.PNG', 'bp2.PNG', 'bp4.png', 'plcl.jpg', ...commonImages], color: '#8a6665' },
+            'magnifier': { images: [ 'mgcv.png', 'mg1.PNG', 'mgcl.png', ...commonImages], color: '#9F2B68' }
         };
 
         const params = new URLSearchParams(window.location.search);
@@ -101,9 +113,8 @@
             title.innerHTML = `<u>IMCBOTS-COMICS</u><br><span style="display: block; text-align: center; font-size: 60%; text-transform: lowercase;">(read)</span>`;
             title.style.color = "#7393B3";
             container.style.borderColor = "#7393B3";
-            container.style.padding = "0"; // Maximize viewing area
+            container.style.padding = "0"; 
             
-            // Inject styling for comic controls
             const style = document.createElement('style');
             style.innerHTML = `
                 .sword-arrow {
@@ -129,7 +140,6 @@
                     transform: translateY(-50%) scale(1.1);
                 }
                 .arrow-right:hover {
-                    /* Preserve the flip for the right arrow on hover */
                     transform: translateY(-50%) scaleX(-1) scale(1.1);
                 }
                 .arrow-left { left: 10px; }
@@ -174,7 +184,6 @@
                     border-radius: 18px;
                 }
                 
-                /* Custom Scrollbars for smooth aesthetics */
                 #comicWrapper::-webkit-scrollbar { width: 8px; height: 8px; }
                 #comicWrapper::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 10px; }
                 #comicWrapper::-webkit-scrollbar-thumb { background: #7393B3; border-radius: 10px; }
@@ -189,16 +198,11 @@
             `;
             document.head.appendChild(style);
 
-            // Stylish SVG sword
             const swordSvg = `
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 30" width="40" height="16">
-                    <!-- Pommel -->
                     <circle cx="92" cy="15" r="5" fill="#ffd700"/>
-                    <!-- Grip -->
                     <rect x="72" y="12" width="20" height="6" fill="#555"/>
-                    <!-- Crossguard -->
                     <rect x="67" y="2" width="5" height="26" rx="2" fill="#ffd700"/>
-                    <!-- Blade -->
                     <path d="M67 12 L0 15 L67 18 Z" fill="#e0e0e0"/>
                     <line x1="15" y1="15" x2="67" y2="15" stroke="#999" stroke-width="1"/>
                 </svg>
@@ -223,8 +227,24 @@
                 </div>
             `;
 
-            // Setup state logic
-            const images = ['imccomics.png', 'issue0.png', 'imcbotsuniverse.png', 'imcbotscrft.png', 'issue1.png', 'comic2.png', 'plcl.jpg', 'cvr2.png', 'issue2.png', 'rngcl.png', 'issue3.png', 'comic4.png', 'dbacl.jpg', 'cover4.png', 'issue4.png', 'issue42.png', 'pgtryccll.jpg', 'cover5.png', 'issue5.png', 'issue52.png', 'kngcl.jpg', 'cover6.png', 'issue6.png', 'mastercl.jpg', 'cover7.png', 'issue7.png', 'issue72.png', 'saccl.jpg', 'cover8.png', 'issue8.png', 'issue802.png', 'twstcl.jpg', 'cover9.png', 'issue9.png', 'issue92.png', 'shdwcl.jpg', 'cover10.png', 'issue10.png', 'issue101.png', 'sspcl.jpg', 'cover11.png', 'issue11.png', 'issue111.png', 'dpcl.jpg', 'cover12.png', 'issue12.png', 'issue121.png', 'asuracll.jpg', 'cover13.png', 'issue013.png', 'issue132.png', 'end13.png', 'cover14.png', 'issue14.png', 'issue141.png', 'issue142.png', 'end14.png', 'cover15.png', 'issue15.png', 'issue151.png', 'end15.png', 'cover16.png', 'issue16.png', 'issue161.png', 'issue162.png', 'end16.png', 'cover17.png', 'issue17.png', 'issue171.png', 'issue172.png', 'end17.png', 'cover18.png', 'issue18.png', 'issue181.png', 'issue182.png', 'end18.png', 'cover19.png', 'issue19.png', 'issue191.png', 'issue192.png', 'end19.png.', 'cover20.png', 'issue20.png', 'issue201.png', 'issue202.png', 'issue203.png', 'end20.png' ];
+            const images = [
+                'imccomics.png', 'issue0.png', 'imcbotsuniverse.png', 'imcbotscrft.png', 'issue1.png', 
+                'comic2.png', 'plcl.jpg', 'cvr2.png', 'issue2.png', 'rngcl.png', 'issue3.png', 
+                'comic4.png', 'dbacl.jpg', 'cover4.png', 'issue4.png', 'issue42.png', 'pgtryccll.jpg', 
+                'cover5.png', 'issue5.png', 'issue52.png', 'kngcl.jpg', 'cover6.png', 'issue6.png', 
+                'mastercl.jpg', 'cover7.png', 'issue7.png', 'issue72.png', 'saccl.jpg', 'cover8.png', 
+                'issue8.png', 'issue802.png', 'twstcl.jpg', 'cover9.png', 'issue9.png', 'issue92.png', 
+                'shdwcl.jpg', 'cover10.png', 'issue10.png', 'issue101.png', 'sspcl.jpg', 'cover11.png', 
+                'issue11.png', 'issue111.png', 'dpcl.jpg', 'cover12.png', 'issue12.png', 'issue121.png', 
+                'asuracll.jpg', 'cover13.png', 'issue013.png', 'issue132.png', 'end13.png', 'cover14.png', 
+                'issue14.png', 'issue141.png', 'issue142.png', 'end14.png', 'cover15.png', 'issue15.png', 
+                'issue151.png', 'end15.png', 'cover16.png', 'issue16.png', 'issue161.png', 'issue162.png', 
+                'end16.png', 'cover17.png', 'issue17.png', 'issue171.png', 'issue172.png', 'end17.png', 
+                'cover18.png', 'issue18.png', 'issue181.png', 'issue182.png', 'end18.png', 'cover19.png', 
+                'issue19.png', 'issue191.png', 'issue192.png', 'end19.png', 'cover20.png', 'issue20.png', 
+                'issue201.png', 'issue202.png', 'issue203.png', 'end20.png' 
+            ];
+            
             let currentIndex = 0;
             let currentZoom = 100;
 
@@ -243,13 +263,11 @@
                 txtZoom.innerText = currentZoom + '%';
                 
                 if (currentZoom > 100) {
-                    
                     wrapper.style.alignItems = 'flex-start';
                     wrapper.style.justifyContent = 'flex-start';
                     imgEl.style.maxHeight = 'none';
                     imgEl.style.maxWidth = 'none';
                 } else {
-                    // Standard centered view
                     wrapper.style.alignItems = 'center';
                     wrapper.style.justifyContent = 'center';
                     imgEl.style.maxHeight = '100%';
@@ -257,7 +275,6 @@
                 }
             }
 
-            // Bind Navigation Handlers
             document.getElementById('btnPrev').addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + images.length) % images.length;
                 updateImage();
@@ -268,16 +285,15 @@
                 updateImage();
             });
 
-            // Bind Zoom Handlers
             document.getElementById('btnZoomIn').addEventListener('click', () => {
-                if (currentZoom < 400) { // Max 400% zoom limit
+                if (currentZoom < 400) { 
                     currentZoom += 50;
                     applyZoom();
                 }
             });
 
             document.getElementById('btnZoomOut').addEventListener('click', () => {
-                if (currentZoom > 100) { // Minimum 100% boundary
+                if (currentZoom > 100) { 
                     currentZoom -= 50;
                     applyZoom();
                 }
@@ -288,6 +304,7 @@
             title.innerHTML = `<u>${botKey} Showcase</u><br><span style="display: block; text-align: center; font-size: 60%;">(watch)</span>`;
             title.style.color = data.color;
             container.style.borderColor = data.color;
+            
             const allMedia = [...(data.video || []), ...data.images];
             allMedia.forEach((src) => {
                 let mediaElement;
@@ -296,8 +313,6 @@
                     mediaElement.src = src;
                     mediaElement.muted = true;
                     mediaElement.playsInline = true;
-                    
-                
                     mediaElement.setAttribute('muted', 'true');
                     mediaElement.setAttribute('playsinline', 'true');
                     mediaElement.setAttribute('preload', 'auto');
@@ -309,7 +324,6 @@
                 container.appendChild(mediaElement);
             });
 
-            // SMART CYCLING LOGIC
             let current = 0;
             const items = document.querySelectorAll('.media-item');
             let slideTimeout;
@@ -319,9 +333,7 @@
                 currentItem.classList.add('active');
 
                 if (currentItem.tagName === 'VIDEO') {
-                    
                     try { currentItem.currentTime = 0; } catch (e) {}
-                    
                     
                     let playPromise = currentItem.play();
                     if (playPromise !== undefined) {
@@ -334,9 +346,7 @@
                     } else {
                         currentItem.addEventListener('ended', changeSlide, { once: true });
                     }
-
                 } else {
-                    // It's an image, stay on it for 5 seconds
                     slideTimeout = setTimeout(changeSlide, 5000);
                 }
             }
@@ -346,15 +356,13 @@
                 currentItem.classList.remove('active');
 
                 if (currentItem.tagName === 'VIDEO') {
-                    currentItem.pause(); // Stop it safely
+                    currentItem.pause(); 
                 }
-                // Move to next item index
+                
                 current = (current + 1) % items.length;
-                // Fire up the next asset
                 startSlide();
             }
             
-            // Start the very first slide execution
             if (items.length > 0) {
                 startSlide();
             }
