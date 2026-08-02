@@ -189,11 +189,13 @@
                 #comicWrapper::-webkit-scrollbar-thumb { background: #7393B3; border-radius: 10px; }
                 
                 #comicImg {
-                    transition: width 0.3s ease;
+                    transition: width 0.3s ease, height 0.3s ease;
                     object-fit: contain;
                     display: block;
                     max-width: 100%;
                     max-height: 100%;
+                    /* Stop the flex container from squashing the image */
+                    flex-shrink: 0; 
                 }
             `;
             document.head.appendChild(style);
@@ -267,11 +269,15 @@
                     wrapper.style.justifyContent = 'flex-start';
                     imgEl.style.maxHeight = 'none';
                     imgEl.style.maxWidth = 'none';
+                    // Allow the height to scale naturally with the width
+                    imgEl.style.height = 'auto';
                 } else {
                     wrapper.style.alignItems = 'center';
                     wrapper.style.justifyContent = 'center';
                     imgEl.style.maxHeight = '100%';
                     imgEl.style.maxWidth = '100%';
+                    // Reset height so it centers perfectly again
+                    imgEl.style.height = '100%'; 
                 }
             }
 
