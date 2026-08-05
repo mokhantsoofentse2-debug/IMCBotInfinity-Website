@@ -855,8 +855,8 @@
                 
                 <!-- The Zoom Buttons -->
                 <div class="zoom-controls">
-                    <button onclick="zoomImage(this, 20)">Zoom In (+)</button>
-                    <button onclick="zoomImage(this, -20)">Zoom Out (-)</button>
+                    <button onclick="event.stopPropagation(); zoomImage(this, 20)">Zoom In (+)</button>
+                    <button onclick="event.stopPropagation(); zoomImage(this, -20)">Zoom Out (-)</button>
                 </div>
             
                 <!-- The Scrollable Container -->
@@ -876,8 +876,8 @@
                 
                 <!-- The Zoom Buttons -->
                 <div class="zoom-controls">
-                    <button onclick="zoomImage(this, 20)">Zoom In (+)</button>
-                    <button onclick="zoomImage(this, -20)">Zoom Out (-)</button>
+                    <button onclick="event.stopPropagation(); zoomImage(this, 20)">Zoom In (+)</button>
+                    <button onclick="event.stopPropagation(); zoomImage(this, -20)">Zoom Out (-)</button>
                 </div>
             
                 <!-- The Scrollable Container -->
