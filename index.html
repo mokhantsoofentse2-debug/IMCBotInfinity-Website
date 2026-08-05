@@ -87,26 +87,59 @@
             overflow: hidden;
         }        
 
-        /* ---- BOTS CRITERIA ------*/
-        #criteria {
-            background: #011508;
-            margin-top: 20px;
-            border-radius: 15px;
-            border: 1px solid #058743;
-            width: 100%;
-            height: 300px;
-            position: relative;
-            overflow: hidden;
-        }   
-        .crtr {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+    /* ---- BOTS CRITERIA & TIMEFRAMES ZOOM CONTAINERS ------*/
+    .image-zoom-wrapper {
+        position: relative;
+        margin-top: 20px;
+        width: 100%;
+        max-width: 800px; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .criteria-container {
+        background: #011508;
+        border-radius: 15px;
+        border: 1px solid #058743;
+        width: 100%;
+        height: 300px;
+        overflow: auto; 
+    }   
+    
+    .crtr {
+        width: 100%;
+        height: auto;
+        min-width: 100%;
+        transition: width 0.3s ease;
+        display: block; 
+    }
+    
+    /* Zoom Buttons Styling */
+    .zoom-controls {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+    }
+    
+    .zoom-controls button {
+        background-color: rgba(1, 21, 8, 0.85);
+        color: #39FF14;
+        border: 1px solid #058743;
+        border-radius: 5px;
+        padding: 5px 12px;
+        cursor: pointer;
+        font-weight: bold;
+        font-family: 'Lexend Deca', sans-serif;
+        transition: 0.3s;
+    }
+    
+    .zoom-controls button:hover {
+        background-color: #058743;
+        color: white;
+    }
         
         /* --- BOTS' BATTLE --- */
         #battle {
@@ -818,8 +851,20 @@
                  <strong style="color: #058743; text-decoration: underline;">USAGE CRITERIA:</strong>
              </div>
             <hr class="sword-line">
-            <div id="criteria">
-                <img src="images/btscrtr.png" class="crtr">
+            <div class="image-zoom-wrapper">
+                
+                <!-- The Zoom Buttons -->
+                <div class="zoom-controls">
+                    <button onclick="zoomImage(this, 20)">Zoom In (+)</button>
+                    <button onclick="zoomImage(this, -20)">Zoom Out (-)</button>
+                </div>
+            
+                <!-- The Scrollable Container -->
+                <div class="criteria-container">
+                    <!-- Change the src to match your specific images -->
+                    <img src="images/btscrtr.png" class="crtr" alt="Trading Info">
+                </div>
+            
             </div>
             <br>
              <hr class="sword-line">
@@ -827,8 +872,19 @@
                  <strong style="color: #058743; text-decoration: underline;">Trading-Timeframes(MT5 Desktop Platform):</strong>
              </div>
             <hr class="sword-line">
-            <div id="criteria">
-                <img src="botstframes.png" class="crtr">
+            <div class="image-zoom-wrapper">
+                
+                <!-- The Zoom Buttons -->
+                <div class="zoom-controls">
+                    <button onclick="zoomImage(this, 20)">Zoom In (+)</button>
+                    <button onclick="zoomImage(this, -20)">Zoom Out (-)</button>
+                </div>
+            
+                <!-- The Scrollable Container -->
+                <div class="criteria-container">
+                    <img src="botstframes.png" class="crtr" alt="Trading Info">
+                </div>
+            
             </div>
             <br>
             <hr class="sword-line">
