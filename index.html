@@ -1232,22 +1232,25 @@
 (function initializeCounter() {
     const counterElement = document.getElementById('viewCount');
     
-    // You can change '416' to whatever your current approximate view count is.
+    // 1. Get the last known count from local storage, or default to 416
     const fallbackCount = localStorage.getItem('cachedViewCount') || 416;
 
+    // 2. Fetch from the API (The "/up" at the end tells the server to add +1 to the count on every load)
     fetch('https://api.counterapi.dev/v1/indicemocashbots/visits/up')
         .then(response => response.json())
         .then(data => {
             const views = data.count;
+            
+            // 3. Display the updated live count with commas 
             counterElement.textContent = views.toLocaleString();
             
-            // Save this new successful count to the browser's local storage
+            // 4. Save this new successful count to the browser's local storage for next time
             localStorage.setItem('cachedViewCount', views);
         })
         .catch(error => {
             console.error("Counter API unavailable:", error);
             
-            // If the fetch fails, display the last known number instead of "Offline"
+            // 5. If the fetch fails (no internet/server down), display the last known number
             counterElement.textContent = parseInt(fallbackCount).toLocaleString();
         });
 })();
