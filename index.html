@@ -1228,20 +1228,29 @@
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    /* --- REAL GLOBAL WEB VIEW COUNTER --- */
-    (function initializeCounter() {
-        const counterElement = document.getElementById('viewCount');
+/* --- REAL GLOBAL WEB VIEW COUNTER --- */
+(function initializeCounter() {
+    const counterElement = document.getElementById('viewCount');
+    
+    // You can change '416' to whatever your current approximate view count is.
+    const fallbackCount = localStorage.getItem('cachedViewCount') || 416;
 
-        fetch('https://api.counterapi.dev/v1/indicemocashbots/visits/up')
-            .then(response => response.json())
-            .then(data => {
-                counterElement.textContent = data.count.toLocaleString();
-            })
-            .catch(error => {
-                console.error("Counter API unavailable:", error);
-                counterElement.textContent = "Offline";
-            });
-    })();
+    fetch('https://api.counterapi.dev/v1/indicemocashbots/visits/up')
+        .then(response => response.json())
+        .then(data => {
+            const views = data.count;
+            counterElement.textContent = views.toLocaleString();
+            
+            // Save this new successful count to the browser's local storage
+            localStorage.setItem('cachedViewCount', views);
+        })
+        .catch(error => {
+            console.error("Counter API unavailable:", error);
+            
+            // If the fetch fails, display the last known number instead of "Offline"
+            counterElement.textContent = parseInt(fallbackCount).toLocaleString();
+        });
+})();
 
     function toggleBio() {
         const content = document.getElementById('bioContent');
