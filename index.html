@@ -1251,13 +1251,20 @@
     // 1. Get the last known count from local storage, or default to 416
     const fallbackCount = localStorage.getItem('cachedViewCount') || 416;
 
-    // 2. Fetch from the API (The "/up" at the end tells the server to add +1 to the count on every load)
-    fetch('https://api.counterapi.dev/v1/indicemocashbots/visits/up')
-        .then(response => response.json())
+    // 2. Fetch from the new V2 API
+    fetch('https://api.counterapi.dev/v2/indicemocashbots/visits/up')
+        .then(response => {
+            // fetch doesn't automatically throw an error on 404/500, so we check manually
+            if (!response.ok) {
+                throw new Error(`API returned status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            const views = data.count;
+            // 3. V2 uses 'value' instead of 'count'
+            const views = data.value; 
             
-            // 3. Display the updated live count with commas 
+            // Display the updated live count with commas 
             counterElement.textContent = views.toLocaleString();
             
             // 4. Save this new successful count to the browser's local storage for next time
