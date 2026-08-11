@@ -1247,34 +1247,28 @@
 /* --- REAL GLOBAL WEB VIEW COUNTER --- */
 (function initializeCounter() {
     const counterElement = document.getElementById('viewCount');
-    
-    // 1. Get the last known count from local storage, or default to 416
-    const fallbackCount = localStorage.getItem('cachedViewCount') || 416;
+    if (!counterElement) return;
 
-    // 2. Fetch from the new V2 API
-    fetch('https://api.counterapi.dev/v2/indicemocashbots/visits/up')
+    // 1. Get saved count if offline, otherwise start fresh
+    const fallbackCount = localStorage.getItem('cachedViewCount') || 0;
+
+    // 2. Use CodeTabs API (works reliably on GitHub Pages)
+    fetch('https://api.codetabs.com/v1/counter?key=indicemocashbots')
         .then(response => {
-            // fetch doesn't automatically throw an error on 404/500, so we check manually
-            if (!response.ok) {
-                throw new Error(`API returned status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error("API network error");
             return response.json();
         })
         .then(data => {
-            // 3. V2 uses 'value' instead of 'count'
-            const views = data.value; 
-            
-            // Display the updated live count with commas 
-            counterElement.textContent = views.toLocaleString();
-            
-            // 4. Save this new successful count to the browser's local storage for next time
+            // 3. Read the visit count
+            const views = data.count;
+
+            // 4. Display the count and save it to storage
+            counterElement.textContent = Number(views).toLocaleString();
             localStorage.setItem('cachedViewCount', views);
         })
         .catch(error => {
             console.error("Counter API unavailable:", error);
-            
-            // 5. If the fetch fails (no internet/server down), display the last known number
-            counterElement.textContent = parseInt(fallbackCount).toLocaleString();
+            counterElement.textContent = Number(fallbackCount).toLocaleString();
         });
 })();
 
