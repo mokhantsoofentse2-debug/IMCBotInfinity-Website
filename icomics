@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMCCOMICS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #011a0d; 
+            background-image: url('.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: 'Lexend Deca', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Animations --- */
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 5px #088F8F; }
+            50% { text-shadow: 0 0 20px #088F8F, 0 0 30px #088F8F; }
+            100% { text-shadow: 0 0 5px #088F8F; }
+        }
+
+        /* --- Typography & Headings --- */
+        h1 {
+            background: linear-gradient(135deg, #058743 0%, #088F8F 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            animation: pulseGlow 3s infinite;
+        }
+
+        .lore-text {
+            text-align: center;
+            font-style: italic;
+            color: #a4e0e0;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* --- Layout & Containers --- */
+        ol {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        /* --- The Flow Card --- */
+        li {
+            background: rgba(0, 20, 10, 0.85);
+            padding: 25px;
+            border-radius: 15px;
+            /* Using Flow's signature cyan */
+            border: 2px solid #088F8F;
+            text-align: center;
+            width: 220px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(8, 143, 143, 0.2);
+        }
+
+        /* Sword Slash Hover Effect */
+        li::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(
+                to right, 
+                rgba(255,255,255,0) 0%, 
+                rgba(8, 143, 143, 0.6) 50%, 
+                rgba(255,255,255,0) 100%
+            );
+            transform: rotate(45deg) translateY(-100%);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        li:hover::before {
+            transform: rotate(45deg) translateY(100%);
+        }
+
+        li:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(8, 143, 143, 0.6);
+            border-color: #ffffff;
+        }
+
+        li b {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: #088F8F;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        li:hover b {
+            color: #ffffff;
+            text-shadow: 0 0 10px #088F8F;
+        }
+
+        img {
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+        
+        li:hover img {
+            transform: scale(1.02);
+        }
+
+        /* --- Buttons & Dividers --- */
+        .sword-line {
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #088F8F, transparent);
+            box-shadow: 0 0 12px #088F8F;
+            margin: 25px auto 25px auto;
+            border-radius: 50%;
+            width: 80%;
+        }
+
+        .back-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .back-btn {
+            background-color: transparent;
+            color: #088F8F;
+            padding: 12px 35px;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 2px solid #088F8F;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-btn:hover {
+            background-color: #088F8F;
+            color: #011a0d;
+            box-shadow: 0 0 20px rgba(8, 143, 143, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+
+    <hr class="sword-line">
+    
+    <h1>IMCCOMICS</h1>
+    <p class="lore-text">
+	"I am a comic book writer, inspired by my trading bots, 
+	I built a universe of their own, where they rule and save the world from despair, 
+	and all in hopes for my readers to appreciate my great inventions."
+	</p>
+
+    <hr class="sword-line">
+    
+    <ol>
+        <li>
+            <b>Flow</b>
+            <img src=".png" width="150" height="200" alt="issue">
+            <a href = ""><p>R0.00</p></a>
+        </li> 
+        <li>
+            <b>Deep</b>
+            <img src=".png" width="150" height="200" alt="issue">
+            <a href = ""><p>R0.00</p></a>
+        </li> 
+        <li>
+            <b>Frost</b>
+            <img src=".png" width="150" height="200" alt="issue">
+            <a href = ""><p>R0.00</p></a>
+        </li>         
+    </ol>
+
+    <hr class="sword-line">
+    
+    <div class="back-container">
+        <a href="index.html" class="back-btn">Back</a>
+    </div>
+
+</body>
+</html>
