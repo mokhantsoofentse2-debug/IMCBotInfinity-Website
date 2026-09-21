@@ -4,400 +4,446 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMCCOMICS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --neon-green: #39ff14;
+            --dark-green: #022b14;
+            --comic-yellow: #ffde00;
+            --border-black: #0c0c0c;
+        }
+
         body {
-            background-color: #011a0d; 
-            background-image: url('comiccvr.png');
-            background-size: cover;
+            /* Halftone dot pattern background */
+            background-color: var(--dark-green);
+            background-image: radial-gradient(rgba(57, 255, 20, 0.15) 15%, transparent 16%), 
+                              radial-gradient(rgba(57, 255, 20, 0.15) 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
             background-attachment: fixed;
-            background-position: center;
-            font-family: 'Lexend Deca', sans-serif;
-            color: white;
+            
+            font-family: 'Comic Neue', cursive, sans-serif;
+            color: #fff;
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 40px 20px;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* --- Animations --- */
         @keyframes pulseGlow {
-            0% { text-shadow: 0 0 5px #088F8F; }
-            50% { text-shadow: 0 0 20px #088F8F, 0 0 30px #088F8F; }
-            100% { text-shadow: 0 0 5px #088F8F; }
+            0% { text-shadow: 4px 4px 0px var(--border-black), 0 0 10px var(--neon-green); }
+            50% { text-shadow: 4px 4px 0px var(--border-black), 0 0 30px var(--neon-green), 0 0 40px var(--neon-green); }
+            100% { text-shadow: 4px 4px 0px var(--border-black), 0 0 10px var(--neon-green); }
         }
 
-        /* --- Typography & Headings --- */
         h1 {
-            background: linear-gradient(135deg, #058743 0%, #088F8F 50%, #ffffff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: 'Bangers', cursive;
+            color: var(--neon-green);
+            font-size: 5rem;
             text-transform: uppercase;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            animation: pulseGlow 3s infinite;
+            letter-spacing: 4px;
+            margin: 0 0 20px 0;
+            padding: 10px 40px;
+            /* Neo-brutalist border and background for the title */
+            background-color: #fff;
+            border: 6px solid var(--border-black);
+            transform: rotate(-2deg);
+            animation: pulseGlow 2.5s infinite alternate;
+            z-index: 10;
         }
 
         .lore-text {
+            background-color: var(--comic-yellow);
+            color: var(--border-black);
+            font-family: 'Comic Neue', cursive;
+            font-weight: 700;
+            font-size: 1.3rem;
             text-align: center;
-            font-style: italic;
-            color: #a4e0e0;
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            max-width: 700px;
+            margin: 20px auto 50px auto;
+            padding: 25px 30px;
+            border: 5px solid var(--border-black);
+            box-shadow: 10px 10px 0px var(--neon-green);
+            position: relative;
+            transform: rotate(1deg);
+            line-height: 1.5;
         }
 
-        /* --- Layout & Containers --- */
+        /* The little 'tape' or marker on the narration box */
+        .lore-text::before {
+            content: "ORIGIN STORY";
+            position: absolute;
+            top: -18px;
+            left: -5px;
+            background: var(--neon-green);
+            color: var(--border-black);
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            padding: 2px 10px;
+            border: 3px solid var(--border-black);
+            letter-spacing: 1px;
+            transform: rotate(-3deg);
+        }
+
         ol {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1400px;
             list-style: none;
             padding: 0;
-            margin-bottom: 40px;
+            margin: 0 auto 50px auto;
         }
 
-        /* --- The Flow Card --- */
         li {
-            background: rgba(0, 20, 10, 0.85);
-            padding: 25px;
-            border-radius: 15px;
-            /* Using Flow's signature cyan */
-            border: 2px solid #088F8F;
+            background: #fff;
+            padding: 20px;
+            border: 5px solid var(--border-black);
+            box-shadow: 10px 10px 0px var(--neon-green);
             text-align: center;
-            width: 220px;
+            display: flex;
+            flex-direction: column;
             position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 0 15px rgba(8, 143, 143, 0.2);
-        }
-
-        /* Sword Slash Hover Effect */
-        li::before {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: -100%;
-            width: 300%;
-            height: 300%;
-            background: linear-gradient(
-                to right, 
-                rgba(255,255,255,0) 0%, 
-                rgba(8, 143, 143, 0.6) 50%, 
-                rgba(255,255,255,0) 100%
-            );
-            transform: rotate(45deg) translateY(-100%);
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        li:hover::before {
-            transform: rotate(45deg) translateY(100%);
+            transition: all 0.2s ease-in-out;
+            transform: translate(0, 0);
         }
 
         li:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(8, 143, 143, 0.6);
-            border-color: #ffffff;
+            transform: translate(-5px, -5px) scale(1.02);
+            box-shadow: 15px 15px 0px var(--neon-green);
+            z-index: 2;
         }
 
         li b {
             display: block;
             margin-bottom: 15px;
-            font-size: 1.4rem;
-            color: #088F8F;
+            font-size: 1.8rem;
+            font-family: 'Bangers', cursive;
+            color: var(--border-black);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: color 0.3s ease;
-            position: relative;
-            z-index: 2;
+            letter-spacing: 1px;
+            line-height: 1.1;
+            min-height: 2.2em; /* Keeps titles aligned if lengths vary */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        li:hover b {
-            color: #ffffff;
-            text-shadow: 0 0 10px #088F8F;
-        }
-
-        img {
-            border-radius: 8px;
+        li img {
+            width: 100%;
+            height: 380px;
             object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.8);
-            position: relative;
-            z-index: 2;
-            transition: transform 0.3s ease;
-        }
-        
-        li:hover img {
-            transform: scale(1.02);
+            object-position: top;
+            border: 4px solid var(--border-black);
+            margin-bottom: 20px;
+            background-color: #eee; /* Placeholder color before load */
         }
 
-        /* --- Buttons & Dividers --- */
-        .sword-line {
-            border: none;
-            height: 3px;
-            background: linear-gradient(to right, transparent, #088F8F, transparent);
-            box-shadow: 0 0 12px #088F8F;
-            margin: 25px auto 25px auto;
-            border-radius: 50%;
-            width: 80%;
+        li a {
+            text-decoration: none;
+            margin-top: auto;
+        }
+
+        li a p {
+            background-color: var(--neon-green);
+            color: var(--border-black);
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            margin: 0;
+            padding: 10px;
+            border: 4px solid var(--border-black);
+            box-shadow: 5px 5px 0px var(--border-black);
+            transition: all 0.1s ease;
+        }
+
+        li a:hover p {
+            background-color: var(--comic-yellow);
+            transform: translate(2px, 2px);
+            box-shadow: 3px 3px 0px var(--border-black);
         }
 
         .back-container {
-            text-align: center;
-            margin: 40px 0;
+            margin: 40px 0 80px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .back-btn {
-            background-color: transparent;
-            color: #088F8F;
-            padding: 12px 35px;
+            background-color: #fff;
+            color: var(--border-black);
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            padding: 15px 50px;
             text-decoration: none;
-            border-radius: 8px;
-            border: 2px solid #088F8F;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
+            border: 5px solid var(--border-black);
+            box-shadow: 8px 8px 0px var(--neon-green);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            transition: all 0.1s ease;
+            transform: rotate(-2deg);
         }
 
         .back-btn:hover {
-            background-color: #088F8F;
-            color: #011a0d;
-            box-shadow: 0 0 20px rgba(8, 143, 143, 0.5);
+            background-color: var(--neon-green);
+            color: var(--border-black);
+            transform: translate(4px, 4px) rotate(0deg);
+            box-shadow: 4px 4px 0px var(--border-black);
         }
-
+        
+        /* Decorative dividers */
+        .comic-divider {
+            width: 100%;
+            max-width: 800px;
+            height: 10px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--neon-green),
+                var(--neon-green) 10px,
+                var(--border-black) 10px,
+                var(--border-black) 20px
+            );
+            border: 3px solid var(--border-black);
+            margin: 20px 0 40px 0;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 3.5rem; }
+            .lore-text { font-size: 1.1rem; padding: 15px; }
+            ol { grid-template-columns: 1fr; padding: 0 10px; }
+            li img { height: auto; aspect-ratio: 2/3; }
+        }
     </style>
 </head>
 <body>
 
-    <hr class="sword-line">
-    
     <h1>IMCCOMICS</h1>
-    <p class="lore-text">
-	"I am a comic book writer, inspired by my trading bots, 
-	I built a universe of their own, where they rule and save the world from despair, 
-	and all in hopes for my readers to appreciate my great inventions."
-	</p>
+    
+    <div class="comic-divider"></div>
+    
+    <div class="lore-text">
+        "I am a comic book writer, inspired by my trading bots. 
+        I built a universe of their own, where they rule and save the world from despair, 
+        and all in hopes for my readers to appreciate my great inventions."
+    </div>
 
-    <hr class="sword-line">
+    <div class="comic-divider"></div>
     
     <ol>
         <li>
             <b>IMCBOTS Universe - Pilot</b>
-            <img src="issue0.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R10.00</p></a>
+            <img src="issue0.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R10.00</p></a>
         </li> 
         <li>
             <b>A New Sword</b>
-            <img src="issue1.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R12.00</p></a>
+            <img src="issue1.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R12.00</p></a>
         </li> 
         <li>
             <b>A Sword Forgotten</b>
-            <img src="cvr2.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R12.00</p></a>
+            <img src="cvr2.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R12.00</p></a>
         </li> 
         <li>
             <b>Dragon Blaze</b>
-            <img src="issue3.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R13.00</p></a>
+            <img src="issue3.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R13.00</p></a>
         </li> 
         <li>
             <b>The Cosmic Ronin</b>
-            <img src="cover4.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R15.00</p></a>
+            <img src="cover4.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R15.00</p></a>
         </li> 
         <li>
-            <b>The king Is Born</b>
-            <img src="cover5.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R20.00</p></a>
+            <b>The King Is Born</b>
+            <img src="cover5.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R20.00</p></a>
         </li>
         <li>
             <b>The Master Brothers</b>
-            <img src="cover6.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R18.00</p></a>
+            <img src="cover6.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R18.00</p></a>
         </li>
         <li>
             <b>The Ninja Ronin</b>
-            <img src="cover7.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R20.00</p></a>
+            <img src="cover7.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R20.00</p></a>
         </li> 
         <li>
             <b>The Storm Ronin</b>
-            <img src="cover8.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R21.00</p></a>
+            <img src="cover8.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R21.00</p></a>
         </li> 
         <li>
             <b>A Steel Forged Ronin</b>
-            <img src="cover9.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R19.00</p></a>
+            <img src="cover9.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R19.00</p></a>
         </li> 
         <li>
             <b>A Battlefield Uncovers Lightning</b>
-            <img src="cover10.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R19.00</p></a>
+            <img src="cover10.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R19.00</p></a>
         </li> 
         <li>
             <b>The Great Protector Of The Waters</b>
-            <img src="cover11.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R19.00</p></a>
+            <img src="cover11.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R19.00</p></a>
         </li> 
         <li>
             <b>Captain Of The IMC Ronin</b>
-            <img src="cover12.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R27.00</p></a>
+            <img src="cover12.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R27.00</p></a>
         </li> 
         <li>
             <b>Victory Is For The Legends!</b>
-            <img src="cover13.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R28.00</p></a>
+            <img src="cover13.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R28.00</p></a>
         </li>
         <li>
             <b>The Legendary Flames Unite</b>
-            <img src="cover14.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R30.00</p></a>
+            <img src="cover14.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R30.00</p></a>
         </li>
+
         <li>
             <b>Trouble Meets The Skies!</b>
-            <img src="cover15.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R32.00</p></a>
+            <img src="cover15.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R32.00</p></a>
         </li> 
         <li>
             <b>The Animals Need Saving!</b>
-            <img src="cover16.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R35.00</p></a>
+            <img src="cover16.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R35.00</p></a>
         </li>
         <li>
             <b>The Enemy's Origins</b>
-            <img src="cover17.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R30.00</p></a>
+            <img src="cover17.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R30.00</p></a>
         </li>
         <li>
             <b>Beware Dark Void!</b>
-            <img src="cover18.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R36.00</p></a>
+            <img src="cover18.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R36.00</p></a>
         </li>
         <li>
             <b>An Unseen Invasion</b>
-            <img src="cover19.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R38.00</p></a>
+            <img src="cover19.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R38.00</p></a>
         </li>
         <li>
             <b>Ancient Trouble Awakes In Depths</b>
-            <img src="cover20.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R42.00</p></a>
+            <img src="cover20.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R42.00</p></a>
         </li> 
         <li>
             <b>IMC Origins</b>
-            <img src="cover21.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R24.00</p></a>
+            <img src="cover21.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R24.00</p></a>
         </li> 
         <li>
             <b>Tech Creates An Enemy To The World</b>
-            <img src="cover22.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R40.00</p></a>
+            <img src="cover22.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R40.00</p></a>
         </li> 
         <li>
             <b>The Brink Of A World War!</b>
-            <img src="cover23.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R33.00</p></a>
+            <img src="cover23.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R33.00</p></a>
         </li>
         <li>
             <b>A Haunted Town!</b>
-            <img src="cover24.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R43.00</p></a>
+            <img src="cover24.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R43.00</p></a>
         </li> 
         <li>
             <b>The Swords Craftman Becomes A Ronin!</b>
-            <img src="cover25.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R38.00</p></a>
+            <img src="cover25.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R38.00</p></a>
         </li> 
         <li>
             <b>Lightning Vs A Cosmic Threat</b>
-            <img src="cover26.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R30.00</p></a>
+            <img src="cover26.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R30.00</p></a>
         </li>
         <li>
             <b>The King Ronin Vs A Sickening Threat</b>
-            <img src="cover27.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R37.00</p></a>
+            <img src="cover27.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R37.00</p></a>
         </li> 
         <li>
             <b>Crime Retaliates On A Ronin?</b>
-            <img src="cover28.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R39.00</p></a>
+            <img src="cover28.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R39.00</p></a>
         </li> 
         <li>
             <b>Blinding Light</b>
-            <img src="cover29.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R37.00</p></a>
+            <img src="cover29.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R37.00</p></a>
         </li> 
+
         <li>
             <b>Dark Depths Become A Trap</b>
-            <img src="cover30.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R32.00</p></a>
+            <img src="cover30.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R32.00</p></a>
         </li> 
         <li>
-            <b>A Civil War - Apex Vs FanEdition </b>
-            <img src="cover31.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R31.00</p></a>
+            <b>A Civil War - Apex Vs FanEdition</b>
+            <img src="cover31.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R31.00</p></a>
         </li> 
         <li>
             <b>The Nile Croc's!</b>
-            <img src="cover32.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R35.00</p></a>
+            <img src="cover32.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R35.00</p></a>
         </li> 
         <li>
             <b>An Iconic Race</b>
-            <img src="cover33.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R30.00</p></a>
+            <img src="cover33.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R30.00</p></a>
         </li> 
         <li>
             <b>Science Shrunk The Ronin</b>
-            <img src="cover34.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R32.00</p></a>
+            <img src="cover34.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R32.00</p></a>
         </li> 
         <li>
             <b>Trouble Meets The Crimson Flames!</b>
-            <img src="cover35.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R41.00</p></a>
+            <img src="cover35.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R41.00</p></a>
         </li> 
         <li>
             <b>Steel Meets Steel!</b>
-            <img src="cover36.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R50.00</p></a>
+            <img src="cover36.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R50.00</p></a>
         </li> 
         <li>
             <b>Sports Or Culvery?</b>
-            <img src="cover37.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R50.00</p></a>
+            <img src="cover37.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R50.00</p></a>
         </li> 
         <li>
             <b>What If A Dream Was A Trap</b>
-            <img src="cover38.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R43.00</p></a>
+            <img src="cover38.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R43.00</p></a>
         </li> 
         <li>
             <b>Chaos Among The Stars</b>
-            <img src="cover39.png" width="150" height="200" alt="issue">
-            <a href = "setup.html?bot=bank"><p>R70.00</p></a>
+            <img src="cover39.png" alt="issue">
+            <a href="setup.html?bot=bank"><p>R70.00</p></a>
         </li> 
     </ol>
 
-    <hr class="sword-line">
+    <div class="comic-divider"></div>
     
     <div class="back-container">
-        <a href="index.html" class="back-btn">Back</a>
+        <a href="index.html" class="back-btn">Back to Main</a>
     </div>
 
 </body>
