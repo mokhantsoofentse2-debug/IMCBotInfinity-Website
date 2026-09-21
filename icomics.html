@@ -25,7 +25,6 @@
             min-height: 100vh;
         }
 
-        /* Watercolor Background Effect */
         .watercolor-bg {
             position: fixed;
             top: 0;
@@ -35,13 +34,11 @@
             background-image: url('comiccvr.png');
             background-size: cover;
             background-position: center;
-            /* Water paint filter stack: blur, supersaturate, contrast adjustments */
             filter: blur(15px) saturate(200%) contrast(110%) brightness(0.6);
-            transform: scale(1.1); /* Prevents blurred edges from showing background */
+            transform: scale(1.1); 
             z-index: -2;
         }
 
-        /* Dark Cinematic Vignette */
         .vignette-overlay {
             position: fixed;
             top: 0;
@@ -87,7 +84,6 @@
             pointer-events: none;
         }
 
-        /* Custom Scrollbar for sleekness */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -105,25 +101,19 @@
 </head>
 <body class="antialiased selection:bg-[#058743] selection:text-white">
 
-    <!-- Cinematic Background Layers -->
     <div class="watercolor-bg"></div>
     <div class="vignette-overlay"></div>
 
-    <!-- Main Content Wrapper -->
-    <main class="relative z-10 flex flex-col items-center px-4 py-16 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <main class="relative z-10 flex flex-col items-center px-4 py-12 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         
-        <!-- Header Section -->
-        <header class="flex flex-col items-center justify-center mb-16 w-full text-center">
-            
-            <!-- Circular Emerald Icon Badge -->
-            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-[#09a855] box-glow-emerald overflow-hidden mb-8 transition-transform duration-500 hover:scale-105 flex items-center justify-center bg-black/50 p-1">
-                <img src="comiccvr.png" alt="IMC Badge" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/200/02592d/fff?text=IMC'">
+        <header class="flex flex-col items-center justify-center mb-12 md:mb-16 w-full text-center">
+            <div class="w-28 h-28 md:w-40 md:h-40 rounded-full border-2 border-[#09a855] box-glow-emerald overflow-hidden mb-6 md:mb-8 transition-transform duration-500 hover:scale-105 flex items-center justify-center bg-black/50 p-1">
+                <img src="comiccvr.png" alt="IMC Badge" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/200/02592d/fff?text=IMC'">
             </div>
             
-            <!-- Glowing Cinematic Title -->
-            <div class="flex items-center justify-center gap-4 md:gap-6 mb-4">
-                <i class="fas fa-book-open text-4xl md:text-5xl text-[#09a855] drop-shadow-[0_0_10px_rgba(9,168,85,0.8)]"></i>
-                <h1 class="font-cinzel text-5xl md:text-7xl lg:text-8xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-[#058743] text-glow-emerald m-0 leading-none">
+            <div class="flex items-center justify-center gap-3 md:gap-6 mb-4">
+                <i class="fas fa-book-open text-3xl md:text-5xl text-[#09a855] drop-shadow-[0_0_10px_rgba(9,168,85,0.8)]"></i>
+                <h1 class="font-cinzel text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-[#058743] text-glow-emerald m-0 leading-none">
                     IMCCOMICS
                 </h1>
             </div>
@@ -131,549 +121,506 @@
             <div class="h-1 w-24 bg-gradient-to-r from-transparent via-[#09a855] to-transparent mt-4 opacity-70"></div>
         </header>
 
-        <!-- Cinematic Lore Text -->
-        <div class="glass-card max-w-3xl w-full rounded-2xl p-8 md:p-10 mb-20 relative overflow-hidden group">
-            <!-- Subtle glow accent inside card -->
+        <div class="glass-card max-w-3xl w-full rounded-2xl p-6 md:p-10 mb-16 md:mb-20 relative overflow-hidden group">
             <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#058743] rounded-full blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
-            
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#02592d] via-[#09a855] to-[#02592d]"></div>
             
-            <h2 class="font-cinzel text-xl text-[#09a855] tracking-widest uppercase mb-4 text-center font-bold">Origin Story</h2>
+            <h2 class="font-cinzel text-lg md:text-xl text-[#09a855] tracking-widest uppercase mb-4 text-center font-bold">Origin Story</h2>
             
-            <p class="text-lg md:text-xl text-gray-300 text-center leading-relaxed font-light italic">
+            <p class="text-base sm:text-lg md:text-xl text-gray-300 text-center leading-relaxed font-light italic">
                 "I am a comic book writer, inspired by my trading bots. 
                 I built a universe of their own, where they rule and save the world from despair, 
                 and all in hopes for my readers to appreciate my great inventions."
             </p>
         </div>
 
-        <!-- Comic Grid -->
-        <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full list-none p-0 m-0 mb-24">
+        <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 w-full list-none p-0 m-0 mb-20 md:mb-24">
             
-            <!-- Issue 0 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <!-- Standardized Comic Card Pattern -->
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     IMCBOTS Universe - Pilot
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="issue0.png" alt="Issue 0 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <!-- Changed to aspect-[2/3] for perfect responsiveness -->
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="issue0.png" alt="Issue 0 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R10.00</p>
                 </a>
             </li>
 
-            <!-- Issue 1 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     A New Sword
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="issue1.png" alt="Issue 1 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="issue1.png" alt="Issue 1 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R12.00</p>
                 </a>
             </li>
 
-            <!-- Issue 2 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     A Sword Forgotten
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cvr2.png" alt="Issue 2 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cvr2.png" alt="Issue 2 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R12.00</p>
                 </a>
             </li>
 
-            <!-- Issue 3 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Dragon Blaze
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="issue3.png" alt="Issue 3 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="issue3.png" alt="Issue 3 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R13.00</p>
                 </a>
             </li>
 
-            <!-- Issue 4 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Cosmic Ronin
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover4.png" alt="Issue 4 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover4.png" alt="Issue 4 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R15.00</p>
                 </a>
             </li>
 
-            <!-- Issue 5 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The King Is Born
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover5.png" alt="Issue 5 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover5.png" alt="Issue 5 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R20.00</p>
                 </a>
             </li>
 
-            <!-- Issue 6 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Master Brothers
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover6.png" alt="Issue 6 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover6.png" alt="Issue 6 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R18.00</p>
                 </a>
             </li>
 
-            <!-- Issue 7 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Ninja Ronin
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover7.png" alt="Issue 7 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover7.png" alt="Issue 7 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R20.00</p>
                 </a>
             </li>
 
-            <!-- Issue 8 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Storm Ronin
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover8.png" alt="Issue 8 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover8.png" alt="Issue 8 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R21.00</p>
                 </a>
             </li>
 
-            <!-- Issue 9 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     A Steel Forged Ronin
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover9.png" alt="Issue 9 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover9.png" alt="Issue 9 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R19.00</p>
                 </a>
             </li>
 
-            <!-- Issue 10 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     A Battlefield Uncovers Lightning
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover10.png" alt="Issue 10 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover10.png" alt="Issue 10 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R19.00</p>
                 </a>
             </li>
 
-            <!-- Issue 11 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Great Protector Of The Waters
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover11.png" alt="Issue 11 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover11.png" alt="Issue 11 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R19.00</p>
                 </a>
             </li>
 
-            <!-- Issue 12 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Captain Of The IMC Ronin
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover12.png" alt="Issue 12 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover12.png" alt="Issue 12 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R27.00</p>
                 </a>
             </li>
 
-            <!-- Issue 13 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Victory Is For The Legends!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover13.png" alt="Issue 13 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover13.png" alt="Issue 13 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R28.00</p>
                 </a>
             </li>
 
-            <!-- Issue 14 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Legendary Flames Unite
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover14.png" alt="Issue 14 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover14.png" alt="Issue 14 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R30.00</p>
                 </a>
             </li>
 
-            <!-- Issue 15 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Trouble Meets The Skies!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover15.png" alt="Issue 15 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover15.png" alt="Issue 15 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R32.00</p>
                 </a>
             </li>
 
-            <!-- Issue 16 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Animals Need Saving!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover16.png" alt="Issue 16 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover16.png" alt="Issue 16 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R35.00</p>
                 </a>
             </li>
 
-            <!-- Issue 17 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Enemy's Origins
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover17.png" alt="Issue 17 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover17.png" alt="Issue 17 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R30.00</p>
                 </a>
             </li>
 
-            <!-- Issue 18 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Beware Dark Void!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover18.png" alt="Issue 18 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover18.png" alt="Issue 18 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R36.00</p>
                 </a>
             </li>
 
-            <!-- Issue 19 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     An Unseen Invasion
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover19.png" alt="Issue 19 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover19.png" alt="Issue 19 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R38.00</p>
                 </a>
             </li>
 
-            <!-- Issue 20 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Ancient Trouble Awakes In Depths
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover20.png" alt="Issue 20 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover20.png" alt="Issue 20 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R42.00</p>
                 </a>
             </li>
 
-            <!-- Issue 21 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     IMC Origins
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover21.png" alt="Issue 21 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover21.png" alt="Issue 21 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R24.00</p>
                 </a>
             </li>
 
-            <!-- Issue 22 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Tech Creates An Enemy To The World
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover022.png" alt="Issue 22 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover022.png" alt="Issue 22 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R40.00</p>
                 </a>
             </li>
 
-            <!-- Issue 23 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Brink Of A World War!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover23.png" alt="Issue 23 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover23.png" alt="Issue 23 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R33.00</p>
                 </a>
             </li>
 
-            <!-- Issue 24 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     A Haunted Town!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover24.png" alt="Issue 24 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover24.png" alt="Issue 24 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R43.00</p>
                 </a>
             </li>
 
-            <!-- Issue 25 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Swords Craftman Becomes A Ronin!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover25.png" alt="Issue 25 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover25.png" alt="Issue 25 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R38.00</p>
                 </a>
             </li>
 
-            <!-- Issue 26 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Lightning Vs A Cosmic Threat
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover26.png" alt="Issue 26 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover26.png" alt="Issue 26 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R30.00</p>
                 </a>
             </li>
 
-            <!-- Issue 27 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The King Ronin Vs A Sickening Threat
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover27.png" alt="Issue 27 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover27.png" alt="Issue 27 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R37.00</p>
                 </a>
             </li>
 
-            <!-- Issue 28 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Crime Retaliates On A Ronin?
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover28.png" alt="Issue 28 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover28.png" alt="Issue 28 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R39.00</p>
                 </a>
             </li>
 
-            <!-- Issue 29 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Blinding Light
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover29.png" alt="Issue 29 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover29.png" alt="Issue 29 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R37.00</p>
                 </a>
             </li>
 
-            <!-- Issue 30 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Dark Depths Become A Trap
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover30.png" alt="Issue 30 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover30.png" alt="Issue 30 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R32.00</p>
                 </a>
             </li>
 
-            <!-- Issue 31 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     A Civil War - Apex Vs FanEdition
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover31.png" alt="Issue 31 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover31.png" alt="Issue 31 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R31.00</p>
                 </a>
             </li>
 
-            <!-- Issue 32 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     The Nile Croc's!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover32.png" alt="Issue 32 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover32.png" alt="Issue 32 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R35.00</p>
                 </a>
             </li>
 
-            <!-- Issue 33 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     An Iconic Race
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover33.png" alt="Issue 33 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover33.png" alt="Issue 33 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R30.00</p>
                 </a>
             </li>
 
-            <!-- Issue 34 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Science Shrunk The Ronin
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover34.png" alt="Issue 34 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover34.png" alt="Issue 34 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R32.00</p>
                 </a>
             </li>
 
-            <!-- Issue 35 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Trouble Meets The Crimson Flames!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover35.png" alt="Issue 35 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover35.png" alt="Issue 35 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R41.00</p>
                 </a>
             </li>
 
-            <!-- Issue 36 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Steel Meets Steel!
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover36.png" alt="Issue 36 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover36.png" alt="Issue 36 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R50.00</p>
                 </a>
             </li>
 
-            <!-- Issue 37 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Sports Or Culvery?
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover37.png" alt="Issue 37 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover37.png" alt="Issue 37 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R50.00</p>
                 </a>
             </li>
 
-            <!-- Issue 38 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     What If A Dream Was A Trap
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover38.png" alt="Issue 38 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover38.png" alt="Issue 38 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R43.00</p>
                 </a>
             </li>
 
-            <!-- Issue 39 -->
-            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
-                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+            <li class="glass-card rounded-2xl p-4 md:p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group max-w-sm mx-auto sm:max-w-none w-full">
+                <b class="font-cinzel text-base md:text-xl text-white text-center uppercase tracking-wide mb-3 min-h-[3.5rem] md:min-h-[3rem] flex items-center justify-center">
                     Chaos Among The Stars
                 </b>
-                <div class="comic-image-container mb-5 flex-grow">
-                    <img src="cover39.png" alt="Issue 39 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                <div class="comic-image-container mb-4 md:mb-5 w-full flex-grow">
+                    <img src="cover39.png" alt="Issue 39 Cover" class="w-full h-full aspect-[2/3] object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
                 </div>
-                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-2.5 md:py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
                     <p class="font-bold tracking-widest text-white m-0">R70.00</p>
                 </a>
             </li>
         </ol>
 
-        <!-- Cinematic Back Button -->
         <div class="w-full flex justify-center mb-8">
-            <a href="index.html" class="glass-card inline-block px-10 py-4 rounded-full border border-[#058743]/50 text-white font-cinzel font-bold text-xl uppercase tracking-widest transition-all duration-300 hover:bg-[#058743]/20 hover:scale-105 hover:shadow-[0_0_30px_rgba(5,135,67,0.6)]">
+            <a href="index.html" class="glass-card inline-block px-8 py-3 md:px-10 md:py-4 rounded-full border border-[#058743]/50 text-white font-cinzel font-bold text-lg md:text-xl uppercase tracking-widest transition-all duration-300 hover:bg-[#058743]/20 hover:scale-105 hover:shadow-[0_0_30px_rgba(5,135,67,0.6)]">
                 Back to Main
             </a>
         </div>
