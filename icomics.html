@@ -3,466 +3,682 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMCCOMICS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <title>IMCCOMICS - Cinematic Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body {
-            background-color: #39FF14 !important; /* Neon Green */
-        }
-    </style>
-</head>
-<body class="text-black font-sans min-h-screen">
-    <header class="flex flex-col items-center justify-center pt-12 pb-8 px-4 w-full">
-        <!-- Circular Emerald Green Frame with comiccvr.png -->
-        <div class="w-36 h-36 bg-[#50C878] rounded-full border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] flex items-center justify-center overflow-hidden mb-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[10px_10px_0_0_rgba(0,0,0,1)] relative z-10">
-            <img src="comiccvr.png" alt="IMC Comics Logo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/200x200/50C878/000000?text=IMG';">
-        </div>
-        
-        <!-- Existing Neo-Brutalist Title with Book Icon -->
-        <div class="bg-white border-4 border-black px-6 py-4 shadow-[8px_8px_0_0_rgba(0,0,0,1)] transform -rotate-2 flex items-center gap-4 text-black">
-            <i class="fas fa-book-open text-4xl sm:text-5xl"></i>
-            <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tighter m-0 leading-none">IMCCOMICS</h1>
-        </div>
-    </header>
-
-            --neon-green: #39ff14;
-            --dark-green: #022b14;
-            --comic-yellow: #ffde00;
-            --border-black: #0c0c0c;
+        :root {
+            --emerald-dark: #02592d;
+            --emerald-base: #058743;
+            --emerald-light: #09a855;
+            --emerald-glow: rgba(5, 135, 67, 0.7);
         }
 
         body {
-            background-color: var(--dark-green);
-            /* Translucent dark green/black overlay merged with your background image */
-            background-image: linear-gradient(rgba(2, 43, 20, 0.85), rgba(12, 12, 12, 0.95)), url('comiccvr.png');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            
-            font-family: 'Comic Neue', cursive, sans-serif;
-            color: #fff;
+            background-color: #000;
+            font-family: 'Montserrat', sans-serif;
+            color: #e5e7eb;
             margin: 0;
-            padding: 40px 20px;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            min-height: 100vh;
         }
 
-        @keyframes pulseGlow {
-            0% { text-shadow: 4px 4px 0px var(--border-black), 0 0 10px var(--neon-green); }
-            50% { text-shadow: 4px 4px 0px var(--border-black), 0 0 30px var(--neon-green), 0 0 40px var(--neon-green); }
-            100% { text-shadow: 4px 4px 0px var(--border-black), 0 0 10px var(--neon-green); }
+        /* Watercolor Background Effect */
+        .watercolor-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('comiccvr.png');
+            background-size: cover;
+            background-position: center;
+            /* Water paint filter stack: blur, supersaturate, contrast adjustments */
+            filter: blur(15px) saturate(200%) contrast(110%) brightness(0.6);
+            transform: scale(1.1); /* Prevents blurred edges from showing background */
+            z-index: -2;
         }
 
-        h1 {
-            font-family: 'Bangers', cursive;
-            color: var(--neon-green);
-            font-size: 5rem;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 4px;
-            margin: 0 0 20px 0;
-            padding: 10px 40px;
-            /* Neo-brutalist border and background for the title */
-            background-color: #fff;
-            border: 6px solid var(--border-black);
-            transform: rotate(-2deg);
-            animation: pulseGlow 2.5s infinite alternate;
-            z-index: 10;
+        /* Dark Cinematic Vignette */
+        .vignette-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.95) 85%, #000000 100%);
+            z-index: -1;
         }
 
-        .lore-text {
-            background-color: var(--comic-yellow);
-            color: var(--border-black);
-            font-family: 'Comic Neue', cursive;
-            font-weight: 700;
-            font-size: 1.3rem;
-            text-align: center;
-            max-width: 700px;
-            margin: 20px auto 50px auto;
-            padding: 25px 30px;
-            border: 5px solid var(--border-black);
-            box-shadow: 10px 10px 0px var(--neon-green);
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .text-glow-emerald {
+            text-shadow: 0 0 15px var(--emerald-glow), 0 0 30px rgba(5, 135, 67, 0.4);
+        }
+
+        .box-glow-emerald {
+            box-shadow: 0 0 25px var(--emerald-glow);
+        }
+        
+        .glass-card {
+            background: rgba(10, 15, 12, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(5, 135, 67, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .comic-image-container {
             position: relative;
-            transform: rotate(1deg);
-            line-height: 1.5;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
         }
-
-        /* The little 'tape' or marker on the narration box */
-        .lore-text::before {
-            content: "ORIGIN STORY";
+        
+        .comic-image-container::after {
+            content: '';
             position: absolute;
-            top: -18px;
-            left: -5px;
-            background: var(--neon-green);
-            color: var(--border-black);
-            font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
-            padding: 2px 10px;
-            border: 3px solid var(--border-black);
-            letter-spacing: 1px;
-            transform: rotate(-3deg);
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 40%);
+            pointer-events: none;
         }
 
-        ol {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 40px;
-            width: 100%;
-            max-width: 1400px;
-            list-style: none;
-            padding: 0;
-            margin: 0 auto 50px auto;
+        /* Custom Scrollbar for sleekness */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
-
-        li {
-            background: #fff;
-            padding: 20px;
-            border: 5px solid var(--border-black);
-            box-shadow: 10px 10px 0px var(--neon-green);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            transition: all 0.2s ease-in-out;
-            transform: translate(0, 0);
+        ::-webkit-scrollbar-track {
+            background: #050505;
         }
-
-        li:hover {
-            transform: translate(-5px, -5px) scale(1.02);
-            box-shadow: 15px 15px 0px var(--neon-green);
-            z-index: 2;
+        ::-webkit-scrollbar-thumb {
+            background: var(--emerald-dark);
+            border-radius: 5px;
         }
-
-        li b {
-            display: block;
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-            font-family: 'Bangers', cursive;
-            color: var(--border-black);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.1;
-            min-height: 2.2em; /* Keeps titles aligned if lengths vary */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        li img {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            object-position: top;
-            border: 4px solid var(--border-black);
-            margin-bottom: 20px;
-            background-color: #eee; /* Placeholder color before load */
-        }
-
-        li a {
-            text-decoration: none;
-            margin-top: auto;
-        }
-
-        li a p {
-            background-color: var(--neon-green);
-            color: var(--border-black);
-            font-family: 'Bangers', cursive;
-            font-size: 1.8rem;
-            margin: 0;
-            padding: 10px;
-            border: 4px solid var(--border-black);
-            box-shadow: 5px 5px 0px var(--border-black);
-            transition: all 0.1s ease;
-        }
-
-        li a:hover p {
-            background-color: var(--comic-yellow);
-            transform: translate(2px, 2px);
-            box-shadow: 3px 3px 0px var(--border-black);
-        }
-
-        .back-container {
-            margin: 40px 0 80px 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .back-btn {
-            background-color: #fff;
-            color: var(--border-black);
-            font-family: 'Bangers', cursive;
-            font-size: 2.5rem;
-            padding: 15px 50px;
-            text-decoration: none;
-            border: 5px solid var(--border-black);
-            box-shadow: 8px 8px 0px var(--neon-green);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.1s ease;
-            transform: rotate(-2deg);
-        }
-
-        .back-btn:hover {
-            background-color: var(--neon-green);
-            color: var(--border-black);
-            transform: translate(4px, 4px) rotate(0deg);
-            box-shadow: 4px 4px 0px var(--border-black);
-        }
-        
-        /* Decorative dividers */
-        .comic-divider {
-            width: 100%;
-            max-width: 800px;
-            height: 10px;
-            background: repeating-linear-gradient(
-                45deg,
-                var(--neon-green),
-                var(--neon-green) 10px,
-                var(--border-black) 10px,
-                var(--border-black) 20px
-            );
-            border: 3px solid var(--border-black);
-            margin: 20px 0 40px 0;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            h1 { font-size: 3.5rem; }
-            .lore-text { font-size: 1.1rem; padding: 15px; }
-            ol { grid-template-columns: 1fr; padding: 0 10px; }
-            li img { height: auto; aspect-ratio: 2/3; }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--emerald-base);
         }
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-[#058743] selection:text-white">
 
-    <h1>IMCCOMICS <i class="fas fa-book-open"></i></h1>
-    
-    <div class="comic-divider"></div>
-    
-    <div class="lore-text">
-        "I am a comic book writer, inspired by my trading bots. 
-        I built a universe of their own, where they rule and save the world from despair, 
-        and all in hopes for my readers to appreciate my great inventions."
-    </div>
+    <!-- Cinematic Background Layers -->
+    <div class="watercolor-bg"></div>
+    <div class="vignette-overlay"></div>
 
-    <div class="comic-divider"></div>
-    
-    <ol>
-        <li>
-            <b>IMCBOTS Universe - Pilot</b>
-            <img src="issue0.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R10.00</p></a>
-        </li> 
-        <li>
-            <b>A New Sword</b>
-            <img src="issue1.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R12.00</p></a>
-        </li> 
-        <li>
-            <b>A Sword Forgotten</b>
-            <img src="cvr2.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R12.00</p></a>
-        </li> 
-        <li>
-            <b>Dragon Blaze</b>
-            <img src="issue3.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R13.00</p></a>
-        </li> 
-        <li>
-            <b>The Cosmic Ronin</b>
-            <img src="cover4.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R15.00</p></a>
-        </li> 
-        <li>
-            <b>The King Is Born</b>
-            <img src="cover5.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R20.00</p></a>
-        </li>
-        <li>
-            <b>The Master Brothers</b>
-            <img src="cover6.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R18.00</p></a>
-        </li>
-        <li>
-            <b>The Ninja Ronin</b>
-            <img src="cover7.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R20.00</p></a>
-        </li> 
-        <li>
-            <b>The Storm Ronin</b>
-            <img src="cover8.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R21.00</p></a>
-        </li> 
-        <li>
-            <b>A Steel Forged Ronin</b>
-            <img src="cover9.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R19.00</p></a>
-        </li> 
-        <li>
-            <b>A Battlefield Uncovers Lightning</b>
-            <img src="cover10.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R19.00</p></a>
-        </li> 
-        <li>
-            <b>The Great Protector Of The Waters</b>
-            <img src="cover11.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R19.00</p></a>
-        </li> 
-        <li>
-            <b>Captain Of The IMC Ronin</b>
-            <img src="cover12.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R27.00</p></a>
-        </li> 
-        <li>
-            <b>Victory Is For The Legends!</b>
-            <img src="cover13.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R28.00</p></a>
-        </li>
-        <li>
-            <b>The Legendary Flames Unite</b>
-            <img src="cover14.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R30.00</p></a>
-        </li>
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 flex flex-col items-center px-4 py-16 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        
+        <!-- Header Section -->
+        <header class="flex flex-col items-center justify-center mb-16 w-full text-center">
+            
+            <!-- Circular Emerald Icon Badge -->
+            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-[#09a855] box-glow-emerald overflow-hidden mb-8 transition-transform duration-500 hover:scale-105 flex items-center justify-center bg-black/50 p-1">
+                <img src="comiccvr.png" alt="IMC Badge" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/200/02592d/fff?text=IMC'">
+            </div>
+            
+            <!-- Glowing Cinematic Title -->
+            <div class="flex items-center justify-center gap-4 md:gap-6 mb-4">
+                <i class="fas fa-book-open text-4xl md:text-5xl text-[#09a855] drop-shadow-[0_0_10px_rgba(9,168,85,0.8)]"></i>
+                <h1 class="font-cinzel text-5xl md:text-7xl lg:text-8xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-[#058743] text-glow-emerald m-0 leading-none">
+                    IMCCOMICS
+                </h1>
+            </div>
+            
+            <div class="h-1 w-24 bg-gradient-to-r from-transparent via-[#09a855] to-transparent mt-4 opacity-70"></div>
+        </header>
 
-        <li>
-            <b>Trouble Meets The Skies!</b>
-            <img src="cover15.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R32.00</p></a>
-        </li> 
-        <li>
-            <b>The Animals Need Saving!</b>
-            <img src="cover16.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R35.00</p></a>
-        </li>
-        <li>
-            <b>The Enemy's Origins</b>
-            <img src="cover17.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R30.00</p></a>
-        </li>
-        <li>
-            <b>Beware Dark Void!</b>
-            <img src="cover18.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R36.00</p></a>
-        </li>
-        <li>
-            <b>An Unseen Invasion</b>
-            <img src="cover19.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R38.00</p></a>
-        </li>
-        <li>
-            <b>Ancient Trouble Awakes In Depths</b>
-            <img src="cover20.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R42.00</p></a>
-        </li> 
-        <li>
-            <b>IMC Origins</b>
-            <img src="cover21.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R24.00</p></a>
-        </li> 
-        <li>
-            <b>Tech Creates An Enemy To The World</b>
-            <img src="cover22.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R40.00</p></a>
-        </li> 
-        <li>
-            <b>The Brink Of A World War!</b>
-            <img src="cover23.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R33.00</p></a>
-        </li>
-        <li>
-            <b>A Haunted Town!</b>
-            <img src="cover24.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R43.00</p></a>
-        </li> 
-        <li>
-            <b>The Swords Craftman Becomes A Ronin!</b>
-            <img src="cover25.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R38.00</p></a>
-        </li> 
-        <li>
-            <b>Lightning Vs A Cosmic Threat</b>
-            <img src="cover26.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R30.00</p></a>
-        </li>
-        <li>
-            <b>The King Ronin Vs A Sickening Threat</b>
-            <img src="cover27.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R37.00</p></a>
-        </li> 
-        <li>
-            <b>Crime Retaliates On A Ronin?</b>
-            <img src="cover28.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R39.00</p></a>
-        </li> 
-        <li>
-            <b>Blinding Light</b>
-            <img src="cover29.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R37.00</p></a>
-        </li> 
+        <!-- Cinematic Lore Text -->
+        <div class="glass-card max-w-3xl w-full rounded-2xl p-8 md:p-10 mb-20 relative overflow-hidden group">
+            <!-- Subtle glow accent inside card -->
+            <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#058743] rounded-full blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+            
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#02592d] via-[#09a855] to-[#02592d]"></div>
+            
+            <h2 class="font-cinzel text-xl text-[#09a855] tracking-widest uppercase mb-4 text-center font-bold">Origin Story</h2>
+            
+            <p class="text-lg md:text-xl text-gray-300 text-center leading-relaxed font-light italic">
+                "I am a comic book writer, inspired by my trading bots. 
+                I built a universe of their own, where they rule and save the world from despair, 
+                and all in hopes for my readers to appreciate my great inventions."
+            </p>
+        </div>
 
-        <li>
-            <b>Dark Depths Become A Trap</b>
-            <img src="cover30.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R32.00</p></a>
-        </li> 
-        <li>
-            <b>A Civil War - Apex Vs FanEdition</b>
-            <img src="cover31.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R31.00</p></a>
-        </li> 
-        <li>
-            <b>The Nile Croc's!</b>
-            <img src="cover32.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R35.00</p></a>
-        </li> 
-        <li>
-            <b>An Iconic Race</b>
-            <img src="cover33.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R30.00</p></a>
-        </li> 
-        <li>
-            <b>Science Shrunk The Ronin</b>
-            <img src="cover34.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R32.00</p></a>
-        </li> 
-        <li>
-            <b>Trouble Meets The Crimson Flames!</b>
-            <img src="cover35.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R41.00</p></a>
-        </li> 
-        <li>
-            <b>Steel Meets Steel!</b>
-            <img src="cover36.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R50.00</p></a>
-        </li> 
-        <li>
-            <b>Sports Or Culvery?</b>
-            <img src="cover37.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R50.00</p></a>
-        </li> 
-        <li>
-            <b>What If A Dream Was A Trap</b>
-            <img src="cover38.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R43.00</p></a>
-        </li> 
-        <li>
-            <b>Chaos Among The Stars</b>
-            <img src="cover39.png" alt="issue">
-            <a href="setup.html?bot=bank"><p>R70.00</p></a>
-        </li> 
-    </ol>
+        <!-- Comic Grid -->
+        <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full list-none p-0 m-0 mb-24">
+            
+            <!-- Issue 0 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    IMCBOTS Universe - Pilot
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="issue0.png" alt="Issue 0 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R10.00</p>
+                </a>
+            </li>
 
-    <div class="comic-divider"></div>
-    
-    <div class="back-container">
-        <a href="index.html" class="back-btn">Back to Main</a>
-    </div>
+            <!-- Issue 1 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    A New Sword
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="issue1.png" alt="Issue 1 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R12.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 2 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    A Sword Forgotten
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cvr2.png" alt="Issue 2 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R12.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 3 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Dragon Blaze
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="issue3.png" alt="Issue 3 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R13.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 4 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Cosmic Ronin
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover4.png" alt="Issue 4 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R15.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 5 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The King Is Born
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover5.png" alt="Issue 5 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R20.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 6 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Master Brothers
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover6.png" alt="Issue 6 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R18.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 7 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Ninja Ronin
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover7.png" alt="Issue 7 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R20.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 8 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Storm Ronin
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover8.png" alt="Issue 8 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R21.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 9 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    A Steel Forged Ronin
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover9.png" alt="Issue 9 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R19.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 10 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    A Battlefield Uncovers Lightning
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover10.png" alt="Issue 10 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R19.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 11 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Great Protector Of The Waters
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover11.png" alt="Issue 11 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R19.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 12 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Captain Of The IMC Ronin
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover12.png" alt="Issue 12 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R27.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 13 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Victory Is For The Legends!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover13.png" alt="Issue 13 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R28.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 14 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Legendary Flames Unite
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover14.png" alt="Issue 14 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R30.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 15 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Trouble Meets The Skies!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover15.png" alt="Issue 15 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R32.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 16 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Animals Need Saving!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover16.png" alt="Issue 16 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R35.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 17 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Enemy's Origins
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover17.png" alt="Issue 17 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R30.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 18 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Beware Dark Void!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover18.png" alt="Issue 18 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R36.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 19 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    An Unseen Invasion
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover19.png" alt="Issue 19 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R38.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 20 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Ancient Trouble Awakes In Depths
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover20.png" alt="Issue 20 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R42.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 21 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    IMC Origins
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover21.png" alt="Issue 21 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R24.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 22 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Tech Creates An Enemy To The World
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover22.png" alt="Issue 22 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R40.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 23 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Brink Of A World War!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover23.png" alt="Issue 23 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R33.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 24 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    A Haunted Town!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover24.png" alt="Issue 24 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R43.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 25 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Swords Craftman Becomes A Ronin!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover25.png" alt="Issue 25 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R38.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 26 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Lightning Vs A Cosmic Threat
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover26.png" alt="Issue 26 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R30.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 27 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The King Ronin Vs A Sickening Threat
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover27.png" alt="Issue 27 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R37.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 28 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Crime Retaliates On A Ronin?
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover28.png" alt="Issue 28 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R39.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 29 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Blinding Light
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover29.png" alt="Issue 29 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R37.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 30 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Dark Depths Become A Trap
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover30.png" alt="Issue 30 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R32.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 31 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    A Civil War - Apex Vs FanEdition
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover31.png" alt="Issue 31 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R31.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 32 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    The Nile Croc's!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover32.png" alt="Issue 32 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R35.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 33 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    An Iconic Race
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover33.png" alt="Issue 33 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R30.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 34 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Science Shrunk The Ronin
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover34.png" alt="Issue 34 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R32.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 35 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Trouble Meets The Crimson Flames!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover35.png" alt="Issue 35 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R41.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 36 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Steel Meets Steel!
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover36.png" alt="Issue 36 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R50.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 37 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Sports Or Culvery?
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover37.png" alt="Issue 37 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R50.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 38 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    What If A Dream Was A Trap
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover38.png" alt="Issue 38 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R43.00</p>
+                </a>
+            </li>
+
+            <!-- Issue 39 -->
+            <li class="glass-card rounded-2xl p-5 flex flex-col transition-all duration-500 hover:-translate-y-3 hover:border-[#09a855]/60 hover:shadow-[0_20px_40px_-10px_rgba(5,135,67,0.4)] group">
+                <b class="font-cinzel text-lg md:text-xl text-white text-center uppercase tracking-wide mb-4 min-h-[3rem] flex items-center justify-center">
+                    Chaos Among The Stars
+                </b>
+                <div class="comic-image-container mb-5 flex-grow">
+                    <img src="cover39.png" alt="Issue 39 Cover" class="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/400x600/02592d/fff?text=Cover+Missing'">
+                </div>
+                <a href="setup.html?bot=bank" class="mt-auto block w-full py-3 rounded-lg bg-gradient-to-r from-[#02592d] to-[#058743] text-center transition-all duration-300 hover:from-[#058743] hover:to-[#09a855] box-glow-emerald">
+                    <p class="font-bold tracking-widest text-white m-0">R70.00</p>
+                </a>
+            </li>
+        </ol>
+
+        <!-- Cinematic Back Button -->
+        <div class="w-full flex justify-center mb-8">
+            <a href="index.html" class="glass-card inline-block px-10 py-4 rounded-full border border-[#058743]/50 text-white font-cinzel font-bold text-xl uppercase tracking-widest transition-all duration-300 hover:bg-[#058743]/20 hover:scale-105 hover:shadow-[0_0_30px_rgba(5,135,67,0.6)]">
+                Back to Main
+            </a>
+        </div>
+        
+    </main>
 
 </body>
 </html>
