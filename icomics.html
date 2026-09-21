@@ -15,13 +15,12 @@
         }
 
         body {
-            /* Halftone dot pattern background */
             background-color: var(--dark-green);
-            background-image: radial-gradient(rgba(57, 255, 20, 0.15) 15%, transparent 16%), 
-                              radial-gradient(rgba(57, 255, 20, 0.15) 15%, transparent 16%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
+            /* Translucent dark green/black overlay merged with your background image */
+            background-image: linear-gradient(rgba(2, 43, 20, 0.85), rgba(12, 12, 12, 0.95)), url('comiccvr.png');
+            background-size: cover;
             background-attachment: fixed;
+            background-position: center;
             
             font-family: 'Comic Neue', cursive, sans-serif;
             color: #fff;
