@@ -8,7 +8,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root {
+        body {
+            background-color: #39FF14 !important; /* Neon Green */
+        }
+    </style>
+</head>
+<body class="text-black font-sans min-h-screen">
+    <header class="flex flex-col items-center justify-center pt-12 pb-8 px-4 w-full">
+        <!-- Circular Emerald Green Frame with comiccvr.png -->
+        <div class="w-36 h-36 bg-[#50C878] rounded-full border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)] flex items-center justify-center overflow-hidden mb-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[10px_10px_0_0_rgba(0,0,0,1)] relative z-10">
+            <img src="comiccvr.png" alt="IMC Comics Logo" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/200x200/50C878/000000?text=IMG';">
+        </div>
+        
+        <!-- Existing Neo-Brutalist Title with Book Icon -->
+        <div class="bg-white border-4 border-black px-6 py-4 shadow-[8px_8px_0_0_rgba(0,0,0,1)] transform -rotate-2 flex items-center gap-4 text-black">
+            <i class="fas fa-book-open text-4xl sm:text-5xl"></i>
+            <h1 class="text-4xl sm:text-6xl font-black uppercase tracking-tighter m-0 leading-none">IMCCOMICS</h1>
+        </div>
+    </header>
+
             --neon-green: #39ff14;
             --dark-green: #022b14;
             --comic-yellow: #ffde00;
@@ -17,6 +35,7 @@
 
         body {
             background-color: var(--dark-green);
+            /* Translucent dark green/black overlay merged with your background image */
             background-image: linear-gradient(rgba(2, 43, 20, 0.85), rgba(12, 12, 12, 0.95)), url('comiccvr.png');
             background-size: cover;
             background-attachment: fixed;
@@ -127,7 +146,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             line-height: 1.1;
-            min-height: 2.2em; /*  titles aligned if lengths vary */
+            min-height: 2.2em; /* Keeps titles aligned if lengths vary */
             display: flex;
             align-items: center;
             justify-content: center;
