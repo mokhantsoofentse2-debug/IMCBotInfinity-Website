@@ -731,41 +731,73 @@
             }, 700); // Matches CSS transition duration
         });
 
-        // ==========================================
-        // 2. SHOPPING CART FUNCTIONALITY
+// ==========================================
+        // 2. SHOPPING CART FUNCTIONALITY (UPDATED)
         // ==========================================
         let cartTotal = 0;
+        let totalItems = 0; // Tracks the total number of items to show/hide the cart
         const cartTotalElement = document.getElementById('cart-total');
         const cartPanel = document.getElementById('cart-panel');
 
-        // Select all the purchase links (ignoring the "Back to Main" link)
+        // Select all the purchase links
         document.querySelectorAll('.cart-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault(); // Stop the link from actually navigating
+            // Stop the link from actually navigating
+            button.addEventListener('click', (e) => e.preventDefault());
+            
+            // Grab the text (e.g., "R10.00"), remove the "R", and parse to a float
+            const priceText = button.querySelector('p').innerText;
+            const priceValue = parseFloat(priceText.replace('R', ''));
+            let quantity = 0;
+            
+            // Dynamically inject the + and - controls into the existing button
+            button.innerHTML = `
+                <div class="flex items-center justify-between w-full text-white px-2">
+                    <div class="decrease-btn w-8 h-8 rounded-full bg-black/20 hover:bg-black/50 flex items-center justify-center font-bold text-xl cursor-pointer transition-all hover:scale-110 active:scale-95">-</div>
+                    <div class="flex flex-col items-center leading-none gap-1">
+                        <span class="font-bold tracking-widest m-0">${priceText}</span>
+                        <span class="text-[10px] text-gray-200 uppercase tracking-widest font-semibold">Qty: <span class="qty-display text-[#09a855] drop-shadow-[0_0_5px_rgba(9,168,85,0.8)]">0</span></span>
+                    </div>
+                    <div class="increase-btn w-8 h-8 rounded-full bg-black/20 hover:bg-black/50 flex items-center justify-center font-bold text-xl cursor-pointer transition-all hover:scale-110 active:scale-95">+</div>
+                </div>
+            `;
+
+            const decreaseBtn = button.querySelector('.decrease-btn');
+            const increaseBtn = button.querySelector('.increase-btn');
+            const qtyDisplay = button.querySelector('.qty-display');
+
+            // Function to handle price and quantity changes
+            const updateCart = (change) => {
+                if (quantity + change < 0) return; // Prevent quantity from going below 0
                 
-                // Grab the text (e.g., "R10.00"), remove the "R", and parse to a float
-                const priceText = this.querySelector('p').innerText;
-                const priceValue = parseFloat(priceText.replace('R', ''));
+                // Update local item quantity
+                quantity += change;
+                qtyDisplay.innerText = quantity;
                 
-                if(!isNaN(priceValue)) {
-                    // Update math
-                    cartTotal += priceValue;
-                    cartTotalElement.innerText = `R${cartTotal.toFixed(2)}`;
-                    
-                    // Slide up the floating panel
+                // Update global cart variables
+                cartTotal += (priceValue * change);
+                totalItems += change;
+                
+                // Update UI text
+                cartTotalElement.innerText = \`R\${Math.max(0, cartTotal).toFixed(2)}\`;
+                
+                // Slide up the floating panel if items exist, hide if empty
+                if (totalItems > 0) {
                     cartPanel.classList.remove('translate-y-full');
-                    
-                    // Visual feedback: Temporarily change button content
-                    const originalHTML = this.innerHTML;
-                    this.innerHTML = `<p class="font-bold tracking-widest text-white m-0">ADDED TO CART</p>`;
-                    this.classList.add('scale-95', 'opacity-80');
-                    
-                    // Revert button visually after 1 second
-                    setTimeout(() => {
-                        this.innerHTML = originalHTML;
-                        this.classList.remove('scale-95', 'opacity-80');
-                    }, 1000);
+                } else {
+                    cartPanel.classList.add('translate-y-full');
                 }
+            };
+
+            // Event listener for decrementing 
+            decreaseBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevents the parent button's click event from firing
+                updateCart(-1);
+            });
+
+            // Event listener for incrementing
+            increaseBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                updateCart(1);
             });
         });
     </script>
