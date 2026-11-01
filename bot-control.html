@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>IMCBOTS Infinity | Bot Control</title>
+<style>
+:root{--bg:#07111f;--panel:#101d30;--line:rgba(164,190,222,.16);--text:#edf4ff;--muted:#9aadc5;--cyan:#4de1df;--green:#48d597;--red:#ff727d;--gold:#f4c96b}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(ellipse at 50% -15%,#183656 0,var(--bg) 55%);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:24px 16px 48px}
+.wrap{width:min(760px,100%);margin:auto}header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.08em}.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#06131e;font-weight:900;background:linear-gradient(135deg,var(--cyan),#91f3c4)}.back{color:var(--muted);text-decoration:none;font-size:13px}.back:hover{color:var(--cyan)}
+.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}h1{margin:8px 0 6px;font-size:clamp(28px,6vw,42px);line-height:1.1}.subtitle{margin:0;color:var(--muted);line-height:1.6}
+.panel{margin-top:22px;padding:22px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(20,36,58,.96),rgba(12,25,42,.96));box-shadow:0 18px 55px rgba(0,0,0,.22)}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.panel h2{margin:0;font-size:17px}.status{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:7px 11px;color:var(--gold);font-size:11px;font-weight:800;white-space:nowrap}.dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.bot-name{margin:18px 0 4px;font-size:30px;font-weight:800;overflow-wrap:anywhere}.bot-id{color:var(--muted);font:12px ui-monospace,monospace}.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}button{border:0;border-radius:12px;padding:14px 16px;font-weight:800;font-size:14px;cursor:pointer}.start{background:linear-gradient(135deg,#50e0ad,#28b987);color:#062016}.stop{background:rgba(255,114,125,.12);color:#ff9aa2;border:1px solid rgba(255,114,125,.35)}
+.notice{margin-top:15px;padding:12px 14px;border-radius:12px;border:1px solid rgba(244,201,107,.22);background:rgba(244,201,107,.07);color:#f3d995;font-size:12px;line-height:1.55}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.metric{padding:17px;border:1px solid var(--line);border-radius:15px;background:rgba(5,15,27,.28)}.metric-label{color:var(--muted);font-size:12px}.metric-value{margin-top:9px;font-size:24px;font-weight:800}.waiting{color:var(--gold);font-size:13px}.section-note{margin:14px 0 0;color:var(--muted);font-size:12px;line-height:1.6}.steps{margin:14px 0 0;padding-left:19px;color:var(--muted);font-size:13px;line-height:1.8}footer{text-align:center;margin-top:25px;color:#70849d;font-size:11px}
+@media(max-width:520px){body{padding:18px 13px 36px}.panel{padding:17px}.grid{gap:9px}.metric{padding:14px}.metric-value{font-size:20px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header><div class="brand"><div class="logo">IM</div><span>IMCBOTS INFINITY</span></div><a class="back" href="index.html">← Back to website</a></header>
+<div class="eyebrow">Client control panel</div><h1>Bot Control</h1><p class="subtitle">View the selected bot and its connection information.</p>
+<section class="panel">
+<div class="panel-head"><h2>Selected Expert Advisor</h2><span class="status"><span class="dot"></span> NOT CONNECTED</span></div>
+<div class="bot-name" id="botName">IMCBOT</div><div class="bot-id" id="botId">Bot ID: default</div>
+<div class="actions"><button class="start" id="activateBtn" type="button">ACTIVATE BOT</button><button class="stop" id="stopBtn" type="button">STOP BOT</button></div>
+<div class="notice" id="actionMessage" role="status">Preview mode: these buttons only change the message on this page. They do not start, stop, or connect to an MT5 Expert Advisor.</div>
+</section>
+<section class="panel">
+<div class="panel-head"><h2>Today's Performance</h2><span class="waiting">Awaiting MT5 data</span></div>
+<div class="grid"><div class="metric"><div class="metric-label">Today's profit / loss</div><div class="metric-value">—</div></div><div class="metric"><div class="metric-label">Open trades</div><div class="metric-value">—</div></div></div>
+<p class="section-note">Live figures will appear here only after a secure connection to the customer's MT5 terminal has been built and configured. This page does not ask for account credentials.</p>
+</section>
+<section class="panel"><h2>How live control will work</h2><ol class="steps"><li>The customer runs the Expert Advisor in an MT5 desktop terminal on a Windows computer or VPS.</li><li>A separate, secure bridge connects that terminal to this website.</li><li>The bridge sends status and daily performance data, and passes approved start/stop commands to the EA.</li></ol><p class="section-note">GitHub Pages hosts this page only. It cannot run an MQ5/EX5 Expert Advisor or communicate with a broker by itself.</p></section>
+<footer>IMCBOTS Infinity · Website control panel preview</footer>
+</main>
+<script>
+const params=new URLSearchParams(location.search);
+const botId=(params.get("bot")||"imcbot").trim().toLowerCase();
+const names={"blade":"IMCBOT Blade","db-fe":"IMCBOT DB-FE","db - fe":"IMCBOT DB-FE","rang":"IMCBOT Rang","sa":"IMCBOT SA","twister":"IMCBOT Twister","shadow":"IMCBOT Shadow","dba":"IMCBOT DBA","master":"IMCBOT Master","light":"IMCBOT Light","plasma":"IMCBOT Plasma","prgtry":"IMCBOT Purgatory","sprsonic":"IMCBOT Sprsonic","king":"IMCBOT King","asura":"IMCBOT Asura","flow":"IMCBOT Flow","frost":"IMCBOT Frost","deep":"IMCBOT Deep","magnifier":"IMCBOT Magnifier"};
+document.getElementById("botName").textContent=names[botId]||("IMCBOT "+botId.replace(/[-_]+/g," ").replace(/\b\w/g,c=>c.toUpperCase()));
+document.getElementById("botId").textContent="Bot ID: "+botId;
+const message=document.getElementById("actionMessage");
+document.getElementById("activateBtn").addEventListener("click",()=>{message.textContent="Activation preview only: no command has been sent to MT5. A live MT5 bridge is still required.";});
+document.getElementById("stopBtn").addEventListener("click",()=>{message.textContent="Stop preview only: no command has been sent to MT5. A live MT5 bridge is still required.";});
+</script>
+</body>
+</html>
