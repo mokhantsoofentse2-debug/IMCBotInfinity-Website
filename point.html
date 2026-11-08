@@ -29,10 +29,7 @@
 
         body {
             background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 15% 20%, rgba(255, 42, 133, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 40%),
-                linear-gradient(to bottom, rgba(8, 3, 12, 0.95), rgba(12, 4, 18, 0.98));
+            background-image: url('ipointbg.png');
             background-attachment: fixed;
             font-family: 'Lexend Deca', sans-serif;
             color: #ffffff;
@@ -95,11 +92,6 @@
             }
         }
 
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(1000%); }
-        }
-
         .animate-glow {
             animation: pulseGlow 4s infinite ease-in-out;
         }
@@ -158,7 +150,6 @@
             background: linear-gradient(90deg, var(--pink-primary), var(--gold-primary), var(--pink-glow));
         }
 
-        /* Cyber Energy Slash Effect on Hover */
         .ronin-card::after {
             content: '';
             position: absolute;
@@ -262,7 +253,7 @@
                 </div>
                 <div>
                     <span class="font-orbitron font-extrabold text-xl tracking-wider text-white">IMC<span class="text-pink-500">BOT</span> ARCHER</span>
-                    <p class="text-xs text-yellow-400/80 font-mono">TACTICAL trajectory BLADE DIVISION</p>
+                    <p class="text-xs text-yellow-400/80 font-mono">TACTICAL TRAJECTORY BLADE DIVISION</p>
                 </div>
             </div>
 
@@ -279,7 +270,6 @@
 
         <!-- Main Hero Title Section -->
         <section class="text-center my-12 relative">
-            <!-- Archer Trajectory Crosshair Background Icon -->
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none">
                 <svg width="320" height="320" viewBox="0 0 100 100" fill="none" stroke="#ffd700" stroke-width="0.5">
                     <circle cx="50" cy="50" r="45" stroke-dasharray="2 2" />
@@ -342,33 +332,25 @@
             <div class="flex items-center justify-between mb-8 px-2">
                 <h2 class="font-orbitron text-xl sm:text-2xl font-bold text-white flex items-center gap-3">
                     <span class="w-3 h-8 bg-gradient-to-b from-pink-500 to-yellow-400 rounded-sm inline-block"></span>
-                    IMC ARCHER VAULT & ALLIES
+                    IMC ARCHER VAULT 
                 </h2>
                 <span class="text-xs font-mono text-pink-400">SELECT MODEL TO VIEW PARAMETERS</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-                <!-- Card 1: Flow (Original Featured Bot) -->
+                <!-- Card 1: IPOINT (Featured Model) -->
                 <div class="ronin-card p-6 flex flex-col justify-between">
                     <div>
-                        <!-- Header / Title -->
                         <div class="flex items-center justify-between mb-4 border-b border-pink-900/50 pb-3">
-                            <span class="font-orbitron text-xl font-extrabold gold-glow-text uppercase">FLOW</span>
+                            <span class="font-orbitron text-xl font-extrabold gold-glow-text uppercase">I'POINT</span>
                             <span class="text-xs font-mono px-2 py-1 bg-pink-950/60 border border-pink-500/40 rounded text-pink-300">IMC-01</span>
                         </div>
 
-                        <!-- Card Hero SVG Illustration (Archer Ronin Silhouette) -->
                         <div class="relative w-full h-52 mb-6 rounded-lg overflow-hidden bg-gradient-to-b from-purple-950/40 to-pink-950/20 border border-pink-500/30 flex items-center justify-center group">
-                            <!-- SVG Bow & Arrow Graphic -->
-                            <svg class="w-36 h-36 text-pink-500 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 100 100" fill="none">
-                                <path d="M30,10 Q80,50 30,90" stroke="#ffd700" stroke-width="3" fill="none" />
-                                <line x1="30" y1="10" x2="30" y2="90" stroke="#ff2a85" stroke-width="1.5" stroke-dasharray="2 2"/>
-                                <line x1="15" y1="50" x2="85" y2="50" stroke="#ffffff" stroke-width="3"/>
-                                <polygon points="85,50 75,45 75,55" fill="#ffd700"/>
-                                <path d="M15,45 L25,50 L15,55" stroke="#ff2a85" stroke-width="2"/>
-                                <circle cx="50" cy="50" r="40" stroke="#ff2a85" stroke-width="0.8" stroke-dasharray="4 4"/>
-                            </svg>
+                            <a href="setup.html?bot=point">
+                                <img src="ipointpstr.png" width="150" height="200" alt="I'Point Bot" class="object-contain max-h-44 transition-transform duration-300 group-hover:scale-105">
+                            </a>
                             <div class="absolute bottom-2 left-2 text-[10px] font-mono bg-black/70 px-2 py-0.5 rounded text-yellow-400">
                                 TARGETING ARCHER
                             </div>
@@ -391,65 +373,20 @@
                         </div>
 
                         <a href="setup.html?bot=point" class="w-full py-3 text-center block font-orbitron text-xs font-bold uppercase tracking-wider rounded border border-pink-500/60 bg-pink-950/40 text-yellow-300 hover:bg-pink-600 hover:text-white transition shadow-[0_0_15px_rgba(255,42,133,0.3)]">
-                            <i class="fa-solid fa-arrow-right-to-bracket mr-2"></i> INITIALIZE FLOW SETUP
+                            <i class="fa-solid fa-arrow-right-to-bracket mr-2"></i> INITIALIZE I'POINT SETUP
                         </a>
                     </div>
                 </div>
 
-                <!-- Card 2: I'Point Trajectory Arsenal -->
+                <!-- Card 2: GLOBAL ALLIANCE PROTOCOL -->
                 <div class="ronin-card p-6 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-4 border-b border-pink-900/50 pb-3">
-                            <span class="font-orbitron text-xl font-extrabold gold-glow-text uppercase">I'POINT ARSENAL</span>
-                            <span class="text-xs font-mono px-2 py-1 bg-pink-950/60 border border-pink-500/40 rounded text-pink-300">WEAPONRY</span>
+                            <span class="font-orbitron text-xl font-extrabold gold-glow-text uppercase">ALLIANCE</span>
+                            <span class="text-xs font-mono px-2 py-1 bg-pink-950/60 border border-pink-500/40 rounded text-pink-300">IMC-NET</span>
                         </div>
 
                         <div class="relative w-full h-52 mb-6 rounded-lg overflow-hidden bg-gradient-to-b from-purple-950/40 to-pink-950/20 border border-pink-500/30 flex items-center justify-center group">
-                            <!-- SVG Quiver & Trajectory Arrow Blade -->
-                            <svg class="w-36 h-36 text-yellow-400 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 100 100" fill="none">
-                                <line x1="10" y1="90" x2="90" y2="10" stroke="#ffd700" stroke-width="4"/>
-                                <polygon points="90,10 75,12 88,25" fill="#ff2a85"/>
-                                <line x1="20" y1="90" x2="95" y2="15" stroke="#ff69b4" stroke-width="2" stroke-dasharray="3 3"/>
-                                <circle cx="50" cy="50" r="35" stroke="#ffd700" stroke-width="1"/>
-                                <path d="M40,30 L60,30 L50,70 Z" fill="rgba(255,42,133,0.3)" stroke="#ff2a85"/>
-                            </svg>
-                            <div class="absolute bottom-2 left-2 text-[10px] font-mono bg-black/70 px-2 py-0.5 rounded text-yellow-400">
-                                TRAJECTORY BLADES
-                            </div>
-                        </div>
-
-                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
-                            Precision arrow tips forged from IMC titan alloy. Each arrow carries a localized phase blade to slice through defenses at hypersonic speeds.
-                        </p>
-                    </div>
-
-                    <div>
-                        <div class="space-y-2 mb-6 font-mono text-xs">
-                            <div class="flex justify-between text-gray-400">
-                                <span>Piercing Power</span>
-                                <span class="text-yellow-400 font-bold">100 / 100</span>
-                            </div>
-                            <div class="w-full bg-gray-900 rounded-full h-1.5 overflow-hidden">
-                                <div class="bg-gradient-to-r from-yellow-400 to-pink-500 h-1.5 rounded-full" style="width: 100%"></div>
-                            </div>
-                        </div>
-
-                        <button onclick="fireKineticBurst()" class="w-full py-3 text-center block font-orbitron text-xs font-bold uppercase tracking-wider rounded border border-yellow-500/60 bg-yellow-950/30 text-pink-300 hover:bg-yellow-500 hover:text-black transition shadow-[0_0_15px_rgba(255,215,0,0.3)]">
-                            <i class="fa-solid fa-bolt mr-2"></i> TEST TRAJECTORY BURST
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Card 3: Global IMC Vanguard -->
-                <div class="ronin-card p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-4 border-b border-pink-900/50 pb-3">
-                            <span class="font-orbitron text-xl font-extrabold gold-glow-text uppercase">IMC VANGUARD</span>
-                            <span class="text-xs font-mono px-2 py-1 bg-pink-950/60 border border-pink-500/40 rounded text-pink-300">HONOR NETWORK</span>
-                        </div>
-
-                        <div class="relative w-full h-52 mb-6 rounded-lg overflow-hidden bg-gradient-to-b from-purple-950/40 to-pink-950/20 border border-pink-500/30 flex items-center justify-center group">
-                            <!-- SVG Shield / Emblem Graphic -->
                             <svg class="w-36 h-36 text-pink-400 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 100 100" fill="none">
                                 <polygon points="50,10 85,25 85,60 50,90 15,60 15,25" stroke="#ffd700" stroke-width="3" fill="rgba(255,42,133,0.15)"/>
                                 <polygon points="50,20 75,32 75,55 50,75 25,55 25,32" stroke="#ff2a85" stroke-width="1.5"/>
@@ -479,6 +416,43 @@
 
                         <button onclick="showAllianceInfo()" class="w-full py-3 text-center block font-orbitron text-xs font-bold uppercase tracking-wider rounded border border-pink-500/60 bg-pink-950/40 text-yellow-300 hover:bg-pink-600 hover:text-white transition shadow-[0_0_15px_rgba(255,42,133,0.3)]">
                             <i class="fa-solid fa-network-wired mr-2"></i> VIEW ALLIANCE PROTOCOL
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: TRAJECTORY BLADES -->
+                <div class="ronin-card p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 border-b border-pink-900/50 pb-3">
+                            <span class="font-orbitron text-xl font-extrabold gold-glow-text uppercase">KINETIC ARROW</span>
+                            <span class="text-xs font-mono px-2 py-1 bg-pink-950/60 border border-pink-500/40 rounded text-pink-300">MK-VI</span>
+                        </div>
+
+                        <div class="relative w-full h-52 mb-6 rounded-lg overflow-hidden bg-gradient-to-b from-purple-950/40 to-pink-950/20 border border-pink-500/30 flex items-center justify-center group">
+                            <i class="fa-solid fa-location-arrow text-6xl text-yellow-400 group-hover:rotate-45 transition-transform duration-500"></i>
+                            <div class="absolute bottom-2 left-2 text-[10px] font-mono bg-black/70 px-2 py-0.5 rounded text-yellow-400">
+                                HIGH VELOCITY
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                            Precision energy projectiles engineered with pink energy tails and golden tips designed for long-range kinetic strikes.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="space-y-2 mb-6 font-mono text-xs">
+                            <div class="flex justify-between text-gray-400">
+                                <span>Velocity Vector</span>
+                                <span class="text-yellow-400 font-bold">Mach 4.5</span>
+                            </div>
+                            <div class="w-full bg-gray-900 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-gradient-to-r from-yellow-400 to-pink-500 h-1.5 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="fireKineticBurst()" class="w-full py-3 text-center block font-orbitron text-xs font-bold uppercase tracking-wider rounded border border-pink-500/60 bg-pink-950/40 text-yellow-300 hover:bg-pink-600 hover:text-white transition shadow-[0_0_15px_rgba(255,42,133,0.3)]">
+                            <i class="fa-solid fa-bolt mr-2"></i> TEST PROJECTILE VOLLEY
                         </button>
                     </div>
                 </div>
@@ -523,7 +497,7 @@
 
     </div>
 
-    <!-- Interactive Custom Alert / Message Box Container -->
+    <!-- Custom Alert / Message Box Container -->
     <div id="cyberMessageBox" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="ronin-card p-6 max-w-md w-full border-2 border-yellow-400 shadow-[0_0_50px_rgba(255,42,133,0.5)]">
             <div class="flex items-center justify-between mb-4 border-b border-pink-500/40 pb-2">
