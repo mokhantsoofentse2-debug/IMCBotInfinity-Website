@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'POINT</title>
+    <!-- Google Fonts & Font Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;600;800;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS (for layout utilities) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --pink-primary: #ff2a85;
+            --pink-glow: #ff69b4;
+            --gold-primary: #ffd700;
+            --gold-dark: #dfa837;
+            --bg-dark: #08030c;
+            --card-bg: rgba(20, 8, 25, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(255, 42, 133, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 40%),
+                linear-gradient(to bottom, rgba(8, 3, 12, 0.95), rgba(12, 4, 18, 0.98));
+            background-attachment: fixed;
+            font-family: 'Lexend Deca', sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Canvas Layer for Flying Kinetic Arrows --- */
+        #arrowCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* --- Cyber Grid Background Overlay --- */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 42, 133, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 42, 133, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* --- Typography & Text Styling --- */
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .pink-gold-gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, var(--gold-primary) 35%, var(--pink-primary) 70%, var(--pink-glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 25px rgba(255, 42, 133, 0.4);
+        }
+
+        .gold-glow-text {
+            color: var(--gold-primary);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+        /* --- Animations --- */
+        @keyframes pulseGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 8px rgba(255, 42, 133, 0.6)) drop-shadow(0 0 18px rgba(255, 215, 0, 0.4));
+            }
+            50% {
+                filter: drop-shadow(0 0 18px rgba(255, 42, 133, 0.9)) drop-shadow(0 0 30px rgba(255, 215, 0, 0.7));
+            }
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(1000%); }
+        }
+
+        .animate-glow {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+
+        /* --- Cyber Blade Dividers & Borders --- */
+        .cyber-line-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            width: 85%;
+            max-width: 900px;
+        }
+
+        .cyber-line {
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, var(--pink-primary), var(--gold-primary), var(--pink-primary), transparent);
+            box-shadow: 0 0 12px var(--pink-primary);
+        }
+
+        .target-reticle-center {
+            position: absolute;
+            background: var(--bg-dark);
+            border: 2px solid var(--gold-primary);
+            color: var(--pink-glow);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--pink-primary);
+        }
+
+        /* --- High-Tech Archery Cards --- */
+        .ronin-card {
+            background: var(--card-bg);
+            border: 1.5px solid rgba(255, 215, 0, 0.4);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 42, 133, 0.08);
+        }
+
+        .ronin-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink-primary), var(--gold-primary), var(--pink-glow));
+        }
+
+        /* Cyber Energy Slash Effect on Hover */
+        .ronin-card::after {
+            content: '';
+            position: absolute;
+            top: -150%;
+            left: -150%;
+            width: 400%;
+            height: 400%;
+            background: linear-gradient(
+                45deg,
+                transparent 45%,
+                rgba(255, 215, 0, 0.2) 50%,
+                rgba(255, 42, 133, 0.4) 52%,
+                transparent 57%
+            );
+            transform: rotate(30deg);
+            transition: transform 0.8s ease;
+            pointer-events: none;
+        }
+
+        .ronin-card:hover::after {
+            transform: rotate(30deg) translate(50%, 50%);
+        }
+
+        .ronin-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--gold-primary);
+            box-shadow: 0 20px 45px rgba(255, 42, 133, 0.35), 0 0 25px rgba(255, 215, 0, 0.25);
+        }
+
+        /* --- Buttons --- */
+        .btn-cyber {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 42, 133, 0.2), rgba(255, 215, 0, 0.15));
+            border: 2px solid var(--gold-primary);
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            padding: 14px 36px;
+            border-radius: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .btn-cyber:hover {
+            background: linear-gradient(135deg, var(--pink-primary), var(--gold-dark));
+            border-color: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 30px rgba(255, 42, 133, 0.7), 0 0 20px rgba(255, 215, 0, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn-cyber:active {
+            transform: translateY(1px);
+        }
+
+        /* --- Stats HUD Display --- */
+        .hud-stat-box {
+            background: rgba(10, 4, 16, 0.7);
+            border-left: 3px solid var(--pink-primary);
+            border-right: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 10px 16px;
+            border-radius: 6px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--pink-primary), var(--gold-primary));
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen pb-16">
+
+    <!-- Interactive HTML5 Canvas Layer for Kinetic Arrow Trails -->
+    <canvas id="arrowCanvas"></canvas>
+
+    <!-- Background Grid Effect -->
+    <div class="cyber-grid"></div>
+
+    <!-- Main Outer Wrapper -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+
+        <!-- Header Navigation Bar -->
+        <header class="flex flex-wrap items-center justify-between pb-6 border-b border-pink-900/40 gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full border-2 border-yellow-400 flex items-center justify-center bg-pink-950/50 shadow-[0_0_15px_rgba(255,42,133,0.5)]">
+                    <i class="fa-solid fa-crosshairs text-yellow-400 text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-orbitron font-extrabold text-xl tracking-wider text-white">IMC<span class="text-pink-500">BOT</span> ARCHER</span>
+                    <p class="text-xs text-yellow-400/80 font-mono">TACTICAL trajectory BLADE DIVISION</p>
+                </div>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center gap-4">
+                <button id="triggerLaunchBtn" class="px-4 py-2 text-xs font-orbitron font-bold rounded border border-pink-500/60 bg-pink-950/40 text-pink-300 hover:bg-pink-600 hover:text-white transition shadow-[0_0_10px_rgba(255,42,133,0.3)]">
+                    <i class="fa-solid fa-location-crosshairs mr-2 text-yellow-400"></i>FIRE KINETIC ARROW
+                </button>
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border border-yellow-500/40 bg-yellow-950/30 text-yellow-300">
+                    <span class="w-2 h-2 rounded-full bg-pink-500 animate-ping"></span> ARCHER LOCK: ACTIVE
+                </span>
+            </div>
+        </header>
+
+        <!-- Main Hero Title Section -->
+        <section class="text-center my-12 relative">
+            <!-- Archer Trajectory Crosshair Background Icon -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none">
+                <svg width="320" height="320" viewBox="0 0 100 100" fill="none" stroke="#ffd700" stroke-width="0.5">
+                    <circle cx="50" cy="50" r="45" stroke-dasharray="2 2" />
+                    <circle cx="50" cy="50" r="30" />
+                    <circle cx="50" cy="50" r="15" />
+                    <line x1="50" y1="0" x2="50" y2="100" />
+                    <line x1="0" y1="50" x2="100" y2="50" />
+                </svg>
+            </div>
+
+            <h1 class="font-orbitron font-black text-4xl sm:text-6xl md:text-7xl tracking-widest pink-gold-gradient-text animate-glow mb-4">
+                I'POINT
+            </h1>
+            <p class="font-orbitron text-base sm:text-xl text-yellow-300 tracking-widest font-semibold uppercase">
+                <i class="fa-solid fa-bow-arrow mr-2 text-pink-500"></i> LADY RONIN ARCHER OF THE IMC <i class="fa-solid fa-bow-arrow ml-2 text-pink-500"></i>
+            </p>
+
+            <!-- Cyber Blade Line Divider -->
+            <div class="cyber-line-container">
+                <div class="cyber-line"></div>
+                <div class="target-reticle-center">
+                    <i class="fa-solid fa-bullseye text-sm"></i>
+                </div>
+            </div>
+
+            <!-- Lore Quote Banner -->
+            <div class="max-w-3xl mx-auto px-6 py-4 rounded-xl bg-gradient-to-r from-pink-950/30 via-purple-950/40 to-yellow-950/30 border border-yellow-500/30 backdrop-blur-md shadow-[0_0_25px_rgba(255,42,133,0.15)]">
+                <p class="lore-text italic text-pink-100 text-sm sm:text-base leading-relaxed">
+                    "Built and shaped by the supreme greatness of IMC Ronin around the world — She became an icon, forged her own trajectory blades, and took up the bow to honor the grand IMC lineage with lethal precision."
+                </p>
+            </div>
+        </section>
+
+        <!-- Dynamic HUD Stats Bar -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16 font-mono text-xs sm:text-sm">
+            <div class="hud-stat-box">
+                <div class="text-gray-400 uppercase text-[10px] tracking-wider">TARGET ACCURACY</div>
+                <div class="text-xl font-bold font-orbitron text-pink-400">99.85%</div>
+                <div class="text-[10px] text-yellow-400/80">IMC LOCK-ON READY</div>
+            </div>
+            <div class="hud-stat-box" style="border-left-color: var(--gold-primary)">
+                <div class="text-gray-400 uppercase text-[10px] tracking-wider">TRAJECTORY BLADES</div>
+                <div class="text-xl font-bold font-orbitron text-yellow-400">MK-VI KINETIC</div>
+                <div class="text-[10px] text-pink-400/80">PINK & GOLD ENERGIZED</div>
+            </div>
+            <div class="hud-stat-box">
+                <div class="text-gray-400 uppercase text-[10px] tracking-wider">RONIN HONOR LEVEL</div>
+                <div class="text-xl font-bold font-orbitron text-pink-400">MAX / SUPREME</div>
+                <div class="text-[10px] text-yellow-400/80">GLOBAL IMC ALLIANCE</div>
+            </div>
+            <div class="hud-stat-box" style="border-left-color: var(--gold-primary)">
+                <div class="text-gray-400 uppercase text-[10px] tracking-wider">EFFECTIVE RANGE</div>
+                <div class="text-xl font-bold font-orbitron text-yellow-400">3,500 METERS</div>
+                <div class="text-[10px] text-pink-400/80">HIGH-PRECISION STRIKE</div>
+            </div>
+        </section>
+
+        <!-- Character & Target Grid Showcase -->
+        <section class="mb-16">
+            <div class="flex items-center justify-between mb-8 px-2">
+                <h2 class="font-orbitron text-xl sm:text-2xl font-bold text-white flex items-center gap-3">
+                    <span class="w-3 h-8 bg-gradient-to-b from-pink-500 to-yellow-400 rounded-sm inline-block"></span>
+                    IMC ARCHER VAULT & ALLIES
+                </h2>
+                <span class="text-xs font-mono text-pink-400">SELECT MODEL TO VIEW PARAMETERS</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Card 1: Flow (Original Featured Bot) -->
+                <div class="ronin-card p-6 flex flex-col justify-between">
+                    <div>
+                        <!-- Header / Title -->
+                        <div class="flex items-center justify-between mb-4 border-b border-pink-900/50 pb-3">
+                            <span class="font-orbitron text-xl font-extrabold gold-glow-text uppercase">FLOW</span>
+                            <span class="text-xs font-mono px-2 py-1 bg-pink-950/60 border border-pink-500/40 rounded text-pink-300">IMC-01</span>
+                        </div>
+
+                        <!-- Card Hero SVG Illustration (Archer Ronin Silhouette) -->
+                        <div class="relative w-full h-52 mb-6 rounded-lg overflow-hidden bg-gradient-to-b from-purple-950/40 to-pink-950/20 border border-pink-500/30 flex items-center justify-center group">
+                            <!-- SVG Bow & Arrow Graphic -->
+                            <svg class="w-36 h-36 text-pink-500 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 100 100" fill="none">
+                                <path d="M30,10 Q80,50 30,90" stroke="#ffd700" stroke-width="3" fill="none" />
+                                <line x1="30" y1="10" x2="30" y2="90" stroke="#ff2a85" stroke-width="1.5" stroke-dasharray="2 2"/>
+                                <line x1="15" y1="50" x2="85" y2="50" stroke="#ffffff" stroke-width="3"/>
+                                <polygon points="85,50 75,45 75,55" fill="#ffd700"/>
+                                <path d="M15,45 L25,50 L15,55" stroke="#ff2a85" stroke-width="2"/>
+                                <circle cx="50" cy="50" r="40" stroke="#ff2a85" stroke-width="0.8" stroke-dasharray="4 4"/>
+                            </svg>
+                            <div class="absolute bottom-2 left-2 text-[10px] font-mono bg-black/70 px-2 py-0.5 rounded text-yellow-400">
+                                TARGETING ARCHER
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                            The core foundation bot inspired by global IMC Ronins. Equipped with fluid maneuvering thrusters and high-tension pink energy bowstrings.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="space-y-2 mb-6 font-mono text-xs">
+                            <div class="flex justify-between text-gray-400">
+                                <span>Agility Index</span>
+                                <span class="text-pink-400 font-bold">98 / 100</span>
+                            </div>
+                            <div class="w-full bg-gray-900 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-gradient-to-r from-pink-500 to-yellow-400 h-1.5 rounded-full" style="width: 98%"></div>
+                            </div>
+                        </div>
+
+                        <a href="setup.html?bot=point" class="w-full py-3 text-center block font-orbitron text-xs font-bold uppercase tracking-wider rounded border border-pink-500/60 bg-pink-950/40 text-yellow-300 hover:bg-pink-600 hover:text-white transition shadow-[0_0_15px_rgba(255,42,133,0.3)]">
+                            <i class="fa-solid fa-arrow-right-to-bracket mr-2"></i> INITIALIZE FLOW SETUP
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: I'Point Trajectory Arsenal -->
+                <div class="ronin-card p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 border-b border-pink-900/50 pb-3">
+                            <span class="font-orbitron text-xl font-extrabold gold-glow-text uppercase">I'POINT ARSENAL</span>
+                            <span class="text-xs font-mono px-2 py-1 bg-pink-950/60 border border-pink-500/40 rounded text-pink-300">WEAPONRY</span>
+                        </div>
+
+                        <div class="relative w-full h-52 mb-6 rounded-lg overflow-hidden bg-gradient-to-b from-purple-950/40 to-pink-950/20 border border-pink-500/30 flex items-center justify-center group">
+                            <!-- SVG Quiver & Trajectory Arrow Blade -->
+                            <svg class="w-36 h-36 text-yellow-400 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 100 100" fill="none">
+                                <line x1="10" y1="90" x2="90" y2="10" stroke="#ffd700" stroke-width="4"/>
+                                <polygon points="90,10 75,12 88,25" fill="#ff2a85"/>
+                                <line x1="20" y1="90" x2="95" y2="15" stroke="#ff69b4" stroke-width="2" stroke-dasharray="3 3"/>
+                                <circle cx="50" cy="50" r="35" stroke="#ffd700" stroke-width="1"/>
+                                <path d="M40,30 L60,30 L50,70 Z" fill="rgba(255,42,133,0.3)" stroke="#ff2a85"/>
+                            </svg>
+                            <div class="absolute bottom-2 left-2 text-[10px] font-mono bg-black/70 px-2 py-0.5 rounded text-yellow-400">
+                                TRAJECTORY BLADES
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                            Precision arrow tips forged from IMC titan alloy. Each arrow carries a localized phase blade to slice through defenses at hypersonic speeds.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="space-y-2 mb-6 font-mono text-xs">
+                            <div class="flex justify-between text-gray-400">
+                                <span>Piercing Power</span>
+                                <span class="text-yellow-400 font-bold">100 / 100</span>
+                            </div>
+                            <div class="w-full bg-gray-900 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-gradient-to-r from-yellow-400 to-pink-500 h-1.5 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="fireKineticBurst()" class="w-full py-3 text-center block font-orbitron text-xs font-bold uppercase tracking-wider rounded border border-yellow-500/60 bg-yellow-950/30 text-pink-300 hover:bg-yellow-500 hover:text-black transition shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+                            <i class="fa-solid fa-bolt mr-2"></i> TEST TRAJECTORY BURST
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Global IMC Vanguard -->
+                <div class="ronin-card p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 border-b border-pink-900/50 pb-3">
+                            <span class="font-orbitron text-xl font-extrabold gold-glow-text uppercase">IMC VANGUARD</span>
+                            <span class="text-xs font-mono px-2 py-1 bg-pink-950/60 border border-pink-500/40 rounded text-pink-300">HONOR NETWORK</span>
+                        </div>
+
+                        <div class="relative w-full h-52 mb-6 rounded-lg overflow-hidden bg-gradient-to-b from-purple-950/40 to-pink-950/20 border border-pink-500/30 flex items-center justify-center group">
+                            <!-- SVG Shield / Emblem Graphic -->
+                            <svg class="w-36 h-36 text-pink-400 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 100 100" fill="none">
+                                <polygon points="50,10 85,25 85,60 50,90 15,60 15,25" stroke="#ffd700" stroke-width="3" fill="rgba(255,42,133,0.15)"/>
+                                <polygon points="50,20 75,32 75,55 50,75 25,55 25,32" stroke="#ff2a85" stroke-width="1.5"/>
+                                <line x1="50" y1="10" x2="50" y2="90" stroke="#ffd700" stroke-width="1" stroke-dasharray="2 2"/>
+                                <circle cx="50" cy="45" r="10" fill="#ffd700"/>
+                            </svg>
+                            <div class="absolute bottom-2 left-2 text-[10px] font-mono bg-black/70 px-2 py-0.5 rounded text-yellow-400">
+                                GLOBAL ALLIANCE
+                            </div>
+                        </div>
+
+                        <p class="text-sm text-gray-300 leading-relaxed mb-4">
+                            Connected to every registered IMC Ronin across worldwide sectors. Sharing tactical target data and defensive trajectory cover.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="space-y-2 mb-6 font-mono text-xs">
+                            <div class="flex justify-between text-gray-400">
+                                <span>Network Sync</span>
+                                <span class="text-pink-400 font-bold">99.9%</span>
+                            </div>
+                            <div class="w-full bg-gray-900 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-gradient-to-r from-pink-500 via-yellow-400 to-pink-500 h-1.5 rounded-full" style="width: 99.9%"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="showAllianceInfo()" class="w-full py-3 text-center block font-orbitron text-xs font-bold uppercase tracking-wider rounded border border-pink-500/60 bg-pink-950/40 text-yellow-300 hover:bg-pink-600 hover:text-white transition shadow-[0_0_15px_rgba(255,42,133,0.3)]">
+                            <i class="fa-solid fa-network-wired mr-2"></i> VIEW ALLIANCE PROTOCOL
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Dynamic Tactical Target Practice Section -->
+        <section class="mb-16 p-8 rounded-2xl bg-gradient-to-br from-pink-950/40 via-black to-yellow-950/30 border-2 border-yellow-500/40 shadow-[0_0_35px_rgba(255,42,133,0.2)]">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 text-center md:text-left">
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-widest">// ARCHERY TACTICAL RANGE PROTOCOL</span>
+                    <h3 class="font-orbitron text-2xl font-black text-white">COMMAND I'POINT TO FIRE KINETIC ARROWS</h3>
+                    <p class="text-sm text-gray-300 max-w-xl">
+                        Activate the bowstrings to launch custom pink & gold energy arrows across the viewport. Observe real-time physics and vector trajectories.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <button id="releaseArrowBtn" class="btn-cyber">
+                        <i class="fa-solid fa-crosshairs text-yellow-400"></i> RELEASE ARROW VOLLEY
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider Line -->
+        <div class="cyber-line-container">
+            <div class="cyber-line"></div>
+        </div>
+
+        <!-- Navigation Action & Footer -->
+        <div class="back-container text-center my-10">
+            <a href="index.html" class="btn-cyber">
+                <i class="fa-solid fa-house text-yellow-400"></i> RETURN TO MAIN COMMAND
+            </a>
+        </div>
+
+        <footer class="text-center text-xs font-mono text-gray-500 border-t border-pink-900/40 pt-6">
+            <p>I'POINT ARCHER PROTOCOL &copy; 2026 IMC RONIN ALLIANCE. ALL RIGHTS RESERVED.</p>
+            <p class="text-pink-500/60 mt-1">DESIGNED WITH PINK ENERGY & METALLIC GOLD PRECISION</p>
+        </footer>
+
+    </div>
+
+    <!-- Interactive Custom Alert / Message Box Container -->
+    <div id="cyberMessageBox" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="ronin-card p-6 max-w-md w-full border-2 border-yellow-400 shadow-[0_0_50px_rgba(255,42,133,0.5)]">
+            <div class="flex items-center justify-between mb-4 border-b border-pink-500/40 pb-2">
+                <h4 id="msgTitle" class="font-orbitron font-bold text-yellow-400 text-lg">PROTOCOL STATUS</h4>
+                <button onclick="closeMessageBox()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p id="msgBody" class="text-sm text-gray-200 leading-relaxed mb-6"></p>
+            <button onclick="closeMessageBox()" class="w-full py-2 font-orbitron text-xs font-bold bg-pink-600 hover:bg-pink-500 text-white rounded uppercase tracking-wider">
+                CONFIRM & CLOSE
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic for Canvas Animations and Interaction -->
+    <script>
+        // Setup Canvas for Animated Flying Arrows
+        const canvas = document.getElementById('arrowCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let arrows = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Arrow Class definition representing dynamic flying archer projectiles
+        class KineticArrow {
+            constructor(startX, startY, angle, speed, colorType) {
+                this.x = startX !== undefined ? startX : -50;
+                this.y = startY !== undefined ? startY : Math.random() * height;
+                this.angle = angle !== undefined ? angle : (Math.random() * 0.4 - 0.2); // slight incline
+                this.speed = speed !== undefined ? speed : (12 + Math.random() * 10);
+                this.length = 45 + Math.random() * 25;
+                this.colorType = colorType || (Math.random() > 0.4 ? 'pink' : 'gold');
+                this.trail = [];
+                this.maxTrail = 18;
+                this.active = true;
+                this.opacity = 1;
+            }
+
+            update() {
+                // Save past positions for glowing energy tail
+                this.trail.push({ x: this.x, y: this.y });
+                if (this.trail.length > this.maxTrail) {
+                    this.trail.shift();
+                }
+
+                // Move forward along angle
+                this.x += Math.cos(this.angle) * this.speed;
+                this.y += Math.sin(this.angle) * this.speed;
+
+                // Deactivate when out of bounds
+                if (this.x > width + 100 || this.y < -100 || this.y > height + 100) {
+                    this.active = false;
+                }
+            }
+
+            draw() {
+                if (!this.active) return;
+
+                ctx.save();
+
+                // Draw Glowing Energy Trail
+                if (this.trail.length > 1) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.trail[0].x, this.trail[0].y);
+                    for (let i = 1; i < this.trail.length; i++) {
+                        ctx.lineTo(this.trail[i].x, this.trail[i].y);
+                    }
+                    ctx.strokeStyle = this.colorType === 'pink' ? 'rgba(255, 42, 133, 0.4)' : 'rgba(255, 215, 0, 0.4)';
+                    ctx.lineWidth = 3;
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = this.colorType === 'pink' ? '#ff2a85' : '#ffd700';
+                    ctx.stroke();
+                }
+
+                // Draw Main Arrow Shaft & Blade Head
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+
+                // Main Arrow Shaft
+                const grad = ctx.createLinearGradient(-this.length, 0, 0, 0);
+                if (this.colorType === 'pink') {
+                    grad.addColorStop(0, 'rgba(255, 42, 133, 0.1)');
+                    grad.addColorStop(1, '#ff69b4');
+                } else {
+                    grad.addColorStop(0, 'rgba(255, 215, 0, 0.1)');
+                    grad.addColorStop(1, '#ffd700');
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(-this.length, 0);
+                ctx.lineTo(0, 0);
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+
+                // Arrow Head (Sharp Archer Trajectory Tip)
+                ctx.beginPath();
+                ctx.moveTo(8, 0);
+                ctx.lineTo(-8, -5);
+                ctx.lineTo(-4, 0);
+                ctx.lineTo(-8, 5);
+                ctx.closePath();
+                ctx.fillStyle = this.colorType === 'pink' ? '#ffffff' : '#ffd700';
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.colorType === 'pink' ? '#ff2a85' : '#ffd700';
+                ctx.fill();
+
+                // Fletching / Back feather vanes
+                ctx.beginPath();
+                ctx.moveTo(-this.length, 0);
+                ctx.lineTo(-this.length - 6, -4);
+                ctx.lineTo(-this.length - 3, 0);
+                ctx.lineTo(-this.length - 6, 4);
+                ctx.closePath();
+                ctx.fillStyle = this.colorType === 'pink' ? '#ff2a85' : '#dfa837';
+                ctx.fill();
+
+                ctx.restore();
+            }
+        }
+
+        // Initialize background ambient arrows continuously
+        function spawnAmbientArrows() {
+            if (Math.random() < 0.08) { // Frequency of passive arrows
+                arrows.push(new KineticArrow());
+            }
+        }
+
+        // Animation Loop
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            spawnAmbientArrows();
+
+            for (let i = arrows.length - 1; i >= 0; i--) {
+                arrows[i].update();
+                arrows[i].draw();
+                if (!arrows[i].active) {
+                    arrows.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start Animation loop on window load
+        window.onload = function() {
+            animate();
+            
+            // Initial burst launch to welcome the user
+            fireKineticBurst();
+        };
+
+        // Function to launch a concentrated volley of dynamic kinetic arrows
+        function fireKineticBurst() {
+            const burstCount = 10;
+            for (let i = 0; i < burstCount; i++) {
+                setTimeout(() => {
+                    const startY = (height * 0.15) + (Math.random() * height * 0.7);
+                    const angle = (Math.random() * 0.3) - 0.15;
+                    const speed = 15 + Math.random() * 12;
+                    const color = i % 2 === 0 ? 'pink' : 'gold';
+                    arrows.push(new KineticArrow(-20, startY, angle, speed, color));
+                }, i * 120);
+            }
+        }
+
+        // Event listeners for interactive launch buttons
+        document.getElementById('releaseArrowBtn').addEventListener('click', () => {
+            fireKineticBurst();
+            openMessageBox("KINETIC VOLLEY DISPATCHED", "I'Point has released a barrage of hypersonic trajectory arrows across the sector. Targets locked and neutralized.");
+        });
+
+        document.getElementById('triggerLaunchBtn').addEventListener('click', () => {
+            fireKineticBurst();
+        });
+
+        // UI Modal / Message Box Handlers
+        function openMessageBox(title, message) {
+            document.getElementById('msgTitle').innerText = title;
+            document.getElementById('msgBody').innerText = message;
+            document.getElementById('cyberMessageBox').classList.remove('hidden');
+        }
+
+        function closeMessageBox() {
+            document.getElementById('cyberMessageBox').classList.add('hidden');
+        }
+
+        function showAllianceInfo() {
+            openMessageBox("IMC RONIN ALLIANCE PROTOCOL", "I'Point remains synchronously linked with IMC Ronin warriors globally. Receiving active telemetry, long-range trajectory coordinates, and honor status.");
+        }
+    </script>
+</body>
+</html>
