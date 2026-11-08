@@ -301,23 +301,25 @@
 
         /* Staggered Delay for left-to-right fluid motion */
         .node-sa .scale-circle { animation-delay: 0.0s; }
-        .node-rng .scale-circle { animation-delay: 0.0s; }
-        .node-shdw .scale-circle { animation-delay: 0.0s; }
-        .node-slt .scale-circle { animation-delay: 0.0s; }
-        .node-slssnc .scale-circle { animation-delay: 0.0s; }
-        .node-flw .scale-circle { animation-delay: 0.0s; }
-        .node-dp .scale-circle { animation-delay: 0.0s; }
-        .node-frs .scale-circle { animation-delay: 0.0s; }
-        .node-twstr .scale-circle { animation-delay: 0.0s; }
-        .node-db .scale-circle { animation-delay: 0.5s; }
-        .node-dba .scale-circle { animation-delay: 1.0s; }
-        .node-asr .scale-circle { animation-delay: 1.5s; }
-        .node-mstr .scale-circle { animation-delay: 2.0s; }
-        .node-pls .scale-circle { animation-delay: 2.0s; }
-        .node-kng .scale-circle { animation-delay: 2.5s; }
-        .node-pgtry .scale-circle { animation-delay: 3.0s; }
-        .node-mg .scale-circle { animation-delay: 3.0s; }
-        .node-blade .scale-circle { animation-delay: 3.0s; }
+        .node-point .scale-circle { animation-delay: 0.5s; }
+        .node-blade .scale-circle { animation-delay: 1.0s; }
+        .node-shdw .scale-circle { animation-delay: 1.5s; }
+        .node-twstr .scale-circle { animation-delay: 2.0s; }
+        .node-db .scale-circle { animation-delay: 2.5s; }
+        .node-dba .scale-circle { animation-delay: 3.0s; }
+        .node-slt .scale-circle { animation-delay: 3.5s; }
+        .node-frs .scale-circle { animation-delay: 4.0s; }
+        .node-slssnc .scale-circle { animation-delay: 4.5s; }
+        .node-dp .scale-circle { animation-delay: 5.0s; }
+        .node-mg .scale-circle { animation-delay: 5.5s; }
+        .node-rng .scale-circle { animation-delay: 6.0s; }
+        .node-flw .scale-circle { animation-delay: 6.5s; }
+        .node-mstr .scale-circle { animation-delay: 7.0s; }
+        .node-asr .scale-circle { animation-delay: 7.5s; }
+        .node-kng .scale-circle { animation-delay: 8.0s; }
+        .node-pgtry .scale-circle { animation-delay: 8.5s; }
+        .node-pls .scale-circle { animation-delay: 9.0s; }
+        
 
         /* Unique Bot Colors */
         .node-sa .scale-label { color: #39FF14; }
@@ -355,11 +357,14 @@
         .node-mg .scale-label { color: #9F2B68; }
         .node-mg .scale-circle { background-color: #9F2B68; color: #9F2B68; }  
         .node-blade .scale-label { color: #B9FF66; }
-        .node-blade .scale-circle { background-color: #B9FF66; color: #B9FF66; }        
+        .node-blade .scale-circle { background-color: #B9FF66; color: #B9FF66; }      
+        .node-point .scale-label { color: #FFC0CB; }
+        .node-point .scale-circle { background-color: #FFC0CB; color: #FFC0CB; }              
         
         
         .final-container { text-align: center; margin: 40px 0; }
         .IMC-Nemisis-container { text-align: center; margin: 40px 0; }
+        .IMC-Fan-container { text-align: center; margin: 40px 0; }
         .comics-container { text-align: center; margin: 40px 0; }
         .payment-container { text-align: center; margin: 40px 0; }
         .final-btn {
@@ -383,7 +388,18 @@
             font-size: 1.1rem;
             transition: background-color 0.3s, color 0.3s;
             display: inline-block;
-        }        
+        }  
+         .Fan-btn {
+            background-color: #0F5132;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+        }       
         .comics-btn {
             background-color: #0F5132;
             color: white;
@@ -410,6 +426,7 @@
         .bank-btn:hover { background-color: #058743; color: black; }
         .comics-btn:hover { background-color: #7393B3; color: white; }
         .nemisis-btn:hover { background-color: #9F2B68; color: white; }
+        .Fan-btn:hover { background-color: #FFC0CB; color: white; }
 
         .first-box {
             margin-top: 50px;
@@ -852,7 +869,7 @@
                 <li><strong>Respect Of Trend:</strong> All IMCBOTS follow the trend and take guidance from the trend by utilizing EMAs, and don't simply act carelessly, as that may result in inconsistency on trading success.</li>
                 <li><strong>Plug-and-Play Deployment:</strong> A fully automated, hands-free algorithmic system requiring minimal initial setup.</li>
                 <li><strong>Bi-Directional Execution:</strong> Programmed to seamlessly execute and manage both long (Buy) and short (Sell) market setups.</li>
-                <li><strong>Capital Requirements:</strong> A minimum funding balance of R400 is required for Blade, Asura, Twister, Rang, Shadow, Light, SuperSonic, Fan Edition, Apex, Flow, Deep, Frost, Master, Plasma, King, Purgatory, and Magnifier. While the SA (Small Accounts) bot offers higher margin flexibility, requiring a minimum balance of only R200.</li>
+                <li><strong>Capital Requirements:</strong> A minimum funding balance of R400 is required for Point, Blade, Asura, Twister, Rang, Shadow, Light, SuperSonic, Fan Edition, Apex, Flow, Deep, Frost, Master, Plasma, King, Purgatory, and Magnifier. While the SA (Small Accounts) bot offers higher margin flexibility, requiring a minimum balance of only R200.</li>
                 <li><strong>Risk Space:</strong> Once you have selected a market to trade on, ensure that there's enough riskspace by checking its minimum lot size loss impact on the account balance(There must be more room for a losses vs wins probability without blowing up the trading account with just 3 trades for example.), this allows for account recovery if possible. Otherwise look for a better & safer market.</li>
             </ul>
             <hr class="sword-line">
@@ -902,6 +919,7 @@
             <ul>
                 <li><strong style="color:#B9FF66">IMCBOT Blade — </strong>Relies on high rejection levels for trend continuation. (Cost - R10,000)</li>
                 <li><strong style="color:#FFA800">IMCBOT DB (Dragon Blaze) F.E — </strong>Capitalizes on key support and resistance levels by executing high-conviction, single-entry setups with structured risk control. As the entry-level "Fan Edition," it delivers optimal cost-efficiency without compromising performance. (Cost - R12,000)</li>
+                <li><strong style="color:#FFC0CB">IMCBOT Point — </strong>Uses a pattern of triangles to predict the market's target. (Cost - R14,000)</li>
                 <li><strong style="color:#6E260E">IMCBOT Rang — </strong>Specializes in trading pullback swing rejections, entering positions at high-probability rejection zones with tight downside risk protocols. (Cost - R15,000)</li>
                 <li><strong style="color:#4CBB17">IMCBOT SA (Small Accounts) — </strong>Tailored specifically for low-capital capitalization. Operates efficiently on low-margin instruments to drive steady account growth through controlled position sizing. (Cost - R18,000)</li>
                 <li><strong style="color:#B2BEB5">IMCBOT Twister — </strong>Captures precision pivot points during corrective pullbacks, enabling early re-entry into momentum moves while utilizing dynamic exits to protect equity. (Cost - R20,000)</li>
@@ -1087,6 +1105,10 @@
                 <span class="scale-label">SA</span>
                 <div class="scale-circle"></div>
             </div>
+            <div class="scale-node node-point">
+                <span class="scale-label">Pt</span>
+                <div class="scale-circle"></div>
+            </div>            
             <div class="scale-node node-blade">
                 <span class="scale-label">Bl</span>
                 <div class="scale-circle"></div>
@@ -1168,6 +1190,9 @@
     <hr class="sword-line">
     <div class="comics-container">
         <a href="icomics.html" class="comics-btn">IMCBOTS - COMICS</a>
+    </div>  
+    <div class="IMC-Fan-container">
+        <a href="point.html" class="nemisis-btn">IMC's Fan</a>
     </div>    
     <hr class="sword-line">
     <div class="payment-container">
@@ -1365,6 +1390,7 @@ if (battlePlayer) {
                 { text: "Support & Resistance Frameworks (DB / DBA / Rang / Shadow / Blade)", next: "sr_frameworks" },
                 { text: "Trend Exploitation & Maximizers", next: "trend_maximizers" },
                 { text: "Aggressive Hyper-Growth Systems", next: "aggressive_growth" },
+                { text: "Pattern Hunter", next: "Pattern_trader" },
                 { text: "View Banking & Payment Protocols", next: "bank_info" },
                 { text: "About The Creator (IndiceMoCash)", next: "IndiceMoCash" },
                 { text: "IMCBOT Pricing Matrix", next: "Prices" },
@@ -1379,6 +1405,13 @@ if (battlePlayer) {
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
+        Pattern_trader: {
+            text: "Analyzing Pattern Trading... Prioritizing Cypher Patterns.... Shall we view this framework?",
+            options: [
+                { text: "Launch Point Setup Page ➔", link: "setup.html?bot=point" },
+                { text: "Return to Core Matrix", next: "start" }
+            ]
+        },        
         sr_frameworks: {
             text: "Accessing key structural frameworks. Select your execution model: DB F.E (Fan Edition) targets major S/R zones with high-conviction single entries. DBA Apex scales dynamically into active trends with trailing profit locks. Rang prioritizes pullback rejection zones for dual-entry precision. Shadow executes role-reversal setups (Support-Turned-Resistance) using singular, high-probability structural levels. And Blade prioritizes high rejection zones - to enter through reversals.",
             options: [
