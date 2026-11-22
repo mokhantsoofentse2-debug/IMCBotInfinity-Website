@@ -303,6 +303,7 @@
         .node-sa .scale-circle { animation-delay: 0.0s; }
         .node-point .scale-circle { animation-delay: 0.5s; }
         .node-blade .scale-circle { animation-delay: 1.0s; }
+        .node-beam .scale-circle { animation-delay: 1.3s; }
         .node-shdw .scale-circle { animation-delay: 1.5s; }
         .node-twstr .scale-circle { animation-delay: 2.0s; }
         .node-db .scale-circle { animation-delay: 2.5s; }
@@ -359,7 +360,9 @@
         .node-blade .scale-label { color: #B9FF66; }
         .node-blade .scale-circle { background-color: #B9FF66; color: #B9FF66; }      
         .node-point .scale-label { color: #FFC0CB; }
-        .node-point .scale-circle { background-color: #FFC0CB; color: #FFC0CB; }              
+        .node-point .scale-circle { background-color: #FFC0CB; color: #FFC0CB; }  
+        .node-beam .scale-label { color: #FFFF00; }
+        .node-beam .scale-circle { background-color: #FFFF00; color: #FFFF00; }         
         
         
         .final-container { text-align: center; margin: 40px 0; }
@@ -467,6 +470,7 @@
         .copyright { margin-top: 15px; font-size: 0.9rem; color: #888; }
 
         li:hover .bl { color: #B9FF66; }
+        li:hover .bm { color: #FFFF00; }
         li:hover .db { color: #FFA800; }
         li:hover .rng { color: #6E260E; }
         li:hover .sa { color: #39FF14; }
@@ -481,7 +485,7 @@
         li:hover .asura { color: #800080; }
         li:hover .prgtry { color: #BBC2CC; }
         
-        .bl, .rng, .db, .sa, .twstr, .shdw, .slt, .slssnc, .dba, .master, .pls, .prgtry, .king, .asura { transition: color 0.3s ease; }
+        .bm, .bl, .rng, .db, .sa, .twstr, .shdw, .slt, .slssnc, .dba, .master, .pls, .prgtry, .king, .asura { transition: color 0.3s ease; }
 
         @media (max-width: 768px) {
             ol { flex-direction: column; align-items: center; }
@@ -840,7 +844,7 @@
                  <strong style="color: #058743; text-decoration: underline;">Bots Trading Golden Rule:</strong>
              </div>
             <ul>
-                <li> <strong style="color:#058743">Triple One</strong><strong>: </strong> <font color="#058743"> One</font> Bot For <font color="#058743">One</font> Market For <font color="#058743">One</font> Day.</li>
+                <li> <strong style="color:#058743">Triple One</strong><strong>: </strong> <font color="#058743"> One</font> Bot For <font color="#058743">One</font> Market For <font color="#058743">One</font> Week.</li>
             </ul>
             <hr class="sword-line">
             <div class="image-zoom-wrapper">
@@ -870,7 +874,7 @@
                 <li><strong>Respect Of Trend:</strong> All IMCBOTS follow the trend and take guidance from the trend by utilizing EMAs, and don't simply act carelessly, as that may result in inconsistency on trading success.</li>
                 <li><strong>Plug-and-Play Deployment:</strong> A fully automated, hands-free algorithmic system requiring minimal initial setup.</li>
                 <li><strong>Bi-Directional Execution:</strong> Programmed to seamlessly execute and manage both long (Buy) and short (Sell) market setups.</li>
-                <li><strong>Capital Requirements:</strong> A minimum funding balance of R400 is required for Point, Blade, Asura, Twister, Rang, Shadow, Light, SuperSonic, Fan Edition, Apex, Flow, Deep, Frost, Master, Plasma, King, Purgatory, and Magnifier. While the SA (Small Accounts) bot offers higher margin flexibility, requiring a minimum balance of only R200.</li>
+                <li><strong>Capital Requirements:</strong> A minimum funding balance of R400 is required for Point, Blade, Beam, Asura, Twister, Rang, Shadow, Light, SuperSonic, Fan Edition, Apex, Flow, Deep, Frost, Master, Plasma, King, Purgatory, and Magnifier. While the SA (Small Accounts) bot offers higher margin flexibility, requiring a minimum balance of only R200.</li>
                 <li><strong>Risk Space:</strong> Once you have selected a market to trade on, ensure that there's enough riskspace by checking its minimum lot size loss impact on the account balance(There must be more room for a losses vs wins probability without blowing up the trading account with just 3 trades for example.), this allows for account recovery if possible. Otherwise look for a better & safer market.</li>
             </ul>
             <hr class="sword-line">
@@ -922,6 +926,7 @@
                 <li><strong style="color:#FFA800">IMCBOT DB (Dragon Blaze) F.E — </strong>Capitalizes on key support and resistance levels by executing high-conviction, single-entry setups with structured risk control. As the entry-level "Fan Edition," it delivers optimal cost-efficiency without compromising performance. (Cost - R12,000)</li>
                 <li><strong style="color:#FFC0CB">IMCBOT Point — </strong>Uses a pattern of triangles to predict the market's target. (Cost - R14,000)</li>
                 <li><strong style="color:#6E260E">IMCBOT Rang — </strong>Specializes in trading pullback swing rejections, entering positions at high-probability rejection zones with tight downside risk protocols. (Cost - R15,000)</li>
+                <li><strong style="color:#FFFF00">IMCBOT Beam — </strong>Uses wick failure for confirmed possible reversal trends. (Cost - R17,000)</li>
                 <li><strong style="color:#4CBB17">IMCBOT SA (Small Accounts) — </strong>Tailored specifically for low-capital capitalization. Operates efficiently on low-margin instruments to drive steady account growth through controlled position sizing. (Cost - R18,000)</li>
                 <li><strong style="color:#B2BEB5">IMCBOT Twister — </strong>Captures precision pivot points during corrective pullbacks, enabling early re-entry into momentum moves while utilizing dynamic exits to protect equity. (Cost - R20,000)</li>
                 <li><strong style="color:#FFAE42">IMCBOT Shadow — </strong>Focuses on structural role-reversal setups (Support-Turned-Resistance and Resistance-Turned-Support) to enter early trend shifts with optimized risk-to-reward parameters. (Cost - R21,000)</li>
@@ -976,7 +981,13 @@
             <a href="setup.html?bot=rang">
                 <img src="rangpst.png" width="150" height="200" alt="Rang Bot">
             </a>
-        </li>                
+        </li>   
+        <li>
+            <div class='bm'><b>Beam</b></div>
+            <a href="setup.html?bot=beam">
+                <img src="bmpst.png" width="150" height="200" alt="Beam Bot">
+            </a>
+        </li>         
         <li>
             <div class='sa'><b>SA (Small Accounts)</b></div>
             <a href="setup.html?bot=sa">
@@ -1062,7 +1073,7 @@
                 <li>I built the design of my website to be like an anime of my own universe, thanks to being an anime fan - which is what lead to my anime-like design for my IMCBOTS project.</li>
                 <li>What inspired me to build these bots was the past strategies I created but was no longer utilizing manually.</li>
                 <li>I built the Master bot first, followed by the SA bot and the rest. Each bot represents a part of my trading journey.</li>
-                <li>A friend of mine called kamohetsoe Ntoi became my team mate in the journey of my IMCBOTS - by inspiring & motivating me to not to give up on my IMCBOTS idea. He became my team mate by using my bots and having hope in their success, which lead to me making each IMCBOT a perfect masterpiece. As well as Kagiso Moloantoa who inspired the Shadow IMCBOTS. That is how the IMCBOTS entirely came to be without doubt in their creation, all 19 Bots crafted with passion & dedication. </li>
+                <li>A friend of mine called kamohetsoe Ntoi became my team mate in the journey of my IMCBOTS - by inspiring & motivating me to not to give up on my IMCBOTS idea. He became my team mate by using my bots and having hope in their success, which lead to me making each IMCBOT a perfect masterpiece. As well as Kagiso Moloantoa who inspired the Shadow IMCBOTS. That is how the IMCBOTS entirely came to be without doubt in their creation, all 20 Bots crafted with passion & dedication. </li>
                 <li>All IMCBOTS are perfectly built, tested on various account sizes, and perform efficiently. They are at their peak versions, & can never fail.</li>
                 <li>With my knowledge of Information Technology, knowing the markets, and extensive research - I was able to successfully automate my trading logic.</li>
             </ul>
@@ -1113,7 +1124,11 @@
             <div class="scale-node node-blade">
                 <span class="scale-label">Bl</span>
                 <div class="scale-circle"></div>
-            </div>                             
+            </div>    
+            <div class="scale-node node-beam">
+                <span class="scale-label">Bm</span>
+                <div class="scale-circle"></div>
+            </div>            
             <div class="scale-node node-shdw">
                 <span class="scale-label">Shw</span>
                 <div class="scale-circle"></div>
@@ -1415,13 +1430,14 @@ if (battlePlayer) {
             ]
         },        
         sr_frameworks: {
-            text: "Accessing key structural frameworks. Select your execution model: DB F.E (Fan Edition) targets major S/R zones with high-conviction single entries. DBA Apex scales dynamically into active trends with trailing profit locks. Rang prioritizes pullback rejection zones for dual-entry precision. Shadow executes role-reversal setups (Support-Turned-Resistance) using singular, high-probability structural levels. And Blade prioritizes high rejection zones - to enter through reversals.",
+            text: "Accessing key structural frameworks. Select your execution model: DB F.E (Fan Edition) targets major S/R zones with high-conviction single entries. DBA Apex scales dynamically into active trends with trailing profit locks. Rang prioritizes pullback rejection zones for dual-entry precision. Shadow executes role-reversal setups (Support-Turned-Resistance) using singular, high-probability structural levels. Blade prioritizes high rejection zones - to enter through reversals. Beam uses wick breaks to prioritize reversal trends.",
             options: [
                 { text: "Launch DB F.E Setup ➔", link: "setup.html?bot=db-fe" },
                 { text: "Launch DBA Apex Setup ➔", link: "setup.html?bot=dba" },
                 { text: "Launch Rang Setup ➔", link: "setup.html?bot=rang" },
                 { text: "Launch Shadow Setup ➔", link: "setup.html?bot=shadow" },
                 { text: "Launch Blade Setup ➔", link: "setup.html?bot=blade" },
+                { text: "Launch Beam Setup ➔", link: "setup.html?bot=beam" },
                 { text: "Return to Core Matrix", next: "start" }
             ]
         },
